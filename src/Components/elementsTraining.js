@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'react-image-resizer';
 import BarTraining from './barTraining';
 
 
@@ -10,16 +9,66 @@ import Yellow from "./img/stimuli3_yellow.jpg";
 
 class ElementsTraining extends React.Component{
 
-  render(){
-    return (
+// function App() {
+//
+//   function changePicture(e) {
+//     e.target.style.background = 'red';
+//
+//
+//   }
+//
+//   return (
+//     <div className="App">
+//       <button onMouseOver={changePicture}>Hover over me!</button>
+//     </div>
+//   );
+// }
+//
+// export default App;
+//
+//
 
-      <div className="elements">
 
-      <BarTraining value={this.props.value} col={this.props.col} training_elements_col={this.props.training_elements_col}/>
+    mouseOver() {
+      // e.target.style.background = 'red';
+        this.handle = setTimeout(() => {
+            console.log('2 seconds have elapsed');
+        }, 1000);
+    }
 
-      </div>
-    );
-  }
-};
+    mouseLeave() {
+        if (this.handle) {
+            e.target.style.background = 'red';
+            clearTimeout(this.handle);
+            this.handle = undefined;
+        }
+    }
+
+    render() {
+        return (
+            <div onMouseOver={this.mouseOver} onMouseLeave={this.mouseLeave}>
+
+            </div>
+        );
+    }
+}
 
 export default ElementsTraining;
+
+
+//
+// class ElementsTraining extends React.Component{
+//
+//   render(){
+//     return (
+//
+//       <div className="elements">
+//
+//       <BarTraining value={this.props.value} col={this.props.col} training_elements_col={this.props.training_elements_col}/>
+//
+//       </div>
+//     );
+//   }
+// };
+//
+// export default ElementsTraining;

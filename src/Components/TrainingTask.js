@@ -3,28 +3,28 @@ import { withRouter } from "react-router-dom";
 import { DATABASE_URL } from "./config";
 import styles from "./style/taskStyle.module.css";
 import Slider from "./slider";
-import Blue from "./img/stimuli3_blue.jpg";
 import Cockpit from "./img/CockpitBlank.jpg";
+import ElementsTraining  from "./elementsTraining";
 /////////////////////////////////////////////////////////////////////////////////
 
-var trialTotal = 9;
-
-setTimeout(
-  function () {
-    this.trialSave();
-  }.bind(this),
-  0
-);
-
-
-setTimeout(
-  function () {
-    this.setState({
-      mounted: 1,
-    });
-  }.bind(this),
-  5000
-);
+// var trialTotal = 9;
+//
+// setTimeout(
+//   function () {
+//     this.trialSave();
+//   }.bind(this),
+//   0
+// );
+//
+//
+// setTimeout(
+//   function () {
+//     this.setState({
+//       mounted: 1,
+//     });
+//   }.bind(this),
+//   5000
+// );
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 // REACT COMPONENT START
@@ -82,7 +82,7 @@ class TrainingTask extends React.Component {
 
         return (<div className={styles.cockpit}>
           //   <div>{text}</div>
-          //   <Slider onSpacebarHit={(result) => window.alert(JSON.stringify(result))} />
+          <ElementsTraining onSpacebarHit={(result) => window.alert(JSON.stringify(result))} />
           </div>);
 
         } else {
