@@ -81,36 +81,32 @@ input[type="submit"] {
   cursor: pointer;
 }
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-}
 
-
-.wrapper {
-    display: grid;
-    grid-auto-flow: column;
-}
-
-.box {
-    align-self: center;
-}
 
 /* Additional styles below */
-.itemcenter {
-  display: grid;
-  grid-auto-flow: column;
-  gap: 4px;
+span.center {
+  display: table;
+  margin: 0 auto;
+  font-weight: bold;
+  font-size: 25px;
+  padding-bottom: 20px;
+}
+
+span.centerTwo {
+  display: table;
+  margin: 0 auto;
+  padding-top: 30%;
+  display: flex;
   align-items: center;
-  justify-items: center;
-  grid-auto-flow: column;
-  align-content: center;
+  justify-content: center;
+}
+
+span.centerThree {
+  display: table;
+  margin: 0 auto;
 }
 
 .elementsize {
-  width: 220px;
-  height: auto;
+  width: 20vh;
+  height: 20vw;
 }

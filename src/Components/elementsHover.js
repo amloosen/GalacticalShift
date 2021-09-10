@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from "react-dom";
 import styles from "./style/taskStyle.module.css";
-
+import {Image} from "react-native";
 import BarTraining from './barTraining';
 
 import Cover from "./img/cover.jpg";
@@ -15,67 +15,59 @@ import Hello from "./Hello";
 class ElementsTraining extends React.Component{
 
     state = {
-      img: Cover
+      img1: Cover,
+      img2: Cover,
+      img3: Cover
     };
-
-    // showElement1() {
-    //     img: Red;
-    //   }
-
     render() {
-      return (
-        <div className={styles.itemcenter}>
-        <div>
-        <img className={styles.elementsize}
-              src={this.state.img}
+      return (<div className={styles.cockpit}>
+        <div className={styles.main}>
+        <span className={styles.centerTwo}>
+          <img className={styles.elementsize }
+              src={this.state.img1}
               onMouseEnter={() => {
                 this.setState({
-                  img:
-                    Blue
+                  img1: Blue
                 });
               }}
               onMouseOut={() => {
                 this.setState({
-                  img: Cover
+                  img1: Cover
                 });
               }}
             />
-        </div>
-        <div>
-        <img className={styles.elementsize}
-              src={this.state.img}
-              onMouseEnter={() => {
-                this.setState({
-                  img:
-                    Blue
-                });
-              }}
-
-              onMouseOut={() => {
-                this.setState({
-                  img: Cover
-                });
-              }}
-            />
-        </div>
-        <div>
-        <img className={styles.elementsize}
-              src={this.state.img}
-              onMouseEnter={() => {
-                this.setState({
-                  img3:
-                    Yellow
-                });
-              }}
-
-              onMouseOut={() => {
-                this.setState({
-                  img3: Cover
-                });
-              }}
-            />
-         </div>
-        </div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <img className={styles.elementsize }
+                src={this.state.img2}
+                onMouseEnter={() => {
+                  this.setState({
+                    img2: Red
+                  });
+                }}
+                onMouseOut={() => {
+                  this.setState({
+                    img2: Cover
+                            });
+                          }}
+                        />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <img className={styles.elementsize }
+                                      src={this.state.img3}
+                                      onMouseEnter={() => {
+                                        this.setState({
+                                          img3:
+                                            Yellow
+                                        });
+                                      }}
+                                      onMouseOut={() => {
+                                        this.setState({
+                                          img3: Cover
+                                        });
+                                      }}
+                                    />
+                                    </span>
+                                  </div>
+     </div>
 
       );
     }
