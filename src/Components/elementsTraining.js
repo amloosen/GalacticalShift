@@ -9,25 +9,6 @@ import Yellow from "./img/stimuli3_yellow.jpg";
 
 class ElementsTraining extends React.Component{
 
-// function App() {
-//
-//   function changePicture(e) {
-//     e.target.style.background = 'red';
-//
-//
-//   }
-//
-//   return (
-//     <div className="App">
-//       <button onMouseOver={changePicture}>Hover over me!</button>
-//     </div>
-//   );
-// }
-//
-// export default App;
-//
-//
-
 
     mouseOver() {
       // e.target.style.background = 'red';

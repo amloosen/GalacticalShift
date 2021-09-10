@@ -62,27 +62,6 @@ margin-top:300px;
     height: 600px;
 }
 
-
-span.centerTwo {
-  display: table;
-  margin: 0 auto;
-  padding-top: 20px;
-}
-
-span.centerThree {
-  display: table;
-  margin: 0 auto;
-}
-
-
-img.state {
-  width: 150px;
-  height: auto;
-}
-
-
-
-
 textarea {
   background-color: rgba(0, 0, 0, 0.5);
   font-size: 18px;
@@ -108,4 +87,30 @@ body {
   padding: 0;
   height: 100%;
   width: 100%;
+}
+
+
+.wrapper {
+    display: grid;
+    grid-auto-flow: column;
+}
+
+.box {
+    align-self: center;
+}
+
+/* Additional styles below */
+.itemcenter {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 4px;
+  align-items: center;
+  justify-items: center;
+  grid-auto-flow: column;
+  align-content: center;
+}
+
+.elementsize {
+  width: 220px;
+  height: auto;
 }
