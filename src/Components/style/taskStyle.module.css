@@ -121,6 +121,7 @@ span.centerThree {
   right: 0;
   height: 100%;
   width: 100%;
+  pointer-events: none;
   transition: .3s ease;
   background-color: transparent;
 }
@@ -129,7 +130,10 @@ span.centerThree {
   position: absolute;
   top: 30%;
   bottom: 0;
-  left: 20%;
+  left: 1%;
   right: 0;
+  pointer-events: none;
+  color: white;
+  font-size: 40px;
   font-family: "Calibri", "Calibri";
 }

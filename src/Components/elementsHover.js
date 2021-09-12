@@ -20,7 +20,9 @@ class ElementsTraining extends React.Component{
     img1: Cover,
     img2: Cover,
     img3: Cover,
-    progress: 10,
+    progress1: 70,
+    progress2: 40,
+    progress3: 50,
     show1: null,
     show2: null,
     show3: null
@@ -54,12 +56,9 @@ class ElementsTraining extends React.Component{
         });
       }}/>
       {this.state.show1? <div className={styles.overlay}>
-      <ElementBar progress={this.state.progress} />
+      <ElementBar progress={this.state.progress1} />
       </div>: null}
-      {this.state.show1? <div className={styles.overlaytext}>
-
-      <Text>{this.state.progress}</Text>
-
+      {this.state.show1? <div className={styles.overlaytext}>{this.state.progress1}%
       </div>: null}
       </View>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -80,20 +79,9 @@ class ElementsTraining extends React.Component{
       }}
       />
       {this.state.show2? <div className={styles.overlay}>
-      <ElementBar progress={this.state.progress}
-      onMouseOver={() => {
-        this.setState({
-          img2: Red,
-          show2: 1
-        });
-      }}
-      onMouseOut={() => {
-        this.setState({
-          img2: Cover,
-          show2: null
-        });
-      }}
-      />
+      <ElementBar progress={this.state.progress2} />
+      </div>: null}
+      {this.state.show2? <div className={styles.overlaytext}>{this.state.progress2}%
       </div>: null}
       </View>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -114,20 +102,10 @@ class ElementsTraining extends React.Component{
       }}
       />
       {this.state.show3? <div className={styles.overlay}>
-      <ElementBar progress={this.state.progress}
-      onMouseOver={() => {
-        this.setState({
-          img3: Red,
-          show3: 1
-        });
-      }}
-      onMouseOut={() => {
-        this.setState({
-          img3: Cover,
-          show3: null
-        });
-      }}
-      /></div>: null}
+      <ElementBar progress={this.state.progress3}/>
+      </div>: null}
+      {this.state.show3? <div className={styles.overlaytext}>{this.state.progress3}%
+      </div>: null}
       </View>
       </span>
       </div>
