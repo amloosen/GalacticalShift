@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import StartPage from "./Components/StartPage";
 import TrainingIntro from "./Components/TrainingIntro";
 import ElementsTraining from "./Components/elementsHover";
+import ElementBar from "./Components/elementBar";
 import TutorTask from "./Components/TutorTask";
 import ExptTask from "./Components/ExptTask";
 import Questionnaires from "./Components/Questionnaires";
@@ -18,6 +19,7 @@ function App() {
         <Route path="/" component={StartPage} exact />
         <Route path="/TrainingIntro" component={TrainingIntro} exact />
         <Route path="/elementsHover" component={ElementsTraining } exact />
+        <Route path="/elementBar" component={ElementBar} exact />
         <Route path="/TutorTask" component={TutorTask} exact />
         <Route path="/ExptTask" component={ExptTask} exact />
         <Route path="/Questionnaires" component={Questionnaires} exact />

@@ -10,17 +10,17 @@
 }
 
 .questions {
-display: flex;
-margin: auto;
-justify-content: center;
-align-items: center;
-height: auto;
-color: white;
-font-size: 30px;
-font-family: "Helvetica";
-font-weight: bold;
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  color: white;
+  font-size: 30px;
+  font-family: "Helvetica";
+  font-weight: bold;
 
-margin-top:300px;
+  margin-top:300px;
 }
 
 
@@ -43,23 +43,23 @@ margin-top:300px;
 }
 
 /* .textblockOld {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
+display: flex;
+justify-content: center;
+align-items: center;
+padding-top: 20px;
+padding-bottom: 20px;
 } */
 
 .textblock {
-    display: inline-block;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-    width: 500px;
-    height: 600px;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  width: 500px;
+  height: 600px;
 }
 
 textarea {
@@ -90,12 +90,13 @@ span.center {
   font-weight: bold;
   font-size: 25px;
   padding-bottom: 20px;
+  position: relative;
 }
 
 span.centerTwo {
   display: table;
   margin: 0 auto;
-  padding-top: 30%;
+  padding-top: 22%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -107,6 +108,29 @@ span.centerThree {
 }
 
 .elementsize {
-  width: 20vh;
-  height: 20vw;
+  width: 30vh;
+  height: auto;
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  top: 10%;
+  bottom: 0;
+  left: 40%;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0.3;
+  transition: .3s ease;
+  background-color: transparent;
+}
+
+.overlaytext {
+  position: absolute;
+  top: 30%;
+  bottom: 0;
+  left: 20%;
+  right: 0;
+  font-family: "Calibri", "Calibri";
 }
