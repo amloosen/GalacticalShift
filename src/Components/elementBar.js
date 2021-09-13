@@ -7,7 +7,7 @@ const ElementBar = ({ progress }) => {
       {({ percent }) => (
         <div className="progress vertical">
           <div style={{ height: `${progress}%` }} className="progress-bar">
-          <p class="text-danger">
+          <p className="text-danger">
             <span className="sr-only">{`${progress}%`}</span>
             </p>
           </div>

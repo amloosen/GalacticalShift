@@ -15,8 +15,9 @@ import "./style/barstyles.css";
 //
 //
 class ElementsTraining extends React.Component{
-
-  state = {
+  constructor(props) {
+    super(props);
+  this.state  = {
     img1: Cover,
     img2: Cover,
     img3: Cover,
@@ -28,6 +29,39 @@ class ElementsTraining extends React.Component{
     show3: null
   };
 
+  this.mouseOver = this.mouseOver.bind(this);
+  this.mouseOut = this.mouseOut.bind(this);
+
+  /* prevents page from going down when space bar is hit .*/
+  window.addEventListener("keydown", function (e) {
+    if (e.keyCode === 32 && e.target === document.body) {
+      e.preventDefault();
+    }
+  });
+  }
+
+  //
+  mouseOver() {
+         this.handle = setTimeout(() => {
+             console.log('2 seconds have elapsed');
+         }, 1000);
+         this.setState({
+           img1: Blue,
+           show1: 1
+         });
+
+     }
+
+  mouseOut() {
+         if (this.handle) {
+             clearTimeout(this.handle);
+             this.handle = undefined;}
+         this.setState({
+           img1: Cover,
+           show1: null
+         });
+
+     }
   // componentDidMount() {
   //     setInterval(() => {
   //       this.setState(prevState => ({
@@ -44,17 +78,21 @@ class ElementsTraining extends React.Component{
       <View style={styles.container}>
       <img className={styles.elementsize }
       src={this.state.img1}
-      onMouseOver={() => {this.setState({
-        img1: Blue,
-        show1: 1
-      });
-      }}
-      onMouseOut={() => {
-        this.setState({
-          img1: Cover,
-          show1: null
-        });
-      }}/>
+      onMouseOver={this.mouseOver}
+      onMouseOut={this.mouseOut}
+      // onMouseOver={() => {this.setState({
+      //   img1: Blue,
+      //   show1: 1
+      // });
+      // }}
+      // onMouseOut={() => {
+        // this.setState({
+        //   img1: Cover,
+        //   show1: null
+        // });
+      // }
+
+      />
       {this.state.show1? <div className={styles.overlay}>
       <ElementBar progress={this.state.progress1} />
       </div>: null}
