@@ -14,9 +14,20 @@ import Hello from "./Hello";
 import "./style/barstyles.css";
 //
 //
+var trialNum =1; //tb changed later
+
 class ElementsTraining extends React.Component{
   constructor(props) {
     super(props);
+    var trial_per_block = 100;//to be changed
+
+
+    /* data to be saved .*/
+  var times_element1 = Array(1).fill().map(() => Array(3).fill(0));
+  // var times_element2 = Array(trial_per_block).fill().map(() => Array(3).fill(0));
+  // var times_element3 = Array(trial_per_block).fill().map(() => Array(3).fill(0));
+
+
   this.state  = {
     img1: Cover,
     img2: Cover,
@@ -26,7 +37,10 @@ class ElementsTraining extends React.Component{
     progress3: 50,
     show1: null,
     show2: null,
-    show3: null
+    show3: null,
+    times_element1: times_element1,
+    // times_element2: times_element2,
+    // times_element3: times_element3
   };
 
   this.mouseOver = this.mouseOver.bind(this);
@@ -40,28 +54,31 @@ class ElementsTraining extends React.Component{
   });
   }
 
-  //
   mouseOver() {
-         this.handle = setTimeout(() => {
-             console.log('2 seconds have elapsed');
-         }, 1000);
+         this.state.times_element1.push([Math.round(performance.now(),0,0]);
          this.setState({
            img1: Blue,
-           show1: 1
+           show1: 1,
+           showtime1: Math.round(performance.now()),
          });
-
+debugger;
      }
 
   mouseOut() {
-         if (this.handle) {
-             clearTimeout(this.handle);
-             this.handle = undefined;}
+    this.state.times_element1[this.state.times_element1.length-1][1] =Math.round(performance.now();
+    // this.state.times_element1[this.state.times_element1.length-1][3] = this.state.times_element1[this.state.times_element1.length-1][0]-this.state.times_element1[this.state.times_element1.length-1][1];
+
+    debugger;
+    // ([this.state.showtime1,Math.round(performance.now()),this.state.showtime1-Math.round(performance.now())]
+        // times_element1[trialNum][1] = Math.round(performance.now());
+        // times_element1[trialNum][2] = times_element1[trialNum][1]-times_element1[trialNum][0] ;
          this.setState({
            img1: Cover,
            show1: null
          });
 
      }
+
   // componentDidMount() {
   //     setInterval(() => {
   //       this.setState(prevState => ({
