@@ -13,7 +13,7 @@ import Yellow from "./img/stimuli3_yellow.jpg";
 import "./style/barstyles.css";
 //
 //
-var trialNum =1; //tb changed later
+var trialNum =1;
 
 class ElementsTraining extends React.Component{
   constructor(props) {

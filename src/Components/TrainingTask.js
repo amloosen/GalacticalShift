@@ -7,7 +7,7 @@ import Cockpit from "./img/CockpitBlank.jpg";
 // import ElementsTraining  from "./elementsTraining";
 /////////////////////////////////////////////////////////////////////////////////
 
-// var trialTotal = 9;
+var trialTotal = 9;
 //
 // setTimeout(
 //   function () {
@@ -37,7 +37,8 @@ class TrainingTask extends React.Component {
     // const startTime = this.props.location.state.startTime;
     // var currentDate = new Date(); // maybe change to local
     // var timeString = currentDate.toTimeString();
-
+    var trialSgmMu = Array(trialTotal).fill().map(() => Array(3).fill(0));
+    var trialRT = Array(trialTotal).fill().map(() => Array(3).fill(0));
     /////////////////////////////////////////////////////////////////////////////////
     // SET COMPONENT STATES
     this.state = {
@@ -48,12 +49,12 @@ class TrainingTask extends React.Component {
       // taskSessionTry: 1,
       // taskSession: "TrainingTask",
       // level: 1,//adapt later
-      // trialNum: 1,//adapt
+      trialNum: 1,//adapt
+      trialRT: trialRT,
       // trialTotal: 1,//adapt
       // //
       // trialSliderRT: null,
-      // trialMu: null,
-      // trialSgm: null,
+      trialSgmMu: trialSgmMu,
       // trialTime: null,
       // trialScore: null,
       // valElem1: null,
@@ -76,7 +77,15 @@ class TrainingTask extends React.Component {
     // componentDidMount() {
     //   setTimeout(this.switchTaskpart, 1000);
     // }
+     saveSgmMu(result) {
+       debugger;
+       this.state.trialSgmMu[this.state.trialNum-1][0]= this.state.trialNum;
+       this.state.trialSgmMu[this.state.trialNum-1][1] = result.sgm;
+       this.state.trialSgmMu[this.state.trialNum-1][2] = result.mu;
+       this.state.trialRT[this.state.trialRT-1][1] = this.state.trialRT[this.state.trialRT-1][0] -  Math.round(performance.now());
+     }
 
+    
     render() {
       // if (this.state.taskPart===1){
 
@@ -95,11 +104,12 @@ class TrainingTask extends React.Component {
             </div>
 
           );
+
           return (<div className={styles.cockpit}>
             <div>{text}</div>
-            <Slider onSpacebarHit={(result) => window.alert(JSON.stringify(result))} />
+            <Slider onSpacebarHit={(result) => this.saveSgmMu(result)} />
             </div>);
-        // }
+        // }// window.alert(JSON.stringify(result))} />
       }
 
       // renderElements(val, col){
