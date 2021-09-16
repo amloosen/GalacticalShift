@@ -7,38 +7,14 @@ import Cockpit from "./img/CockpitBlank.jpg";
 // import ElementsTraining  from "./elementsTraining";
 /////////////////////////////////////////////////////////////////////////////////
 
-var trialTotal = 9;
-//
-// setTimeout(
-//   function () {
-//     this.trialSave();
-//   }.bind(this),
-//   0
-// );
-//
-//
-// setTimeout(
-//   function () {
-//     this.setState({
-//       mounted: 1,
-//     });
-//   }.bind(this),
-//   5000
-// );
-/////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////
-// REACT COMPONENT START
 class TrainingTask extends React.Component {
   constructor(props) {
     super(props);
 
-    // const userID = this.props.location.state.userID;
-    // const date = this.props.location.state.date;
-    // const startTime = this.props.location.state.startTime;
-    // var currentDate = new Date(); // maybe change to local
-    // var timeString = currentDate.toTimeString();
-    var trialSgmMu = Array(trialTotal).fill().map(() => Array(3).fill(0));
-    var trialRT = Array(trialTotal).fill().map(() => Array(3).fill(0));
+    let trialTotal = 9;//update later
+
+    let trialSgmMu = Array(trialTotal).fill().map(() => Array(3).fill(0));
+    let trialRT = Array(trialTotal).fill().map(() => Array(3).fill(0));
     /////////////////////////////////////////////////////////////////////////////////
     // SET COMPONENT STATES
     this.state = {
@@ -48,10 +24,10 @@ class TrainingTask extends React.Component {
       // sectionTime: timeString,
       // taskSessionTry: 1,
       // taskSession: "TrainingTask",
-      // level: 1,//adapt later
       trialNum: 1,//adapt
       trialRT: trialRT,
-      // trialTotal: 1,//adapt
+      trialTime0: 0,
+      trialTotal: trialTotal,//adapt
       // //
       // trialSliderRT: null,
       trialSgmMu: trialSgmMu,
@@ -62,55 +38,56 @@ class TrainingTask extends React.Component {
       // valElem3: null,
       // colElem1: null,
       // colElem2: null,
-      // colElem3: null,
-      // taskPart: 2
+      // colElem3: null
     };
-    // this.switchImage = this.switchImage.bind(this);
+
   }
 
-  // switchTaskpart() {
-  //   this.setState({
-  //     taskPart: 2
-  //   });
-  // }
-
-    // componentDidMount() {
-    //   setTimeout(this.switchTaskpart, 1000);
-    // }
-     saveSgmMu(result) {
-       debugger;
-       this.state.trialSgmMu[this.state.trialNum-1][0]= this.state.trialNum;
-       this.state.trialSgmMu[this.state.trialNum-1][1] = result.sgm;
-       this.state.trialSgmMu[this.state.trialNum-1][2] = result.mu;
-       this.state.trialRT[this.state.trialRT-1][1] = this.state.trialRT[this.state.trialRT-1][0] -  Math.round(performance.now());
-     }
-
-    
+  // implement method to change values on elements etc.
     render() {
-      // if (this.state.taskPart===1){
+var trial = this.state.trialNum;
 
-        // return (<div className={styles.cockpit}>
-        //   //   <div>{text}</div>
-        //   <ElementsTraining onSpacebarHit={(result) => window.alert(JSON.stringify(result))} />
-        //   </div>);
-        //
-        // } else {
-          let text = (
-            <div className={styles.questions}>
-            How large is the alien population?
-            <br />
-            <br />
-            <br />
-            </div>
+renderSlider(){
+  let text = (
+    <div className={styles.questions}>
+    How large is the alien population?
+    <br />
+    <br />
+    <br />
+    </div>);
 
-          );
+  return (
+      <div className={styles.cockpit}>
+      <div>{text}</div>
+      <Slider onSpacebarHit={(result) => this.saveSgmMu(result)} />
+      </div>
+    );
+  }
 
-          return (<div className={styles.cockpit}>
-            <div>{text}</div>
-            <Slider onSpacebarHit={(result) => this.saveSgmMu(result)} />
-            </div>);
-        // }// window.alert(JSON.stringify(result))} />
-      }
+
+
+    saveSgmMu(result) {
+      debugger;
+      trialSgmMu[trialNum-1][0]= this.state.trialNum+1;
+      trialSgmMu[trialNum-1][1] = result.sgm;
+      trialSgmMu[trialNum-1][2] = result.mu;
+      trialRT[trialNum-1][0] = trialNum;
+      trialRT[trialNum-1][1] = Math.round(performance.now())- trialTime0;
+
+
+      // setTimeout(
+      //   function() {
+      //     this.setState({
+      //       trialTime0: trialTime0,
+      //       trialSgmMu: trialSgmMu,
+      //       trialRT: trialRT,
+      //     });
+      //   }
+      //   .bind(this),
+      //   1000
+      // );
+   }
+
 
       // renderElements(val, col){
       //   return <ElementsTraining value={val} col={col} training_apple_col={this.props.training_apple_col}/>;
@@ -203,5 +180,8 @@ class TrainingTask extends React.Component {
     //   };
     // }
   }
+
+
+
 
   export default withRouter(TrainingTask);
