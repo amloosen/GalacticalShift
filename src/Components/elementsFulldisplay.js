@@ -15,7 +15,7 @@ import "./style/barstyles.css";
 //
 var trialNum =1;
 
-class ElementsTraining extends React.Component{
+class ElementsFullDisplay extends React.Component{
   constructor(props) {
     super(props);
     var trial_per_block = 100;//to be changed
@@ -31,9 +31,9 @@ class ElementsTraining extends React.Component{
     img1: Cover,
     img2: Cover,
     img3: Cover,
-    progress1: 70,
-    progress2: 40,
-    progress3: 50,
+    // value1: 70,
+    // value2: 40,
+    // value3: 50,
     show1: null,
     show2: null,
     show3: null,
@@ -106,9 +106,9 @@ class ElementsTraining extends React.Component{
       onMouseOut={(elNr) => this.mouseOut(1)}
       />
       {this.state.show1? <div className={styles.overlay}>
-      <ElementBar progress={this.state.progress1} />
+      <ElementBar progress={this.props.value1} />
       </div>: null}
-      {this.state.show1? <div className={styles.overlaytext}>{this.state.progress1}%
+      {this.state.show1? <div className={styles.overlaytext}>{this.props.value1}%
       </div>: null}
       </View>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -119,9 +119,9 @@ class ElementsTraining extends React.Component{
       onMouseOut={(elNr) => this.mouseOut(2)}
       />
       {this.state.show2? <div className={styles.overlay}>
-      <ElementBar progress={this.state.progress2} />
+      <ElementBar progress={this.props.value2} />
       </div>: null}
-      {this.state.show2? <div className={styles.overlaytext}>{this.state.progress2}%
+      {this.state.show2? <div className={styles.overlaytext}>{this.props.value2}%
       </div>: null}
       </View>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -132,9 +132,9 @@ class ElementsTraining extends React.Component{
       onMouseOut={(elNr) => this.mouseOut(3)}
       />
       {this.state.show3? <div className={styles.overlay}>
-      <ElementBar progress={this.state.progress3}/>
+      <ElementBar progress={this.props.value3}/>
       </div>: null}
-      {this.state.show3? <div className={styles.overlaytext}>{this.state.progress3}%
+      {this.state.show3? <div className={styles.overlaytext}>{this.props.value3}%
       </div>: null}
       </View>
       </span>
@@ -147,8 +147,8 @@ class ElementsTraining extends React.Component{
 //
 
 
-render(<ElementsTraining />, document.getElementById("root"));
+render(<ElementsFullDisplay  />, document.getElementById("root"));
 
 const rootElement = document.getElementById("root");
 
-export default ElementsTraining;
+export default ElementsFullDisplay ;
