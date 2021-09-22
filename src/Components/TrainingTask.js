@@ -1,13 +1,16 @@
-import React, { useState }  from "react";
+import React, { useState, Component}  from "react";
 import { withRouter } from "react-router-dom";
 import { DATABASE_URL } from "./config";
 import styles from "./style/taskStyle.module.css";
 import Slider from "./slider";
 import ElementsFullDisplay from "./elementsFulldisplay";
 import Cockpit from "./img/CockpitBlank.jpg";
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
+
 /////////////////////////////////////////////////////////////////////////////////
 
 class TrainingTask extends React.Component {
+
   constructor(props) {
     super(props);
 
@@ -30,6 +33,9 @@ class TrainingTask extends React.Component {
       // //
       // trialSliderRT: null,
       trialSgmMu: trialSgmMu,
+      timerCountDur: 10,
+      // timerKey: 0,
+      timePassed: false,
       // trialTime: null,
       // trialScore: null,
       // valElem1: null,
@@ -41,18 +47,31 @@ class TrainingTask extends React.Component {
     };
   }
 
+  // render() {
+  //   return (<div>
+  //           <div>{this.renderElements()}</div>
+  //           // <div>{this.renderSlider()}</div>
+  //           </div>);
+  // }
   render() {
-    return (
-      // <div>{this.renderElements()}>
-            <div>{this.renderSlider()}
-            </div>);
-  }
+   setTimeout(() => {this.setState({timePassed: true})}, 1700);
+   if (!this.state.timePassed){
+     return (
+       <ElementsFullDisplay  value1={30} value2={40} value3={80} trialTotal={this.state.trialTotal} trialNum={this.state.trialNum}/>
+     );
+   }else{
+
+     return (
+    <div>{this.renderSlider()}</div>
+  );
+ }
+ }
 
 
 
   // implement method to change values on elements etc.
   renderSlider(){
-    let trialTime0 = Math.round(performance.now());
+     let trialTime0 = Math.round(performance.now());
 
      let text = (
       <div className={styles.questions}>
@@ -71,7 +90,6 @@ class TrainingTask extends React.Component {
     }
 
     saveSgmMu(result,time) {
-      debugger;
       let trialSgmMu = this.state.trialSgmMu;
       let trialRT = this.state.trialRT;
       let trialNum = this.state.trialNum;
@@ -89,10 +107,19 @@ class TrainingTask extends React.Component {
         });
     }
 
-    renderElements(){
-      debugger;
-          return<ElementsFullDisplay value1={30} value2={40} value3={80} trialTotal={this.state.trialTotal} trialNum={this.state.trialNum}/>
-    }
+//   onTimeout() {
+//     debugger;
+//   this.setState({ elementshow: false });
+//
+// }
+
+    // renderElements(){
+    //       return(
+    //       <div>
+    //       <ElementsFullDisplay value1={30} value2={40} value3={80} trialTotal={this.state.trialTotal} trialNum={this.state.trialNum}/>
+    //       </div>
+    //     );
+    // }
 
 }
 

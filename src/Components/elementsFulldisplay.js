@@ -13,7 +13,7 @@ import Yellow from "./img/stimuli3_yellow.jpg";
 import "./style/barstyles.css";
 //
 //
-var trialNum =1;
+var trialNum = 1;
 
 class ElementsFullDisplay extends React.Component{
   constructor(props) {
@@ -146,9 +146,9 @@ class ElementsFullDisplay extends React.Component{
 }
 //
 
-
-render(<ElementsFullDisplay  />, document.getElementById("root"));
-
-const rootElement = document.getElementById("root");
+// 
+// render(<ElementsFullDisplay  />, document.getElementById("root"));
+//
+// const rootElement = document.getElementById("root");
 
 export default ElementsFullDisplay ;

@@ -18,20 +18,18 @@ class TrainingIntro extends React.Component {
   constructor(props) {
     super(props);
 
-    const userID = this.props.location.state.userID;
-    const date = this.props.location.state.date;
-    const startTime = this.props.location.state.startTime;
+    // var user_info = this.props.location.state.user_info;
 
-    var currentDate = new Date(); // maybe change to local
-    var timeString = currentDate.toTimeString();
+    var currentDate   = new Date();
+    var introStartTime    = currentDate.toTimeString();
 
     /////////////////////////////////////////////////////////////////////////////////
     // SET COMPONENT STATES
     this.state = {
-      userID: userID,
-      date: date,
-      startTime: startTime,
-      sectionTime: timeString,
+      // userID: userID,
+      date: currentDate,
+      startTime: introStartTime ,
+      sectionTime: introStartTime,
       taskSessionTry: 1,
       taskSession: "TrainingIntro",
       instructScreenText: 1,
@@ -123,7 +121,7 @@ class TrainingIntro extends React.Component {
   // condSave() {
   //   var userID = this.state.userID;
   //   var currentDate = new Date(); // maybe change to local
-  //   var sectionTime = currentDate.toTimeString();
+  //   var sectionTime = currentDate.tointroStartTime();
   //   var trialTime = Math.round(performance.now());
   //
   //   let saveString = {
@@ -257,10 +255,10 @@ class TrainingIntro extends React.Component {
             <br /> <br />
             We will now tell you how you can infer the population size once you reached a planet.
             <br /> <br />
-            <span className={styles.centerTwo}>
+            <span className={styles.center}>
             <i>(Use the ← → keys to navigate the pages.)</i>
             </span>
-            <span className={styles.centerTwo}>
+            <span className={styles.center}>
             [<strong>NEXT →</strong>]
             </span>
             </p>
@@ -281,16 +279,14 @@ class TrainingIntro extends React.Component {
             <br />
             that will help you determine how many aliens live on the planet.
             <br /><br />A measuring instrument may look like this:
-            <br /> <br />
-            <span className={styles.centerTwo}>
-            <img src={img_intro1} alt="example1"  />
-            />
+            <span className={styles.center}>
+            <img src={img_intro1} alt="example1"/>
             </span>
             <br />
             This instrument indicates 40% of the resource is available.
             <br />
             <br />
-            <span className={styles.centerTwo}>
+            <span className={styles.center}>
             [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
             </span>
             </p>
@@ -310,7 +306,7 @@ class TrainingIntro extends React.Component {
             <br />
             This would mean that if the instrument shows you ‘40%’ 40 million aliens live on that planet. <br />
             <br />
-            <span className={styles.centerTwo}>
+            <span className={styles.center}>
             [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
             </span>
             </p>
@@ -333,7 +329,7 @@ class TrainingIntro extends React.Component {
             <br />
             It is your task to learn this and keep track of changes.
             <br /> <br />
-            <span className={styles.centerTwo}>
+            <span className={styles.center}>
             [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
             </span>
             </p>
@@ -350,7 +346,7 @@ class TrainingIntro extends React.Component {
             <br /> <br />
             We want to see whether you can detect the change. <br /><br />
             <br /> <br />
-            <span className={styles.centerTwo}>
+            <span className={styles.center}>
             [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
             </span>
             </p>
@@ -369,10 +365,10 @@ class TrainingIntro extends React.Component {
             <br /> <br />
             Let's practice this!
             <br /> <br />
-            <span className={styles.centerTwo}>
+            <span className={styles.center}>
             Press the [<strong>SPACEBAR</strong>] to start the training.
             </span>
-            <span className={styles.centerTwo}>
+            <span className={styles.center}>
             [<strong>← BACK</strong>]
             </span>
             </p>
