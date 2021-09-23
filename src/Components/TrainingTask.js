@@ -98,14 +98,45 @@ class TrainingTask extends React.Component {
      return (
        <ElementsFullDisplay  value1={30} value2={40} value3={80} trialTotal={this.state.trialTotal} trialNum={this.state.trialNum}/>
      );
-   }else {
+   } else {
     // switch(this.state.feedback) {
     if (this.state.feedback===false){
-  return(<div>{this.renderSlider()}</div>);}
-      else {
-      return(<div>{this.showFeedback()}</div>);}
-}
-}
+      let choiceTime0 = Math.round(performance.now());
+
+      let text = (
+       <div className={styles.questions}>
+       How large is the alien population?
+       <br />
+       <br />
+       <br />
+       </div>);
+return(
+       <div className={styles.cockpit}>
+       <div>{text}</div>
+       <Slider onSpacebarHit={(result) => {this.saveSgmMu(result,choiceTime0);}}/>
+     </div>
+     );
+      // <div>{this.renderSlider()}</div>);
+    } else {
+        var trueValue = 50;
+        let feedbackStartTime = Math.round(performance.now());
+        let text = (
+         <div className={styles.questions}>
+         The true population on the planet was {trueValue} mio.
+         <br />
+         <br />
+         <br />
+         </div>);
+         return (
+           <div className={styles.cockpit}>
+           <div>{text}</div>
+           <OutcomeSlider mu={this.state.trialSgmMu[this.state.trialNum-1][2]} sgm={this.state.trialSgmMu[this.state.trialNum-1][1]} value={trueValue}/>
+           </div>
+         );}
+
+      }
+    }
+
 /////////////////////////////////////////////////////////////////////////////////
 
 // listenner(feedback){
@@ -113,28 +144,29 @@ class TrainingTask extends React.Component {
 // }
 
   // implement method to change values on elements etc.
-renderSlider(){
-     let choiceTime0 = Math.round(performance.now());
-
-     let text = (
-      <div className={styles.questions}>
-      How large is the alien population?
-      <br />
-      <br />
-      <br />
-      </div>);
-
-      return (
-        <div className={styles.cockpit}>
-        <div>{text}</div>
-        <Slider onSpacebarHit={(result) => {this.saveSgmMu(result,choiceTime0);}}/>
-
-        // {(result) => this.saveSgmMu(result,choiceTime0)}
-            </div>
-      );
-    }
+// renderSlider(){
+//      let choiceTime0 = Math.round(performance.now());
+//
+//      let text = (
+//       <div className={styles.questions}>
+//       How large is the alien population?
+//       <br />
+//       <br />
+//       <br />
+//       </div>);
+//
+//       return (
+//         <div className={styles.cockpit}>
+//         <div>{text}</div>
+//         <Slider onSpacebarHit={(result) => {this.saveSgmMu(result,choiceTime0);}}/>
+//
+//         // {(result) => this.saveSgmMu(result,choiceTime0)}
+//             </div>
+//       );
+//     }
 
   saveSgmMu(result,time) {
+  
       let trialSgmMu = this.state.trialSgmMu;
       let trialRT = this.state.trialRT;
       let trialNum = this.state.trialNum;
@@ -154,30 +186,29 @@ renderSlider(){
 
     }
 
-showFeedback(){
-    debugger;
-      var trueValue = 50;
-      let feedbackStartTime = Math.round(performance.now());
-      let text = (
-       <div className={styles.questions}>
-       The true population on the planet was {trueValue} mio.
-       <br />
-       <br />
-       <br />
-       </div>);
-
-       return (
-         <div className={styles.cockpit}>
-         <div>{text}</div>
-         <OutcomeSlider mu={this.state.trialSgmMu[this.state.trialNum-1][2]} sgm={this.state.trialSgmMu[this.state.trialNum-1][1]} value={trueValue}/>
-         </div>
-       );}
-
-       // componentWillUnmount() {
-       //   this.setState({
-       //     feedback: !this.state.feedback
-       //   });
-       // }
+// showFeedback(){
+//   var trueValue = 50;
+//   let feedbackStartTime = Math.round(performance.now());
+//   let text = (
+//    <div className={styles.questions}>
+//    The true population on the planet was {trueValue} mio.
+//    <br />
+//    <br />
+//    <br />
+//    </div>);
+//
+//        return (
+//          <div className={styles.cockpit}>
+//          <div>{text}</div>
+//          <OutcomeSlider mu={this.state.trialSgmMu[this.state.trialNum-1][2]} sgm={this.state.trialSgmMu[this.state.trialNum-1][1]} value={trueValue}/>
+//          </div>
+//        );}
+//
+//        // componentWillUnmount() {
+//        //   this.setState({
+//        //     feedback: !this.state.feedback
+//        //   });
+//        // }
 }
 
   export default withRouter(TrainingTask);

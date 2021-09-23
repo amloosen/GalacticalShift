@@ -7,19 +7,28 @@ import ReactApexChart from "react-apexcharts";
 
 class OutcomeSlider extends React.Component{
   render (){
-  const mu  = this.props.mu
-  const sgm  = this.props.sgm
+  // const mu  = this.props.mu
+  // const sgm  = this.props.sgm
+  const mu = 50;
+  const sgm = 20;
+  const trueValue = 60;
 
-  const xValues = range(0, 100,0.5)
+  const xValues = range(0, 100,0.5);
   const yValues = xValues.map((x) => normalPdf(x, mu, sgm))
   const yValuesAdapt = yValues.map(function(element) {
 	                     return element*1000;});
 
-debugger;
+ var xValuesOutcome = new Array(200).fill(null);
+ xValuesOutcome[trueValue*2] = yValuesAdapt[trueValue*2];
+
+  // const  outcomeValue = range(0, 100,0.5)
 
   const data = {
     series: [
-      { data: yValuesAdapt}
+      { data: yValuesAdapt,
+      type: "line"},
+      { data: xValuesOutcome,
+      type: "column"},
     ],
     options: {
       chart: {
@@ -133,7 +142,7 @@ debugger;
 //   }, [onSpacebarHit, mu, sgm])
   return (
     <div>
-    <ReactApexChart options={data.options} series={data.series} type="line" height={350} width={700} align="center"/>
+    <ReactApexChart options={data.options} series={data.series} height={350} width={700} align="center"/>
     </div>
   )
 };
