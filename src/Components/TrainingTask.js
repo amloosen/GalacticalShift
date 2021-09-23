@@ -8,8 +8,7 @@ import ElementsFullDisplay from "./elementsFulldisplay";
 import Cockpit from "./img/CockpitBlank.jpg";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
-/////////////////////////////////////////////////////////////////////////////////
-
+////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 class TrainingTask extends React.Component {
   constructor(props) {
@@ -37,6 +36,7 @@ class TrainingTask extends React.Component {
       timerCountDur: 10,
       timePassed: false,
       feedback: false,
+      mounted: 0
       // trialTime: null,
       // trialScore: null,
       // valElem1: null,
@@ -46,33 +46,74 @@ class TrainingTask extends React.Component {
       // colElem2: null,
       // colElem3: null
     };
+    // this.displayFeedback = this.displayFeedback.bind(this)
+    /* prevents page from going to the right/left when arrows are pressed .*/
+    window.addEventListener('keydown', function(e) {
+    if(e.keyCode === 37 && e.target === document.body) {
+      e.preventDefault();
+    }
+    else if(e.keyCode === 39 && e.target === document.body) {
+      e.preventDefault();
+    }
+    });
   }
+/////////////////////////////////////////////////////////////////////////////////
+  // componentDidMount() {
+  //     setTimeout(
+  //       function() {
+  //         this.setState({
+  //           mounted: 1,
+  //         });
+  //       }
+  //       .bind(this),
+  //       5000
+  //     );
+  //   }
+  //
+  //   fetchUserInfo () {
+  //        fetch(`${API_URL}/questions_behaviour/last_user_no`)
+  //          .then(handleResponse)
+  //          .then((data) => {
+  //            const user_no_ = parseInt(data['new_user_no'])
+  //            //console.log("fetchUserInfo in Intro ", "user_no", user_no_)
+  //
+  //            this.setState({
+  //                    UserNo : user_no_,
+  //                    fetched: 1,
+  //                });
+  //        })
+  //          .catch((error) => {
+  //           console.log(error)
+  //        });
+  //       }
 
-  // render() {
-  //   return (<div>
-  //           <div>{this.renderElements()}</div>
-  //           // <div>{this.renderSlider()}</div>
-  //           </div>);
+  // displayFeedback() {
+  //   this.setState({feedback: true});
   // }
+
+  /////////////////////////////////////////////////////////////////////////////////
   render() {
-   setTimeout(() => {this.setState({timePassed: true})}, 10000);
+   setTimeout(() => {this.setState({timePassed: true})}, 100);//show elements
    if (!this.state.timePassed){
      return (
        <ElementsFullDisplay  value1={30} value2={40} value3={80} trialTotal={this.state.trialTotal} trialNum={this.state.trialNum}/>
      );
-   }else if (this.state.feedback===false){
-    return (
-    <div>{this.renderSlider()}</div>
-  );}
-  else {
-      <div>{this.showFeedback()}</div>
-  }
- }
+   }else {
+    // switch(this.state.feedback) {
+    if (this.state.feedback===false){
+  return(<div>{this.renderSlider()}</div>);}
+      else {
+      return(<div>{this.showFeedback()}</div>);}
+}
+}
+/////////////////////////////////////////////////////////////////////////////////
 
-
+// listenner(feedback){
+//
+// }
 
   // implement method to change values on elements etc.
-  renderSlider(){
+renderSlider(){
      let choiceTime0 = Math.round(performance.now());
 
      let text = (
@@ -86,12 +127,14 @@ class TrainingTask extends React.Component {
       return (
         <div className={styles.cockpit}>
         <div>{text}</div>
-        <Slider onSpacebarHit={(result) => this.saveSgmMu(result,choiceTime0)} />
-        </div>
+        <Slider onSpacebarHit={(result) => {this.saveSgmMu(result,choiceTime0);}}/>
+
+        // {(result) => this.saveSgmMu(result,choiceTime0)}
+            </div>
       );
     }
 
-    saveSgmMu(result,time) {
+  saveSgmMu(result,time) {
       let trialSgmMu = this.state.trialSgmMu;
       let trialRT = this.state.trialRT;
       let trialNum = this.state.trialNum;
@@ -101,7 +144,6 @@ class TrainingTask extends React.Component {
       trialRT[trialNum-1][1] = time;
       trialRT[trialNum-1][2] = Math.round(performance.now());
       trialRT[trialNum-1][3] = trialRT[trialNum-1][2] - time;
-
       this.setState({
           trialSgmMu: trialSgmMu,
           trialRT: trialRT,
@@ -109,28 +151,33 @@ class TrainingTask extends React.Component {
           // trialNum : trialNum+1,
           // outcome: show
         });
-        debugger;
+
     }
 
-    showFeedback(result){
-    var trueValue = 50;
-    let feedbackTime = Math.round(performance.now());
+showFeedback(){
+    debugger;
+      var trueValue = 50;
+      let feedbackStartTime = Math.round(performance.now());
+      let text = (
+       <div className={styles.questions}>
+       The true population on the planet was {trueValue} mio.
+       <br />
+       <br />
+       <br />
+       </div>);
 
-    let text = (
-     <div className={styles.questions}>
-     The true population on the planet was ${trueValue} mio.'
-     <br />
-     <br />
-     <br />
-     </div>);
+       return (
+         <div className={styles.cockpit}>
+         <div>{text}</div>
+         <OutcomeSlider mu={this.state.trialSgmMu[this.state.trialNum-1][2]} sgm={this.state.trialSgmMu[this.state.trialNum-1][1]} value={trueValue}/>
+         </div>
+       );}
 
-     return (
-       <div className={styles.cockpit}>
-       <div>{text}</div>
-       <OutcomeSlider mu={this.state.trialSgmMu[this.state.trialNum-1][2]} sgm={this.state.trialSgmMu[this.state.trialNum-1][1]} value={trueValue}/>
-       </div>
-     );}
-
+       // componentWillUnmount() {
+       //   this.setState({
+       //     feedback: !this.state.feedback
+       //   });
+       // }
 }
 
   export default withRouter(TrainingTask);

@@ -15,6 +15,7 @@ class OutcomeSlider extends React.Component{
   const yValuesAdapt = yValues.map(function(element) {
 	                     return element*1000;});
 
+debugger;
 
   const data = {
     series: [
