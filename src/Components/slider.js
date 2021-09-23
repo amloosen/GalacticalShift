@@ -24,9 +24,6 @@ const Slider = ({ onSpacebarHit = () => {} }) => {
         show: false},
         height: 350,
         type: 'line',
-        toolbar: {
-          show: false
-        },
         zoom: {
             enabled: false}
       },
@@ -87,19 +84,18 @@ const Slider = ({ onSpacebarHit = () => {} }) => {
 
 //
   function muPlus(event) {
-    if (mu==100){setMu(mu)}
+    if (mu===100){setMu(mu)}
     else
       {setMu(mu + 1)}
     }
 
   function muMinus(event) {
-    if (mu==0){setMu(mu)}
+    if (mu===0){setMu(mu)}
     else
     {setMu(mu - 1)}
   }
   function sgmPlus(event) {
-    // if (sgm>=20000){setSgm(sgm)}
-    // else
+
     setSgm(sgm + 10)
   }
   function sgmMinus(event) {

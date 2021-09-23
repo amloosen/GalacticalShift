@@ -70,7 +70,6 @@ class ElementsFullDisplay extends React.Component{
          img3: Yellow,
          show3: 1,
        });}
-
      }
 
      mouseOut(elNr) {
@@ -146,7 +145,7 @@ class ElementsFullDisplay extends React.Component{
 }
 //
 
-// 
+//
 // render(<ElementsFullDisplay  />, document.getElementById("root"));
 //
 // const rootElement = document.getElementById("root");

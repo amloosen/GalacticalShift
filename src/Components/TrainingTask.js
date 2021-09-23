@@ -1,12 +1,10 @@
-import React, { useState, Component}  from "react";
+import React from "react";
 import { withRouter } from "react-router-dom";
 import { DATABASE_URL } from "./config";
 import styles from "./style/taskStyle.module.css";
 import Slider from "./slider";
 import OutcomeSlider from "./sliderOutcome";
 import ElementsFullDisplay from "./elementsFulldisplay";
-import Cockpit from "./img/CockpitBlank.jpg";
-import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
 ////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
@@ -58,17 +56,17 @@ class TrainingTask extends React.Component {
     });
   }
 /////////////////////////////////////////////////////////////////////////////////
-  // componentDidMount() {
-  //     setTimeout(
-  //       function() {
-  //         this.setState({
-  //           mounted: 1,
-  //         });
-  //       }
-  //       .bind(this),
-  //       5000
-  //     );
-  //   }
+  componentDidMount() {
+      setTimeout(
+        function() {
+          this.setState({
+            mounted: 1,
+          });
+        }
+        .bind(this),
+        5000
+      );
+    }
   //
   //   fetchUserInfo () {
   //        fetch(`${API_URL}/questions_behaviour/last_user_no`)
@@ -99,7 +97,6 @@ class TrainingTask extends React.Component {
        <ElementsFullDisplay  value1={30} value2={40} value3={80} trialTotal={this.state.trialTotal} trialNum={this.state.trialNum}/>
      );
    } else {
-    // switch(this.state.feedback) {
     if (this.state.feedback===false){
       let choiceTime0 = Math.round(performance.now());
 
@@ -110,17 +107,16 @@ class TrainingTask extends React.Component {
        <br />
        <br />
        </div>);
-return(
-       <div className={styles.cockpit}>
+
+      return(<div className={styles.cockpit}>
        <div>{text}</div>
        <Slider onSpacebarHit={(result) => {this.saveSgmMu(result,choiceTime0);}}/>
      </div>
      );
-      // <div>{this.renderSlider()}</div>);
     } else {
         var trueValue = 50;
         let feedbackStartTime = Math.round(performance.now());
-        let text = (
+        let text2 = (
          <div className={styles.questions}>
          The true population on the planet was {trueValue} mio.
          <br />
@@ -129,44 +125,18 @@ return(
          </div>);
          return (
            <div className={styles.cockpit}>
-           <div>{text}</div>
+           <div>{text2}</div>
            <OutcomeSlider mu={this.state.trialSgmMu[this.state.trialNum-1][2]} sgm={this.state.trialSgmMu[this.state.trialNum-1][1]} value={trueValue}/>
            </div>
          );}
 
       }
     }
-
+    // <div className={styles.overlay}>
+    // <ElementBar progress={this.props.value2} />
 /////////////////////////////////////////////////////////////////////////////////
 
-// listenner(feedback){
-//
-// }
-
-  // implement method to change values on elements etc.
-// renderSlider(){
-//      let choiceTime0 = Math.round(performance.now());
-//
-//      let text = (
-//       <div className={styles.questions}>
-//       How large is the alien population?
-//       <br />
-//       <br />
-//       <br />
-//       </div>);
-//
-//       return (
-//         <div className={styles.cockpit}>
-//         <div>{text}</div>
-//         <Slider onSpacebarHit={(result) => {this.saveSgmMu(result,choiceTime0);}}/>
-//
-//         // {(result) => this.saveSgmMu(result,choiceTime0)}
-//             </div>
-//       );
-//     }
-
   saveSgmMu(result,time) {
-  
       let trialSgmMu = this.state.trialSgmMu;
       let trialRT = this.state.trialRT;
       let trialNum = this.state.trialNum;
@@ -185,30 +155,6 @@ return(
         });
 
     }
-
-// showFeedback(){
-//   var trueValue = 50;
-//   let feedbackStartTime = Math.round(performance.now());
-//   let text = (
-//    <div className={styles.questions}>
-//    The true population on the planet was {trueValue} mio.
-//    <br />
-//    <br />
-//    <br />
-//    </div>);
-//
-//        return (
-//          <div className={styles.cockpit}>
-//          <div>{text}</div>
-//          <OutcomeSlider mu={this.state.trialSgmMu[this.state.trialNum-1][2]} sgm={this.state.trialSgmMu[this.state.trialNum-1][1]} value={trueValue}/>
-//          </div>
-//        );}
-//
-//        // componentWillUnmount() {
-//        //   this.setState({
-//        //     feedback: !this.state.feedback
-//        //   });
-//        // }
 }
 
   export default withRouter(TrainingTask);
