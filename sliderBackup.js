@@ -1,32 +1,22 @@
 import { range } from "lodash";
-import React, { Component } from "react";
 import normalPdf from "normal-pdf";
+import { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 
-class OutcomeSlider extends React.Component{
-  constructor(props) {
-  super(props);
-  const mu  = this.props.mu
-  const sgm  = this.props.sgm
-  // const mu = 50;
-  // const sgm = 20;
-  // const trueValue = 50;
-  const trueValue = this.props.value;
+const Slider = ({ onSpacebarHit = () => {} }) => {
+  const [mu, setMu] = useState(50)
+  const [sgm, setSgm] = useState(30)
 
-  const xValues = range(0, 100,0.5);
+
+  const xValues = range(0, 100,0.5)
   const yValues = xValues.map((x) => normalPdf(x, mu, sgm))
-  const yValuesAdaptNew = yValues.map(function(element) {
+  const yValuesAdapt = yValues.map(function(element) {
 	                     return element*1000;});
 
- var xValuesOutcome = new Array(200).fill(null);
- xValuesOutcome[trueValue*2] = yValuesAdaptNew[trueValue*2];
 
-  this.state = {
+  const data = {
     series: [
-      { data: yValuesAdaptNew,
-      type: "line"},
-      { data: xValuesOutcome,
-      type: "column"},
+      { data: yValuesAdapt}
     ],
     options: {
       chart: {
@@ -37,7 +27,7 @@ class OutcomeSlider extends React.Component{
         zoom: {
             enabled: false}
       },
-      colors: ['#d2eaf2',"#DAA520"],
+      colors: ['#d2eaf2'],
       fill: {colors: ['#d2eaf2']},
       dataLabels: {
         enabled: false,
@@ -86,22 +76,60 @@ class OutcomeSlider extends React.Component{
          offsetY: 0}
         }
       },
-      animations: {
-      enabled: false},
       grid: {show: false},
       tooltip: {enabled: false},
-      legend: {
-      show: false}
     },
   };
-}
-render (){
-  return (
-   <div>
-   <ReactApexChart options={this.state.options} series={this.state.series} type="line" width={700} height={350} align="center"/>
-   </div>
-  );
- };
-}
+//
 
-export default OutcomeSlider;
+//
+  function muPlus(event) {
+    if (mu===100){setMu(mu)}
+    else
+      {setMu(mu + 1)}
+    }
+
+  function muMinus(event) {
+    if (mu===0){setMu(mu)}
+    else
+    {setMu(mu - 1)}
+  }
+  function sgmPlus(event) {
+
+    setSgm(sgm + 10)
+  }
+  function sgmMinus(event) {
+    if (sgm<=1){setSgm(sgm)}
+    else
+    setSgm(sgm - 1)
+  }
+
+  useEffect(() => {
+    const handler = (event) => {
+      // do something with data
+      if (event.keyCode === 32) {
+        onSpacebarHit({ mu, sgm })
+      } else if (event.keyCode === 39) {muPlus()
+
+      } else if (event.keyCode === 37) {muMinus()
+
+      } else if (event.keyCode === 38) {sgmPlus()
+
+      } else if (event.keyCode === 40) {sgmMinus()
+
+      }
+    }
+    document.addEventListener('keydown', handler)
+    return () => {
+      document.removeEventListener('keydown', handler)
+    }
+  }, [onSpacebarHit, mu, sgm])
+
+  return (
+    <div>
+    <ReactApexChart options={data.options} series={data.series} type="line" height={350} width={700} align="center"/>
+    </div>
+  )
+};
+
+export default Slider;

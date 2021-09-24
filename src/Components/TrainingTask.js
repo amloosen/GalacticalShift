@@ -3,9 +3,9 @@ import { withRouter } from "react-router-dom";
 import { DATABASE_URL } from "./config";
 import styles from "./style/taskStyle.module.css";
 import Slider from "./slider";
-import OutcomeSlider from "./sliderOutcome";
+// import OutcomeSlider from "./sliderOutcome";
+import BarOutcome from "./barOutcome";
 import ElementsFullDisplay from "./elementsFulldisplay";
-
 ////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 class TrainingTask extends React.Component {
@@ -56,17 +56,17 @@ class TrainingTask extends React.Component {
     });
   }
 /////////////////////////////////////////////////////////////////////////////////
-  componentDidMount() {
-      setTimeout(
-        function() {
-          this.setState({
-            mounted: 1,
-          });
-        }
-        .bind(this),
-        5000
-      );
-    }
+  // componentDidMount() {
+  //     setTimeout(
+  //       function() {
+  //         this.setState({
+  //           mounted: 1,
+  //         });
+  //       }
+  //       .bind(this),
+  //       5000
+  //     );
+  //   }
   //
   //   fetchUserInfo () {
   //        fetch(`${API_URL}/questions_behaviour/last_user_no`)
@@ -97,7 +97,7 @@ class TrainingTask extends React.Component {
        <ElementsFullDisplay  value1={30} value2={40} value3={80} trialTotal={this.state.trialTotal} trialNum={this.state.trialNum}/>
      );
    } else {
-    if (this.state.feedback===false){
+      if (this.state.timePassed===true && this.state.feedback===false){
       let choiceTime0 = Math.round(performance.now());
 
       let text = (
@@ -113,12 +113,12 @@ class TrainingTask extends React.Component {
        <Slider onSpacebarHit={(result) => {this.saveSgmMu(result,choiceTime0);}}/>
      </div>
      );
-    } else {
-        var trueValue = 50;
+   } else if (this.state.timePassed===true && this.state.feedback===true){
+   //      // var trueValue = 50;
         let feedbackStartTime = Math.round(performance.now());
         let text2 = (
          <div className={styles.questions}>
-         The true population on the planet was {trueValue} mio.
+         The true population on the planet was {50} mio.
          <br />
          <br />
          <br />
@@ -126,12 +126,14 @@ class TrainingTask extends React.Component {
          return (
            <div className={styles.cockpit}>
            <div>{text2}</div>
-           <OutcomeSlider mu={this.state.trialSgmMu[this.state.trialNum-1][2]} sgm={this.state.trialSgmMu[this.state.trialNum-1][1]} value={trueValue}/>
+           <BarOutcome mu={50} sgm={30} value={50}/>
            </div>
-         );}
-
+         );
+         // <SliderOutcome mu={this.state.trialSgmMu[this.state.trialNum-1][2]} sgm={this.state.trialSgmMu[this.state.trialNum-1][1]} value={trueValue}/>
+    //
       }
     }
+  }
     // <div className={styles.overlay}>
     // <ElementBar progress={this.props.value2} />
 /////////////////////////////////////////////////////////////////////////////////
@@ -157,4 +159,4 @@ class TrainingTask extends React.Component {
     }
 }
 
-  export default withRouter(TrainingTask);
+export default withRouter(TrainingTask);

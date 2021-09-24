@@ -108,7 +108,8 @@ const Slider = ({ onSpacebarHit = () => {} }) => {
     const handler = (event) => {
       // do something with data
       if (event.keyCode === 32) {
-        onSpacebarHit({ mu, sgm })
+        onSpacebarHit({ mu, sgm });
+
       } else if (event.keyCode === 39) {muPlus()
 
       } else if (event.keyCode === 37) {muMinus()
@@ -121,7 +122,7 @@ const Slider = ({ onSpacebarHit = () => {} }) => {
     }
     document.addEventListener('keydown', handler)
     return () => {
-      document.removeEventListener('keydown', handler)
+    document.removeEventListener('keydown', handler)
     }
   }, [onSpacebarHit, mu, sgm])
 

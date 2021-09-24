@@ -9,7 +9,6 @@ import Blue from "./img/stimuli3_blue.jpg";
 import Red from "./img/stimuli3_red.jpg";
 import Green from "./img/stimuli3_green.jpg";
 import Yellow from "./img/stimuli3_yellow.jpg";
-
 import "./style/barstyles.css";
 //
 //
@@ -143,11 +142,5 @@ class ElementsFullDisplay extends React.Component{
     );
   }
 }
-//
-
-//
-// render(<ElementsFullDisplay  />, document.getElementById("root"));
-//
-// const rootElement = document.getElementById("root");
 
 export default ElementsFullDisplay ;
