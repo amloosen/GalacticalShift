@@ -3,8 +3,13 @@ import { withRouter } from "react-router-dom";
 import { DATABASE_URL } from "./config";
 import styles from "./style/taskStyle.module.css";
 import Slider from "./slider";
-// import OutcomeSlider from "./sliderOutcome";
-import BarOutcome from "./barOutcome";
+import {
+  SafeAreaView,
+  View,
+  StyleSheet,
+} from 'react-native';
+import OutcomeSlider from "./sliderOutcome";
+import OutcomeSliderBar from "./sliderOutcomeBar";
 import ElementsFullDisplay from "./elementsFulldisplay";
 ////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +39,8 @@ class TrainingTask extends React.Component {
       timerCountDur: 10,
       timePassed: false,
       feedback: false,
-      mounted: 0
+      mounted: 0,
+      trueValue: 50
       // trialTime: null,
       // trialScore: null,
       // valElem1: null,
@@ -97,7 +103,7 @@ class TrainingTask extends React.Component {
        <ElementsFullDisplay  value1={30} value2={40} value3={80} trialTotal={this.state.trialTotal} trialNum={this.state.trialNum}/>
      );
    } else {
-      if (this.state.timePassed===true && this.state.feedback===false){
+      // if (this.state.timePassed===true && this.state.feedback===false){
       let choiceTime0 = Math.round(performance.now());
 
       let text = (
@@ -108,34 +114,38 @@ class TrainingTask extends React.Component {
        <br />
        </div>);
 
-      return(<div className={styles.cockpit}>
-       <div>{text}</div>
-       <Slider onSpacebarHit={(result) => {this.saveSgmMu(result,choiceTime0);}}/>
-     </div>
-     );
-   } else if (this.state.timePassed===true && this.state.feedback===true){
-   //      // var trueValue = 50;
-        let feedbackStartTime = Math.round(performance.now());
-        let text2 = (
-         <div className={styles.questions}>
-         The true population on the planet was {50} mio.
-         <br />
-         <br />
-         <br />
-         </div>);
-         return (
-           <div className={styles.cockpit}>
-           <div>{text2}</div>
-           <BarOutcome mu={50} sgm={30} value={50}/>
-           </div>
-         );
-         // <SliderOutcome mu={this.state.trialSgmMu[this.state.trialNum-1][2]} sgm={this.state.trialSgmMu[this.state.trialNum-1][1]} value={trueValue}/>
-    //
-      }
+       let text2 = (
+       <div className={styles.questions}>
+        The true population on the planet was {50} mio.
+        <br />
+        <br />
+        <br />
+       </div>);
+
+       return (
+         <div> {this.state.feedback ? (
+         <div className={styles.cockpit}>
+         <div>{text2}</div>
+         <View style={styles.container}>
+         <div className={styles.overlaybar}><OutcomeSliderBar mu={this.state.trialSgmMu[this.state.trialNum-1][2]} sgm={this.state.trialSgmMu[this.state.trialNum-1][1]} value = {this.state.trueValue}/>
+         </div>
+         <div className={styles.overlaybar}><OutcomeSlider mu={this.state.trialSgmMu[this.state.trialNum-1][2]} sgm={this.state.trialSgmMu[this.state.trialNum-1][1]} />
+         </div>
+         </View>
+         </div>
+      ) : (
+        <div className={styles.cockpit}>
+        <div>{text}</div>
+        <Slider onSpacebarHit={(result) => {this.saveSgmMu(result,choiceTime0);}}/>
+        </div>
+          )}
+       </div>
+  );
+
     }
   }
-    // <div className={styles.overlay}>
-    // <ElementBar progress={this.props.value2} />
+
+
 /////////////////////////////////////////////////////////////////////////////////
 
   saveSgmMu(result,time) {
@@ -155,7 +165,6 @@ class TrainingTask extends React.Component {
           // trialNum : trialNum+1,
           // outcome: show
         });
-
     }
 }
 

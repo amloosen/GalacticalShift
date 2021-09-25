@@ -137,3 +137,26 @@ span.centerThree {
   font-size: 40px;
   font-family: "Calibri", "Calibri";
 }
+
+.overlaybar{
+  height: 100%;
+  width: 1024px;
+
+  /* Full height */
+  width: 100%;
+
+  /* Center and scale the image nicely */
+
+  position: absolute;
+}
+.overlaybarsecond{
+  height: 100%;
+  width: 1024px;
+
+  /* Full height */
+  width: 100%;
+
+  /* Center and scale the image nicely */
+
+  position: absolute;
+}

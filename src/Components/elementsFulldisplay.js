@@ -63,7 +63,7 @@ class ElementsFullDisplay extends React.Component{
         this.setState({
           img2: Red,
           show2: 1,
-        });} else if (elNr === 3){ debugger;
+        });} else if (elNr === 3){
        this.state.times_element3.push([Math.round(performance.now()),0,0]);
        this.setState({
          img3: Yellow,
