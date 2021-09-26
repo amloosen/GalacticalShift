@@ -124,6 +124,17 @@ img.introImgTwo {
   border: 10px solid white;
 }
 
+img.introImgTwo2 {
+  width: 50px;
+  height: auto;
+}
+
+img.introImgTwo3 {
+  width: 100px;
+  height: auto;
+  border: 5px solid white;
+}
+
 .elementsize {
   width: 30vh;
   height: auto;

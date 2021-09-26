@@ -6,6 +6,10 @@ import styles from "./style/taskStyle.module.css";
 import Cockpit from "./img/CockpitBlank.jpg";
 
 import img_spacebar from "./intro/spacebar.png";
+import img_up from "./intro/up.png";
+import img_down from "./intro/down.png";
+import img_left from "./intro/left.png";
+import img_right from "./intro/right.png";
 import img_slider1 from "./intro/SliderExamplePicture1.png";
 import img_slider2 from "./intro/SliderExamplePoint.png";
 import img_slider3 from "./intro/SliderExampleLine.png";
@@ -242,7 +246,8 @@ class SliderIntro extends React.Component {
                   alt="example1"
                 />
               </span>
-              <br /> <br />
+              <br />
+              <br />
               <span className={styles.center}>
                 [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
               </span>
@@ -253,26 +258,54 @@ class SliderIntro extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
-              The second aspect of the slider enables you to indicate your certainty.
+            You can change position of the peak
+            <br /><br />
+            <span className={styles.center}>
+              <img
+                className={styles.introImgTwo3}
+                src={img_slider2}
+                alt="example1"
+              />
+            </span>
+            <br />
+            using the left
+            <img
+              className={styles.introImgTwo2}
+              src={img_left}
+              alt="example1"
+            />
+             and right arrow keys
+            <img
+              className={styles.introImgTwo2}
+              src={img_right}
+              alt="example1"
+            />
+              <br /><br />
               <br />
-              Here you see how it looks like when the estimate is 50 with high uncertainty
-              <br />
+              You can change the width
+              <br /><br />
               <span className={styles.center}>
                 <img
-                  className={styles.introImgTwo}
-                  src={img_slider5}
+                  className={styles.introImgTwo3}
+                  src={img_slider3}
                   alt="example1"
                 />
               </span>
-              and here you indicated with high certainty
               <br />
-              <span className={styles.center}>
-                <img
-                  className={styles.introImgTwo}
-                  src={img_slider6}
-                  alt="example1"
-                />
-              </span>
+              using the up
+              <img
+                className={styles.introImgTwo2}
+                src={img_up}
+                alt="example1"
+              />
+               and down arrow keys
+              <img
+                className={styles.introImgTwo2}
+                src={img_down}
+                alt="example1"
+              />
+              <br />
+              <br />
               <br />
               <span className={styles.center}>
                 [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
@@ -280,22 +313,21 @@ class SliderIntro extends React.Component {
             </p>
           </div>
         );
-      } else if (this.state.instructScreenText === 7) {
+      }  else if (this.state.instructScreenText === 7) {
         text = (
           <div className={styles.main}>
             <p>
-              The second aspect of the slider enables you to indicate your certainty.
               <br />
-              Here you see how it looks like when the estimate is 50 with high uncertainty
+              Here you see how it looks like when the estimate is 50
               <br />
               <span className={styles.center}>
                 <img
                   className={styles.introImgTwo}
-                  src={img_slider3}
+                  src={img_slider1}
                   alt="example1"
                 />
               </span>
-              and here you see 50 indicated with high certainty
+              and here you see 75
               <br />
               <span className={styles.center}>
                 <img
@@ -311,7 +343,39 @@ class SliderIntro extends React.Component {
               </p>
             </div>
           );
-        } else if (this.state.instructScreenText === 8) {
+
+      } else if (this.state.instructScreenText === 8) {
+          text = (
+            <div className={styles.main}>
+              <p>
+               The second aspect of the slider enables you to indicate your certainty.
+               <br /><br />
+                To clarify this, here you see how it looks like when the estimate is 50 with high certainty
+                <br /><br />
+                <span className={styles.center}>
+                  <img
+                    className={styles.introImgTwo}
+                    src={img_slider5}
+                    alt="example1"
+                  />
+                </span>
+                and here 50 is indicated with <strong>un</strong>certainty
+                <br />
+                <span className={styles.center}>
+                  <img
+                    className={styles.introImgTwo}
+                    src={img_slider6}
+                    alt="example1"
+                  />
+                </span>
+                <br />
+                <span className={styles.center}>
+                  [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
+                </span>
+              </p>
+            </div>
+          );
+        } else if (this.state.instructScreenText === 9) {
           text = (
           <div className={styles.main}>
             <p>
@@ -333,7 +397,7 @@ class SliderIntro extends React.Component {
             </p>
           </div>
         );
-      } else if (this.state.instructScreenText === 9) {
+      } else if (this.state.instructScreenText === 10) {
           text = (
             <div className={styles.main}>
               <p>
@@ -361,7 +425,7 @@ class SliderIntro extends React.Component {
               </p>
             </div>
           );
-   } else if (this.state.instructScreenText === 10) {
+   } else if (this.state.instructScreenText === 11) {
        text = (
          <div className={styles.main}>
            <p>
@@ -382,7 +446,7 @@ class SliderIntro extends React.Component {
              Let's practice this!
              <br /> <br /> <br /> <br />
              <span className={styles.center}>
-               Press the [<strong>SPACEBAR</strong>] to start the training.
+               Also press the spacebar to start the practice.
              </span>
              <span className={styles.center}>
                [<strong>← BACK</strong>]
