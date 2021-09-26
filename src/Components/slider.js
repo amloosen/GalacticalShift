@@ -95,13 +95,13 @@ const Slider = ({ onSpacebarHit = () => {} }) => {
     {setMu(mu - 1)}
   }
   function sgmPlus(event) {
-
     setSgm(sgm + 10)
   }
   function sgmMinus(event) {
-    if (sgm<=1){setSgm(sgm)}
+    if (sgm<=10){setSgm(sgm)}
     else
-    setSgm(sgm - 1)
+    
+    setSgm(sgm - 10)
   }
 
   useEffect(() => {
