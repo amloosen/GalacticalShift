@@ -5,16 +5,22 @@ import { DATABASE_URL } from "./config";
 import styles from "./style/taskStyle.module.css";
 import Cockpit from "./img/CockpitBlank.jpg";
 
-import img_intro1 from "./intro/ExamplePicture1.jpg";
-import img_intro2 from "./intro/ExamplePicture2.jpg";
-import img_intro3 from "./intro/ExamplePicture3.jpg";
+import img_spacebar from "./intro/spacebar.png";
+import img_slider1 from "./intro/SliderExamplePicture1.png";
+import img_slider2 from "./intro/SliderExamplePoint.png";
+import img_slider3 from "./intro/SliderExampleLine.png";
+import img_slider4 from "./intro/SliderExamplePicture2.png";
+import img_slider5 from "./intro/SliderExamplePicture3.png";
+import img_slider6 from "./intro/SliderExamplePicture4.png";
+import img_slider7 from "./intro/SliderExamplePicture5.png";
+
 /////////
 var trialTotal = 9;
 
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 // REACT COMPONENT START
-class TrainingIntro extends React.Component {
+class SliderIntro extends React.Component {
   constructor(props) {
     super(props);
 
@@ -31,7 +37,7 @@ class TrainingIntro extends React.Component {
       startTime: introSliderStartTime,
       sectionTime: introSliderStartTime,
       taskSessionTry: 1,
-      taskSession: "TrainingIntro",
+      taskSession: "SliderIntro",
       instructScreenText: 1,
       instructScreen: true,
     };
@@ -55,7 +61,7 @@ class TrainingIntro extends React.Component {
 
     if (whichButton === 4 && curText > 1) {
       this.setState({ instructScreenText: curText - 1 });
-    } else if (whichButton === 5 && curText < 6) {
+    } else if (whichButton === 5 && curText < 12) {
       this.setState({ instructScreenText: curText + 1 });
     } else if (curText === 6 && whichButton === 10) {
       setTimeout(
@@ -73,20 +79,20 @@ class TrainingIntro extends React.Component {
 
     switch (event.keyCode) {
       case 37:
-      //    this is left arrow
-      key_pressed = 4;
-      this.handleInstructLocal(key_pressed);
-      break;
+        //    this is left arrow
+        key_pressed = 4;
+        this.handleInstructLocal(key_pressed);
+        break;
       case 39:
-      //    this is right arrow
-      key_pressed = 5;
-      this.handleInstructLocal(key_pressed);
-      break;
+        //    this is right arrow
+        key_pressed = 5;
+        this.handleInstructLocal(key_pressed);
+        break;
       case 32:
-      //    this is SPACEBAR
-      key_pressed = 10;
-      this.handleInstructLocal(key_pressed);
-      break;
+        //    this is SPACEBAR
+        key_pressed = 10;
+        this.handleInstructLocal(key_pressed);
+        break;
       default:
     }
   };
@@ -115,163 +121,287 @@ class TrainingIntro extends React.Component {
         document.addEventListener("keyup", this._handleInstructKey);
         text = (
           <div className={styles.main}>
-          <p>
-          <span className={styles.center}>
-          Welcome to our study!
-          </span>
-          <br />
-          In the following game, you will use a special response slider, with which you can indicate
-          <br />
-          both a number we are asking for and how certain you are about this number.
-          <br />
-          We will now show you how it works.
-          <br />
-          <br />
-          <br /> <br />
-          <span className={styles.center}>
-          <i>(Use the ← → keys to navigate the pages.)</i>
-          </span>
-          <span className={styles.center}>
-          [<strong>NEXT →</strong>]
-          </span>
-          </p>
+            <p>
+              <span className={styles.center}>Welcome to our study!</span>
+              <br />
+              In the following game, you will use a special response slider.
+              With this slider you can indicate both <br />
+              (1) a <strong>number</strong> we are asking for and <br />
+              (2) how <strong>certain</strong> you are about this number.
+              <br />
+              <br />
+              We will now show you how this slider works and give you a chance
+              to get used to it.
+              <br />
+              <br />
+              <br /> <br />
+              <span className={styles.center}>
+                <i>(Use the ← → keys to navigate the pages.)</i>
+              </span>
+              <span className={styles.center}>
+                [<strong>NEXT →</strong>]
+              </span>
+            </p>
           </div>
         );
       } else if (this.state.instructScreenText === 2) {
         text = (
           <div className={styles.main}>
-          <p>
-          <span className={styles.center}>
-          Let&apos;s say you are estimating how much something costs.
-          <br />
-          If you make such an estimate you might be more or less certain about its accuracy.
-          <br />
-          This means, sometimes you might be certain (sure.) that your estimate is correct and other times you
-          might be very uncertain (unsure) about your estimate.
-          <br />
-          <br />For instance a scenario might be:
-
-          <br />
-          Your estimate:
-          <br />“The ice cream will cost £2”
-          <br />
-          Your certainty in your estimate
-          <br />
-          “I am very certain that the ice-cream will cost £2 since this is what I paid last time I went to this shop”
-          or “I am very uncertain how much the ice-cream will actually cost because I have never been to this shop before.”
-          <br /> <br />
-          <span className={styles.center}>
-          <i>(Use the ← → keys to navigate the pages.)</i>
-          </span>
-          <span className={styles.center}>
-          [<strong>NEXT →</strong>]
-          </span>
-          </span>
-          </p>
+            <p>
+              <br />
+              <br />
+              When you make an estimate, such as how expensive something is, you
+              might be more or less certain about this estimate's accuracy.
+              <br />
+              <br />
+              This means, sometimes you might be certain (sure.) that your
+              estimate is correct and other times you might be very uncertain
+              (unsure) about your estimate.
+              <br />
+              <br />
+              <br /> <br />
+              <span className={styles.center}>
+                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
+              </span>
+            </p>
           </div>
         );
       } else if (this.state.instructScreenText === 3) {
         text = (
           <div className={styles.main}>
-          <p>
-          <span className={styles.center}>TRAINING I</span>
-          <br />
-          The aliens living on these planets rely on natural resources,
-          <br /> and thus the population size is related to the measurement
-          of your instrument.
-          <br />
-          <br />
-          For example, the reading of the measurement could be reflecting
-          the population size (in million) one-to-one.
-          <br />
-          This would mean that if the instrument shows you ‘40%’ 40 million
-          aliens live on that planet. <br />
-          <br />
-          <span className={styles.center}>
-          [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
-          </span>
-          </p>
+            <p>
+              <br />
+              <br />
+              For instance a scenario might be:
+              <br />
+              <br />
+              <li>Your estimate:</li>
+              “The ice cream will cost £2”
+              <br />
+              <br />
+              <li>Your certainty in your estimate:</li>
+              “I am very certain that the ice-cream will cost £2 since this is
+              what I paid last time I went to this shop”
+              <br /> <br />
+              or <br />
+              <br />
+              “I am very uncertain how much the ice-cream will actually cost
+              because I have never been to this shop before.”
+              <br />
+              <br />
+              <br /> <br />
+              <span className={styles.center}>
+                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
+              </span>
+            </p>
           </div>
         );
       } else if (this.state.instructScreenText === 4) {
         text = (
           <div className={styles.main}>
-          <p>
-          <span className={styles.center}>TRAINING I</span>
-          <br />
-          However, a challenge makes your mission more difficult:
-          <br />
-          <br />
-          No one knows how the instrument readings map onto the population
-          size of the planet.
-          <br />
-          <br />
-          The association between the instrument reading and the population
-          size will be
-          <strong>more complex</strong> and also{" "}
-          <strong>change at certain time points.</strong>
-          <br />
-          <br />
-          It is your task to learn this and keep track of changes.
-          <br /> <br />
-          <span className={styles.center}>
-          [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
-          </span>
-          </p>
+            <p>
+              <br />
+              This is the slider you will use:
+              <br />
+              <br />
+              <span className={styles.center}>
+                <img
+                  className={styles.introImg}
+                  src={img_slider1}
+                  alt="example1"
+                />
+              </span>
+              <br />
+              <br />
+              <span className={styles.center}>
+                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
+              </span>
+            </p>
           </div>
         );
       } else if (this.state.instructScreenText === 5) {
         text = (
           <div className={styles.main}>
-          <p>
-          <span className={styles.center}>TRAINING I</span>
-          <br />
-          For simplicity, we will now introduce you to the structure by
-          using simple mappings that will change at some point.
-          <br /> <br />
-          We want to see whether you can detect the change. <br />
-          <br />
-          <br /> <br />
-          <span className={styles.center}>
-          [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
-          </span>
-          </p>
+            <p>
+              The peak of this curve shows the estimate that you think is most
+              likely:
+              <br />
+              <span className={styles.center}>
+                <img
+                  className={styles.introImgTwo}
+                  src={img_slider2}
+                  alt="example1"
+                />
+              </span>
+              And the width of the slider shows how certain you are:
+              <br />
+              <span className={styles.center}>
+                <img
+                  className={styles.introImgTwo}
+                  src={img_slider3}
+                  alt="example1"
+                />
+              </span>
+              <br /> <br />
+              <span className={styles.center}>
+                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
+              </span>
+            </p>
           </div>
         );
       } else if (this.state.instructScreenText === 6) {
         text = (
           <div className={styles.main}>
-          <p>
-          <span className={styles.center}>TRAINING I</span>
-          <br />
-          For your first training, after you indicated your answer <br />
-          we will show you how many aliens actually lived on the planet.
-          <br />
-          <br />
-          This will make it possible for you to find out how the instrument
-          relates to the alien population size.
-          <br /> <br />
-          Let's practice this!
-          <br /> <br />
-          <span className={styles.center}>
-          <i>(Use the ← → keys to navigate the pages.)</i>
-          </span>
-          <span className={styles.center}>
-          [<strong>NEXT →</strong>]
-          </span>
-          </p>
+            <p>
+              The second aspect of the slider enables you to indicate your certainty.
+              <br />
+              Here you see how it looks like when the estimate is 50 with high uncertainty
+              <br />
+              <span className={styles.center}>
+                <img
+                  className={styles.introImgTwo}
+                  src={img_slider5}
+                  alt="example1"
+                />
+              </span>
+              and here you indicated with high certainty
+              <br />
+              <span className={styles.center}>
+                <img
+                  className={styles.introImgTwo}
+                  src={img_slider6}
+                  alt="example1"
+                />
+              </span>
+              <br />
+              <span className={styles.center}>
+                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
+              </span>
+            </p>
           </div>
         );
-      } else if (this.state.instructScreen === false) {
-      }
-    }
+      } else if (this.state.instructScreenText === 7) {
+        text = (
+          <div className={styles.main}>
+            <p>
+              The second aspect of the slider enables you to indicate your certainty.
+              <br />
+              Here you see how it looks like when the estimate is 50 with high uncertainty
+              <br />
+              <span className={styles.center}>
+                <img
+                  className={styles.introImgTwo}
+                  src={img_slider3}
+                  alt="example1"
+                />
+              </span>
+              and here you see 50 indicated with high certainty
+              <br />
+              <span className={styles.center}>
+                <img
+                  className={styles.introImgTwo}
+                  src={img_slider4}
+                  alt="example1"
+                  />
+                </span>
+                <br />
+                <span className={styles.center}>
+                  [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
+                </span>
+              </p>
+            </div>
+          );
+        } else if (this.state.instructScreenText === 8) {
+          text = (
+          <div className={styles.main}>
+            <p>
+              <br />
+              <br />
+              To familiarize you with the slider, we will ask you several questions.
+              <br />
+              <br />
+              Some questions are related to yourself and some are not.
+              <br />
+              <br />
+              Please indicate your answer to the question, as well as your certainty in your answer by using the slider.
+              <br />
+              <br />
+              <br /> <br />
+              <span className={styles.center}>
+                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
+              </span>
+            </p>
+          </div>
+        );
+      } else if (this.state.instructScreenText === 9) {
+          text = (
+            <div className={styles.main}>
+              <p>
+                <br />
+                One example could be:
+                <br />
+                <br />
+                “How large is the population of Thailand? (If the scale refers to 0-100 Million)”
+                <br />
+                <br />
+                Your answer:
+                <br />
+                <span className={styles.center}>
+                  <img
+                    className={styles.introImg}
+                    src={img_slider7}
+                    alt="example1"
+                  />
+                </span>
+                <br />
+                <br />
+                <span className={styles.center}>
+                  [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
+                </span>
+              </p>
+            </div>
+          );
+   } else if (this.state.instructScreenText === 10) {
+       text = (
+         <div className={styles.main}>
+           <p>
+             <br />
+             When indicating your estimate and certainty, please try to do be as precise as possible.
+             <br />
+             <br />
+             To submit your answer, please press the space bar.
+             <br />
+             <span className={styles.center}>
+               <img
+                 className={styles.introImg2}
+                 src={img_spacebar}
+                 alt="example1"
+               />
+             </span>
+             <br /> <br />
+             Let's practice this!
+             <br /> <br /> <br /> <br />
+             <span className={styles.center}>
+               Press the [<strong>SPACEBAR</strong>] to start the training.
+             </span>
+             <span className={styles.center}>
+               [<strong>← BACK</strong>]
+             </span>
+           </p>
+         </div>
+       );
+     }
+}
+
+
+
 
     return (
       <div className={styles.cockpit}>
-      <div className={styles.textblock}>{text}</div>
+        <div className={styles.textblock}>{text}</div>
       </div>
     );
   }
 }
 
-export default withRouter(TrainingIntro);
+export default withRouter(SliderIntro);

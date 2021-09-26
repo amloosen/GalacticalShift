@@ -107,6 +107,23 @@ span.centerThree {
   margin: 0 auto;
 }
 
+img.introImg {
+  width: 400px;
+  height: auto;
+  border: 10px solid white;
+}
+
+img.introImg2 {
+  width: 200px;
+  height: auto;
+}
+
+img.introImgTwo {
+  width: 300px;
+  height: auto;
+  border: 10px solid white;
+}
+
 .elementsize {
   width: 30vh;
   height: auto;

@@ -6,8 +6,6 @@ import styles from "./style/taskStyle.module.css";
 import Cockpit from "./img/CockpitBlank.jpg";
 
 import img_intro1 from "./intro/ExamplePicture1.jpg";
-import img_intro2 from "./intro/ExamplePicture2.jpg";
-import img_intro3 from "./intro/ExamplePicture3.jpg";
 /////////
 var trialTotal = 9;
 
