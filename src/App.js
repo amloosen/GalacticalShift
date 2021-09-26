@@ -4,7 +4,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import StartPage from "./Components/StartPage";
 import TrainingIntro from "./Components/TrainingIntro";
 import TrainingTask from "./Components/TrainingTask";
-// import ElementBar from "./Components/elementBar";
+import SliderPractice from "./Components/sliderTraining";
 import TutorTask from "./Components/TutorTask";
 import ExptTask from "./Components/ExptTask";
 import Questionnaires from "./Components/Questionnaires";
@@ -17,6 +17,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path="/" component={StartPage} exact />
+       <Route path="/sliderTraining" component={SliderPractice} exact />
         <Route path="/TrainingIntro" component={TrainingIntro} exact />
         <Route path="/TrainingTask" component={TrainingTask} exact />
         <Route path="/TutorTask" component={TutorTask} exact />

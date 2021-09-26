@@ -12,8 +12,8 @@ class TrainingTask extends React.Component {
   constructor(props) {
     super(props);
 
-    let trialSgmMu = Array(trialTotal).fill().map(() => Array(3).fill(0));
-    let trialRT = Array(trialTotal).fill().map(() => Array(3).fill(0));
+    let trialSgmMu = Array(9).fill().map(() => Array(3).fill(0));
+    let trialRT = Array(9).fill().map(() => Array(3).fill(0));
 
     this.state = {
       // userID: userID,
@@ -26,7 +26,6 @@ class TrainingTask extends React.Component {
       trialNum: 1,//adapt
       trialRT: trialRT,
       choiceTime0: 0,
-      trialTotal: trialTotal,//adapt
       // //
       trialSgmMu: trialSgmMu,
       timerCountDur: 10,
@@ -146,7 +145,7 @@ class TrainingTask extends React.Component {
       this.setState({
           trialSgmMu: trialSgmMu,
           trialRT: trialRT,
-          feedback: true
+          feedback: true,
           trialNum : trialNum+1,
           // outcome: show
         });
