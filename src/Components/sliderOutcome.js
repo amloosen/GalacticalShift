@@ -4,82 +4,97 @@ import { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 
 const OutcomeSlider = (props) => {
-
-const xValues = range(0, 100,0.5)
-const yValues = xValues.map((x) => normalPdf(x, props.mu, props.sgm))
-const yValuesAdapt = yValues.map(function(element) {
-	                     return element*1000;});
+  const xValues = range(0, 100, 0.5);
+  const yValues = xValues.map((x) => normalPdf(x, props.mu, props.sgm));
+  const yValuesAdapt = yValues.map(function (element) {
+    return element * 1000;
+  });
 
   const data = {
-    series: [
-      { data: yValuesAdapt}
-    ],
+    series: [{ data: yValuesAdapt }],
     options: {
       chart: {
-      toolbar: {
-        show: false},
-        type: 'line',
+        toolbar: {
+          show: false,
+        },
+        type: "line",
         zoom: {
-            enabled: false}
+          enabled: false,
+        },
       },
-      colors: ['#d2eaf2'],
-      fill: {colors: ['#d2eaf2']},
+      colors: ["#d2eaf2"],
+      fill: { colors: ["#d2eaf2"] },
       dataLabels: {
         enabled: false,
       },
       stroke: {
-        curve: 'smooth',
+        curve: "smooth",
       },
       markers: {
-        size: 0
+        size: 0,
       },
       yaxis: {
-        min:0,
-        labels:{show: false },
-        axisTicks:{
-          show: false
+        min: 0,
+        labels: { show: false },
+        axisTicks: {
+          show: false,
         },
         lines: {
-          show: false
-        }
+          show: false,
+        },
       },
       xaxis: {
-        color:'#1C00ff00',
-        show:false,
+        color: "#1C00ff00",
+        show: false,
         tickAmount: 5,
-        overwriteCategories: ['0', '25', '50', '75', '100'],
+        overwriteCategories: ["0", "25", "50", "75", "100"],
         lines: {
-          show: false
+          show: false,
         },
         axisTicks: {
-          show: false
+          show: false,
         },
         axisBorder: {
           show: false,
-          color: '#1C00ff00',
-          opacity:1,
+          color: "#1C00ff00",
+          opacity: 1,
           height: 4,
-        width: '100%'},
+          width: "100%",
+        },
         labels: {
           rotate: 0,
           style: {
-            fontSize: '20px',
-            colors: ['#1C00ff00','#1C00ff00','#1C00ff00','#1C00ff00','#1C00ff00'],
+            fontSize: "20px",
+            colors: [
+              "#1C00ff00",
+              "#1C00ff00",
+              "#1C00ff00",
+              "#1C00ff00",
+              "#1C00ff00",
+            ],
             offsetX: 0,
-         offsetY: 0}
-        }
+            offsetY: 0,
+          },
+        },
       },
-      grid: {show: false},
-      tooltip: {enabled: false},
+      grid: { show: false },
+      tooltip: { enabled: false },
     },
   };
-//
+  //
 
   return (
     <div>
-    <ReactApexChart options={data.options} series={data.series} type="line" height={350} width={700} align="center"/>
+      <ReactApexChart
+        options={data.options}
+        series={data.series}
+        type="line"
+        height={350}
+        width={700}
+        align="center"
+      />
     </div>
-  )
+  );
 };
 
 export default OutcomeSlider;

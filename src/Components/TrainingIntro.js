@@ -19,17 +19,14 @@ class TrainingIntro extends React.Component {
     super(props);
 
     // var user_info = this.props.location.state.user_info;
-
-    var currentDate   = new Date();
-    var introStartTime    = currentDate.toTimeString();
+    var currentDate = new Date();
+    var introTrainingStartTime = currentDate.toTimeString();
 
     /////////////////////////////////////////////////////////////////////////////////
     // SET COMPONENT STATES
     this.state = {
       // userID: userID,
-      date: currentDate,
-      startTime: introStartTime ,
-      sectionTime: introStartTime,
+      sectionStartTime: introTrainingStartTime,
       taskSessionTry: 1,
       taskSession: "TrainingIntro",
       instructScreenText: 1,
@@ -68,20 +65,20 @@ class TrainingIntro extends React.Component {
     } else if (whichButton === 5 && curText < 6) {
       this.setState({ instructScreenText: curText + 1 });
     } else if (curText === 6 && whichButton === 10) {
-    //   //startmissionOne
-    //   setTimeout(
-    //     function () {
-    //       this.missionOne();
-    //     }.bind(this),
-    //     0
-    //   );
-    // } else if (curText === 7 && whichButton === 10) {
-    //   //restart
-    //   this.setState({
-    //     instructScreenText: 1,
-    //   });
-    // } else if (curText === 8 && whichButton === 10) {
-    //   //go to TrainingTask
+      //   //startmissionOne
+      //   setTimeout(
+      //     function () {
+      //       this.missionOne();
+      //     }.bind(this),
+      //     0
+      //   );
+      // } else if (curText === 7 && whichButton === 10) {
+      //   //restart
+      //   this.setState({
+      //     instructScreenText: 1,
+      //   });
+      // } else if (curText === 8 && whichButton === 10) {
+      //   //go to TrainingTask
       setTimeout(
         function () {
           this.nextMission();
@@ -121,7 +118,7 @@ class TrainingIntro extends React.Component {
   // condSave() {
   //   var userID = this.state.userID;
   //   var currentDate = new Date(); // maybe change to local
-  //   var sectionTime = currentDate.tointroStartTime();
+  //   var sectionTime = currentDate.tointroTrainingStartTime();
   //   var trialTime = Math.round(performance.now());
   //
   //   let saveString = {
@@ -199,7 +196,8 @@ class TrainingIntro extends React.Component {
       state: {
         userID: this.state.userID,
         date: this.state.date,
-        startTime: this.state.startTime},
+        startTime: this.state.startTime,
+      },
     });
   }
 
@@ -237,145 +235,159 @@ class TrainingIntro extends React.Component {
 
   render() {
     let text;
-      if (this.state.instructScreen === true) {
-        if (this.state.instructScreenText === 1) {
-          document.addEventListener("keyup", this._handleInstructKey);
-          text = (
-            <div className={styles.main}>
+    if (this.state.instructScreen === true) {
+      if (this.state.instructScreenText === 1) {
+        document.addEventListener("keyup", this._handleInstructKey);
+        text = (
+          <div className={styles.main}>
             <p>
-            <span className={styles.center}>
-            Hello and welcome on onboard!
-            </span>
-            <br />
-            For today&apos;s mission, you will be a space explorer on an intergalactic mission.
-            <br />
-            <br />
-            Your mission is to tell your station on earth of how many aliens live on the planets you visit.
-            <br /> <br />It is critical that you give your best estimate of the alien population size for the mission to be successful.
-            <br /> <br />
-            We will now tell you how you can infer the population size once you reached a planet.
-            <br /> <br />
-            <span className={styles.center}>
-            <i>(Use the ← → keys to navigate the pages.)</i>
-            </span>
-            <span className={styles.center}>
-            [<strong>NEXT →</strong>]
-            </span>
+              <span className={styles.center}>
+                Hello and welcome on onboard!
+              </span>
+              <br />
+              For today&apos;s mission, you will be a space explorer on an
+              intergalactic mission.
+              <br />
+              <br />
+              Your mission is to tell your station on earth of how many aliens
+              live on the planets you visit.
+              <br /> <br />
+              It is critical that you give your best estimate of the alien
+              population size for the mission to be successful.
+              <br /> <br />
+              We will now tell you how you can infer the population size once
+              you reached a planet.
+              <br /> <br />
+              <span className={styles.center}>
+                <i>(Use the ← → keys to navigate the pages.)</i>
+              </span>
+              <span className={styles.center}>
+                [<strong>NEXT →</strong>]
+              </span>
             </p>
-            </div>
-          );
-        } else if (this.state.instructScreenText === 2) {
-          text = (
-            <div className={styles.main}>
+          </div>
+        );
+      } else if (this.state.instructScreenText === 2) {
+        text = (
+          <div className={styles.main}>
             <p>
-            <span className={styles.center}>
-            TRAINING I
-            </span>
-
-            So how can you find out how many aliens live on a planet?
-            <br />
-            <br />
-            Your spaceship is equipped with several measuring instruments
-            <br />
-            that will help you determine how many aliens live on the planet.
-            <br /><br />A measuring instrument may look like this:
-            <span className={styles.center}>
-            <img src={img_intro1} alt="example1"/>
-            </span>
-            <br />
-            This instrument indicates 40% of the resource is available.
-            <br />
-            <br />
-            <span className={styles.center}>
-            [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
-            </span>
+              <span className={styles.center}>TRAINING I</span>
+              So how can you find out how many aliens live on a planet?
+              <br />
+              <br />
+              Your spaceship is equipped with several measuring instruments
+              <br />
+              that will help you determine how many aliens live on the planet.
+              <br />
+              <br />A measuring instrument may look like this:
+              <span className={styles.center}>
+                <img src={img_intro1} alt="example1" />
+              </span>
+              <br />
+              This instrument indicates 40% of the resource is available.
+              <br />
+              <br />
+              <span className={styles.center}>
+                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
+              </span>
             </p>
-            </div>
-          );
-        } else if (this.state.instructScreenText === 3) {
-          text = (
-            <div className={styles.main}>
+          </div>
+        );
+      } else if (this.state.instructScreenText === 3) {
+        text = (
+          <div className={styles.main}>
             <p>
-            <span className={styles.center}>TRAINING I</span>
-            <br />
-            The aliens living on these planets rely on natural resources,
-            <br /> and thus the population size is related to the measurement of your instrument.
-            <br />
-            <br />
-            For example, the reading of the measurement could be reflecting the population size (in million) one-to-one.
-            <br />
-            This would mean that if the instrument shows you ‘40%’ 40 million aliens live on that planet. <br />
-            <br />
-            <span className={styles.center}>
-            [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
-            </span>
+              <span className={styles.center}>TRAINING I</span>
+              <br />
+              The aliens living on these planets rely on natural resources,
+              <br /> and thus the population size is related to the measurement
+              of your instrument.
+              <br />
+              <br />
+              For example, the reading of the measurement could be reflecting
+              the population size (in million) one-to-one.
+              <br />
+              This would mean that if the instrument shows you ‘40%’ 40 million
+              aliens live on that planet. <br />
+              <br />
+              <span className={styles.center}>
+                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
+              </span>
             </p>
-            </div>
-          );
-        } else if (this.state.instructScreenText === 4) {
-          text = (
-            <div className={styles.main}>
+          </div>
+        );
+      } else if (this.state.instructScreenText === 4) {
+        text = (
+          <div className={styles.main}>
             <p>
-            <span className={styles.center}>TRAINING I</span>
-            <br />
-            However, a challenge makes your mission more difficult:
-            <br />
-            <br />
-            No one knows how the instrument readings map onto the population size of the planet.
-            <br />
-            <br />
-            The association between the instrument reading and the population size will be
-            <strong>more complex</strong> and also <strong>change at certain time points.</strong><br />
-            <br />
-            It is your task to learn this and keep track of changes.
-            <br /> <br />
-            <span className={styles.center}>
-            [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
-            </span>
+              <span className={styles.center}>TRAINING I</span>
+              <br />
+              However, a challenge makes your mission more difficult:
+              <br />
+              <br />
+              No one knows how the instrument readings map onto the population
+              size of the planet.
+              <br />
+              <br />
+              The association between the instrument reading and the population
+              size will be
+              <strong>more complex</strong> and also{" "}
+              <strong>change at certain time points.</strong>
+              <br />
+              <br />
+              It is your task to learn this and keep track of changes.
+              <br /> <br />
+              <span className={styles.center}>
+                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
+              </span>
             </p>
-            </div>
-          );
-        } else if (this.state.instructScreenText === 5) {
-          text = (
-            <div className={styles.main}>
+          </div>
+        );
+      } else if (this.state.instructScreenText === 5) {
+        text = (
+          <div className={styles.main}>
             <p>
-            <span className={styles.center}>TRAINING I</span>
-            <br />
-            For simplicity, we will now introduce you to the structure by using simple mappings
-            that will change at some point.
-            <br /> <br />
-            We want to see whether you can detect the change. <br /><br />
-            <br /> <br />
-            <span className={styles.center}>
-            [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
-            </span>
+              <span className={styles.center}>TRAINING I</span>
+              <br />
+              For simplicity, we will now introduce you to the structure by
+              using simple mappings that will change at some point.
+              <br /> <br />
+              We want to see whether you can detect the change. <br />
+              <br />
+              <br /> <br />
+              <span className={styles.center}>
+                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
+              </span>
             </p>
-            </div>
-          );
-        } else if (this.state.instructScreenText === 6) {
-          text = (
-            <div className={styles.main}>
+          </div>
+        );
+      } else if (this.state.instructScreenText === 6) {
+        text = (
+          <div className={styles.main}>
             <p>
-            <span className={styles.center}>TRAINING I</span>
-            <br />
-            For your first training, after you indicated your answer <br />
-            we will show you how many aliens actually lived on the planet.
-            <br /><br />
-            This will make it possible for you to find out how the instrument relates to the alien population size.
-            <br /> <br />
-            Let's practice this!
-            <br /> <br />
-            <span className={styles.center}>
-            Press the [<strong>SPACEBAR</strong>] to start the training.
-            </span>
-            <span className={styles.center}>
-            [<strong>← BACK</strong>]
-            </span>
+              <span className={styles.center}>TRAINING I</span>
+              <br />
+              For your first training, after you indicated your answer <br />
+              we will show you how many aliens actually lived on the planet.
+              <br />
+              <br />
+              This will make it possible for you to find out how the instrument
+              relates to the alien population size.
+              <br /> <br />
+              Let's practice this!
+              <br /> <br />
+              <span className={styles.center}>
+                Press the [<strong>SPACEBAR</strong>] to start the training.
+              </span>
+              <span className={styles.center}>
+                [<strong>← BACK</strong>]
+              </span>
             </p>
-            </div>
-          );
-        } else if (this.state.instructScreen === false) {}
+          </div>
+        );
+      } else if (this.state.instructScreen === false) {
       }
+    }
 
     return (
       <div className={styles.cockpit}>

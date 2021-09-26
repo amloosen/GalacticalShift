@@ -11,12 +11,7 @@ import img_intro1 from "./intro/ExamplePicture1.jpg";
 import img_intro2 from "./intro/ExamplePicture2.jpg";
 import img_intro3 from "./intro/ExamplePicture3.jpg";
 /////////
-var introPic = [
-  img_intro1,
-  img_intro2,
-  img_intro3
-
-];
+var introPic = [img_intro1, img_intro2, img_intro3];
 
 class StartPage extends React.Component {
   constructor(props) {
@@ -51,7 +46,7 @@ class StartPage extends React.Component {
       date: dateString,
       dateTime: dateTime,
       startTime: timeString,
-      consentComplete: 0
+      consentComplete: 0,
     };
 
     // update State when consent is complete
@@ -69,7 +64,7 @@ class StartPage extends React.Component {
 
     this.setState({
       introPic: introPic,
-      mounted: 1
+      mounted: 1,
     });
   }
 
@@ -86,12 +81,12 @@ class StartPage extends React.Component {
     });
 
     this.props.history.push({
-      pathname: `/TrainingIntro`,
+      pathname: `/sliderTraining`,
       state: {
         userID: this.state.userID,
         date: this.state.date,
         startTime: this.state.startTime,
-        introPic: this.state.introPic
+        introPic: this.state.introPic,
       },
     });
 
@@ -280,7 +275,9 @@ class StartPage extends React.Component {
     if (this.state.consentComplete === 0) {
       return (
         <div className="placeMiddle">
-          <div className="placeMiddleHeader">INFORMATION FOR THE PARTICIPANT</div>
+          <div className="placeMiddleHeader">
+            INFORMATION FOR THE PARTICIPANT
+          </div>
           <br />
           Please read this information page carefully. If you are happy to
           proceed, please check the boxes on the second page of this form to
