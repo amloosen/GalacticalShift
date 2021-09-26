@@ -3,17 +3,14 @@ import { withRouter } from "react-router-dom";
 import { DATABASE_URL } from "./config";
 import styles from "./style/taskStyle.module.css";
 import Slider from "./slider";
-import OutcomeSlider from "./sliderOutcome";
-import OutcomeSliderBar from "./sliderOutcomeBar";
-import ElementsFullDisplay from "./elementsFulldisplay";
 ////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
-class TrainingTask extends React.Component {
+class SliderPractice extends React.Component {
   constructor(props) {
     super(props);
 
-    let trialSgmMu = Array(trialTotal).fill().map(() => Array(3).fill(0));
-    let trialRT = Array(trialTotal).fill().map(() => Array(3).fill(0));
+    let practSgmMu = Array(trialTotal).fill().map(() => Array(3).fill(0));
+    let practlRT = Array(trialTotal).fill().map(() => Array(3).fill(0));
 
     this.state = {
       // userID: userID,
@@ -21,14 +18,14 @@ class TrainingTask extends React.Component {
       // startTime: startTime,
       // sectionTime: timeString,
       // taskSessionTry: 1,
-      // taskSession: "TrainingTask",
-      trialTotal: 9,
-      trialNum: 1,//adapt
-      trialRT: trialRT,
+      // taskSession: "SliderPractice",
+      practTotal: 9,
+      trianNum: 1,//adapt
+      practlRT: practlRT,
       choiceTime0: 0,
       trialTotal: trialTotal,//adapt
       // //
-      trialSgmMu: trialSgmMu,
+      practSgmMu: practSgmMu,
       timerCountDur: 10,
       timePassed: false,
       feedback: false,
@@ -85,72 +82,45 @@ class TrainingTask extends React.Component {
   //       }
   /////////////////////////////////////////////////////////////////////////////////
   render() {
-  if (this.state.trialNum<=this.state.trialTotal){
-   setTimeout(() => {this.setState({timePassed: true})}, 100);//show elements
-   if (!this.state.timePassed){
-     return (
-       <ElementsFullDisplay  value1={30} value2={40} value3={80} trialTotal={this.state.trialTotal} trialNum={this.state.trialNum}/>
-     );
-   } else {
-      // if (this.state.timePassed===true && this.state.feedback===false){
-      let choiceTime0 = Math.round(performance.now());
+  if (this.state.trianNum<=this.state.practTotal){
 
-      let text = (
-       <div className={styles.questions}>
-       How large is the alien population?
-       <br />
-       <br />
-       <br />
-       </div>);
-
-       let text2 = (
-       <div className={styles.questions}>
-        The true population on the planet was {50} mio.
-        <br />
-        <br />
-        <br />
-       </div>);
 
        return (
-         <div> {this.state.feedback ? (
-         <div className={styles.cockpit}>
-         <div>{text2}</div>
-         <div className={styles.overlaybar}><OutcomeSliderBar mu={this.state.trialSgmMu[this.state.trialNum-1][2]} sgm={this.state.trialSgmMu[this.state.trialNum-1][1]} value = {this.state.trueValue}/>
-         </div>
-         <div className={styles.overlaybar}><OutcomeSlider mu={this.state.trialSgmMu[this.state.trialNum-1][2]} sgm={this.state.trialSgmMu[this.state.trialNum-1][1]} />
-         </div>
-         </div>
-      ) : (
         <div className={styles.cockpit}>
         <div>{text}</div>
         <Slider onSpacebarHit={(result) => {this.saveSgmMu(result,choiceTime0);}}/>
-        </div>
-          )}
-       </div>
-  );
-
-    }
-  }
-  }
+        </div>);
+}}
 /////////////////////////////////////////////////////////////////////////////////
   saveSgmMu(result,time) {
-      let trialSgmMu = this.state.trialSgmMu;
-      let trialRT = this.state.trialRT;
-      let trialNum = this.state.trialNum;
-      trialSgmMu[trialNum-1][1] = result.sgm;
-      trialSgmMu[trialNum-1][2] = result.mu;
-      trialRT[trialNum-1][0] = trialNum;
-      trialRT[trialNum-1][1] = time;
-      trialRT[trialNum-1][2] = Math.round(performance.now());
-      trialRT[trialNum-1][3] = trialRT[trialNum-1][2] - time;
+      let practSgmMu = this.state.practSgmMu;
+      let practlRT = this.state.practlRT;
+      let trianNum = this.state.trianNum;
+      practSgmMu[trianNum-1][1] = result.sgm;
+      practSgmMu[trianNum-1][2] = result.mu;
+      practlRT[trianNum-1][0] = trianNum;
+      practlRT[trianNum-1][1] = time;
+      practlRT[trianNum-1][2] = Math.round(performance.now());
+      practlRT[trianNum-1][3] = practlRT[trianNum-1][2] - time;
       this.setState({
-          trialSgmMu: trialSgmMu,
-          trialRT: trialRT,
-          feedback: true
-          trialNum : trialNum+1,
+          practSgmMu: practSgmMu,
+          practlRT: practlRT,
+          feedback: true,
+          trianNum : trianNum+1,
           // outcome: show
-        });
-    }
+        });}
+
+        bubble_text(questNr){
+          if (questNr===1){
+            let text = (
+             <div className={styles.questions}>
+             How large is the alien population?
+             <br />
+             <br />
+             <br />
+             </div>)
+          }
+        }
 }
 
-export default withRouter(TrainingTask);
+export default SliderPractice;
