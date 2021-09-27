@@ -3,7 +3,6 @@ import { withRouter } from "react-router-dom";
 import { DATABASE_URL } from "./config";
 import styles from "./style/taskStyle.module.css";
 import Slider from "./slider";
-////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 class SliderPractice extends React.Component {
   constructor(props) {
@@ -21,30 +20,20 @@ class SliderPractice extends React.Component {
       // date: date,
       // startTime: startTime,
       // sectionTime: timeString,
-      // taskSessionTry: 1,
       taskSession: "SliderPractice",
       practTotal: 7,
       practNum: 1, //adapt
       practRT: practRT,
       choiceTime0: 0,
-      // //
       practSgmMu: practSgmMu,
       timerCountDur: 10,
       timePassed: false,
       feedback: false,
       mounted: 0,
-      trueValue: 50,
-      // trialTime: null,
-      // trialScore: null,
-      // valElem1: null,
-      // valElem2: null,
-      // valElem3: null,
-      // colElem1: null,
-      // colElem2: null,
-      // colElem3: null
+      trueValue: 50
     };
     this.redirectToTarget = this.redirectToTarget.bind(this);
-    
+
     // this.displayFeedback = this.displayFeedback.bind(this)
     /* prevents page from going to the right/left when arrows are pressed .*/
     window.addEventListener("keydown", function (e) {

@@ -383,8 +383,7 @@ class TrainingIntro extends React.Component {
             </p>
           </div>
         );
-      } else if (this.state.instructScreen === false) {
-      }
+      } 
     }
 
     return (

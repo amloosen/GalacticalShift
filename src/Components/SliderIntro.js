@@ -17,13 +17,8 @@ import img_slider4 from "./intro/SliderExamplePicture2.png";
 import img_slider5 from "./intro/SliderExamplePicture3.png";
 import img_slider6 from "./intro/SliderExamplePicture4.png";
 import img_slider7 from "./intro/SliderExamplePicture5.png";
-
-/////////
-var trialTotal = 9;
-
 /////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////
-// REACT COMPONENT START
+
 class SliderIntro extends React.Component {
   constructor(props) {
     super(props);
@@ -67,7 +62,7 @@ class SliderIntro extends React.Component {
       this.setState({ instructScreenText: curText - 1 });
     } else if (whichButton === 5 && curText < 12) {
       this.setState({ instructScreenText: curText + 1 });
-    } else if (curText === 6 && whichButton === 10) {
+    } else if (curText === 12 && whichButton === 10) {
       setTimeout(
         function () {
           this.nextPart();
@@ -108,8 +103,7 @@ class SliderIntro extends React.Component {
     document.removeEventListener("keyup", this._handleInstructKey);
     document.removeEventListener("keyup", this._handleDebugKey);
     this.props.history.push({
-      pathname: `/TrainingTask`,
-      // pathname: `/elementsHover`,
+      pathname: `/sliderTraining`,
       state: {
         userID: this.state.userID,
         date: this.state.date,
@@ -126,9 +120,11 @@ class SliderIntro extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
+            <br />
               <span className={styles.center}>Welcome to our study!</span>
               <br />
               In the following game, you will use a special response slider.
+              <br />
               With this slider you can indicate both <br />
               (1) a <strong>number</strong> we are asking for and <br />
               (2) how <strong>certain</strong> you are about this number.
@@ -258,47 +254,58 @@ class SliderIntro extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
-            You can change position of the peak
+            You can move the position of the peak
             <br /><br />
             <span className={styles.center}>
               <img
-                className={styles.introImgTwo3}
+                className={styles.introImg2}
                 src={img_slider2}
                 alt="example1"
               />
             </span>
             <br />
-            using the left
+            to the left using the left arrow key
             <img
               className={styles.introImgTwo2}
               src={img_left}
               alt="example1"
-            />
-             and right arrow keys
+            /><br />
+             and to the right using the right arrow key
             <img
               className={styles.introImgTwo2}
               src={img_right}
               alt="example1"
             />
-              <br /><br />
               <br />
-              You can change the width
+              <br />
+              <br />
+              <span className={styles.center}>
+                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
+              </span>
+            </p>
+          </div>
+        );
+      }  else if (this.state.instructScreenText === 7) {
+        text = (
+          <div className={styles.main}>
+            <p>
+              You can make change the width as well.
               <br /><br />
               <span className={styles.center}>
                 <img
-                  className={styles.introImgTwo3}
+                  className={styles.introImg2}
                   src={img_slider3}
                   alt="example1"
                 />
               </span>
               <br />
-              using the up
+              You can make the slider wider using the up arrow key
               <img
                 className={styles.introImgTwo2}
                 src={img_up}
                 alt="example1"
               />
-               and down arrow keys
+               and narrower using the down arrow key
               <img
                 className={styles.introImgTwo2}
                 src={img_down}
@@ -313,7 +320,7 @@ class SliderIntro extends React.Component {
             </p>
           </div>
         );
-      }  else if (this.state.instructScreenText === 7) {
+      } else if (this.state.instructScreenText === 8) {
         text = (
           <div className={styles.main}>
             <p>
@@ -327,7 +334,7 @@ class SliderIntro extends React.Component {
                   alt="example1"
                 />
               </span>
-              and here you see 75
+              and here you see how it looks like when it is 75
               <br />
               <span className={styles.center}>
                 <img
@@ -344,13 +351,13 @@ class SliderIntro extends React.Component {
             </div>
           );
 
-      } else if (this.state.instructScreenText === 8) {
+      } else if (this.state.instructScreenText === 9) {
           text = (
             <div className={styles.main}>
               <p>
-               The second aspect of the slider enables you to indicate your certainty.
-               <br /><br />
-                To clarify this, here you see how it looks like when the estimate is 50 with high certainty
+               The second aspect of the slider, the changeable width, enables you to indicate your certainty.
+               <br />
+                Here you see how it looks like when the estimate is 50 with high <strong>certainty</strong>
                 <br /><br />
                 <span className={styles.center}>
                   <img
@@ -359,7 +366,7 @@ class SliderIntro extends React.Component {
                     alt="example1"
                   />
                 </span>
-                and here 50 is indicated with <strong>un</strong>certainty
+                and here 50 is indicated with <strong>uncertainty</strong>
                 <br />
                 <span className={styles.center}>
                   <img
@@ -368,20 +375,19 @@ class SliderIntro extends React.Component {
                     alt="example1"
                   />
                 </span>
-                <br />
                 <span className={styles.center}>
                   [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
                 </span>
               </p>
             </div>
           );
-        } else if (this.state.instructScreenText === 9) {
+        } else if (this.state.instructScreenText === 10) {
           text = (
           <div className={styles.main}>
             <p>
               <br />
               <br />
-              To familiarize you with the slider, we will ask you several questions.
+              To familiarize you with the slider, we will now ask you several questions.
               <br />
               <br />
               Some questions are related to yourself and some are not.
@@ -397,7 +403,7 @@ class SliderIntro extends React.Component {
             </p>
           </div>
         );
-      } else if (this.state.instructScreenText === 10) {
+      } else if (this.state.instructScreenText === 11) {
           text = (
             <div className={styles.main}>
               <p>
@@ -408,7 +414,7 @@ class SliderIntro extends React.Component {
                 “How large is the population of Thailand? (If the scale refers to 0-100 Million)”
                 <br />
                 <br />
-                Your answer:
+                If you think it is approximately 65 mio and you are relatively certain,your answer could be:
                 <br />
                 <span className={styles.center}>
                   <img
@@ -425,7 +431,7 @@ class SliderIntro extends React.Component {
               </p>
             </div>
           );
-   } else if (this.state.instructScreenText === 11) {
+   } else if (this.state.instructScreenText === 12) {
        text = (
          <div className={styles.main}>
            <p>
@@ -437,7 +443,7 @@ class SliderIntro extends React.Component {
              <br />
              <span className={styles.center}>
                <img
-                 className={styles.introImg2}
+                 className={styles.introImgTwo3}
                  src={img_spacebar}
                  alt="example1"
                />
@@ -445,9 +451,9 @@ class SliderIntro extends React.Component {
              <br /> <br />
              Let's practice this!
              <br /> <br /> <br /> <br />
-             <span className={styles.center}>
-               Also press the spacebar to start the practice.
-             </span>
+               Also press the [<strong>SPACEBAR</strong>] to start the practice.
+             <br />
+             <br />
              <span className={styles.center}>
                [<strong>← BACK</strong>]
              </span>
@@ -456,9 +462,6 @@ class SliderIntro extends React.Component {
        );
      }
 }
-
-
-
 
     return (
       <div className={styles.cockpit}>
