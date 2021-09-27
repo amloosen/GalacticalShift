@@ -12,18 +12,20 @@ import OutcomeSliderBar from "./sliderOutcomeBar";
 import ElementsOneDisplay from "./elementsOnedisplay";
 ////////////////////////////////////////////////////////////////////////////////
 function shuffle(array) {
-  let currentIndex = array.length,  randomIndex;
+  let currentIndex = array.length,
+    randomIndex;
 
   // While there remain elements to shuffle...
   while (currentIndex != 0) {
-
     // Pick a remaining element...
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex--;
 
     // And swap it with the current element.
     [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex], array[currentIndex]];
+      array[randomIndex],
+      array[currentIndex],
+    ];
   }
 
   return array;
@@ -35,14 +37,22 @@ class TrainingTaskA extends React.Component {
     super(props);
 
     var nr_train_a_trial = 10;
+    // var val_options = range(0, 110, 10);
+    // var val_tmp = val_options[~~(Math.random() * val_options.length)];
     var val_options = range(0, 110, 10);
-    // var idx_respoptions = range(1, 3, 1);
-    // var random_val = val_options[~~(Math.random() * val_options.length)];
-    var idx_corransw = idx_respoptions[~~(Math.random() * idx_respoptions.length)];
+    var random_val = [];
+    for (var i = 0; i <= nr_train_a_trial - 1; i++) {
+      var val_tmp = val_options[~~(Math.random() * val_options.length)];
+      do {
+        var val_tmp = val_options[~~(Math.random() * val_options.length)];
+      } while (random_val[i - 1] === val_tmp); // make sure it changes color every time
+      random_val[i] = val_tmp;
+    }
 
-    var corr_pos = [1, 2];//1 is left and 2 is right
+    debugger;
+    var corr_pos = [1, 2]; //1 is left and 2 is right
     shuffle(corr_pos);
-    console.log(corr_pos );
+    console.log(corr_pos);
 
     let trialSgmMu = Array(9)
       .fill()
@@ -69,7 +79,7 @@ class TrainingTaskA extends React.Component {
       mounted: 0,
       // trialTime: null,
       // trialScore: null,
-      valTrainElem: random_val,
+      valTrainElem: val_tmp,
       ansOne: 20,
       ansTwo: 10,
     };
@@ -93,47 +103,47 @@ class TrainingTaskA extends React.Component {
     } else if (whichButton === 5) {
       this.setState({ instructScreenText: curText + 1 });
     }
-}
-
-_handleTrainKey = (event) => {
-  var pressed;
-  var time_pressed;
-
-  switch (event.keyCode) {
-    case 49:
-      pressed = 1;
-      time_pressed = Math.round(performance.now());
-      this.trainCheck(pressed, time_pressed);
-      break;
-    case 50:
-      pressed = 2;
-      time_pressed = Math.round(performance.now());
-      this.trainCheck(pressed, time_pressed);
-      break;
-    case 51:
-      pressed = 3;
-      time_pressed = Math.round(performance.now());
-      this.trainCheck(pressed, time_pressed);
-      break;
-    //this is keycode for numpad
-    case 97:
-      pressed = 1;
-      time_pressed = Math.round(performance.now());
-      this.trainCheck(pressed, time_pressed);
-      break;
-    case 98:
-      pressed = 2;
-      time_pressed = Math.round(performance.now());
-      this.trainCheck(pressed, time_pressed);
-      break;
-    case 99:
-      pressed = 3;
-      time_pressed = Math.round(performance.now());
-      this.trainCheck(pressed, time_pressed);
-      break;
-    default:
   }
-};
+
+  _handleTrainKey = (event) => {
+    var pressed;
+    var time_pressed;
+
+    switch (event.keyCode) {
+      case 49:
+        pressed = 1;
+        time_pressed = Math.round(performance.now());
+        this.trainCheck(pressed, time_pressed);
+        break;
+      case 50:
+        pressed = 2;
+        time_pressed = Math.round(performance.now());
+        this.trainCheck(pressed, time_pressed);
+        break;
+      case 51:
+        pressed = 3;
+        time_pressed = Math.round(performance.now());
+        this.trainCheck(pressed, time_pressed);
+        break;
+      //this is keycode for numpad
+      case 97:
+        pressed = 1;
+        time_pressed = Math.round(performance.now());
+        this.trainCheck(pressed, time_pressed);
+        break;
+      case 98:
+        pressed = 2;
+        time_pressed = Math.round(performance.now());
+        this.trainCheck(pressed, time_pressed);
+        break;
+      case 99:
+        pressed = 3;
+        time_pressed = Math.round(performance.now());
+        this.trainCheck(pressed, time_pressed);
+        break;
+      default:
+    }
+  };
   // componentDidMount() {
   //     setTimeout(
   //       function() {
@@ -209,7 +219,7 @@ _handleTrainKey = (event) => {
         />
       );
     } else {
-    // if (this.state.timePassed===true && this.state.feedback===false){
+      // if (this.state.timePassed===true && this.state.feedback===false){
       document.addEventListener("keyup", this._handleInstructKey);
       let choiceTime0 = Math.round(performance.now());
       let text = (
@@ -242,10 +252,10 @@ _handleTrainKey = (event) => {
               <div>{text}</div>
               <br />
               <div className={styles.main}>
-                  <div className={styles.container_1}>
-                    <span className={styles.right}>{this.state.ansTwo}</span>
-                    <span className={styles.left}>{this.state.ansOne}</span>
-                  </div>
+                <div className={styles.container_1}>
+                  <span className={styles.right}>{this.state.ansTwo}</span>
+                  <span className={styles.left}>{this.state.ansOne}</span>
+                </div>
                 <br />
               </div>
             </div>
