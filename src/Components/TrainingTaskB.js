@@ -8,7 +8,7 @@ import OutcomeSliderBar from "./sliderOutcomeBar";
 import ElementsFullDisplay from "./elementsFulldisplay";
 ////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
-class TrainingTask extends React.Component {
+class TrainingTaskB extends React.Component {
   constructor(props) {
     super(props);
 
@@ -25,7 +25,7 @@ class TrainingTask extends React.Component {
       // startTime: startTime,
       // sectionTime: timeString,
       // taskSessionTry: 1,
-      // taskSession: "TrainingTask",
+      // taskSession: "TrainingTaskB",
       trialNum: 1, //adapt
       trialRT: trialRT,
       choiceTime0: 0,
@@ -89,7 +89,7 @@ class TrainingTask extends React.Component {
   render() {
     setTimeout(() => {
       this.setState({ timePassed: true });
-    }, 100); //show elements
+    }, 10000); //show elements
     if (!this.state.timePassed) {
       return (
         <ElementsFullDisplay
@@ -156,7 +156,6 @@ class TrainingTask extends React.Component {
       );
     }
   }
-
   /////////////////////////////////////////////////////////////////////////////////
 
   saveSgmMu(result, time) {
@@ -179,4 +178,4 @@ class TrainingTask extends React.Component {
   }
 }
 
-export default withRouter(TrainingTask);
+export default withRouter(TrainingTaskB);

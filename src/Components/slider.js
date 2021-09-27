@@ -7,7 +7,7 @@ const Slider = ({ onSpacebarHit = () => {} }) => {
   const [mu, setMu] = useState(50);
   const [sgm, setSgm] = useState(30);
 
-  const xValues = range(0, 100, 0.5);
+  const xValues = range(0, 100.5, 0.5);
   const yValues = xValues.map((x) => normalPdf(x, mu, sgm));
   const yValuesAdapt = yValues.map(function (element) {
     return element * 1000;
@@ -49,8 +49,6 @@ const Slider = ({ onSpacebarHit = () => {} }) => {
       },
       xaxis: {
         color: "#d2eaf2",
-        // min: 0,
-        // max: 100,
         tickAmount: 5,
         overwriteCategories: ["0", "25", "50", "75", "100"],
         lines: {

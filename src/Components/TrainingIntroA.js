@@ -9,10 +9,8 @@ import img_intro1 from "./intro/ExamplePicture1.jpg";
 /////////
 var trialTotal = 9;
 
-/////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////
-// REACT COMPONENT START
-class TrainingIntro extends React.Component {
+/////////////////////////////////////////////////////////////////////////////////t.Component {
+class TrainingIntroA extends React.Component {
   constructor(props) {
     super(props);
 
@@ -26,7 +24,7 @@ class TrainingIntro extends React.Component {
       // userID: userID,
       sectionStartTime: introTrainingStartTime,
       taskSessionTry: 1,
-      taskSession: "TrainingIntro",
+      taskSession: "TrainingIntroA",
       instructScreenText: 1,
 
       // outcomeNotAnsLog2: outcomeNotAnsLog2,
@@ -168,7 +166,7 @@ class TrainingIntro extends React.Component {
   //     console.log("Cant post?");
   //   }
   //
-  //   //send the TrainingIntro conditions?
+  //   //send the TrainingIntroA conditions?
   //   setTimeout(
   //     function () {
   //       this.condSave();
@@ -201,7 +199,7 @@ class TrainingIntro extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    //send the TrainingIntro conditions?
+    //send the TrainingIntroA conditions?
 
     // setTimeout(
     //   function () {
@@ -383,7 +381,7 @@ class TrainingIntro extends React.Component {
             </p>
           </div>
         );
-      } 
+      }
     }
 
     return (
@@ -394,4 +392,4 @@ class TrainingIntro extends React.Component {
   }
 }
 
-export default withRouter(TrainingIntro);
+export default withRouter(TrainingIntroA);

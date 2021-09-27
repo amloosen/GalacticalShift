@@ -4,8 +4,10 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import StartPage from "./Components/StartPage";
 import SliderIntro from "./Components/SliderIntro";
 import SliderPractice from "./Components/sliderTraining";
-import TrainingIntro from "./Components/TrainingIntro";
-import TrainingTask from "./Components/TrainingTask";
+import TrainingIntroA from "./Components/TrainingIntroA";
+import TrainingTaskA from "./Components/TrainingTaskA";
+import TrainingIntroB from "./Components/TrainingIntroB";
+import TrainingTaskB from "./Components/TrainingTaskB";
 import TutorTask from "./Components/TutorTask";
 import ExptTask from "./Components/ExptTask";
 import Questionnaires from "./Components/Questionnaires";
@@ -20,8 +22,10 @@ function App() {
         <Route path="/" component={StartPage} exact />
         <Route path="/SliderIntro" component={SliderIntro} exact />
         <Route path="/sliderTraining" component={SliderPractice} exact />
-        <Route path="/TrainingIntro" component={TrainingIntro} exact />
-        <Route path="/TrainingTask" component={TrainingTask} exact />
+        <Route path="/TrainingIntroA" component={TrainingIntroA} exact />
+        <Route path="/TrainingTaskA" component={TrainingTaskA} exact />
+        <Route path="/TrainingIntroB" component={TrainingIntroB} exact />
+        <Route path="/TrainingTaskB" component={TrainingTaskB} exact />
         <Route path="/TutorTask" component={TutorTask} exact />
         <Route path="/ExptTask" component={ExptTask} exact />
         <Route path="/Questionnaires" component={Questionnaires} exact />

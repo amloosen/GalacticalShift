@@ -176,6 +176,7 @@ img.introImgTwo3 {
 
   position: absolute;
 }
+
 .overlaybarsecond{
   height: 100%;
   width: 1024px;
@@ -186,4 +187,25 @@ img.introImgTwo3 {
   /* Center and scale the image nicely */
 
   position: absolute;
+}
+
+.container_1 {
+        width: 300px;
+        height: 100px;
+      }
+
+.right {  float: right;
+  height: auto;
+  margin: 0px;
+  color: white;
+  font-size: 50px;
+  font-family: "Calibri", "Calibri";
+}
+
+.left {float: left;
+  height: auto;
+  margin: 0px;
+  color: white;
+  font-size: 50px;
+  font-family: "Calibri", "Calibri";
 }
