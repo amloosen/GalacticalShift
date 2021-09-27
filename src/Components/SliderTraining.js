@@ -28,13 +28,11 @@ class SliderPractice extends React.Component {
       practSgmMu: practSgmMu,
       timerCountDur: 10,
       timePassed: false,
-      feedback: false,
       mounted: 0,
-      trueValue: 50
+      trueValue: 50,
     };
     this.redirectToTarget = this.redirectToTarget.bind(this);
 
-    // this.displayFeedback = this.displayFeedback.bind(this)
     /* prevents page from going to the right/left when arrows are pressed .*/
     window.addEventListener("keydown", function (e) {
       if (e.keyCode === 37 && e.target === document.body) {
@@ -45,17 +43,23 @@ class SliderPractice extends React.Component {
     });
   }
   /////////////////////////////////////////////////////////////////////////////////
-  // componentDidMount() {
-  //     setTimeout(
-  //       function() {
-  //         this.setState({
-  //           mounted: 1,
-  //         });
-  //       }
-  //       .bind(this),
-  //       5000
-  //     );
-  //   }
+  componentDidMount() {
+    setTimeout(
+      function () {
+        this.setState({
+          mounted: 1,
+        });
+      }.bind(this),
+      5000
+    );
+  }
+
+  componentWillUnmount() {
+  // fix Warning: Can't perform a React state update on an unmounted component
+  this.setState = (state, callback) => {
+    return;
+  };
+}
   //
   //   fetchUserInfo () {
   //        fetch(`${API_URL}/questions_behaviour/last_user_no`)
@@ -82,7 +86,7 @@ class SliderPractice extends React.Component {
           <div> {this.quest_text(this.state.practNum)} </div>{" "}
           <Slider
             onSpacebarHit={(result) => {
-              this.saveSgmMu(result, choiceTime0);
+              this.saveSgmMu(result, choiceTime0)
             }}
           />{" "}
         </div>
@@ -105,7 +109,6 @@ class SliderPractice extends React.Component {
     this.setState({
       practSgmMu: practSgmMu,
       practRT: practRT,
-      feedback: true,
       practNum: practNum + 1,
     });
   }
@@ -154,7 +157,7 @@ class SliderPractice extends React.Component {
     } else if (practNum === 6) {
       return (
         <div className={styles.questions}>
-          What is the population of the Connecticut ?
+          What is the population of Connecticut ?
           <br />
           (If the scale refers to 0 - 100 Million). <br />
           <br />

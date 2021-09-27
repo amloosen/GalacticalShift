@@ -107,12 +107,17 @@ const Slider = ({ onSpacebarHit = () => {} }) => {
       setSgm(sgm);
     } else setSgm(sgm - 5);
   }
+function resetSlider(event){
+    setSgm(30);
+    setMu(50);
+  }
 
   useEffect(() => {
     const handler = (event) => {
       // do something with data
       if (event.keyCode === 32) {
         onSpacebarHit({ mu, sgm });
+        resetSlider();
       } else if (event.keyCode === 39) {
         muPlus();
       } else if (event.keyCode === 37) {
