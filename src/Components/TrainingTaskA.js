@@ -54,12 +54,8 @@ class TrainingTaskA extends React.Component {
     shuffle(corr_pos);
     console.log(corr_pos);
 
-    let trialSgmMu = Array(9)
-      .fill()
-      .map(() => Array(3).fill(0));
-    let trialRT = Array(9)
-      .fill()
-      .map(() => Array(3).fill(0));
+
+    let trainAcc_tmp => Array(nr_train_a_trial).fill(0)
 
     this.state = {
       // userID: userID,
@@ -69,19 +65,14 @@ class TrainingTaskA extends React.Component {
       // taskSessionTry: 1,
       // taskSession: "TrainingTaskA",
       traintrialNum: 1, //adapt
-      trialRT: trialRT,
-      choiceTime0: 0,
-      traintrialTotal: 9, //adapt
-      trialSgmMu: trialSgmMu,
-      timerCountDur: 10,
-      timePassed: false,
+      traintrialTotal: nr_train_a_trial,
       feedback: false,
       mounted: 0,
-      // trialTime: null,
-      // trialScore: null,
+      rightCodeAns:[4,4,4,4,4,5,5,5,5],
       valTrainElem: val_tmp,
+      trainAcc: trainAcc_tmp,
       ansOne: 20,
-      ansTwo: 10,
+      ansTwo: random_val,
     };
     // this.displayFeedback = this.displayFeedback.bind(this)
     /* prevents page from going to the right/left when arrows are pressed .*/
@@ -110,35 +101,14 @@ class TrainingTaskA extends React.Component {
     var time_pressed;
 
     switch (event.keyCode) {
-      case 49:
-        pressed = 1;
-        time_pressed = Math.round(performance.now());
+      case 37:
+        //    this is left arrow
+        pressed = 4;
         this.trainCheck(pressed, time_pressed);
         break;
-      case 50:
-        pressed = 2;
-        time_pressed = Math.round(performance.now());
-        this.trainCheck(pressed, time_pressed);
-        break;
-      case 51:
-        pressed = 3;
-        time_pressed = Math.round(performance.now());
-        this.trainCheck(pressed, time_pressed);
-        break;
-      //this is keycode for numpad
-      case 97:
-        pressed = 1;
-        time_pressed = Math.round(performance.now());
-        this.trainCheck(pressed, time_pressed);
-        break;
-      case 98:
-        pressed = 2;
-        time_pressed = Math.round(performance.now());
-        this.trainCheck(pressed, time_pressed);
-        break;
-      case 99:
-        pressed = 3;
-        time_pressed = Math.round(performance.now());
+      case 39:
+        //    this is right arrow
+        key_pressed = 5;
         this.trainCheck(pressed, time_pressed);
         break;
       default:
@@ -173,28 +143,25 @@ class TrainingTaskA extends React.Component {
   //        });
   //       }
   trainCheck(pressed, time_pressed) {
-    var traintrialNum = this.state.traintrialNum; //quiz question number (this needs to be rest to 1)
-    var trialRT = time_pressed - this.state.trialTime;
-    var corAns = this.state.outcomeAnsLog[traintrialNum - 1];
-    var trialCorLog = this.state.trialCorLog; //[1,1,1,0...]
-    var trialScore = this.state.trialScore; //sum of the correct answers
-    var trialCor = this.state.trialCor;
+    var traintrialNum = this.state.traintrialNum+1;
+    var trainScore = this.state.trainScore;
+    var corAns = this.state.rightCodeAns[trialNum - 1];
+    var trainAcc = this.state.trainAcc;
 
     if (pressed === corAns) {
       trialCor = 1;
-      trialCorLog[traintrialNum - 1] = 1;
-      trialScore = trialScore + 1;
+      trainAcc[traintrialNum - 1] = 1;
+      trainScore = trainScore + 1;
     } else {
       trialCor = 0;
-      trialCorLog[traintrialNum - 1] = 0;
+      trainAcc[traintrialNum - 1] = 0;
     }
 
     this.setState({
       trialKeypress: pressed,
-      trialRT: trialRT,
-      trialCor: trialCor,
-      trialCorLog: trialCorLog,
-      trialScore: trialScore,
+      trainScore: trainScore,
+      traintrialNum: traintrialNum,
+      trainAcc: trainAcc
     });
 
     setTimeout(
@@ -266,24 +233,5 @@ class TrainingTaskA extends React.Component {
   }
 
   /////////////////////////////////////////////////////////////////////////////////
-
-  saveSgmMu(result, time) {
-    let trialSgmMu = this.state.trialSgmMu;
-    let trialRT = this.state.trialRT;
-    let traintrialNum = this.state.traintrialNum;
-    trialSgmMu[traintrialNum - 1][1] = result.sgm;
-    trialSgmMu[traintrialNum - 1][2] = result.mu;
-    trialRT[traintrialNum - 1][0] = traintrialNum;
-    trialRT[traintrialNum - 1][1] = time;
-    trialRT[traintrialNum - 1][2] = Math.round(performance.now());
-    trialRT[traintrialNum - 1][3] = trialRT[traintrialNum - 1][2] - time;
-    this.setState({
-      trialSgmMu: trialSgmMu,
-      trialRT: trialRT,
-      feedback: true,
-      traintrialNum: traintrialNum + 1,
-    });
-  }
-}
 
 export default withRouter(TrainingTaskA);
