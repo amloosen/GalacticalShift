@@ -1,9 +1,8 @@
 import React from "react";
-import { render } from "react-dom";
 import styles from "./style/taskStyle.module.css";
-import { ImageBackground, View, Image, StyleSheet,Text } from "react-native";
 import ElementBar from "./elementBar";
 
+import { View} from "react-native";
 import Cover from "./img/cover.jpg";
 import Blue from "./img/stimuli3_blue.jpg";
 import "./style/barstyles.css";
@@ -11,7 +10,6 @@ import "./style/barstyles.css";
 class ElementsOneDisplay extends React.Component {
   constructor(props) {
     super(props);
-    var trial_per_block = 100; //to be changed
 
     /* data to be saved .*/
     var times_element = Array(1)
@@ -45,13 +43,13 @@ class ElementsOneDisplay extends React.Component {
   }
 
   mouseOut(elNr) {
-    this.state.times_element[
-      this.state.times_element.length - 1
-    ][1] = Math.round(performance.now());
-    this.state.times_element[this.state.times_element.length - 1][2] =
-      this.state.times_element[this.state.times_element.length - 1][1] -
-      this.state.times_element[this.state.times_element.length - 1][0];
+var times_element = this.state.times_element
+
+    times_element[times_element.length - 1][1] = Math.round(performance.now());
+    times_element[times_element.length - 1][2] = times_element[times_element.length - 1][1] -
+      times_element[times_element.length - 1][0];
     this.setState({
+      times_element: times_element,
       img: Cover,
       show: null,
     });
