@@ -31,7 +31,7 @@ class SliderPractice extends React.Component {
       mounted: 0,
       trueValue: 50,
     };
-    this.redirectToTarget = this.redirectToTarget.bind(this);
+    this.redirectToNextStage = this.redirectToNextStage.bind(this);
 
     /* prevents page from going to the right/left when arrows are pressed .*/
     window.addEventListener("keydown", function (e) {
@@ -92,7 +92,7 @@ class SliderPractice extends React.Component {
         </div>
       );
     } else {
-      this.redirectToTarget();
+      this.redirectToNextStage();
     }
   }
   /////////////////////////////////////////////////////////////////////////////////
@@ -174,22 +174,18 @@ class SliderPractice extends React.Component {
     }
   }
 
-  redirectToTarget() {
-    this.setState({
-      sliderPracticeComplete: 1,
-    });
+  redirectToNextStage() {
 
     this.props.history.push({
-      pathname: `/TrainingIntro`,
+      pathname: `/TrainingIntroA`,
       state: {
-        userID: this.state.userID,
-        date: this.state.date,
-        startTime: this.state.startTime,
-        introPic: this.state.introPic,
+        // userID: this.state.userID,
+        // date: this.state.date,
+        // startTime: this.state.startTime,
       },
     });
 
-    console.log("UserID is: " + this.state.userID);
+    // console.log("UserID is: " + this.state.userID);
   }
 }
 

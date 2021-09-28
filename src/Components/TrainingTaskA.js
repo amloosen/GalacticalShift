@@ -6,26 +6,6 @@ import { range } from "lodash";
 
 import ElementsOneDisplay from "./elementsOnedisplay";
 ////////////////////////////////////////////////////////////////////////////////
-// function shuffle(array) {
-//   let currentIndex = array.length,
-//     randomIndex;
-//
-//   // While there remain elements to shuffle...
-//   while (currentIndex !== 0) {
-//     // Pick a remaining element...
-//     randomIndex = Math.floor(Math.random() * currentIndex);
-//     currentIndex--;
-//
-//     // And swap it with the current element.
-//     [array[currentIndex], array[randomIndex]] = [
-//       array[randomIndex],
-//       array[currentIndex],
-//     ];
-// //   }
-//
-//   return array;
-// }
-/////////////////////////////////////////////////////////////////////////////////
 
 class TrainingTaskA extends React.Component {
   constructor(props) {
@@ -42,9 +22,6 @@ class TrainingTaskA extends React.Component {
       random_val[i] = val_tmp;
     }
     var rightCodeAns = [4, 4, 4, 4, 4, 5, 5, 5, 5];
-    // var corr_pos = [1, 2]; //1 is left and 2 is right
-    // shuffle(corr_pos);
-    // console.log(corr_pos);
 
     let array_tmp = Array(nr_train_a_trial).fill(0);
 
@@ -62,19 +39,21 @@ class TrainingTaskA extends React.Component {
       timePassed: false,
       timePassed2: false,
       mounted: 0,
+      all_values: random_val,
       valTrainElem: random_val[0],
       corr_value: random_val[0],
-      all_values: random_val,
       trainAcc: array_tmp,
       ansOne: 100 - random_val[0],
       ansTwo: random_val[0],
-      all_corrAns: rightCodeAns,
+      all_corrPress: rightCodeAns,
     };
 
     this.nextTrial = this.nextTrial.bind(this);
     this.trainCheck = this.trainCheck.bind(this);
     this.disp_options = this.disp_options.bind(this);
     this.disp_feedback = this.disp_feedback.bind(this);
+    this.disp_element = this.disp_element.bind(this);
+    this.redirectToNextStage = this.redirectToNextStage.bind(this);
     /* prevents page from going to the right/left when arrows are pressed .*/
     window.addEventListener("keydown", function (e) {
       if (e.keyCode === 37 && e.target === document.body) {
@@ -87,8 +66,10 @@ class TrainingTaskA extends React.Component {
 
   /////////////////////////////////////////////////////////////////////////////////
   trainCheck(pressed) {
-    var corrAns = this.state.all_corrAns[this.state.traintrialNum - 1];
+    var corrAns = this.state.all_corrPress[this.state.traintrialNum - 1];
     var trainAcc = this.state.trainAcc;
+    var trialKeypress = this.state.trialKeypress;
+    trialKeypress[this.state.traintrialNum - 1] = pressed;
 
     if (pressed === corrAns) {
       trainAcc[this.state.traintrialNum - 1] = 1;
@@ -97,7 +78,7 @@ class TrainingTaskA extends React.Component {
     }
 
     this.setState({
-      trialKeypress: pressed,
+      trialKeypress: trialKeypress,
       trainAcc: trainAcc,
       corrAns: corrAns,
       feedback: 1,
@@ -124,16 +105,20 @@ class TrainingTaskA extends React.Component {
   nextTrial() {
     document.removeEventListener("keyup", this._handleTrainKey);
     var traintrialNum_tmp = this.state.traintrialNum + 1;
+if (traintrialNum_tmp===this.state.traintrialTotal){
+this.redirectToNextStage();} else{
+
+
     var valTrainElem_tmp = this.state.all_values[traintrialNum_tmp - 1];
 
     if (traintrialNum_tmp <= 5) {
       var corr_value_tmp = valTrainElem_tmp;
-      var   ansOne_tmp = 100 - this.state.all_values[traintrialNum_tmp - 1];
-      var   ansTwo_tmp = this.state.all_values[traintrialNum_tmp - 1]
+      var ansOne_tmp = 100 - this.state.all_values[traintrialNum_tmp - 1];
+      var ansTwo_tmp = this.state.all_values[traintrialNum_tmp - 1];
     } else {
       var corr_value_tmp = 100 - valTrainElem_tmp;
-      var   ansTwo_tmp = 100 - this.state.all_values[traintrialNum_tmp - 1];
-      var   ansOne_tmp = this.state.all_values[traintrialNum_tmp - 1]
+      var ansTwo_tmp = 100 - this.state.all_values[traintrialNum_tmp - 1];
+      var ansOne_tmp = this.state.all_values[traintrialNum_tmp - 1];
     }
 
     this.setState({
@@ -144,10 +129,10 @@ class TrainingTaskA extends React.Component {
       valTrainElem: valTrainElem_tmp,
       corr_value: corr_value_tmp,
       ansTwo: ansTwo_tmp,
-      ansOne: ansOne_tmp
+      ansOne: ansOne_tmp,
     });
   }
-
+}
   componentDidMount() {
     window.scrollTo(0, 0);
     //send the outcomeTask conditions?
@@ -205,15 +190,17 @@ class TrainingTaskA extends React.Component {
       return <div className={styles.cockpit}>{this.disp_element()}</div>;
     } else if (this.state.feedback === 0 && this.state.timePassed === true) {
       return <div className={styles.cockpit}>{this.disp_options()}</div>;
-    } else if (!this.state.timePassed2 && this.state.feedback === 1){
+    } else if (!this.state.timePassed2 && this.state.feedback === 1) {
       return <div className={styles.cockpit}>{this.disp_feedback()}</div>;
-    } else if (this.state.timePassed2 === true && this.state.feedback === 1){{this.nextTrial()} return null}
+    } else if (this.state.timePassed2 === true && this.state.feedback === 1){
+      {this.nextTrial()} return null}
+
   }
 
-disp_element(event) {
-  setTimeout(() => {
-    this.setState({ timePassed: true, timePassed2: false });
-  }, 1700);
+  disp_element(event) {
+    setTimeout(() => {
+      this.setState({ timePassed: true, timePassed2: false });
+    }, 1700);
     return (
       <ElementsOneDisplay
         value={this.state.valTrainElem}
@@ -221,8 +208,7 @@ disp_element(event) {
         traintrialNum={this.state.traintrialNum}
       />
     );
-}
-
+  }
 
   disp_options(event) {
     document.addEventListener("keyup", this._handleTrainKey);
@@ -259,7 +245,7 @@ disp_element(event) {
       </div>
     );
     setTimeout(() => {
-      this.setState({timePassed2: true });
+      this.setState({ timePassed2: true });
     }, 700);
 
     return (
@@ -267,9 +253,22 @@ disp_element(event) {
         <div>{text2}</div>
       </div>
     );
+  }
 
+  redirectToNextStage() {
+    this.props.history.push({
+      pathname: `/TrainingIntroB`,
+      state: {
+        // userID: this.state.userID,
+        // date: this.state.date,
+        // startTime: this.state.startTime,
+      },
+    });
+
+    // console.log("UserID is: " + this.state.userID);
   }
 }
+
 /////////////////////////////////////////////////////////////////////////////////
 
 export default withRouter(TrainingTaskA);

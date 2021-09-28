@@ -6,6 +6,8 @@ import styles from "./style/taskStyle.module.css";
 import Cockpit from "./img/CockpitBlank.jpg";
 
 import img_intro1 from "./intro/ExamplePicture1.jpg";
+import img_left from "./intro/left.png";
+import img_right from "./intro/right.png";
 /////////
 var trialTotal = 9;
 
@@ -61,23 +63,9 @@ class TrainingIntroA extends React.Component {
     } else if (whichButton === 5 && curText < 6) {
       this.setState({ instructScreenText: curText + 1 });
     } else if (curText === 6 && whichButton === 10) {
-      //   //startmissionOne
-      //   setTimeout(
-      //     function () {
-      //       this.missionOne();
-      //     }.bind(this),
-      //     0
-      //   );
-      // } else if (curText === 7 && whichButton === 10) {
-      //   //restart
-      //   this.setState({
-      //     instructScreenText: 1,
-      //   });
-      // } else if (curText === 8 && whichButton === 10) {
-      //   //go to TrainingTask
       setTimeout(
         function () {
-          this.nextMission();
+          this.redirectToNextStage();
         }.bind(this),
         0
       );
@@ -109,85 +97,14 @@ class TrainingIntroA extends React.Component {
   };
 
   /////////////////////////////////////////////////////////////////////////////////
-  // END COMPONENT PROPS
-  //
-  // condSave() {
-  //   var userID = this.state.userID;
-  //   var currentDate = new Date(); // maybe change to local
-  //   var sectionTime = currentDate.tointroTrainingStartTime();
-  //   var trialTime = Math.round(performance.now());
-  //
-  //   let saveString = {
-  //     userID: this.state.userID,
-  //     date: this.state.date,
-  //     startTime: this.state.startTime, // this is when they start the expt
-  //     sectionTime: sectionTime, //this is if they somehow refresh the page...
-  //     trialTime: trialTime,
-  //     taskSession: this.state.taskSession,
-  //     taskSessionTry: this.state.taskSessionTry};
-  //
-  //   console.log(saveString);
-  //
-  //   try {
-  //     fetch(`${DATABASE_URL}/cond_data/` + userID, {
-  //       method: "POST",
-  //       headers: {
-  //         Accept: "application/json",
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(saveString),
-  //     });
-  //   } catch (e) {
-  //     console.log("Cant post?");
-  //   }
-  // }
-  //
-  // trialSave() {
-  //   var userID = this.state.userID;
-  //
-  //   let saveString = {
-  //     userID: this.state.userID,
-  //     date: this.state.date,
-  //     startTime: this.state.startTime, // this is when they start the expt
-  //     sectionTime: this.state.sectionTime, //this is if they somehow refresh the page...
-  //     taskSession: this.state.taskSession
-  //   };
-  //
-  //   try {
-  //     fetch(`${DATABASE_URL}/outcome_test/` + userID, {
-  //       method: "POST",
-  //       headers: {
-  //         Accept: "application/json",
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(saveString),
-  //     });
-  //   } catch (e) {
-  //     console.log("Cant post?");
-  //   }
-  //
-  //   //send the TrainingIntroA conditions?
-  //   setTimeout(
-  //     function () {
-  //       this.condSave();
-  //     }.bind(this),
-  //     0
-  //   );
-  // }
-  //
-  // passMission() {
-  //   this.setState({
-  //     instructScreen: true,
-  //     testScreen: false,
-  //     instructScreenText: 8,
-  //   });
+
   // }
 
-  nextMission() {
+  redirectToNextStage() {
     document.removeEventListener("keyup", this._handleInstructKey);
     document.removeEventListener("keyup", this._handleDebugKey);
     this.props.history.push({
-      pathname: `/TrainingTask`,
+      pathname: `/TrainingTaskA`,
       // pathname: `/elementsHover`,
       state: {
         userID: this.state.userID,
@@ -237,22 +154,22 @@ class TrainingIntroA extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
-              <span className={styles.center}>
-                Hello and welcome on onboard!
-              </span>
               <br />
-              For today&apos;s mission, you will be a space explorer on an
+              Well done so far!
+              <br />
+              <br />
+              For today&apos;s game, you will be a space explorer on an
               intergalactic mission.
               <br />
               <br />
-              Your mission is to tell your station on earth of how many aliens
-              live on the planets you visit.
+              Your mission is it to tell your station on earth of how many
+              aliens live on the planets you visit.
               <br /> <br />
               It is critical that you give your best estimate of the alien
               population size for the mission to be successful.
               <br /> <br />
-              We will now tell you how you can infer the population size once
-              you reached a planet.
+              We will now introduce you to the main task itself, step-by-step by
+              letting you complete a few training trials.
               <br /> <br />
               <span className={styles.center}>
                 <i>(Use the ← → keys to navigate the pages.)</i>
@@ -271,9 +188,8 @@ class TrainingIntroA extends React.Component {
               So how can you find out how many aliens live on a planet?
               <br />
               <br />
-              Your spaceship is equipped with several measuring instruments
-              <br />
-              that will help you determine how many aliens live on the planet.
+              Your spaceship is equipped with several measuring instruments that
+              will help you determine how many aliens live on the planet.
               <br />
               <br />A measuring instrument may look like this:
               <span className={styles.center}>
@@ -346,9 +262,26 @@ class TrainingIntroA extends React.Component {
               <span className={styles.center}>TRAINING I</span>
               <br />
               For simplicity, we will now introduce you to the structure by
-              using simple mappings that will change at some point.
-              <br /> <br />
+              using simple associations that will change at some point.
+              <br />
               We want to see whether you can detect the change. <br />
+              <br />
+                    Choose between the two alternatives on the screen using the
+                    corresponding arrow keys.
+                    <br /> For the option on the left side use the left arrow key
+                    <img
+                      className={styles.introImgTwo2}
+                      src={img_left}
+                      alt="example1"
+                    />
+                    <br />
+                    and for the option on the right use the right arrow key
+                    <img
+                      className={styles.introImgTwo2}
+                      src={img_right}
+                      alt="example1"
+                    />
+                    <br />
               <br />
               <br /> <br />
               <span className={styles.center}>
