@@ -60,26 +60,12 @@ class TrainingIntroB extends React.Component {
 
     if (whichButton === 4 && curText > 1) {
       this.setState({ instructScreenText: curText - 1 });
-    } else if (whichButton === 5 && curText < 6) {
+    } else if (whichButton === 5 && curText < 3) {
       this.setState({ instructScreenText: curText + 1 });
-    } else if (curText === 6 && whichButton === 10) {
-      //   //startmissionOne
-      //   setTimeout(
-      //     function () {
-      //       this.missionOne();
-      //     }.bind(this),
-      //     0
-      //   );
-      // } else if (curText === 7 && whichButton === 10) {
-      //   //restart
-      //   this.setState({
-      //     instructScreenText: 1,
-      //   });
-      // } else if (curText === 8 && whichButton === 10) {
-      //   //go to TrainingTask
+    } else if (curText === 3 && whichButton === 10) {
       setTimeout(
         function () {
-          this.nextMission();
+          this.redirectToNextStage();
         }.bind(this),
         0
       );
@@ -109,87 +95,12 @@ class TrainingIntroB extends React.Component {
       default:
     }
   };
-
   /////////////////////////////////////////////////////////////////////////////////
-  // END COMPONENT PROPS
-  //
-  // condSave() {
-  //   var userID = this.state.userID;
-  //   var currentDate = new Date(); // maybe change to local
-  //   var sectionTime = currentDate.tointroTrainingStartTime();
-  //   var trialTime = Math.round(performance.now());
-  //
-  //   let saveString = {
-  //     userID: this.state.userID,
-  //     date: this.state.date,
-  //     startTime: this.state.startTime, // this is when they start the expt
-  //     sectionTime: sectionTime, //this is if they somehow refresh the page...
-  //     trialTime: trialTime,
-  //     taskSession: this.state.taskSession,
-  //     taskSessionTry: this.state.taskSessionTry};
-  //
-  //   console.log(saveString);
-  //
-  //   try {
-  //     fetch(`${DATABASE_URL}/cond_data/` + userID, {
-  //       method: "POST",
-  //       headers: {
-  //         Accept: "application/json",
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(saveString),
-  //     });
-  //   } catch (e) {
-  //     console.log("Cant post?");
-  //   }
-  // }
-  //
-  // trialSave() {
-  //   var userID = this.state.userID;
-  //
-  //   let saveString = {
-  //     userID: this.state.userID,
-  //     date: this.state.date,
-  //     startTime: this.state.startTime, // this is when they start the expt
-  //     sectionTime: this.state.sectionTime, //this is if they somehow refresh the page...
-  //     taskSession: this.state.taskSession
-  //   };
-  //
-  //   try {
-  //     fetch(`${DATABASE_URL}/outcome_test/` + userID, {
-  //       method: "POST",
-  //       headers: {
-  //         Accept: "application/json",
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(saveString),
-  //     });
-  //   } catch (e) {
-  //     console.log("Cant post?");
-  //   }
-  //
-  //   //send the TrainingIntroB conditions?
-  //   setTimeout(
-  //     function () {
-  //       this.condSave();
-  //     }.bind(this),
-  //     0
-  //   );
-  // }
-  //
-  // passMission() {
-  //   this.setState({
-  //     instructScreen: true,
-  //     testScreen: false,
-  //     instructScreenText: 8,
-  //   });
-  // }
-
-  nextMission() {
+  redirectToNextStage() {
     document.removeEventListener("keyup", this._handleInstructKey);
     document.removeEventListener("keyup", this._handleDebugKey);
     this.props.history.push({
-      pathname: `/TrainingTask`,
+      pathname: `/TrainingTaskB`,
       // pathname: `/elementsHover`,
       state: {
         userID: this.state.userID,
@@ -201,14 +112,6 @@ class TrainingIntroB extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    //send the TrainingIntroB conditions?
-
-    // setTimeout(
-    //   function () {
-    //     this.condSave();
-    //   }.bind(this),
-    //   0
-    // );
 
     setTimeout(
       function () {
@@ -226,11 +129,7 @@ class TrainingIntroB extends React.Component {
       return;
     };
   }
-
   //////////////////////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////////////////////
-  // render time
-
   render() {
     let text;
     if (this.state.instructScreen === true) {
@@ -240,25 +139,20 @@ class TrainingIntroB extends React.Component {
           <div className={styles.main}>
             <p>
               <span className={styles.center}>
-                Hello and welcome on onboard!
+                Your space-training session is going well!
               </span>
               <br />
-              For today&apos;s mission, you will be a space explorer on an
-              intergalactic mission.
+              Another challenge makes your mission even more difficult:
               <br />
               <br />
-              Your mission is to tell your station on earth of how many aliens
-              live on the planets you visit.
-              <br /> <br />
-              It is critical that you give your best estimate of the alien
-              population size for the mission to be successful.
-              <br /> <br />
-              We will now tell you how you can infer the population size once
-              you reached a planet.
-              <br /> <br />
-              <span className={styles.center}>
-                <i>(Use the ← → keys to navigate the pages.)</i>
-              </span>
+              Your spaceship has <strong>three</strong> measuring instruments
+              showing different natural resources.
+              <br />
+              <br />
+              You have to find out <strong>which one is relevant</strong>{" "}
+              and determining the population size.
+              <br />
+              <br />
               <span className={styles.center}>
                 [<strong>NEXT →</strong>]
               </span>
@@ -269,24 +163,24 @@ class TrainingIntroB extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
-              <span className={styles.center}>TRAINING I</span>
-              So how can you find out how many aliens live on a planet?
               <br />
               <br />
-              Your spaceship is equipped with several measuring instruments
+              Again, sometimes this might change, which means suddenly a new
+              instrument will be relevant. You have to recognize these changes.
               <br />
-              that will help you determine how many aliens live on the planet.
               <br />
-              <br />A measuring instrument may look like this:
+              This means, now you have to <br />
+              <br /><strong>(1)</strong> find out which
+              instrument is relevant, <br />
+              <br /><strong>(2)</strong> what its association
+              with the population size is,
+              <br />
+              <br /><strong>(3)</strong> detect when suddenly a new instrument is
+              relevant or when the association to the population size changes.
+              <br />
+              <br />
               <span className={styles.center}>
-                <img src={img_intro1} alt="example1" />
-              </span>
-              <br />
-              This instrument indicates 40% of the resource is available.
-              <br />
-              <br />
-              <span className={styles.center}>
-                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
+                [<strong>NEXT →</strong>]
               </span>
             </p>
           </div>
@@ -295,83 +189,14 @@ class TrainingIntroB extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
-              <span className={styles.center}>TRAINING I</span>
-              <br />
-              The aliens living on these planets rely on natural resources,
-              <br /> and thus the population size is related to the measurement
-              of your instrument.
+              <span className={styles.center}>TRAINING II</span>
+              Again, the true population size will for now be shown after each planet. This will make
+              it possible for you to find out which instrument is of importance and how it is associated to the population size.
               <br />
               <br />
-              For example, the reading of the measurement could be reflecting
-              the population size (in million) one-to-one.
-              <br />
-              This would mean that if the instrument shows you ‘40%’ 40 million
-              aliens live on that planet. <br />
-              <br />
-              <span className={styles.center}>
-                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
-              </span>
-            </p>
-          </div>
-        );
-      } else if (this.state.instructScreenText === 4) {
-        text = (
-          <div className={styles.main}>
-            <p>
-              <span className={styles.center}>TRAINING I</span>
-              <br />
-              However, a challenge makes your mission more difficult:
+              Indicate the value by pressing the corresponding left and right arrow key.
               <br />
               <br />
-              No one knows how the instrument readings map onto the population
-              size of the planet.
-              <br />
-              <br />
-              The association between the instrument reading and the population
-              size will be
-              <strong>more complex</strong> and also{" "}
-              <strong>change at certain time points.</strong>
-              <br />
-              <br />
-              It is your task to learn this and keep track of changes.
-              <br /> <br />
-              <span className={styles.center}>
-                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
-              </span>
-            </p>
-          </div>
-        );
-      } else if (this.state.instructScreenText === 5) {
-        text = (
-          <div className={styles.main}>
-            <p>
-              <span className={styles.center}>TRAINING I</span>
-              <br />
-              For simplicity, we will now introduce you to the structure by
-              using simple mappings that will change at some point.
-              <br /> <br />
-              We want to see whether you can detect the change. <br />
-              <br />
-              <br /> <br />
-              <span className={styles.center}>
-                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
-              </span>
-            </p>
-          </div>
-        );
-      } else if (this.state.instructScreenText === 6) {
-        text = (
-          <div className={styles.main}>
-            <p>
-              <span className={styles.center}>TRAINING I</span>
-              <br />
-              For your first training, after you indicated your answer <br />
-              we will show you how many aliens actually lived on the planet.
-              <br />
-              <br />
-              This will make it possible for you to find out how the instrument
-              relates to the alien population size.
-              <br /> <br />
               Let's practice this!
               <br /> <br />
               <span className={styles.center}>
