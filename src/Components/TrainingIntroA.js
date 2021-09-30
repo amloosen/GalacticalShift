@@ -146,6 +146,7 @@ class TrainingIntroA extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
+            <span className={styles.center}>TRAINING II</span>
               <br />
               Well done so far!
               <br /> <br />
@@ -175,7 +176,7 @@ class TrainingIntroA extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
-              <span className={styles.center}>TRAINING I</span>
+              <span className={styles.center}>TRAINING II</span>
               So how can you find out how many aliens live on a planet?
               <br />
               <br />
@@ -200,7 +201,7 @@ class TrainingIntroA extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
-              <span className={styles.center}>TRAINING I</span>
+              <span className={styles.center}>TRAINING II</span>
               <br />
               The aliens living on these planets rely on natural resources,
               <br /> and thus the population size is related to the measurement
@@ -223,7 +224,7 @@ class TrainingIntroA extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
-              <span className={styles.center}>TRAINING I</span>
+              <span className={styles.center}>TRAINING II</span>
               <br />
               However, a challenge makes your mission more difficult:
               <br />
@@ -249,7 +250,7 @@ class TrainingIntroA extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
-              <span className={styles.center}>TRAINING I</span>
+              <span className={styles.center}>TRAINING II</span>
               <br />
               For simplicity, we will now introduce you to the structure of the game by
               using one instrument with simple associations that will change at some point.
@@ -285,7 +286,7 @@ class TrainingIntroA extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
-              <span className={styles.center}>TRAINING I</span>
+              <span className={styles.center}>TRAINING II</span>
               <br />
               For your first training, we will show you how
               many aliens actually lived on the planet  after you indicated your answer.

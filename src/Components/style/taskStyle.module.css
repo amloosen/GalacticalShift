@@ -81,7 +81,13 @@ input[type="submit"] {
   cursor: pointer;
 }
 
-
+img.relevInd{
+  width: 200px;
+  height: auto;
+  border: 10px solid green;
+  align-items: center;
+  justify-content: center;
+}
 
 /* Additional styles below */
 span.center {

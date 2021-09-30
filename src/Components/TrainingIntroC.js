@@ -100,8 +100,7 @@ class TrainingIntroB extends React.Component {
     document.removeEventListener("keyup", this._handleInstructKey);
     document.removeEventListener("keyup", this._handleDebugKey);
     this.props.history.push({
-      pathname: `/TrainingTaskB`,
-      // pathname: `/elementsHover`,
+      pathname: `/TrainingTaskC`,
       state: {
         userID: this.state.userID,
         date: this.state.date,
@@ -138,19 +137,19 @@ class TrainingIntroB extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
-              <span className={styles.center}>
-                Your space-training session is going well!
-              </span>
+              <span className={styles.center}>TRAINING IV</span>
               <br />
-              Another challenge makes your mission even more difficult:
+              Great job!
               <br />
               <br />
-              Your spaceship has <strong>three</strong> measuring instruments
-              showing different natural resources.
+              You will now be introduced to main game. We will bring all the parts together that you got introduced to so far.
               <br />
               <br />
-              You have to find out <strong>which one is relevant</strong>{" "}
-              and determining the population size.
+              This means, from now on, you will be asked to use the slider.
+              <br />
+              <br />
+              Remember, with the slider you can indicate your estimate as well as your certainty
+              in your estimate by changing the shape of the slider.
               <br />
               <br />
               <span className={styles.center}>
@@ -163,20 +162,22 @@ class TrainingIntroB extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
+              <span className={styles.center}>TRAINING IV</span>
+              <br />
+              The task will be conceptually similar to the previous training
+              trials. The introduced challenges will now be combined.
               <br />
               <br />
-              Again, sometimes this might change, which means suddenly a new
-              instrument will be relevant. You have to recognize these changes.
+              Additionally, the association between the instrument and the
+              population size will be more complex.
               <br />
               <br />
-              This means, now you have to <br />
-              <br /><strong>(1)</strong> find out which
-              instrument is relevant, <br />
-              <br /><strong>(2)</strong> what its association
-              with the population size is,
+              Again, you have to find out <strong>(1)</strong> which instrument
+              is important and <strong>(2)</strong> how it is associated with
+              the population size. This mapping as well as the instrument of
+              importance will <strong>(3)</strong> change over time. <br />
               <br />
-              <br /><strong>(3)</strong> detect when suddenly a new instrument is
-              relevant or when the association to the population size changes.
+              Try to detect these changes and adapt your estimate accordingly.
               <br />
               <br />
               <span className={styles.center}>
@@ -189,15 +190,22 @@ class TrainingIntroB extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
-              <span className={styles.center}>TRAINING II</span>
-              Again, the true population size will for now be shown after each planet. This will make
-              it possible for you to find out which instrument is of importance and how it is associated to the population size.
+              <span className={styles.center}>TRAINING IV</span>
+              <br />
+              For now, we will give you some help. <br />
+              <br />
+              For this training stage, we will show you which instrument is of
+              importance by highlighting it.
               <br />
               <br />
-              Indicate the value by pressing the corresponding left and right arrow key.
-              <br />
-              <br />
-              Let's practice this!
+              <span className={styles.center}>
+                <img
+                  className={styles.relevInd}
+                  src={img_intro1}
+                  alt="example1"
+                />
+              </span>
+              <br /> <br />
               <br /> <br />
               <span className={styles.center}>
                 Press the [<strong>SPACEBAR</strong>] to start the training.

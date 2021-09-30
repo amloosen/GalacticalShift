@@ -138,9 +138,10 @@ class TrainingIntroB extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
-              <span className={styles.center}>
-                Your space-training session is going well!
-              </span>
+            <span className={styles.center}>TRAINING III</span>
+            <br /><br />
+              Your space-training session is going well!
+              <br />
               <br />
               Another challenge makes your mission even more difficult:
               <br />
@@ -163,6 +164,7 @@ class TrainingIntroB extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
+            <span className={styles.center}>TRAINING III</span>
               <br />
               <br />
               Again, sometimes this might change, which means suddenly a new
@@ -189,7 +191,7 @@ class TrainingIntroB extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
-              <span className={styles.center}>TRAINING II</span>
+              <span className={styles.center}>TRAINING III</span>
               Again, the true population size will for now be shown after each planet. This will make
               it possible for you to find out which instrument is of importance and how it is associated to the population size.
               <br />

@@ -8,6 +8,8 @@ import TrainingIntroA from "./Components/TrainingIntroA";
 import TrainingTaskA from "./Components/TrainingTaskA";
 import TrainingIntroB from "./Components/TrainingIntroB";
 import TrainingTaskB from "./Components/TrainingTaskB";
+import TrainingIntroC from "./Components/TrainingIntroC";
+import TrainingTaskC from "./Components/TrainingTaskC";
 import TutorTask from "./Components/TutorTask";
 import ExptTask from "./Components/ExptTask";
 import Questionnaires from "./Components/Questionnaires";
@@ -26,6 +28,8 @@ function App() {
         <Route path="/TrainingTaskA" component={TrainingTaskA} exact />
         <Route path="/TrainingIntroB" component={TrainingIntroB} exact />
         <Route path="/TrainingTaskB" component={TrainingTaskB} exact />
+        <Route path="/TrainingIntroC" component={TrainingIntroC} exact />
+        <Route path="/TrainingTaskC" component={TrainingTaskC} exact />
         <Route path="/TutorTask" component={TutorTask} exact />
         <Route path="/ExptTask" component={ExptTask} exact />
         <Route path="/Questionnaires" component={Questionnaires} exact />
