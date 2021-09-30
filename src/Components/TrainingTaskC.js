@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 // import { DATABASE_URL } from "./config";
 import styles from "./style/taskStyle.module.css";
 import { range } from "lodash";
-import ElementsOneDisplay from "./elementsOnedisplay";
+import ElementsFullDisplay from "./elementsFulldisplay";
 ////////////////////////////////////////////////////////////////////////////////
 function shuffle(array) {
   let currentIndex = array.length,
@@ -21,15 +21,26 @@ function shuffle(array) {
       array[currentIndex],
     ];
   }
-
   return array;
 }
+
+function getRand(array) {
+  var val_options = range(0, 110, 10);
+  var rand = val_options[~~(Math.random() * val_options.length)];
+  // var rand = Math.floor(Math.random() * 10);
+  if (array.indexOf(rand) === -1) {
+    return rand;
+  } else {
+    return getRand(array);
+  }
+}
+
 ////////////////////////////////////////////////////////////////////////////////
-class TrainingTaskA extends React.Component {
+class TrainingTaskB extends React.Component {
   constructor(props) {
     super(props);
 
-    var nr_train_a_trial = 10;
+    var nr_train_a_trial = 12;
     var val_options = range(0, 110, 10);
     val_options.splice(val_options.indexOf(50), 1); //remove the 50 to make it clearer which element is correct
     var random_val = [];
@@ -41,17 +52,78 @@ class TrainingTaskA extends React.Component {
       random_val[i] = val_tmp;
     }
 
-    var corr_values = random_val.slice(0, 5);
-    var inverse_tmp = random_val.slice(5, 10);
+    var corr_values = random_val.slice(0, 6);
+    var inverse_tmp = random_val.slice(6, 12);
     var inverse = inverse_tmp.map(function (value) {
       return 100 - value;
     });
-    corr_values.push(inverse[0],inverse[1],inverse[2],inverse[3],inverse[4]);
+    corr_values.push(
+      inverse[0],
+      inverse[1],
+      inverse[2],
+      inverse[3],
+      inverse[4],
+      inverse[5]
+    );
     let array_tmp = Array(nr_train_a_trial).fill(0);
 
     // var rightCodeAns = [4, 4, 4, 4, 4, 5, 5, 5, 5];
     var corr_pos = [4, 4, 4, 4, 4, 5, 5, 5, 5]; //1 is left and 2 is right; determine where the correct value is displayed
     shuffle(corr_pos);
+    // initialize options for the first trial
+    if (corr_pos[0] === 4) {
+      // var ansTwo = 100 - corr_values[0];
+      var ansOne = corr_values[0];
+    } else {
+      // var ansOne = 100 - corr_values[0];
+      var ansTwo = corr_values[0];
+    }
+
+    var corr_elem_tmp = [1, 2, 3]; //1 is left and 2 is right; determine where the correct value is displayed
+    shuffle(corr_elem_tmp);
+    var corr_elem = Array(nr_train_a_trial).fill(0);
+
+    for (var i = 0; i <= nr_train_a_trial - 1; i++) {
+      if (i < nr_train_a_trial / 3) {
+        corr_elem[i] = corr_elem_tmp[0];
+      } else if (i >= nr_train_a_trial / 3 && i < (nr_train_a_trial / 3) * 2) {
+        corr_elem[i] = corr_elem_tmp[1];
+      } else {
+        corr_elem[i] = corr_elem_tmp[2];
+      }
+    }
+    //pregenerate the values for all elements
+    var check_al2 = [];
+    var check_al1 = [];
+
+    for (var i = 0; i <= nr_train_a_trial - 1; i++) {
+      var restricted = [corr_values[i], 100 - corr_values[i]];
+      if (i < nr_train_a_trial / 2) {
+        check_al1[i] = getRand(restricted);
+        check_al2[i] = 100 - corr_values[i];
+      } else {
+        check_al1[i] = 100 - corr_values[i];
+        check_al2[i] = getRand(restricted);
+      }
+    }
+
+    var all_element_values = Array(nr_train_a_trial)
+      .fill()
+      .map(() => Array(3).fill(0));
+
+    for (var i = 0; i <= nr_train_a_trial - 1; i++) {
+      all_element_values[i][corr_elem[i]-1] = corr_values[i];
+      if (corr_elem[i] == 1) {
+        all_element_values[i][1] = check_al1[i];
+        all_element_values[i][2] = check_al2[i];
+      } else if (corr_elem[i] == 2) {
+        all_element_values[i][0] = check_al1[i];
+        all_element_values[i][2] = check_al2[i];
+      } else if (corr_elem[i] == 3) {
+        all_element_values[i][0] = check_al1[i];
+        all_element_values[i][1] = check_al2[i];
+      }
+    }
     // initialize options for the first trial
     if (corr_pos[0] === 4) {
       var ansTwo = 100 - corr_values[0];
@@ -82,14 +154,10 @@ class TrainingTaskA extends React.Component {
       ansOne: ansOne,
       ansTwo: ansTwo,
       corr_pos: corr_pos,
+      corr_elem:corr_elem,
+      all_element_values: all_element_values,
     };
-
-    this.nextTrial = this.nextTrial.bind(this);
-    this.trainCheck = this.trainCheck.bind(this);
-    this.disp_options = this.disp_options.bind(this);
-    this.disp_feedback = this.disp_feedback.bind(this);
-    this.disp_element = this.disp_element.bind(this);
-    this.redirectToNextStage = this.redirectToNextStage.bind(this);
+    // this.displayFeedback = this.displayFeedback.bind(this)
     /* prevents page from going to the right/left when arrows are pressed .*/
     window.addEventListener("keydown", function (e) {
       if (e.keyCode === 37 && e.target === document.body) {
@@ -99,7 +167,6 @@ class TrainingTaskA extends React.Component {
       }
     });
   }
-
   /////////////////////////////////////////////////////////////////////////////////
   trainCheck(pressed) {
     var trainAcc = this.state.trainAcc;
@@ -224,7 +291,7 @@ class TrainingTaskA extends React.Component {
   /////////////////////////////////////////////////////////////////////////////////
   render() {
     if (!this.state.timePassed && this.state.feedback === 0) {
-      return <div className={styles.cockpit}>{this.disp_element()}</div>;
+      return <div className={styles.cockpit}>{this.disp_elements()}</div>;
     } else if (this.state.feedback === 0 && this.state.timePassed === true) {
       return <div className={styles.cockpit}>{this.disp_options()}</div>;
     } else if (!this.state.timePassed2 && this.state.feedback === 1) {
@@ -237,17 +304,19 @@ class TrainingTaskA extends React.Component {
     }
   }
 
-  disp_element(event) {
+  disp_elements(event) {
     setTimeout(() => {
       this.setState({ timePassed: true, timePassed2: false });
-    }, 2000);
-    return (
-      <ElementsOneDisplay
-        value={this.state.valTrainElem}
-        traintrialTotal={this.state.traintrialTotal}
-        traintrialNum={this.state.traintrialNum}
-      />
-    );
+    }, 10000);
+        return (
+          <ElementsFullDisplay
+            value1={this.state.all_element_values[this.state.traintrialNum-1][0]}
+            value2={this.state.all_element_values[this.state.traintrialNum-1][1]}
+            value3={this.state.all_element_values[this.state.traintrialNum-1][2]}
+            trialTotal={this.state.trialTotal}
+            trialNum={this.state.trialNum}
+          />
+        );
   }
 
   disp_options(event) {
@@ -278,7 +347,7 @@ class TrainingTaskA extends React.Component {
   disp_feedback() {
     let text2 = (
       <div className={styles.questions}>
-        The true population on the planet was {this.state.corr_value} mio.
+        The true population on the planet was {this.state.all_corr_values[this.state.traintrialNum-1]} mio.
         <br />
         <br />
         <br />
@@ -309,6 +378,4 @@ class TrainingTaskA extends React.Component {
   }
 }
 
-/////////////////////////////////////////////////////////////////////////////////
-
-export default withRouter(TrainingTaskA);
+export default withRouter(TrainingTaskB);

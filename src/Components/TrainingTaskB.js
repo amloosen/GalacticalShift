@@ -25,14 +25,14 @@ function shuffle(array) {
 }
 
 function getRand(array) {
-    var val_options = range(0, 110, 10);
-    var rand = val_options[~~(Math.random() * val_options.length)];
-    // var rand = Math.floor(Math.random() * 10);
-    if (array.indexOf(rand) === -1) {
-        return rand;
-    } else {
-        return getRand(array);
-    }
+  var val_options = range(0, 110, 10);
+  var rand = val_options[~~(Math.random() * val_options.length)];
+  // var rand = Math.floor(Math.random() * 10);
+  if (array.indexOf(rand) === -1) {
+    return rand;
+  } else {
+    return getRand(array);
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -72,10 +72,10 @@ class TrainingTaskB extends React.Component {
     shuffle(corr_pos);
     // initialize options for the first trial
     if (corr_pos[0] === 4) {
-      var ansTwo = 100 - corr_values[0];
+      // var ansTwo = 100 - corr_values[0];
       var ansOne = corr_values[0];
     } else {
-      var ansOne = 100 - corr_values[0];
+      // var ansOne = 100 - corr_values[0];
       var ansTwo = corr_values[0];
     }
 
@@ -92,45 +92,46 @@ class TrainingTaskB extends React.Component {
         corr_elem[i] = corr_elem_tmp[2];
       }
     }
-//pregenerate the values for all elements
-var check_al2 = [];
-var check_al1 = [];
+    //pregenerate the values for all elements
+    var check_al2 = [];
+    var check_al1 = [];
 
-for (var i = 0; i <= nr_train_a_trial - 1; i++) {
-  var restricted = [corr_values[i],100-corr_values[i]];
-  if (i < nr_train_a_trial / 2) {
-    check_al1[i] = getRand(restricted);
-    check_al2[i] = 100-corr_values[i];
-  } else {
-    check_al1[i] = 100-corr_values[i];
-    check_al2[i] = getRand(restricted);
-  }
-}
+    for (var i = 0; i <= nr_train_a_trial - 1; i++) {
+      var restricted = [corr_values[i], 100 - corr_values[i]];
+      if (i < nr_train_a_trial / 2) {
+        check_al1[i] = getRand(restricted);
+        check_al2[i] = 100 - corr_values[i];
+      } else {
+        check_al1[i] = 100 - corr_values[i];
+        check_al2[i] = getRand(restricted);
+      }
+    }
 
+    var all_element_values = Array(nr_train_a_trial)
+      .fill()
+      .map(() => Array(3).fill(0));
 
-//pregenerate the position of the correct value
-    // if (corr_elem[0] === 1) {
-    //   var valElem1 = corr_values[0];
-    //   var valElem2 = 100-corr_values[0];
-    //   if (valElem1>=10){
-    //     var valElem3 = corr_values[0]-10;
-    //   }else{var valElem3 = corr_values[0]+10;}
-    //
-    // } else if {(corr_elem[0] === 1)
-
-      //
-      // var ansOne = 100 - corr_values[0];
-      // var ansTwo = corr_values[0];
-    // }
-
+    for (var i = 0; i <= nr_train_a_trial - 1; i++) {
+      all_element_values[i][corr_elem[i]-1] = corr_values[i];
+      if (corr_elem[i] == 1) {
+        all_element_values[i][1] = check_al1[i];
+        all_element_values[i][2] = check_al2[i];
+      } else if (corr_elem[i] == 2) {
+        all_element_values[i][0] = check_al1[i];
+        all_element_values[i][2] = check_al2[i];
+      } else if (corr_elem[i] == 3) {
+        all_element_values[i][0] = check_al1[i];
+        all_element_values[i][1] = check_al2[i];
+      }
+    }
     // initialize options for the first trial
-    // if (corr_pos[0] === 4) {
-    //   var ansTwo = 100 - corr_values[0];
-    //   var ansOne = corr_values[0];
-    // } else {
-    //   var ansOne = 100 - corr_values[0];
-    //   var ansTwo = corr_values[0];
-    // }
+    if (corr_pos[0] === 4) {
+      var ansTwo = 100 - corr_values[0];
+      var ansOne = corr_values[0];
+    } else {
+      var ansOne = 100 - corr_values[0];
+      var ansTwo = corr_values[0];
+    }
 
     this.state = {
       // userID: userID,
@@ -153,10 +154,8 @@ for (var i = 0; i <= nr_train_a_trial - 1; i++) {
       ansOne: ansOne,
       ansTwo: ansTwo,
       corr_pos: corr_pos,
-      // corr_elem:,
-      valElem1: null,
-      valElem2: null,
-      valElem3: null,
+      corr_elem:corr_elem,
+      all_element_values: all_element_values,
     };
     // this.displayFeedback = this.displayFeedback.bind(this)
     /* prevents page from going to the right/left when arrows are pressed .*/
@@ -169,17 +168,102 @@ for (var i = 0; i <= nr_train_a_trial - 1; i++) {
     });
   }
   /////////////////////////////////////////////////////////////////////////////////
-  // componentDidMount() {
-  //     setTimeout(
-  //       function() {
-  //         this.setState({
-  //           mounted: 1,
-  //         });
-  //       }
-  //       .bind(this),
-  //       5000
-  //     );
-  //   }
+  trainCheck(pressed) {
+    var trainAcc = this.state.trainAcc;
+    var trialKeypress = this.state.trialKeypress;
+    trialKeypress[this.state.traintrialNum - 1] = pressed;
+
+    if (pressed === this.state.corr_pos[this.state.traintrialNum - 1]) {
+      trainAcc[this.state.traintrialNum - 1] = 1;
+    } else {
+      trainAcc[this.state.traintrialNum - 1] = 0;
+    }
+
+    this.setState({
+      trialKeypress: trialKeypress,
+      trainAcc: trainAcc,
+      feedback: 1,
+    });
+  }
+
+  _handleTrainKey = (event) => {
+    var pressed;
+    switch (event.keyCode) {
+      case 37:
+        //    this is left arrow
+        pressed = 4;
+        this.trainCheck(pressed);
+        break;
+      case 39:
+        //    this is right arrow
+        pressed = 5;
+        this.trainCheck(pressed);
+        break;
+      default:
+    }
+  };
+
+  nextTrial() {
+    document.removeEventListener("keyup", this._handleTrainKey);
+    var traintrialNum_tmp = this.state.traintrialNum + 1;
+    var all_corr_values = this.state.all_corr_values;
+    if (traintrialNum_tmp === this.state.traintrialTotal) {
+      this.redirectToNextStage();
+    } else {
+
+      if (traintrialNum_tmp <= this.state.traintrialTotal / 2) {
+        var valTrainElem = all_corr_values[traintrialNum_tmp-1];
+      } else {
+        var valTrainElem = 100 - all_corr_values[traintrialNum_tmp-1];
+      }
+
+      var corr_pos = this.state.corr_pos;
+      if (corr_pos[traintrialNum_tmp - 1] === 4) {
+        var ansTwo = 100 - all_corr_values[traintrialNum_tmp-1];
+        var ansOne = all_corr_values[traintrialNum_tmp-1];
+      } else {
+        var ansOne = 100 - all_corr_values[traintrialNum_tmp-1];
+        var ansTwo = all_corr_values[traintrialNum_tmp-1];
+      }
+      this.setState({
+        traintrialNum: traintrialNum_tmp,
+        feedback: 0,
+        timePassed: false,
+        timePassed2: false,
+        valTrainElem: valTrainElem,
+        corr_value: this.state.all_corr_values[traintrialNum_tmp - 1],
+        ansTwo: ansTwo,
+        ansOne: ansOne,
+      });
+    }
+  }
+  componentDidMount() {
+    window.scrollTo(0, 0);
+    //send the outcomeTask conditions?
+
+    // setTimeout(
+    //   function () {
+    //     this.condSave();
+    //   }.bind(this),
+    //   0
+    // );
+
+    setTimeout(
+      function () {
+        this.setState({
+          mounted: 1,
+        });
+      }.bind(this),
+      5000
+    );
+  }
+
+  componentWillUnmount() {
+    // fix Warning: Can't perform a React state update on an unmounted component
+    this.setState = (state, callback) => {
+      return;
+    };
+  }
   //
   //   fetchUserInfo () {
   //        fetch(`${API_URL}/questions_behaviour/last_user_no`)
@@ -198,96 +282,99 @@ for (var i = 0; i <= nr_train_a_trial - 1; i++) {
   //        });
   //       }
 
+  // setTimeout(
+  //   function () {
+  //     this.trainTrialSave();
+  //   }.bind(this),
+  //   5
+  // );
   /////////////////////////////////////////////////////////////////////////////////
   render() {
-    setTimeout(() => {
-      this.setState({ timePassed: true });
-    }, 10000); //show elements
-    if (!this.state.timePassed) {
-      return (
-        <ElementsFullDisplay
-          value1={30}
-          value2={40}
-          value3={80}
-          trialTotal={this.state.trialTotal}
-          trialNum={this.state.trialNum}
-        />
-      );
-    } else {
-      // if (this.state.timePassed===true && this.state.feedback===false){
-      let choiceTime0 = Math.round(performance.now());
-
-      let text = (
-        <div className={styles.questions}>
-          How large is the alien population?
-          <br />
-          <br />
-          <br />
-        </div>
-      );
-
-      let text2 = (
-        <div className={styles.questions}>
-          The true population on the planet was {50} mio.
-          <br />
-          <br />
-          <br />
-        </div>
-      );
-
-      // return (
-      // <div>
-      //   {" "}
-      //   {this.state.feedback ? (
-      // <div className={styles.cockpit}>
-      //   <div>{text2}</div>
-      //   <div className={styles.overlaybar}>
-      //     <OutcomeSliderBar
-      //       mu={this.state.trialSgmMu[this.state.trialNum - 1][2]}
-      //       sgm={this.state.trialSgmMu[this.state.trialNum - 1][1]}
-      //       value={this.state.trueValue}
-      //     />
-      //   </div>
-      //   <div className={styles.overlaybar}>
-      //     <OutcomeSlider
-      //       mu={this.state.trialSgmMu[this.state.trialNum - 1][2]}
-      //       sgm={this.state.trialSgmMu[this.state.trialNum - 1][1]}
-      //     />
-      //   </div>
-      // </div>
-      // ) : (
-      //   <div className={styles.cockpit}>
-      //     // <div>{text}</div>
-      //     // <Slider
-      //     //   onSpacebarHit={(result) => {
-      //     //     this.saveSgmMu(result, choiceTime0);
-      //     //   }}
-      //     // />
-      //   </div>
-      // )}
-      // </div>
-      // );
+    if (!this.state.timePassed && this.state.feedback === 0) {
+      return <div className={styles.cockpit}>{this.disp_elements()}</div>;
+    } else if (this.state.feedback === 0 && this.state.timePassed === true) {
+      return <div className={styles.cockpit}>{this.disp_options()}</div>;
+    } else if (!this.state.timePassed2 && this.state.feedback === 1) {
+      return <div className={styles.cockpit}>{this.disp_feedback()}</div>;
+    } else if (this.state.timePassed2 === true && this.state.feedback === 1) {
+      {
+        this.nextTrial();
+      }
+      return null;
     }
   }
-  /////////////////////////////////////////////////////////////////////////////////
 
-  saveSgmMu(result, time) {
-    let trialSgmMu = this.state.trialSgmMu;
-    let trialRT = this.state.trialRT;
-    let trialNum = this.state.trialNum;
-    trialSgmMu[trialNum - 1][1] = result.sgm;
-    trialSgmMu[trialNum - 1][2] = result.mu;
-    trialRT[trialNum - 1][0] = trialNum;
-    trialRT[trialNum - 1][1] = time;
-    trialRT[trialNum - 1][2] = Math.round(performance.now());
-    trialRT[trialNum - 1][3] = trialRT[trialNum - 1][2] - time;
-    this.setState({
-      trialSgmMu: trialSgmMu,
-      trialRT: trialRT,
-      feedback: true,
-      // trialNum : trialNum+1,
-      // outcome: show
+  disp_elements(event) {
+    setTimeout(() => {
+      this.setState({ timePassed: true, timePassed2: false });
+    }, 7500);
+        return (
+          <ElementsFullDisplay
+            value1={this.state.all_element_values[this.state.traintrialNum-1][0]}
+            value2={this.state.all_element_values[this.state.traintrialNum-1][1]}
+            value3={this.state.all_element_values[this.state.traintrialNum-1][2]}
+            trialTotal={this.state.trialTotal}
+            trialNum={this.state.trialNum}
+          />
+        );
+  }
+
+  disp_options(event) {
+    document.addEventListener("keyup", this._handleTrainKey);
+    let text = (
+      <div className={styles.questions}>
+        How large is the alien population?
+        <br />
+        <br />
+        <br />
+      </div>
+    );
+    return (
+      <div className={styles.cockpit}>
+        <div>{text}</div>
+        <br />
+        <div className={styles.main}>
+          <div className={styles.container_1}>
+            <span className={styles.right}>{this.state.ansTwo}</span>
+            <span className={styles.left}>{this.state.ansOne}</span>
+          </div>
+          <br />
+        </div>
+      </div>
+    );
+  }
+
+  disp_feedback() {
+    let text2 = (
+      <div className={styles.questions}>
+        The true population on the planet was {this.state.all_corr_values[this.state.traintrialNum-1]} mio.
+        <br />
+        <br />
+        <br />
+      </div>
+    );
+    setTimeout(() => {
+      this.setState({ timePassed2: true, timePassed: false });
+    }, 700);
+
+    return (
+      <div className={styles.cockpit}>
+        <div>{text2}</div>
+      </div>
+    );
+  }
+
+  redirectToNextStage() {
+    this.props.history.push({
+      pathname: `/TrainingIntroC`,
+      state: {
+        // userID: this.state.userID,
+        // date: this.state.date,
+        // startTime: this.state.startTime,
+      },
     });
+
+    // console.log("UserID is: " + this.state.userID);
   }
 }
 
