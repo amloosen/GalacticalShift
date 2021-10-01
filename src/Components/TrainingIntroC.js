@@ -6,6 +6,7 @@ import styles from "./style/taskStyle.module.css";
 import Cockpit from "./img/CockpitBlank.jpg";
 
 import img_intro1 from "./intro/ExamplePicture1.jpg";
+import img_bar from "./intro/bar.png";
 /////////
 var trialTotal = 9;
 
@@ -60,9 +61,9 @@ class TrainingIntroB extends React.Component {
 
     if (whichButton === 4 && curText > 1) {
       this.setState({ instructScreenText: curText - 1 });
-    } else if (whichButton === 5 && curText < 3) {
+    } else if (whichButton === 5 && curText < 6) {
       this.setState({ instructScreenText: curText + 1 });
-    } else if (curText === 3 && whichButton === 10) {
+    } else if (curText === 6 && whichButton === 10) {
       setTimeout(
         function () {
           this.redirectToNextStage();
@@ -142,14 +143,12 @@ class TrainingIntroB extends React.Component {
               Great job!
               <br />
               <br />
-              You will now be introduced to main game. We will bring all the parts together that you got introduced to so far.
+              You will now be introduced to the main game. We will bring all the
+              parts together that you learned about so far.
               <br />
               <br />
-              This means, from now on, you will be asked to use the slider.
-              <br />
-              <br />
-              Remember, with the slider you can indicate your estimate as well as your certainty
-              in your estimate by changing the shape of the slider.
+              This means, these task will be similar to the previous training
+              trials but the introduced challenges will be combined and become more difficult.
               <br />
               <br />
               <span className={styles.center}>
@@ -164,24 +163,21 @@ class TrainingIntroB extends React.Component {
             <p>
               <span className={styles.center}>TRAINING IV</span>
               <br />
-              The task will be conceptually similar to the previous training
-              trials. The introduced challenges will now be combined.
               <br />
-              <br />
-              Additionally, the association between the instrument and the
-              population size will be more complex.
+              From now on, you will be asked to use the slider.
+              Remember, with the slider you can indicate your <strong>estimate</strong> as well
+              as your <strong> certainty</strong>  in your estimate by changing the shape of the
+              slider.
               <br />
               <br />
               Again, you have to find out <strong>(1)</strong> which instrument
               is important and <strong>(2)</strong> how it is associated with
-              the population size. This mapping as well as the instrument of
-              importance will <strong>(3)</strong> change over time. <br />
-              <br />
-              Try to detect these changes and adapt your estimate accordingly.
+              the population size. This association as well as the instrument of
+              importance will <strong>(3)</strong> change over time. Detect these changes and adapt your estimate accordingly.
               <br />
               <br />
               <span className={styles.center}>
-                [<strong>NEXT →</strong>]
+                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
               </span>
             </p>
           </div>
@@ -192,10 +188,13 @@ class TrainingIntroB extends React.Component {
             <p>
               <span className={styles.center}>TRAINING IV</span>
               <br />
-              For now, we will give you some help. <br />
               <br />
-              For this training stage, we will show you which instrument is of
-              importance by highlighting it.
+              However, from now on the associations between the instruments and
+              the population size will be <strong>more complex</strong>.
+              <br />
+              <br />
+              For this training, we will, therefore, give you some help. We will show you which instrument is of
+              importance by highlighting it like this:
               <br />
               <br />
               <span className={styles.center}>
@@ -205,10 +204,78 @@ class TrainingIntroB extends React.Component {
                   alt="example1"
                 />
               </span>
-              <br /> <br />
+              <br />
+              <span className={styles.center}>
+                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
+              </span>
+            </p>
+          </div>
+        );
+      } else if (this.state.instructScreenText === 4) {
+        text = (
+          <div className={styles.main}>
+            <p>
+              <span className={styles.center}>TRAINING IV</span>
+              <br />
+              <br />
+              <strong>An additional hint:</strong><br /><br />
+              As you might have noticed in the trainig session, planets (trials)
+              that you encounter after each other, are more similar to each other than planets that are further
+              apart. <br />
+              <br />
+              This means, their population size depends on the same instrument.
+              Keep this in mind when indicating your answers.
               <br /> <br />
               <span className={styles.center}>
-                Press the [<strong>SPACEBAR</strong>] to start the training.
+                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
+              </span>
+            </p>
+          </div>
+        );
+      } else if (this.state.instructScreenText === 5) {
+        text = (
+          <div className={styles.main}>
+            <p>
+              <span className={styles.center}>TRAINING IV</span>
+              <br />
+              <br />
+              Also, not only your estimate is important, but also your
+              certainty in your estimate. After each trial you will be rewarded
+              for the correctness of your estimate and your certainty in it.
+              <br />
+              <br />
+              This reward will be indicated by a bar that look like this: <br />
+              <br />
+              <span className={styles.center}>
+                <img src={img_bar} alt="bar" />
+              </span>
+              During this training stage the collected reward is however only
+              for demonstration and will be deleted after the training. Please
+              try to indicate your estimate and certainty as precisely as
+              possible.
+              <br /> <br />
+              <span className={styles.center}>
+                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
+              </span>
+            </p>
+          </div>
+        );
+      } else if (this.state.instructScreenText === 6) {
+        text = (
+          <div className={styles.main}>
+            <p>
+              <span className={styles.center}>TRAINING IV</span>
+              <br />
+              <br />
+              Again, the true population size shown after each planet will make
+              it possible for you to find out which instrument (i.e. which
+              colour) is of importance.
+              <br />
+              <br />
+              Let’s practice that!
+              <br /> <br />
+              <span className={styles.center}>
+                Press the [<strong>SPACEBAR</strong>] to start the final training.
               </span>
               <span className={styles.center}>
                 [<strong>← BACK</strong>]

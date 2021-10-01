@@ -101,7 +101,6 @@ class TrainingIntroB extends React.Component {
     document.removeEventListener("keyup", this._handleDebugKey);
     this.props.history.push({
       pathname: `/TrainingTaskB`,
-      // pathname: `/elementsHover`,
       state: {
         userID: this.state.userID,
         date: this.state.date,
