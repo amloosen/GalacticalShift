@@ -84,7 +84,7 @@ class ElementsFullDisplay extends React.Component{
            this.setState({
              img2: Cover,
              show2: null
-           });} else if (elNr === 3){debugger;
+           });} else if (elNr === 3){
              this.state.times_element3[this.state.times_element3.length-1][1] =Math.round(performance.now());
              this.state.times_element3[this.state.times_element3.length-1][2] = this.state.times_element3[this.state.times_element3.length-1][1]-this.state.times_element3[this.state.times_element3.length-1][0];
              this.setState({
