@@ -115,7 +115,7 @@ class TrainingTaskB extends React.Component {
 
       let text2 = (
         <div className={styles.questions}>
-          The true population on the planet was {50} mio.
+          The true population on the planet was {50} million.
           <br />
           <br />
           <br />

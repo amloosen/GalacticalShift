@@ -141,7 +141,6 @@ class TrainingTask extends React.Component {
       // trialSliderRT: null,
       trialSgmMu: trialSgmMu,
       timerCountDur: 10,
-      timePassed: false,
       feedback: false,
       mounted: 0,
       trueValue: 50,
@@ -171,8 +170,9 @@ class TrainingTask extends React.Component {
     });
   }
   /////////////////////////////////////////////////////////////////////////////////
+
+
   nextTrial() {
-    debugger;
     var traintrialNum_tmp = this.state.traintrialNum + 1;
     var all_corr_values = this.state.all_corr_values;
     if (traintrialNum_tmp === this.state.traintrialTotal) {
@@ -184,7 +184,6 @@ class TrainingTask extends React.Component {
         var valTrainElem = 100 - all_corr_values[traintrialNum_tmp - 1];
       }
 
-
       this.setState({
         traintrialNum: traintrialNum_tmp,
         feedback: false,
@@ -195,17 +194,24 @@ class TrainingTask extends React.Component {
       });
     }
   }
-  // componentDidMount() {
-  //     setTimeout(
-  //       function() {
-  //         this.setState({
-  //           mounted: 1,
-  //         });
-  //       }
-  //       .bind(this),
-  //       5000
-  //     );
-  //   }
+  componentDidMount() {
+    setTimeout(
+      function () {
+        this.setState({
+          mounted: 1,
+        });
+      }.bind(this),
+      5000
+    );
+  }
+
+
+
+  componentWillUnmount() {
+    this.setState = (state, callback) => {
+      return;
+    };
+  }
   //
   //   fetchUserInfo () {
   //        fetch(`${API_URL}/questions_behaviour/last_user_no`)
@@ -224,107 +230,49 @@ class TrainingTask extends React.Component {
   //        });
   //       }
 
-  // displayFeedback() {
-  //   this.setState({feedback: true});
-  // }
-
   /////////////////////////////////////////////////////////////////////////////////
   render() {
-    setTimeout(() => {
-      this.setState({ timePassed: true });
-    }, 100); //show elements
-    if (!this.state.timePassed) {
-      return (
-        <ElementsFullDisplay
-          value1={30}
-          value2={40}
-          value3={80}
-          trialTotal={this.state.traintrialTotal}
-          trialNum={this.state.traintrialNum}
-        />
-      );
-    } else {
-      let choiceTime0 = Math.round(performance.now());
-
-      let text = (
-        <div className={styles.questions}>
-          How large is the alien population?
-          <br />
-          <br />
-          <br />
-        </div>
-      );
-
-      let text2 = (
-        <div className={styles.questions}>
-          The true population on the planet was {50} mio.
-          <br />
-          <br />
-          <br />
-        </div>
-      );
-      if (this.state.feedback === true) {
-        setTimeout(() => {
-          this.setState({ timePassed2: true });
-        }, 100); //show elements
-      }
-
-      if (this.state.timePassed2 === false) {
-        return (
-          <div>
-            {" "}
-            {this.state.feedback ? (
-              <div className={styles.cockpit}>
-                <div>{text2}</div>
-                <View style={styles.container}>
-                  <div className={styles.overlaybar}>
-                    <OutcomeSliderBar
-                      mu={
-                        this.state.trialSgmMu[this.state.traintrialNum - 1][2]
-                      }
-                      sgm={
-                        this.state.trialSgmMu[this.state.traintrialNum - 1][1]
-                      }
-                      value={this.state.trueValue}
-                    />
-                  </div>
-                  <div className={styles.overlaybar}>
-                    <OutcomeSlider
-                      mu={
-                        this.state.trialSgmMu[this.state.traintrialNum - 1][2]
-                      }
-                      sgm={
-                        this.state.trialSgmMu[this.state.traintrialNum - 1][1]
-                      }
-                    />
-                  </div>
-                </View>
-              </div>
-            ) : (
-              <div className={styles.cockpit}>
-                <div>{text}</div>
-                <Slider
-                  onSpacebarHit={(result) => {
-                    this.saveSgmMu(result, choiceTime0);
-                  }}
-                />
-              </div>
-            )}
-          </div>
-        );
-      } else {
-        {
-          this.nextTrial();
-        }
-        return null;}
+    if (!this.state.timePassed && this.state.feedback === false) {
+      return <div className={styles.cockpit}>{this.disp_elements()}</div>;
+    } else if (this.state.feedback === true && !this.state.timePassed2 ) {
+      return <div className={styles.cockpit}>{this.disp_feedback()} {this.handleIncrement} </div>;
+    } else if (!this.state.feedback && this.state.timePassed2 === false) {
+      return <div className={styles.cockpit}>{this.disp_slider()}</div>;
+    } else if (this.state.timePassed2 === true && this.state.feedback === true)  {
+      {this.nextTrial();}
+      return null;
     }
   }
 
   /////////////////////////////////////////////////////////////////////////////////
+  disp_slider() {
+    let choiceTime0 = Math.round(performance.now());
+
+    let text = (
+      <div className={styles.questions}>
+        How large is the alien population?
+        <br />
+        <br />
+        <br />
+      </div>
+    );
+
+    return (
+      <div className={styles.cockpit}>
+        <div>{text}</div>
+        <Slider
+          onSpacebarHit={(result) => {
+            this.saveSgmMu(result, choiceTime0);
+          }}
+        />
+      </div>
+    );
+  }
+
   disp_elements() {
     setTimeout(() => {
-      this.setState({ timePassed: true });
-    }, 100); //show elements
+      this.setState({ timePassed: true, timePassed2: false });
+    }, 5000);
 
     return (
       <ElementsFullDisplay
@@ -334,6 +282,42 @@ class TrainingTask extends React.Component {
         trialTotal={this.state.traintrialTotal}
         trialNum={this.state.traintrialNum}
       />
+    );
+  }
+
+  disp_feedback() {
+    let text2 = (
+      <div className={styles.questions}>
+        The true population on the planet was {50} million.
+        <br />
+        <br />
+        <br />
+      </div>
+    );
+
+    setTimeout(() => {
+      this.setState({ timePassed2: true, timePassed: false });
+    }, 700);
+
+    return (
+      <div className={styles.cockpit}>
+        <div>{text2}</div>
+        <View style={styles.container}>
+          <div className={styles.overlaybar}>
+            <OutcomeSlider
+              mu={this.state.trialSgmMu[this.state.traintrialNum - 1][2]}
+              sgm={this.state.trialSgmMu[this.state.traintrialNum - 1][1]}
+            />
+          </div>
+          <div className={styles.overlaybar}>
+            <OutcomeSliderBar
+              mu={this.state.trialSgmMu[this.state.traintrialNum - 1][2]}
+              sgm={this.state.trialSgmMu[this.state.traintrialNum - 1][1]}
+              value={this.state.trueValue}
+            />
+          </div>
+        </View>
+      </div>
     );
   }
 
@@ -347,11 +331,11 @@ class TrainingTask extends React.Component {
     trialRT[traintrialNum - 1][1] = time;
     trialRT[traintrialNum - 1][2] = Math.round(performance.now());
     trialRT[traintrialNum - 1][3] = trialRT[traintrialNum - 1][2] - time;
+
     this.setState({
       trialSgmMu: trialSgmMu,
       trialRT: trialRT,
       feedback: true,
-      timePassed: false
       //traintrialNum : traintrialNum+1,
       // outcome: show
     });

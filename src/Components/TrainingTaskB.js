@@ -347,7 +347,7 @@ class TrainingTaskB extends React.Component {
   disp_feedback() {
     let text2 = (
       <div className={styles.questions}>
-        The true population on the planet was {this.state.all_corr_values[this.state.traintrialNum-1]} mio.
+        The true population on the planet was {this.state.all_corr_values[this.state.traintrialNum-1]} million.
         <br />
         <br />
         <br />
