@@ -134,6 +134,20 @@ class MainTask extends React.Component {
       .fill()
       .map(() => Array(3).fill(0));
 
+      var randNum = "struct_" + getRandomInt(1, 10);
+      var StructToRender = require("./taskStructs/" + randNum + ".json");
+      var precededShift = StructToRender[0];//1=intra-dimensional; 2=extra-dimensional
+      var w0 = StructToRender[1];
+      var relevant_w = StructToRender[2];
+      var col_sq = StructToRender[3];
+      var val_corr_elem_tmp = StructToRender[4];
+      var epsilon = StructToRender[5];
+      debugger;
+      var val_corr_elem_final_tmp = StructToRender[6];
+      var val_corr_elem_tmp = val_corr_elem_final_tmp.map(function(each_element){
+      return Number(each_element.toFixed(0));});
+
+
     this.state = {
       // userID: userID,
       // date: date,
@@ -172,57 +186,8 @@ class MainTask extends React.Component {
     });
   }
   /////////////////////////////////////////////////////////////////////////////////
-  componentDidMount = () => {
-      window.scrollTo(0, 0);
 
-      // Variables for tutorial
-      //taskStruct 0-2: values, 3-5: probability, 6-8: EVs, 9: risky EV, 10: safe - risky EV, 11: optimal answer (1:safe, 2: risky)
 
-      var randNum = "struct_" + getRandomInt(1, 10);
-      var StructToRender = require("./taskStructs/" + randNum + ".json");
-debugger;
-      var taskSafePathOutcome = StructToRender[0];
-      // var taskRiskyPathOutcome1 = StructToRender[1];
-      // var taskRiskyPathOutcome2 = StructToRender[2];
-      //
-      // var taskSafePathProb = StructToRender[3];
-      // var taskRiskyPathProb1 = StructToRender[4];
-      // var taskRiskyPathProb2 = StructToRender[5];
-      //
-      // var taskSafePathEV = StructToRender[6];
-      // var taskRiskyPathEV1 = StructToRender[7];
-      // var taskRiskyPathEV2 = StructToRender[8];
-      //
-      // var taskGambleEV = StructToRender[9]; //Risky EV1+EV2
-      // var taskChoiceEV = StructToRender[10]; //SafeEV - (RiskyEV1+EV2)
-      //
-      // var taskOptChoice = StructToRender[11];
-      // var taskForceChoice = StructToRender[12];
-      //
-      // var taskPlanChoice = StructToRender[13];
-
-      this.setState({
-        // structNum: randNum,
-        // StructToRender: StructToRender,
-        // taskSafePathOutcome: taskSafePathOutcome,
-        // taskRiskyPathOutcome1: taskRiskyPathOutcome1,
-        // taskRiskyPathOutcome2: taskRiskyPathOutcome2,
-        //
-        // taskSafePathProb: taskSafePathProb,
-        // taskRiskyPathProb1: taskRiskyPathProb1,
-        // taskRiskyPathProb2: taskRiskyPathProb2,
-        //
-        // taskSafePathEV: taskSafePathEV,
-        // taskRiskyPathEV1: taskRiskyPathEV1,
-        // taskRiskyPathEV2: taskRiskyPathEV2,
-        //
-        // taskGambleEV: taskGambleEV, //Risky EV1+EV2
-        // taskChoiceEV: taskChoiceEV, //SafeEV - (RiskyEV1+EV2)
-        //
-        // taskOptChoice: taskOptChoice,
-        // taskForceChoice: taskForceChoice,
-        // taskPlanChoice: taskPlanChoice,
-      });}
 
 
   nextTrial() {
@@ -271,16 +236,16 @@ debugger;
       });
     }
   }
-  // componentDidMount() {
-  //   setTimeout(
-  //     function () {
-  //       this.setState({
-  //         mounted: 1,
-  //       });
-  //     }.bind(this),
-  //     5000
-  //   );
-  // }
+  componentDidMount() {
+    setTimeout(
+      function () {
+        this.setState({
+          mounted: 1,
+        });
+      }.bind(this),
+      5000
+    );
+  }
 
   componentWillUnmount() {
     this.setState = (state, callback) => {
