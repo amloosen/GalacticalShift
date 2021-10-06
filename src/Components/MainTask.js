@@ -329,6 +329,7 @@ class MainTask extends React.Component {
           value1={this.state.all_element_values[this.state.trialNum - 1][0]}
           value2={this.state.all_element_values[this.state.trialNum - 1][1]}
           value3={this.state.all_element_values[this.state.trialNum - 1][2]}
+          elem_indic={1};//adapt later
         />
       </div>
     );

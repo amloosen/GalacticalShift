@@ -24,6 +24,7 @@ class ElementsFullDisplay extends React.Component {
       .fill()
       .map(() => Array(3).fill(0));
 
+
     this.state = {
       img1: Cover,
       img2: Cover,
@@ -33,7 +34,7 @@ class ElementsFullDisplay extends React.Component {
       show3: null,
       times_element1: times_element1,
       times_element2: times_element2,
-      times_element3: times_element3,
+      times_element3: times_element3
     };
 
     this.mouseOver = this.mouseOver.bind(this);
