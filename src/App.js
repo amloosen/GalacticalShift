@@ -14,6 +14,8 @@ import MainTask from "./Components/MainTask";
 import Questionnaires from "./Components/Questionnaires";
 import EndPage from "./Components/EndPage";
 
+import ElementsIndicator from"./Components/elementsIndicator";
+
 import "./App.css";
 
 function App() {
@@ -31,6 +33,7 @@ function App() {
         <Route path="/TrainingTaskB" component={TrainingTaskB} exact />
         <Route path="/TrainingTaskC" component={TrainingTaskC} exact />
         <Route path="/MainTask" component={MainTask} exact />
+        <Route path="/ElementsIndicator" component={ElementsIndicator} exact />
         <Route path="/Questionnaires" component={Questionnaires} exact />
         <Route path="/EndPage" component={EndPage} exact />
       </Switch>

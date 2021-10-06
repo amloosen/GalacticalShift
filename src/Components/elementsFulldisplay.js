@@ -72,34 +72,48 @@ class ElementsFullDisplay extends React.Component {
 
   mouseOut(elNr) {
     if (elNr === 1) {
-      debugger;
-      var times1_tmp = this.state.times_element1;
-          times1_tmp[times1_tmp.length - 1][1] = Math.round(performance.now());
-          times1_tmp[times1_tmp.length - 1][2] = times1_tmp[times1_tmp.length - 1][1] -times1_tmp[times1_tmp.length - 1][0];
+      var times_element1 = this.state.times_element1;
 
+      times_element1[times_element1.length - 1][1] = Math.round(
+        performance.now()
+      );
+      times_element1[times_element1.length - 1][2] =
+        times_element1[times_element1.length - 1][1] -
+        times_element1[times_element1.length - 1][0];
       this.setState({
-        times_element1: times1_tmp,
         img1: Cover,
         show1: null,
+        style1: styles.elementsize,
+        times_element1: times_element1,
       });
     } else if (elNr === 2) {
-var times2_tmp = this.state.times_element2;
-      times2_tmp[times2_tmp.length - 1][1] = Math.round(performance.now());
-      times2_tmp[times2_tmp.length - 1][2] = times2_tmp[times2_tmp.length - 1][1] -  times2_tmp[times2_tmp.length - 1][0];
+      var times_element2 = this.state.times_element2;
 
+      times_element2[times_element2.length - 1][1] = Math.round(
+        performance.now()
+      );
+      times_element2[times_element2.length - 1][2] =
+        times_element2[times_element2.length - 1][1] -
+        times_element2[times_element2.length - 1][0];
       this.setState({
-        times_element2: times2_tmp,
         img2: Cover,
         show2: null,
+        style2: styles.elementsize,
+        times_element2: times_element2,
       });
     } else if (elNr === 3) {
-      var times3_tmp = this.state.times_element3;
-      times3_tmp[times3_tmp.length - 1][1] = Math.round(performance.now());
-      times3_tmp[times3_tmp.length - 1][2] = times3_tmp[times3_tmp.length - 1][1] - times3_tmp[times3_tmp.length - 1][0];
-
+      var times_element3 = this.state.times_element3;
+      times_element3[times_element3.length - 1][1] = Math.round(
+        performance.now()
+      );
+      times_element3[times_element3.length - 1][2] =
+        times_element3[times_element3.length - 1][1] -
+        times_element3[times_element3.length - 1][0];
       this.setState({
         img3: Cover,
         show3: null,
+        style3: styles.elementsize,
+        times_element3: times_element3,
       });
     }
   }

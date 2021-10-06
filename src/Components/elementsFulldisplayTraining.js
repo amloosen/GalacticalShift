@@ -75,61 +75,69 @@ class ElementsFullDisplayTraining extends React.Component {
       this.setState({
         img1: Blue,
         show1: 1,
-        style1: this.state.style_element1
+        style1: this.state.style_element1,
       });
     } else if (elNr === 2) {
       this.state.times_element2.push([Math.round(performance.now()), 0, 0]);
       this.setState({
         img2: Red,
         show2: 1,
-        style2: this.state.style_element2
+        style2: this.state.style_element2,
       });
     } else if (elNr === 3) {
       this.state.times_element3.push([Math.round(performance.now()), 0, 0]);
       this.setState({
         img3: Yellow,
         show3: 1,
-        style3: this.state.style_element3
+        style3: this.state.style_element3,
       });
     }
   }
 
   mouseOut(elNr) {
     if (elNr === 1) {
-      this.state.times_element1[
-        this.state.times_element1.length - 1
-      ][1] = Math.round(performance.now());
-      this.state.times_element1[this.state.times_element1.length - 1][2] =
-        this.state.times_element1[this.state.times_element1.length - 1][1] -
-        this.state.times_element1[this.state.times_element1.length - 1][0];
+      var times_element1 = this.state.times_element1;
+
+      times_element1[times_element1.length - 1][1] = Math.round(
+        performance.now()
+      );
+      times_element1[times_element1.length - 1][2] =
+        times_element1[times_element1.length - 1][1] -
+        times_element1[times_element1.length - 1][0];
       this.setState({
         img1: Cover,
         show1: null,
-        style1: styles.elementsize
+        style1: styles.elementsize,
+        times_element1: times_element1,
       });
     } else if (elNr === 2) {
-      this.state.times_element2[
-        this.state.times_element2.length - 1
-      ][1] = Math.round(performance.now());
-      this.state.times_element2[this.state.times_element2.length - 1][2] =
-        this.state.times_element2[this.state.times_element2.length - 1][1] -
-        this.state.times_element2[this.state.times_element2.length - 1][0];
+      var times_element2 = this.state.times_element2;
+
+      times_element2[times_element2.length - 1][1] = Math.round(
+        performance.now()
+      );
+      times_element2[times_element2.length - 1][2] =
+        times_element2[times_element2.length - 1][1] -
+        times_element2[times_element2.length - 1][0];
       this.setState({
         img2: Cover,
         show2: null,
-        style2: styles.elementsize
+        style2: styles.elementsize,
+        times_element2: times_element2,
       });
     } else if (elNr === 3) {
-      this.state.times_element3[
-        this.state.times_element3.length - 1
-      ][1] = Math.round(performance.now());
-      this.state.times_element3[this.state.times_element3.length - 1][2] =
-        this.state.times_element3[this.state.times_element3.length - 1][1] -
-        this.state.times_element3[this.state.times_element3.length - 1][0];
+      var times_element3 = this.state.times_element3;
+      times_element3[times_element3.length - 1][1] = Math.round(
+        performance.now()
+      );
+      times_element3[times_element3.length - 1][2] =
+        times_element3[times_element3.length - 1][1] -
+        times_element3[times_element3.length - 1][0];
       this.setState({
         img3: Cover,
         show3: null,
-        style3: styles.elementsize
+        style3: styles.elementsize,
+        times_element3: times_element3,
       });
     }
   }

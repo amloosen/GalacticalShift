@@ -7,6 +7,8 @@ import { View } from "react-native";
 import OutcomeSlider from "./sliderOutcome";
 import OutcomeSliderBar from "./sliderOutcomeBar";
 import ElementsFullDisplay from "./elementsFulldisplay";
+
+import ElementsIndicator from "./elementsIndicator";
 import { range } from "lodash";
 ////////////////////////////////////////////////////////////////////////////////
 function shuffle(array) {
@@ -134,19 +136,21 @@ class MainTask extends React.Component {
       .fill()
       .map(() => Array(3).fill(0));
 
-      var randNum = "struct_" + getRandomInt(1, 10);
-      var StructToRender = require("./taskStructs/" + randNum + ".json");
-      var precededShift = StructToRender[0];//1=intra-dimensional; 2=extra-dimensional
-      var w0 = StructToRender[1];
-      var relevant_w = StructToRender[2];
-      var col_sq = StructToRender[3];
-      var val_corr_elem_tmp = StructToRender[4];
-      var epsilon = StructToRender[5];
-      debugger;
-      var val_corr_elem_final_tmp = StructToRender[6];
-      var val_corr_elem_tmp = val_corr_elem_final_tmp.map(function(each_element){
-      return Number(each_element.toFixed(0));});
-
+    var randNum = "struct_" + getRandomInt(1, 10);
+    var StructToRender = require("./taskStructs/" + randNum + ".json");
+    var precededShift = StructToRender[0]; //1=intra-dimensional; 2=extra-dimensional
+    var w0 = StructToRender[1];
+    var relevant_w = StructToRender[2];
+    var col_sq = StructToRender[3];
+    var val_corr_elem_tmp = StructToRender[4];
+    var epsilon = StructToRender[5];
+    debugger;
+    var val_corr_elem_final_tmp = StructToRender[6];
+    var val_corr_elem_tmp = val_corr_elem_final_tmp.map(function (
+      each_element
+    ) {
+      return Number(each_element.toFixed(0));
+    });
 
     this.state = {
       // userID: userID,
@@ -155,7 +159,12 @@ class MainTask extends React.Component {
       // sectionTime: timeString,
       // taskSessionTry: 1,
       // taskSession: "MainTaskC",
+      trialTotal: nr_train_a_trial,
+      trialPerBlock: 50,
       trialNum: 1,
+      trialBlockNum: 1,
+      blockTotal: 5,
+      blockNum: 1,
       trialRT: trialRT,
       choiceTime0: 0,
       // //
@@ -164,9 +173,6 @@ class MainTask extends React.Component {
       timerCountDur: 10,
       feedback: false,
       mounted: 0,
-      trialTotal: nr_train_a_trial,
-      blockTotal: 10,
-      blockNum: 1,
       choiceTime0: 0,
       timePassed: false,
       timePassed2: false,
@@ -186,9 +192,6 @@ class MainTask extends React.Component {
     });
   }
   /////////////////////////////////////////////////////////////////////////////////
-
-
-
 
   nextTrial() {
     if (
@@ -213,6 +216,7 @@ class MainTask extends React.Component {
         choiceTime0: 0,
         timePassed: false,
         timePassed2: false,
+        indicTrials: [10,87,163,240]
         // all_corr_values: corr_values,
         // trainAcc: array_tmp,
         // corr_elem: corr_elem,
@@ -272,28 +276,50 @@ class MainTask extends React.Component {
 
   /////////////////////////////////////////////////////////////////////////////////
   render() {
-    if (!this.state.timePassed && this.state.feedback === false) {
-      return <div className={styles.cockpit}>{this.disp_elements()}</div>;
-    } else if (this.state.feedback === true && !this.state.timePassed2) {
-      return (
-        <div className={styles.cockpit}>
-          {this.disp_feedback()} {this.handleIncrement}{" "}
-        </div>
-      );
-    } else if (!this.state.feedback && this.state.timePassed2 === false) {
-      return <div className={styles.cockpit}>{this.disp_slider()}</div>;
-    } else if (
-      this.state.timePassed2 === true &&
-      this.state.feedback === true
-    ) {
-      {
-        this.nextTrial();
+    //generate by Matlab function linspace(min(10),max(240),4)
+    if (this.state.indicTrials.includes(this.state.trialNum)) {
+      return <div className={styles.cockpit}>{this.disp_elementIndicator()}</div>;
+    } else {
+      if (!this.state.timePassed && this.state.feedback === false) {
+        return <div className={styles.cockpit}>{this.disp_elements()}</div>;
+      } else if (this.state.feedback === true && !this.state.timePassed2) {
+        return (
+          <div className={styles.cockpit}>
+            {this.disp_feedback()} {this.handleIncrement}{" "}
+          </div>
+        );
+      } else if (!this.state.feedback && this.state.timePassed2 === false) {
+        return <div className={styles.cockpit}>{this.disp_slider()}</div>;
+      } else if (
+        this.state.timePassed2 === true &&
+        this.state.feedback === true
+      ) {
+        {
+          this.nextTrial();
+        }
+        return null;
       }
-      return null;
     }
   }
 
   /////////////////////////////////////////////////////////////////////////////////
+  disp_elementIndicator() {
+    return (
+      <div className={styles.cockpit}>
+        <ElementsIndicator
+          value1={this.state.all_element_values[this.state.trialNum - 1][0]}
+          value2={this.state.all_element_values[this.state.trialNum - 1][1]}
+          value3={this.state.all_element_values[this.state.trialNum - 1][2]}
+          corAns={this.state.corr_elem} //adapt later
+          element_col={[1, 2, 3]} //adapt later
+          userID={100} //props.userID,
+          trialNum={this.state.trialNum}
+          blockNum={this.state.blockNum}
+        />
+      </div>
+    );
+  }
+
   disp_slider() {
     let choiceTime0 = Math.round(performance.now());
 
@@ -329,7 +355,7 @@ class MainTask extends React.Component {
           value1={this.state.all_element_values[this.state.trialNum - 1][0]}
           value2={this.state.all_element_values[this.state.trialNum - 1][1]}
           value3={this.state.all_element_values[this.state.trialNum - 1][2]}
-          elem_indic={1};//adapt later
+          elem_indic={1} //adapt later
         />
       </div>
     );
@@ -392,7 +418,7 @@ class MainTask extends React.Component {
     });
   }
 
-  disp_break(){
+  disp_break() {
     let text = (
       <div className={styles.main}>
         <p>
@@ -421,6 +447,8 @@ class MainTask extends React.Component {
       </div>
     );
   }
+
+
 
   redirectToNextStage() {
     this.props.history.push({

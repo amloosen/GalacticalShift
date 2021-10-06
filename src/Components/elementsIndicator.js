@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./style/taskStyle.module.css";
-import {View} from "react-native";
+import { View } from "react-native";
 import ElementBar from "./elementBar";
 import Cover from "./img/cover.jpg";
 import Blue from "./img/stimuli3_blue.jpg";
@@ -13,15 +13,44 @@ class ElementsIndicator extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      img1: Cover,
-      img2: Cover,
-      img3: Cover,
-      show1: null,
-      show2: null,
-      show3: null,
+    if (this.props.element_col[0] === 1) {
+      var img_1 = Blue;
+      if (this.props.element_col[1] === 2) {
+        var img_2 = Red;
+        var img_3 = Yellow;
+      } else if (this.props.element_col[2] === 3) {
+        var img_2 = Yellow;
+        var img_3 = Red;
+      }
+    } else if (this.props.element_col[0] === 2) {
+      var img_1 = Red;
 
+      if (this.props.element_col[1] === 3) {
+        var img_2 = Yellow;
+        var img_3 = Blue;
+      } else if (this.props.element_col[2] === 1) {
+        var img_2 = Blue;
+        var img_3 = Yellow;
+      }
+    } else if (this.props.element_col[0] === 3) {
+      var img_1 = Yellow;
+
+      if (this.props.element_col[1] === 1) {
+        var img_2 = Blue;
+        var img_3 = Red;
+      } else if (this.props.element_col[2] === 1) {
+        var img_2 = Red;
+        var img_3 = Blue;
+      }
+    }
+
+    this.state = {
+      img1: img_1,
+      img2: img_2,
+      img3: img_3,
     };
+
+    this.trialSave = this.trialSave.bind(this);
 
     /* prevents page from going down when space bar is hit .*/
     window.addEventListener("keydown", function (e) {
@@ -30,95 +59,80 @@ class ElementsIndicator extends React.Component {
       }
     });
   }
-  // 
-  // mouseOver(elNr) {
-  //   if (elNr === 1) {
-  //     this.state.times_element1.push([Math.round(performance.now()), 0, 0]);
-  //     this.setState({
-  //       img1: Blue,
-  //       show1: 1,
-  //     });
-  //   } else if (elNr === 2) {
-  //     this.state.times_element2.push([Math.round(performance.now()), 0, 0]);
-  //     this.setState({
-  //       img2: Red,
-  //       show2: 1,
-  //     });
-  //   } else if (elNr === 3) {
-  //     this.state.times_element3.push([Math.round(performance.now()), 0, 0]);
-  //     this.setState({
-  //       img3: Yellow,
-  //       show3: 1,
-  //     });
-  //   }
+
+  _handleTestKey = (event) => {
+    var pressed;
+    var time_pressed;
+    switch (event.keyCode) {
+      case 49:
+        pressed = 1;
+        time_pressed = Math.round(performance.now());
+        this.trialSave(pressed, time_pressed);
+        break;
+      case 50:
+        pressed = 2;
+        time_pressed = Math.round(performance.now());
+        this.trialSave(pressed, time_pressed);
+        break;
+      case 51:
+        pressed = 3;
+        time_pressed = Math.round(performance.now());
+        this.trialSave(pressed, time_pressed);
+        break;
+      default:
+    }
+  };
+
+  trialSave(pressed, time_pressed) {
+    document.removeEventListener("keyup", this._handleTestKey);
+    if (pressed === this.props.corAns) {
+      var indicCor = 1;
+    } else {
+      var indicCor = 0;
+    }
+
+    let saveString = {
+      userID: this.props.userID,
+      indicTime: time_pressed,
+      trialNum: this.props.trialNum,
+      blockNum: this.props.blockNum,
+      trialKeypress: pressed,
+      indicCor: indicCor,
+    };
+
+    // try {
+    //   fetch(`${DATABASE_URL}/outcome_test/` + userID, {
+    //     method: "POST",
+    //     headers: {
+    //       Accept: "application/json",
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(saveString),
+    //   });
+    // } catch (e) {
+    //   console.log("Cant post?");
+    // }
   }
-//
-//   mouseOut(elNr) {
-//     if (elNr === 1) {
-//       debugger;
-//       var times1_tmp = this.state.times_element1;
-//           times1_tmp[times1_tmp.length - 1][1] = Math.round(performance.now());
-//           times1_tmp[times1_tmp.length - 1][2] = times1_tmp[times1_tmp.length - 1][1] -times1_tmp[times1_tmp.length - 1][0];
-//
-//       this.setState({
-//         times_element1: times1_tmp,
-//         img1: Cover,
-//         show1: null,
-//       });
-//     } else if (elNr === 2) {
-// var times2_tmp = this.state.times_element2;
-//       times2_tmp[times2_tmp.length - 1][1] = Math.round(performance.now());
-//       times2_tmp[times2_tmp.length - 1][2] = times2_tmp[times2_tmp.length - 1][1] -  times2_tmp[times2_tmp.length - 1][0];
-//
-//       this.setState({
-//         times_element2: times2_tmp,
-//         img2: Cover,
-//         show2: null,
-//       });
-//     } else if (elNr === 3) {
-//       var times3_tmp = this.state.times_element3;
-//       times3_tmp[times3_tmp.length - 1][1] = Math.round(performance.now());
-//       times3_tmp[times3_tmp.length - 1][2] = times3_tmp[times3_tmp.length - 1][1] - times3_tmp[times3_tmp.length - 1][0];
-//
-//       this.setState({
-//         img3: Cover,
-//         show3: null,
-//       });
-//     }
-//   }
 
   render() {
+    document.addEventListener("keyup", this._handleTestKey);
     return (
       <div className={styles.cockpit}>
         <div className={styles.main}>
           <span className={styles.centerThree}>
             <View style={styles.container}>
-              <img
-                className={styles.elementsize}
-                src={this.state.img1}
-              />
-              // {this.state.show1 ? (
-              //   <div className={styles.overlay}>
-              //     <ElementBar progress={this.props.value1} />
-              //   </div>
-              // ) : null}
-              // {this.state.show1 ? (
-              //   <div className={styles.overlaytext}>{this.props.value1}%</div>
-              // ) : null}
+              <img className={styles.elementsize} src={this.state.img1} />
+              <div className={styles.indicatortext}>{1}</div>
             </View>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <View style={styles.container}>
-              <img
-                className={styles.elementsize}
-                src={this.state.img2}
-              />
+              <img className={styles.elementsize} src={this.state.img2} />
+              <div className={styles.indicatortext}>{2}</div>
             </View>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <View style={styles.container}>
-              <img
-                className={styles.elementsize}
-                src={this.state.img3}
-              />
+              <img className={styles.elementsize} src={this.state.img3} />
+              <div className={styles.indicatortext}>{3}</div>
             </View>
           </span>
         </div>

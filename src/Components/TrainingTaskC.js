@@ -151,7 +151,11 @@ class TrainingTaskC extends React.Component {
       trainAcc: array_tmp,
       corr_elem: corr_elem,
       all_element_values: all_element_values,
+      times_element1: Array(nr_train_a_trial).fill(0),
+      times_element2: Array(nr_train_a_trial).fill(0),
+      times_element3: Array(nr_train_a_trial).fill(0),
     };
+
     // this.displayFeedback = this.displayFeedback.bind(this)
     /* prevents page from going to the right/left when arrows are pressed .*/
     window.addEventListener("keydown", function (e) {
@@ -163,7 +167,6 @@ class TrainingTaskC extends React.Component {
     });
   }
   /////////////////////////////////////////////////////////////////////////////////
-
   nextTrial() {
     if (this.state.traintrialNum === this.state.traintrialTotal) {
       this.redirectToNextStage();
@@ -277,6 +280,7 @@ class TrainingTaskC extends React.Component {
             this.state.all_element_values[this.state.traintrialNum - 1][2]
           }
           corr_elem={this.state.corr_elem[this.state.traintrialNum - 1]}
+          
         />
       </div>
     );
