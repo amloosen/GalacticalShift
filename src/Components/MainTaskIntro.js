@@ -1,16 +1,12 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { DATABASE_URL } from "./config";
-
 import styles from "./style/taskStyle.module.css";
-import Cockpit from "./img/CockpitBlank.jpg";
-
-import img_intro1 from "./intro/ExamplePicture1.jpg";
-import img_left from "./intro/left.png";
-import img_right from "./intro/right.png";
-/////////
-
-/////////////////////////////////////////////////////////////////////////////////t.Component {
+import img_indicat1 from "./intro/indicat1.png";
+import img_indicat2 from "./intro/indicat2.png";
+import img_indicat3 from "./intro/indicat3.png";
+/////////////////////////////////////////////////////////////////////////////////
+// REACT COMPONENT START
 class MainTaskIntro extends React.Component {
   constructor(props) {
     super(props);
@@ -25,7 +21,7 @@ class MainTaskIntro extends React.Component {
       // userID: userID,
       sectionStartTime: introTrainingStartTime,
       taskSessionTry: 1,
-      taskSession: "TrainingIntroA",
+      taskSession: "MainTaskIntro",
       instructScreenText: 1,
 
       // outcomeNotAnsLog2: outcomeNotAnsLog2,
@@ -94,16 +90,12 @@ class MainTaskIntro extends React.Component {
       default:
     }
   };
-
   /////////////////////////////////////////////////////////////////////////////////
-
-  // }
-
   redirectToNextStage() {
     document.removeEventListener("keyup", this._handleInstructKey);
     document.removeEventListener("keyup", this._handleDebugKey);
     this.props.history.push({
-      pathname: `/TrainingTaskA`,
+      pathname: `/MainTask`,
       state: {
         userID: this.state.userID,
         date: this.state.date,
@@ -131,11 +123,7 @@ class MainTaskIntro extends React.Component {
       return;
     };
   }
-
   //////////////////////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////////////////////
-  // render time
-
   render() {
     let text;
     if (this.state.instructScreen === true) {
@@ -144,26 +132,19 @@ class MainTaskIntro extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
-            <span className={styles.center}>TRAINING II</span>
+              <span className={styles.center}>MAIN GAME</span>
               <br />
-              Well done so far!
-              <br /> <br />
-              We will now introduce you to the main task itself, step-by-step by
-              letting you complete a few training trials.
-              <br /> <br />
-              For today&apos;s game, you will be a space explorer on an
-              intergalactic mission.
+              Welcome to the main game!
               <br />
               <br />
-              Your mission is it to tell your station on earth of how many
-              aliens live on the planets you visit.
-              <br /> <br />
-              It is critical that you give your best estimate of the alien
-              population size for the mission to be successful.
-              <br /> <br />
-              <span className={styles.center}>
-                <i>(Use the ← → keys to navigate the pages.)</i>
-              </span>
+              The main game will be very similar to the last training stage,
+              with one crucial difference:
+              <br />
+              <br />
+              Now, you have to find out which instrument is important at a given
+              time and it will not be highlighted anymore.
+              <br />
+              <br />
               <span className={styles.center}>
                 [<strong>NEXT →</strong>]
               </span>
@@ -174,19 +155,17 @@ class MainTaskIntro extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
-              <span className={styles.center}>TRAINING II</span>
-              So how can you find out how many aliens live on a planet?
+              <span className={styles.center}>MAIN GAME</span>
               <br />
               <br />
-              Your spaceship is equipped with several measuring instruments that
-              will help you determine how many aliens live on the planet.
+              You again have to master the three challenges: <br />
               <br />
-              <br />A measuring instrument may look like this:
-              <span className={styles.center}>
-                <img src={img_intro1} alt="example1" />
-              </span>
-              <br />
-              This instrument indicates 40% of the resource is available.
+              <strong>1.</strong> Find out which instrument is important.
+              <br /> <br />
+              <strong>2.</strong> Find out how it is associated with the
+              population size <br /> <br />
+              <strong>3.</strong> Recognize changes in 1. or 2. and adapt your
+              answer.
               <br />
               <br />
               <span className={styles.center}>
@@ -199,18 +178,17 @@ class MainTaskIntro extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
-              <span className={styles.center}>TRAINING II</span>
+              <span className={styles.center}>MAIN GAME</span>
               <br />
-              The aliens living on these planets rely on natural resources,
-              <br /> and thus the population size is related to the measurement
-              of your instrument.
+              <strong>Remember:</strong>
               <br />
               <br />
-              For example, the reading of the measurement could be reflecting
-              the population size (in million) one-to-one.
+              Planets (trials) that you encounter after each other, are more
+              similar to each other than planets that are further apart. This
+              means, their population size depends on the same instrument.
+              <br /> <br />
+              Keep this in mind when indicating your answers.
               <br />
-              This would mean that if the instrument shows you ‘40%’ 40 million
-              aliens live on that planet. <br />
               <br />
               <span className={styles.center}>
                 [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
@@ -222,21 +200,21 @@ class MainTaskIntro extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
-              <span className={styles.center}>TRAINING II</span>
-              <br />
-              However, a challenge makes your mission more difficult:
+              <span className={styles.center}>MAIN GAME</span>
               <br />
               <br />
-              No one knows how the instrument readings map onto the population
-              size of the planet.
+              As in the training, not only your estimate is important, but also
+              your certainty in your estimate. After each trial you will be
+              rewarded for the correctness of your estimate and your certainty
+              in it.
               <br />
               <br />
-              The association between the instrument reading and the population
-              size will be <strong>more complex</strong> and also{" "}
-              <strong>change</strong> at some point.
+              Please try to indicate your estimate and certainty as precisely as
+              possible.
               <br />
               <br />
-              It is your task to learn the associations and keep track of changes.
+              From now on, your collected reward will count towards your bonus
+              payment at the end of the experiment.
               <br /> <br />
               <span className={styles.center}>
                 [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
@@ -248,32 +226,38 @@ class MainTaskIntro extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
-              <span className={styles.center}>TRAINING II</span>
+              <span className={styles.center}>MAIN GAME</span>
               <br />
-              For simplicity, we will now introduce you to the structure of the game by
-              using one instrument with simple associations that will change at some point.
-              <br /><br />
-              We want to see whether you can detect the associations and the changes.
-              <br />  <br />First, look at the instrument by hoovering over the black square with your mouse.  <br />
               <br />
-                    Second, choose between the two alternative population sizes on the screen using the
-                    corresponding arrow keys.
-                    <br /> For the option on the left side use the left arrow key
-                    <img
-                      className={styles.introImgTwo2}
-                      src={img_left}
-                      alt="example1"
-                    />
-                    <br />
-                    and for the option on the right use the right arrow key
-                    <img
-                      className={styles.introImgTwo2}
-                      src={img_right}
-                      alt="example1"
-                    />
-                    <br />
-              <br />
+              As you have learned in the training, only one instrument
+              determines the population size at a given moment.
               <br /> <br />
+              To probe your understanding of the task we will sometimes,
+              randomly ask you to indicate which colour/instrument is the
+              important one at a given stage of the task by pressing the
+              indicated number key (see example below). Please answer the
+              question as accurately as possible.
+              <br /> <br />
+              <span className={styles.centerThree_intro}>
+                <img
+                  className={styles.elementsize}
+                  src={img_indicat1}
+                  alt="example1"
+                />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <img
+                  className={styles.elementsize}
+                  src={img_indicat2}
+                  alt="example1"
+                />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <img
+                  className={styles.elementsize}
+                  src={img_indicat3}
+                  alt="example1"
+                />
+              </span>
+              <br />
               <span className={styles.center}>
                 [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
               </span>
@@ -284,20 +268,21 @@ class MainTaskIntro extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
-              <span className={styles.center}>TRAINING II</span>
-              <br />
-              For your first training, we will show you how
-              many aliens actually lived on the planet  after you indicated your answer.
+              <span className={styles.center}>MAIN GAME</span>
               <br />
               <br />
-              This will make it possible for you to find out how the instrument
-              relates to the alien population size.
+              It is important, that you complete the game in one go. However,
+              there will be short breaks in between, that you can choose to take
+              or you can continue by pressing the space bar.
+              <br />
+              <br />
+              Good luck with the main game!
               <br /> <br />
-              Let's practice this!
-              <br /> <br />
-              <span className={styles.center}>
-                Press the [<strong>SPACEBAR</strong>] to start the training.
+              <span className={styles.main}>
+                Press the [<strong>SPACEBAR</strong>] when you are ready to
+                start.
               </span>
+              <br /> <br />
               <span className={styles.center}>
                 [<strong>← BACK</strong>]
               </span>

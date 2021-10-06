@@ -5,7 +5,7 @@ import ReactApexChart from "react-apexcharts";
 
 const Slider = ({ onSpacebarHit = () => {} }) => {
   const [mu, setMu] = useState(50);
-  const [sgm, setSgm] = useState(30);
+  const [sgm, setSgm] = useState(50);
 
   const xValues = range(0, 100.5, 0.5);
   const yValues = xValues.map((x) => normalPdf(x, mu, sgm));
@@ -103,7 +103,7 @@ const Slider = ({ onSpacebarHit = () => {} }) => {
   function sgmMinus(event) {
     if (sgm <= 10) {
       setSgm(sgm);
-    } else setSgm(sgm - 5);
+    } else setSgm(sgm - 10);
   }
 function resetSlider(event){
     setSgm(30);

@@ -3,10 +3,10 @@ import { withRouter } from "react-router-dom";
 import { DATABASE_URL } from "./config";
 import styles from "./style/taskStyle.module.css";
 import Slider from "./slider";
-import { SafeAreaView, View, StyleSheet } from "react-native";
+import { View } from "react-native";
 import OutcomeSlider from "./sliderOutcome";
 import OutcomeSliderBar from "./sliderOutcomeBar";
-import ElementsFullDisplay from "./elementsFulldisplay";
+import ElementsFullDisplayTraining from "./elementsFulldisplayTraining";
 import { range } from "lodash";
 ////////////////////////////////////////////////////////////////////////////////
 function shuffle(array) {
@@ -14,7 +14,7 @@ function shuffle(array) {
     randomIndex;
 
   // While there remain elements to shuffle...
-  while (currentIndex != 0) {
+  while (currentIndex !== 0) {
     // Pick a remaining element...
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex--;
@@ -39,7 +39,7 @@ function getRand(array) {
   }
 }
 /////////////////////////////////////////////////////////////////////////////////
-class TrainingTask extends React.Component {
+class TrainingTaskC extends React.Component {
   constructor(props) {
     super(props);
 
@@ -108,13 +108,13 @@ class TrainingTask extends React.Component {
 
     for (var i = 0; i <= nr_train_a_trial - 1; i++) {
       all_element_values[i][corr_elem[i] - 1] = corr_values[i];
-      if (corr_elem[i] == 1) {
+      if (corr_elem[i] === 1) {
         all_element_values[i][1] = check_al1[i];
         all_element_values[i][2] = check_al2[i];
-      } else if (corr_elem[i] == 2) {
+      } else if (corr_elem[i] === 2) {
         all_element_values[i][0] = check_al1[i];
         all_element_values[i][2] = check_al2[i];
-      } else if (corr_elem[i] == 3) {
+      } else if (corr_elem[i] === 3) {
         all_element_values[i][0] = check_al1[i];
         all_element_values[i][1] = check_al2[i];
       }
@@ -143,21 +143,14 @@ class TrainingTask extends React.Component {
       timerCountDur: 10,
       feedback: false,
       mounted: 0,
-      trueValue: 50,
-
-      trialRT: trialRT,
       traintrialTotal: nr_train_a_trial,
       choiceTime0: 0,
       timePassed: false,
       timePassed2: false,
-      mounted: 0,
       all_corr_values: corr_values,
-      valTrainElem: corr_values[0],
-      corr_value: corr_values[0],
       trainAcc: array_tmp,
       corr_elem: corr_elem,
       all_element_values: all_element_values,
-      trialSgmMu: trialSgmMu,
     };
     // this.displayFeedback = this.displayFeedback.bind(this)
     /* prevents page from going to the right/left when arrows are pressed .*/
@@ -171,26 +164,16 @@ class TrainingTask extends React.Component {
   }
   /////////////////////////////////////////////////////////////////////////////////
 
-
   nextTrial() {
-    var traintrialNum_tmp = this.state.traintrialNum + 1;
-    var all_corr_values = this.state.all_corr_values;
-    if (traintrialNum_tmp === this.state.traintrialTotal) {
+    if (this.state.traintrialNum === this.state.traintrialTotal) {
       this.redirectToNextStage();
     } else {
-      if (traintrialNum_tmp <= this.state.traintrialTotal / 2) {
-        var valTrainElem = all_corr_values[traintrialNum_tmp - 1];
-      } else {
-        var valTrainElem = 100 - all_corr_values[traintrialNum_tmp - 1];
-      }
-
+      var traintrialNum_tmp = this.state.traintrialNum + 1;
       this.setState({
         traintrialNum: traintrialNum_tmp,
         feedback: false,
         timePassed: false,
         timePassed2: false,
-        valTrainElem: valTrainElem,
-        corr_value: this.state.all_corr_values[traintrialNum_tmp - 1],
       });
     }
   }
@@ -204,8 +187,6 @@ class TrainingTask extends React.Component {
       5000
     );
   }
-
-
 
   componentWillUnmount() {
     this.setState = (state, callback) => {
@@ -234,12 +215,21 @@ class TrainingTask extends React.Component {
   render() {
     if (!this.state.timePassed && this.state.feedback === false) {
       return <div className={styles.cockpit}>{this.disp_elements()}</div>;
-    } else if (this.state.feedback === true && !this.state.timePassed2 ) {
-      return <div className={styles.cockpit}>{this.disp_feedback()} {this.handleIncrement} </div>;
+    } else if (this.state.feedback === true && !this.state.timePassed2) {
+      return (
+        <div className={styles.cockpit}>
+          {this.disp_feedback()} {this.handleIncrement}{" "}
+        </div>
+      );
     } else if (!this.state.feedback && this.state.timePassed2 === false) {
       return <div className={styles.cockpit}>{this.disp_slider()}</div>;
-    } else if (this.state.timePassed2 === true && this.state.feedback === true)  {
-      {this.nextTrial();}
+    } else if (
+      this.state.timePassed2 === true &&
+      this.state.feedback === true
+    ) {
+      {
+        this.nextTrial();
+      }
       return null;
     }
   }
@@ -275,20 +265,28 @@ class TrainingTask extends React.Component {
     }, 5000);
 
     return (
-      <ElementsFullDisplay
-        value1={30}
-        value2={40}
-        value3={80}
-        trialTotal={this.state.traintrialTotal}
-        trialNum={this.state.traintrialNum}
-      />
+      <div className={styles.overlaybar}>
+        <ElementsFullDisplayTraining
+          value1={
+            this.state.all_element_values[this.state.traintrialNum - 1][0]
+          }
+          value2={
+            this.state.all_element_values[this.state.traintrialNum - 1][1]
+          }
+          value3={
+            this.state.all_element_values[this.state.traintrialNum - 1][2]
+          }
+          corr_elem={this.state.corr_elem[this.state.traintrialNum - 1]}
+        />
+      </div>
     );
   }
 
   disp_feedback() {
     let text2 = (
       <div className={styles.questions}>
-        The true population on the planet was {50} million.
+        The true population on the planet was{" "}
+        {this.state.all_corr_values[this.state.traintrialNum - 1]} million.
         <br />
         <br />
         <br />
@@ -313,7 +311,7 @@ class TrainingTask extends React.Component {
             <OutcomeSliderBar
               mu={this.state.trialSgmMu[this.state.traintrialNum - 1][2]}
               sgm={this.state.trialSgmMu[this.state.traintrialNum - 1][1]}
-              value={this.state.trueValue}
+              value={this.state.all_corr_values[this.state.traintrialNum - 1]}
             />
           </div>
         </View>
@@ -355,4 +353,4 @@ class TrainingTask extends React.Component {
   }
 }
 
-export default withRouter(TrainingTask);
+export default withRouter(TrainingTaskC);

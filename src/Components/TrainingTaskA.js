@@ -10,7 +10,7 @@ function shuffle(array) {
     randomIndex;
 
   // While there remain elements to shuffle...
-  while (currentIndex != 0) {
+  while (currentIndex !== 0) {
     // Pick a remaining element...
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex--;
@@ -138,11 +138,12 @@ class TrainingTaskA extends React.Component {
 
   nextTrial() {
     document.removeEventListener("keyup", this._handleTrainKey);
-    var traintrialNum_tmp = this.state.traintrialNum + 1;
-    var all_corr_values = this.state.all_corr_values;
-    if (traintrialNum_tmp === this.state.traintrialTotal) {
+    if (this.state.traintrialNum === this.state.traintrialTotal) {
       this.redirectToNextStage();
     } else {
+
+      var traintrialNum_tmp = this.state.traintrialNum + 1;
+      var all_corr_values = this.state.all_corr_values;
 
       if (traintrialNum_tmp <= this.state.traintrialTotal / 2) {
         var valTrainElem = all_corr_values[traintrialNum_tmp-1];
@@ -230,9 +231,7 @@ class TrainingTaskA extends React.Component {
     } else if (!this.state.timePassed2 && this.state.feedback === 1) {
       return <div className={styles.cockpit}>{this.disp_feedback()}</div>;
     } else if (this.state.timePassed2 === true && this.state.feedback === 1) {
-      {
-        this.nextTrial();
-      }
+      {this.nextTrial();}
       return null;
     }
   }

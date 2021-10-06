@@ -1,19 +1,12 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { DATABASE_URL } from "./config";
-
 import styles from "./style/taskStyle.module.css";
-import Cockpit from "./img/CockpitBlank.jpg";
-
 import img_intro1 from "./intro/ExamplePicture1.jpg";
 import img_bar from "./intro/bar.png";
-/////////
-var trialTotal = 9;
-
-/////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 // REACT COMPONENT START
-class TrainingIntroB extends React.Component {
+class TrainingIntroC extends React.Component {
   constructor(props) {
     super(props);
 
@@ -27,7 +20,7 @@ class TrainingIntroB extends React.Component {
       // userID: userID,
       sectionStartTime: introTrainingStartTime,
       taskSessionTry: 1,
-      taskSession: "TrainingIntroB",
+      taskSession: "TrainingIntroC",
       instructScreenText: 1,
 
       // outcomeNotAnsLog2: outcomeNotAnsLog2,
@@ -294,4 +287,4 @@ class TrainingIntroB extends React.Component {
   }
 }
 
-export default withRouter(TrainingIntroB);
+export default withRouter(TrainingIntroC);

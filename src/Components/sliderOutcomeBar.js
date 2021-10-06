@@ -1,6 +1,5 @@
 import { range } from "lodash";
 import normalPdf from "normal-pdf";
-import { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 
 const OutcomeSliderBar = (props) => {

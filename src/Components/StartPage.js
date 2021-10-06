@@ -2,17 +2,12 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import * as Consent from "survey-react";
 import "../../node_modules/survey-react/survey.css";
-import queryString from "query-string"; // I need this for prolific
-
+// import queryString from "query-string"; // I need this for prolific
 import "./style/startStyle.css";
-
-// Edit: 22/07/2021: Add in pre-load and caching of images here
 import img_intro1 from "./intro/ExamplePicture1.jpg";
 import img_intro2 from "./intro/ExamplePicture2.jpg";
 import img_intro3 from "./intro/ExamplePicture3.jpg";
 /////////
-var introPic = [img_intro1, img_intro2, img_intro3];
-
 class StartPage extends React.Component {
   constructor(props) {
     super(props);

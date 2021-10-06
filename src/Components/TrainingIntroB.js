@@ -1,15 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { DATABASE_URL } from "./config";
-
 import styles from "./style/taskStyle.module.css";
-import Cockpit from "./img/CockpitBlank.jpg";
-
-import img_intro1 from "./intro/ExamplePicture1.jpg";
-/////////
-var trialTotal = 9;
-
-/////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 // REACT COMPONENT START
 class TrainingIntroB extends React.Component {

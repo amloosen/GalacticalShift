@@ -10,7 +10,7 @@ function shuffle(array) {
     randomIndex;
 
   // While there remain elements to shuffle...
-  while (currentIndex != 0) {
+  while (currentIndex !== 0) {
     // Pick a remaining element...
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex--;
@@ -112,14 +112,14 @@ class TrainingTaskB extends React.Component {
       .map(() => Array(3).fill(0));
 
     for (var i = 0; i <= nr_train_a_trial - 1; i++) {
-      all_element_values[i][corr_elem[i]-1] = corr_values[i];
-      if (corr_elem[i] == 1) {
+      all_element_values[i][corr_elem[i] - 1] = corr_values[i];
+      if (corr_elem[i] === 1) {
         all_element_values[i][1] = check_al1[i];
         all_element_values[i][2] = check_al2[i];
-      } else if (corr_elem[i] == 2) {
+      } else if (corr_elem[i] === 2) {
         all_element_values[i][0] = check_al1[i];
         all_element_values[i][2] = check_al2[i];
-      } else if (corr_elem[i] == 3) {
+      } else if (corr_elem[i] === 3) {
         all_element_values[i][0] = check_al1[i];
         all_element_values[i][1] = check_al2[i];
       }
@@ -148,13 +148,11 @@ class TrainingTaskB extends React.Component {
       timePassed2: false,
       mounted: 0,
       all_corr_values: corr_values,
-      valTrainElem: corr_values[0],
-      corr_value: corr_values[0],
       trainAcc: array_tmp,
       ansOne: ansOne,
       ansTwo: ansTwo,
       corr_pos: corr_pos,
-      corr_elem:corr_elem,
+      corr_elem: corr_elem,
       all_element_values: all_element_values,
     };
     // this.displayFeedback = this.displayFeedback.bind(this)
@@ -204,34 +202,24 @@ class TrainingTaskB extends React.Component {
   };
 
   nextTrial() {
-    debugger;
-    var traintrialNum_tmp = this.state.traintrialNum + 1;
-    var all_corr_values = this.state.all_corr_values;
-    if (traintrialNum_tmp === this.state.traintrialTotal) {
+    if (this.state.traintrialNum === this.state.traintrialTotal) {
       this.redirectToNextStage();
     } else {
-
-      if (traintrialNum_tmp <= this.state.traintrialTotal / 2) {
-        var valTrainElem = all_corr_values[traintrialNum_tmp-1];
-      } else {
-        var valTrainElem = 100 - all_corr_values[traintrialNum_tmp-1];
-      }
-
+      var traintrialNum_tmp = this.state.traintrialNum + 1;
+      var all_corr_values = this.state.all_corr_values;
       var corr_pos = this.state.corr_pos;
       if (corr_pos[traintrialNum_tmp - 1] === 4) {
-        var ansTwo = 100 - all_corr_values[traintrialNum_tmp-1];
-        var ansOne = all_corr_values[traintrialNum_tmp-1];
+        var ansTwo = 100 - all_corr_values[traintrialNum_tmp - 1];
+        var ansOne = all_corr_values[traintrialNum_tmp - 1];
       } else {
-        var ansOne = 100 - all_corr_values[traintrialNum_tmp-1];
-        var ansTwo = all_corr_values[traintrialNum_tmp-1];
+        var ansOne = 100 - all_corr_values[traintrialNum_tmp - 1];
+        var ansTwo = all_corr_values[traintrialNum_tmp - 1];
       }
       this.setState({
         traintrialNum: traintrialNum_tmp,
         feedback: 0,
         timePassed: false,
         timePassed2: false,
-        valTrainElem: valTrainElem,
-        corr_value: this.state.all_corr_values[traintrialNum_tmp - 1],
         ansTwo: ansTwo,
         ansOne: ansOne,
       });
@@ -308,15 +296,15 @@ class TrainingTaskB extends React.Component {
     setTimeout(() => {
       this.setState({ timePassed: true, timePassed2: false });
     }, 7500);
-        return (
-          <ElementsFullDisplay
-            value1={this.state.all_element_values[this.state.traintrialNum-1][0]}
-            value2={this.state.all_element_values[this.state.traintrialNum-1][1]}
-            value3={this.state.all_element_values[this.state.traintrialNum-1][2]}
-            trialTotal={this.state.trialTotal}
-            trialNum={this.state.trialNum}
-          />
-        );
+    return (
+      <ElementsFullDisplay
+        value1={this.state.all_element_values[this.state.traintrialNum - 1][0]}
+        value2={this.state.all_element_values[this.state.traintrialNum - 1][1]}
+        value3={this.state.all_element_values[this.state.traintrialNum - 1][2]}
+        trialTotal={this.state.trialTotal}
+        trialNum={this.state.trialNum}
+      />
+    );
   }
 
   disp_options(event) {
@@ -347,7 +335,8 @@ class TrainingTaskB extends React.Component {
   disp_feedback() {
     let text2 = (
       <div className={styles.questions}>
-        The true population on the planet was {this.state.all_corr_values[this.state.traintrialNum-1]} million.
+        The true population on the planet was{" "}
+        {this.state.all_corr_values[this.state.traintrialNum - 1]} million.
         <br />
         <br />
         <br />

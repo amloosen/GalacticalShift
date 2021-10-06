@@ -3,7 +3,6 @@ import { withRouter } from "react-router-dom";
 import { DATABASE_URL } from "./config";
 
 import styles from "./style/taskStyle.module.css";
-import Cockpit from "./img/CockpitBlank.jpg";
 
 import img_spacebar from "./intro/spacebar.png";
 import img_up from "./intro/up.png";
