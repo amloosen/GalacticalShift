@@ -156,6 +156,11 @@ class MainTask extends React.Component {
     });
   }
   /////////////////////////////////////////////////////////////////////////////////
+  _handleBreakKey = (event) => {
+      if (event.keyCode === 32) {
+        this.nextTrial();
+      }
+    };
 
   nextTrial() {
    if (
@@ -176,6 +181,8 @@ class MainTask extends React.Component {
       });
     }
   }
+
+
   componentDidMount() {
     setTimeout(
       function () {
@@ -362,14 +369,17 @@ class MainTask extends React.Component {
   }
 
   disp_break(blockNum,blockTotal) {
-  setTimeout(() => {
-      this.setState({ timePassed2: true, feedback: true });
-  }, 700);
-
+  // setTimeout(() => {
+  //     this.setState({ timePassed2: true, feedback: true });
+  // }, 700);
+  //
+    document.addEventListener("keyup", this._handleBreakKey);
     let text = (
       <div className={styles.main}>
         <p>
           <span className={styles.center}>BREAK</span>
+          <br />
+          <br />
           You have completed {blockNum} out of&nbsp;
           {blockTotal} blocks!
           <br />
@@ -390,7 +400,7 @@ class MainTask extends React.Component {
 
     return (
       <div className={styles.cockpit}>
-        <div className={styles.textblock}>{text}</div>
+        <div className={styles.textblock}>{text} {this.handleBreakKey}</div>
       </div>
     );
   }
