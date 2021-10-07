@@ -18,27 +18,25 @@ class ElementsIndicator extends React.Component {
       if (this.props.element_col[1] === 2) {
         var img_2 = Red;
         var img_3 = Yellow;
-      } else if (this.props.element_col[2] === 3) {
+      } else if (this.props.element_col[1] === 3) {
         var img_2 = Yellow;
         var img_3 = Red;
       }
     } else if (this.props.element_col[0] === 2) {
       var img_1 = Red;
-
       if (this.props.element_col[1] === 3) {
         var img_2 = Yellow;
         var img_3 = Blue;
-      } else if (this.props.element_col[2] === 1) {
+      } else if (this.props.element_col[1] === 1) {
         var img_2 = Blue;
         var img_3 = Yellow;
       }
     } else if (this.props.element_col[0] === 3) {
       var img_1 = Yellow;
-
       if (this.props.element_col[1] === 1) {
         var img_2 = Blue;
         var img_3 = Red;
-      } else if (this.props.element_col[2] === 1) {
+      } else if (this.props.element_col[1] === 2) {
         var img_2 = Red;
         var img_3 = Blue;
       }

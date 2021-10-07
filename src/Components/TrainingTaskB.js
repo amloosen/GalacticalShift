@@ -68,7 +68,7 @@ class TrainingTaskB extends React.Component {
     let array_tmp = Array(nr_train_a_trial).fill(0);
 
     // var rightCodeAns = [4, 4, 4, 4, 4, 5, 5, 5, 5];
-    var corr_pos = [4, 4, 4, 4, 4, 5, 5, 5, 5]; //1 is left and 2 is right; determine where the correct value is displayed
+    var corr_pos = [4, 4, 4, 4, 4, 5, 5, 5, 5,5]; //1 is left and 2 is right; determine where the correct value is displayed
     shuffle(corr_pos);
     // initialize options for the first trial
     if (corr_pos[0] === 4) {

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./style/taskStyle.module.css";
-import {View} from "react-native";
+import { View } from "react-native";
 import ElementBar from "./elementBar";
 import Cover from "./img/cover.jpg";
 import Blue from "./img/stimuli3_blue.jpg";
@@ -23,7 +23,37 @@ class ElementsFullDisplay extends React.Component {
     var times_element3 = Array(1)
       .fill()
       .map(() => Array(3).fill(0));
+      
+    if (this.props.img1 === 1) {
+      var img1 = Blue;
+      if (this.props.img2 === 2) {
+        var img2 = Red;
+        var img3 = Yellow;
+      } else if (this.props.img2 === 3) {
+        var img2 = Yellow;
+        var img3 = Red;
+      }
+    } else if (this.props.img1 === 2) {
+      var img1 = Red;
 
+      if (this.props.img2 === 3) {
+        var img2 = Yellow;
+        var img3 = Blue;
+      } else if (this.props.img2 === 1) {
+        var img2 = Blue;
+        var img3 = Yellow;
+      }
+    } else if (this.props.img1 === 3) {
+      var img1 = Yellow;
+
+      if (this.props.img2 === 1) {
+        var img2 = Blue;
+        var img3 = Red;
+      } else if (this.props.img2 === 2) {
+        var img2 = Red;
+        var img3 = Blue;
+      }
+    }
 
     this.state = {
       img1: Cover,
@@ -32,9 +62,12 @@ class ElementsFullDisplay extends React.Component {
       show1: null,
       show2: null,
       show3: null,
+      shownImg1: img1,
+      shownImg3: img2,
+      shownImg2: img3,
       times_element1: times_element1,
       times_element2: times_element2,
-      times_element3: times_element3
+      times_element3: times_element3,
     };
 
     this.mouseOver = this.mouseOver.bind(this);
@@ -52,19 +85,19 @@ class ElementsFullDisplay extends React.Component {
     if (elNr === 1) {
       this.state.times_element1.push([Math.round(performance.now()), 0, 0]);
       this.setState({
-        img1: Blue,
+        img1: this.state.shownImg1,
         show1: 1,
       });
     } else if (elNr === 2) {
       this.state.times_element2.push([Math.round(performance.now()), 0, 0]);
       this.setState({
-        img2: Red,
+        img2: this.state.shownImg2,
         show2: 1,
       });
     } else if (elNr === 3) {
       this.state.times_element3.push([Math.round(performance.now()), 0, 0]);
       this.setState({
-        img3: Yellow,
+        img3: this.state.shownImg3,
         show3: 1,
       });
     }

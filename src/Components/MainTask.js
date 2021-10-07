@@ -29,7 +29,7 @@ function shuffle(array) {
   }
   return array;
 }
-
+//
 function getRandomInt(min, max) {
   const minimum = Math.ceil(min);
   const maximum = Math.floor(max);
@@ -52,105 +52,66 @@ class MainTask extends React.Component {
   constructor(props) {
     super(props);
 
-    let nr_train_a_trial = 10; //update later
-    var val_options = range(0, 110, 10);
-    val_options.splice(val_options.indexOf(50), 1); //remove the 50 to make it clearer which element is correct
-    var random_val = [];
-    for (var i = 0; i <= nr_train_a_trial - 1; i++) {
-      var val_tmp = val_options[~~(Math.random() * val_options.length)];
-      do {
-        var val_tmp = val_options[~~(Math.random() * val_options.length)];
-      } while (random_val[i - 1] === val_tmp); // make sure it changes every time
-      random_val[i] = val_tmp;
-    }
-
-    var corr_values = random_val.slice(0, 6);
-    var inverse_tmp = random_val.slice(6, 12);
-    var inverse = inverse_tmp.map(function (value) {
-      return 100 - value;
-    });
-    corr_values.push(
-      inverse[0],
-      inverse[1],
-      inverse[2],
-      inverse[3],
-      inverse[4],
-      inverse[5]
-    );
-    let array_tmp = Array(nr_train_a_trial).fill(0);
-
-    // var rightCodeAns = [4, 4, 4, 4, 4, 5, 5, 5, 5];
-    var corr_pos = [4, 4, 4, 4, 4, 5, 5, 5, 5]; //1 is left and 2 is right; determine where the correct value is displayed
-    shuffle(corr_pos);
-
-    var corr_elem_tmp = [1, 2, 3]; //1 is left and 2 is right; determine where the correct value is displayed
-    shuffle(corr_elem_tmp);
-    var corr_elem = Array(nr_train_a_trial).fill(0);
-
-    for (var i = 0; i <= nr_train_a_trial - 1; i++) {
-      if (i < nr_train_a_trial / 3) {
-        corr_elem[i] = corr_elem_tmp[0];
-      } else if (i >= nr_train_a_trial / 3 && i < (nr_train_a_trial / 3) * 2) {
-        corr_elem[i] = corr_elem_tmp[1];
-      } else {
-        corr_elem[i] = corr_elem_tmp[2];
-      }
-    }
-    //pregenerate the values for all elements
-    var check_al2 = [];
-    var check_al1 = [];
-
-    for (var i = 0; i <= nr_train_a_trial - 1; i++) {
-      var restricted = [corr_values[i], 100 - corr_values[i]];
-      if (i < nr_train_a_trial / 2) {
-        check_al1[i] = getRand(restricted);
-        check_al2[i] = 100 - corr_values[i];
-      } else {
-        check_al1[i] = 100 - corr_values[i];
-        check_al2[i] = getRand(restricted);
-      }
-    }
-
-    var all_element_values = Array(nr_train_a_trial)
-      .fill()
-      .map(() => Array(3).fill(0));
-
-    for (var i = 0; i <= nr_train_a_trial - 1; i++) {
-      all_element_values[i][corr_elem[i] - 1] = corr_values[i];
-      if (corr_elem[i] === 1) {
-        all_element_values[i][1] = check_al1[i];
-        all_element_values[i][2] = check_al2[i];
-      } else if (corr_elem[i] === 2) {
-        all_element_values[i][0] = check_al1[i];
-        all_element_values[i][2] = check_al2[i];
-      } else if (corr_elem[i] === 3) {
-        all_element_values[i][0] = check_al1[i];
-        all_element_values[i][1] = check_al2[i];
-      }
-    }
-
-    let trialSgmMu = Array(nr_train_a_trial)
-      .fill()
-      .map(() => Array(3).fill(0));
-    let trialRT = Array(nr_train_a_trial)
-      .fill()
-      .map(() => Array(3).fill(0));
-
     var randNum = "struct_" + getRandomInt(1, 10);
     var StructToRender = require("./taskStructs/" + randNum + ".json");
     var precededShift = StructToRender[0]; //1=intra-dimensional; 2=extra-dimensional
     var w0 = StructToRender[1];
     var relevant_w = StructToRender[2];
-    var col_sq = StructToRender[3];
-    var val_corr_elem_tmp = StructToRender[4];
+    var corPos_sq = StructToRender[3];
+    var val_corr_elem = StructToRender[4];
     var epsilon = StructToRender[5];
-    debugger;
-    var val_corr_elem_final_tmp = StructToRender[6];
-    var val_corr_elem_tmp = val_corr_elem_final_tmp.map(function (
+    var true_pop_size_tmp = StructToRender[6];
+    var true_pop_size = true_pop_size_tmp.map(function (
       each_element
     ) {
       return Number(each_element.toFixed(0));
     });
+
+    var nr_trial = w0.length;
+  //pregenerate the values of the remaining elements
+    var check_al2 = [];
+    var check_al1 = [];
+
+    for (var i = 0; i <= nr_trial - 1; i++) {
+      var restricted = [val_corr_elem[i], 100 - val_corr_elem[i]];
+      if (i < nr_trial / 2) {
+        check_al1[i] = getRand(restricted);
+        check_al2[i] = 100 - val_corr_elem[i];
+      } else {
+        check_al1[i] = 100 - val_corr_elem[i];
+        check_al2[i] = getRand(restricted);
+      }
+    }
+
+    var all_element_values = Array(nr_trial)
+      .fill()
+      .map(() => Array(3).fill(0));
+
+    for (var i = 0; i <= nr_trial - 1; i++) {
+      all_element_values[i][corPos_sq[i] - 1] = val_corr_elem[i];
+      if (corPos_sq[i] === 1) {
+        all_element_values[i][1] = check_al1[i];
+        all_element_values[i][2] = check_al2[i];
+      } else if (corPos_sq[i] === 2) {
+        all_element_values[i][0] = check_al1[i];
+        all_element_values[i][2] = check_al2[i];
+      } else if (corPos_sq[i] === 3) {
+        all_element_values[i][0] = check_al1[i];
+        all_element_values[i][1] = check_al2[i];
+      }
+    }
+
+    let trialSgmMu = Array(nr_trial)
+      .fill()
+      .map(() => Array(3).fill(0));
+    let trialRT = Array(nr_trial)
+      .fill()
+      .map(() => Array(3).fill(0));
+
+      let array_tmp = Array(nr_trial).fill(0);
+
+      var element_colours = [1, 2, 3]; // from left to right
+      shuffle(element_colours);
 
     this.state = {
       // userID: userID,
@@ -159,7 +120,7 @@ class MainTask extends React.Component {
       // sectionTime: timeString,
       // taskSessionTry: 1,
       // taskSession: "MainTaskC",
-      trialTotal: nr_train_a_trial,
+      trialTotal: nr_trial,
       trialPerBlock: 50,
       trialNum: 1,
       trialBlockNum: 1,
@@ -167,8 +128,11 @@ class MainTask extends React.Component {
       blockNum: 1,
       trialRT: trialRT,
       choiceTime0: 0,
-      // //
-      // trialSliderRT: null,
+      element1Col: element_colours[0],
+      element2Col: element_colours[1],
+      element3Col: element_colours[2],
+      indicTrials: [10,87,163,240],//generate by Matlab function linspace(min(10),max(240),4)
+      trialSliderRT: null,
       trialSgmMu: trialSgmMu,
       timerCountDur: 10,
       feedback: false,
@@ -176,9 +140,9 @@ class MainTask extends React.Component {
       choiceTime0: 0,
       timePassed: false,
       timePassed2: false,
-      all_corr_values: corr_values,
+      all_true_pop_size: true_pop_size,
       trainAcc: array_tmp,
-      corr_elem: corr_elem,
+      corr_elem_pos: corPos_sq,
       all_element_values: all_element_values,
     };
     // this.displayFeedback = this.displayFeedback.bind(this)
@@ -210,17 +174,12 @@ class MainTask extends React.Component {
         timerCountDur: 10,
         feedback: false,
         mounted: 0,
-        // trialTotal: nr_train_a_trial,
+        // trialTotal: nr_trial,
         blockTotal: 10,
         blockNum: 1,
         choiceTime0: 0,
         timePassed: false,
         timePassed2: false,
-        indicTrials: [10,87,163,240]
-        // all_corr_values: corr_values,
-        // trainAcc: array_tmp,
-        // corr_elem: corr_elem,
-        // all_element_values: all_element_values,
       });
     } else if (
       this.state.trialNum === this.state.trialTotal &&
@@ -276,7 +235,6 @@ class MainTask extends React.Component {
 
   /////////////////////////////////////////////////////////////////////////////////
   render() {
-    //generate by Matlab function linspace(min(10),max(240),4)
     if (this.state.indicTrials.includes(this.state.trialNum)) {
       return <div className={styles.cockpit}>{this.disp_elementIndicator()}</div>;
     } else {
@@ -310,7 +268,7 @@ class MainTask extends React.Component {
           value1={this.state.all_element_values[this.state.trialNum - 1][0]}
           value2={this.state.all_element_values[this.state.trialNum - 1][1]}
           value3={this.state.all_element_values[this.state.trialNum - 1][2]}
-          corAns={this.state.corr_elem} //adapt later
+          corAns={this.state.corr_elem_pos} //adapt later
           element_col={[1, 2, 3]} //adapt later
           userID={100} //props.userID,
           trialNum={this.state.trialNum}
@@ -355,6 +313,9 @@ class MainTask extends React.Component {
           value1={this.state.all_element_values[this.state.trialNum - 1][0]}
           value2={this.state.all_element_values[this.state.trialNum - 1][1]}
           value3={this.state.all_element_values[this.state.trialNum - 1][2]}
+          img1={this.state.element1Col}
+          img2={this.state.element2Col}
+          img3={this.state.element3Col}
           elem_indic={1} //adapt later
         />
       </div>
@@ -365,7 +326,7 @@ class MainTask extends React.Component {
     let text2 = (
       <div className={styles.questions}>
         The true population on the planet was{" "}
-        {this.state.all_corr_values[this.state.trialNum - 1]} million.
+        {this.state.all_true_pop_size[this.state.trialNum - 1]} million.
         <br />
         <br />
         <br />
@@ -390,7 +351,7 @@ class MainTask extends React.Component {
             <OutcomeSliderBar
               mu={this.state.trialSgmMu[this.state.trialNum - 1][2]}
               sgm={this.state.trialSgmMu[this.state.trialNum - 1][1]}
-              value={this.state.all_corr_values[this.state.trialNum - 1]}
+              value={this.state.all_true_pop_size[this.state.trialNum - 1]}
             />
           </div>
         </View>
