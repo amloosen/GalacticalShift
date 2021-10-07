@@ -158,30 +158,7 @@ class MainTask extends React.Component {
   /////////////////////////////////////////////////////////////////////////////////
 
   nextTrial() {
-    if (
-      this.state.trialNum === this.state.trialTotal &&
-      this.state.blockNum < this.state.blockTotal
-    ) {
-      // setInterval()
-      // {this.disp_break)}
-
-      this.setState({
-        trialNum: 1,
-        // trialRT: trialRT,
-        choiceTime0: 0,
-        // trialSliderRT: null,
-        // trialSgmMu: trialSgmMu,
-        timerCountDur: 10,
-        feedback: false,
-        mounted: 0,
-        // trialTotal: nr_trial,
-        blockTotal: 10,
-        blockNum: 1,
-        choiceTime0: 0,
-        timePassed: false,
-        timePassed2: false,
-      });
-    } else if (
+   if (
       this.state.trialNum === this.state.trialTotal &&
       this.state.blockNum === this.state.blockTotal
     ) {
@@ -252,12 +229,17 @@ class MainTask extends React.Component {
         this.state.timePassed2 === true &&
         this.state.feedback === true
       ) {
+        // if (this.state.trialNum === this.state.trialTotal && this.state.blockNum < this.state.blockTotal
+        if (this.state.trialNum === 1
+        ) {return <div className={styles.cockpit}>{this.disp_break(this.state.blockNum,this.state.blockTotal)}</div>;}
+
         {
           this.nextTrial();
         }
         return null;
       }
     }
+
   }
 
   /////////////////////////////////////////////////////////////////////////////////
@@ -379,13 +361,17 @@ class MainTask extends React.Component {
     });
   }
 
-  disp_break() {
+  disp_break(blockNum,blockTotal) {
+  setTimeout(() => {
+      this.setState({ timePassed2: true, feedback: true });
+  }, 700);
+
     let text = (
       <div className={styles.main}>
         <p>
           <span className={styles.center}>BREAK</span>
-          You have completed {this.state.blockNum} out of&nbsp;
-          {this.state.blockTotal} blocks!
+          You have completed {blockNum} out of&nbsp;
+          {blockTotal} blocks!
           <br />
           <br />
           You may take a short break.
@@ -393,7 +379,7 @@ class MainTask extends React.Component {
           <br />
           You should take the opportunity to refresh your memory of the room and
           outcome images.
-          <br />
+          <br /><br />
           <span className={styles.centerTwo}>
             If you are ready to continue, please press the [
             <strong>SPACEBAR</strong>].
