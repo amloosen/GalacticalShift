@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 // import { DATABASE_URL } from "./config";
 import styles from "./style/taskStyle.module.css";
 import { range } from "lodash";
-import ElementsFullDisplay from "./elementsFulldisplay";
+import ElementsFullDisplay from "./ElementsFulldisplay";
 ////////////////////////////////////////////////////////////////////////////////
 function shuffle(array) {
   let currentIndex = array.length,

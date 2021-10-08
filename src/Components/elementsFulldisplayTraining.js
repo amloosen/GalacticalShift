@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./style/taskStyle.module.css";
 import { View } from "react-native";
-import ElementBar from "./elementBar";
+import ElementBar from "./ElementBar";
 import Cover from "./img/cover.jpg";
 import Blue from "./img/stimuli3_blue.jpg";
 import Red from "./img/stimuli3_red.jpg";

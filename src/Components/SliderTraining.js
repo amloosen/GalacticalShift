@@ -1,7 +1,7 @@
 import React from "react";
 // import { DATABASE_URL } from "./config";
 import styles from "./style/taskStyle.module.css";
-import Slider from "./slider";
+import Slider from "./MainSlider";
 /////////////////////////////////////////////////////////////////////////////////
 class SliderPractice extends React.Component {
   constructor(props) {

@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { DATABASE_URL } from "./config";
+import { DATABASE_URL } from "./Config";
 import styles from "./style/taskStyle.module.css";
 /////////////////////////////////////////////////////////////////////
 class EndPage extends React.Component {

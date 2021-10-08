@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import StartPage from "./Components/StartPage";
 import SliderIntro from "./Components/SliderIntro";
-import SliderPractice from "./Components/sliderTraining";
+import SliderPractice from "./Components/SliderTraining";
 import TrainingIntroA from "./Components/TrainingIntroA";
 import TrainingTaskA from "./Components/TrainingTaskA";
 import TrainingIntroB from "./Components/TrainingIntroB";

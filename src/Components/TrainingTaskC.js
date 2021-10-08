@@ -2,11 +2,11 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 // import { DATABASE_URL } from "./config";
 import styles from "./style/taskStyle.module.css";
-import Slider from "./slider";
+import Slider from "./MainSlider";
 import { View } from "react-native";
-import OutcomeSlider from "./sliderOutcome";
-import OutcomeSliderBar from "./sliderOutcomeBar";
-import ElementsFullDisplayTraining from "./elementsFulldisplayTraining";
+import OutcomeSlider from "./SliderOutcome";
+import OutcomeSliderBar from "./SliderOutcomeBar";
+import ElementsFullDisplayTraining from "./ElementsFulldisplayTraining";
 import { range } from "lodash";
 ////////////////////////////////////////////////////////////////////////////////
 function shuffle(array) {

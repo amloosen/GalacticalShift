@@ -48,8 +48,6 @@ class ElementsIndicator extends React.Component {
       img3: img3,
     };
 
-    // this.trialSave = this.trialSave.bind(this);
-
     /* prevents page from going down when space bar is hit .*/
     window.addEventListener("keydown", function (e) {
       if (e.keyCode === 32 && e.target === document.body) {

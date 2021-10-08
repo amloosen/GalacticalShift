@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./style/taskStyle.module.css";
-import ElementBar from "./elementBar";
+import ElementBar from "./ElementBar.js";
 
 import { View} from "react-native";
 import Cover from "./img/cover.jpg";

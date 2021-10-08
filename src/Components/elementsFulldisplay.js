@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./style/taskStyle.module.css";
 import { View } from "react-native";
-import ElementBar from "./elementBar";
+import ElementBar from "./ElementBar";
 import Cover from "./img/cover.jpg";
 import Blue from "./img/stimuli3_blue.jpg";
 import Red from "./img/stimuli3_red.jpg";
@@ -14,15 +14,15 @@ class ElementsFullDisplay extends React.Component {
   constructor(props) {
     super(props);
     /* data to be saved .*/
-    var times_element1 = Array(1)
+    var times_element1 = Array(1) //trialNum, starttimeview, endtimeview, totalviewtime
       .fill()
-      .map(() => Array(3).fill(0));
+      .map(() => Array(4).fill(0));
     var times_element2 = Array(1)
       .fill()
-      .map(() => Array(3).fill(0));
+      .map(() => Array(4).fill(0));
     var times_element3 = Array(1)
       .fill()
-      .map(() => Array(3).fill(0));
+      .map(() => Array(4).fill(0));
 
     if (this.props.img1 === 1) {
       var img1 = Blue;
@@ -81,6 +81,20 @@ class ElementsFullDisplay extends React.Component {
     });
   }
 
+  componentDidMount() {
+    setTimeout(() => {
+      this.props.onViewEnd(
+        this.state.times_element1,
+        this.state.times_element2,
+        this.state.times_element3
+      );
+    }, 5000);
+  }
+
+  componentWillUnmount() {
+    clearTimeout();
+  }
+
   mouseOver(elNr) {
     if (elNr === 1) {
       this.state.times_element1.push([Math.round(performance.now()), 0, 0]);
@@ -106,13 +120,13 @@ class ElementsFullDisplay extends React.Component {
   mouseOut(elNr) {
     if (elNr === 1) {
       var times_element1 = this.state.times_element1;
-
-      times_element1[times_element1.length - 1][1] = Math.round(
+      times_element1[times_element1.length - 1][0] = this.props.trialNum;
+      times_element1[times_element1.length - 1][2] = Math.round(
         performance.now()
       );
-      times_element1[times_element1.length - 1][2] =
-        times_element1[times_element1.length - 1][1] -
-        times_element1[times_element1.length - 1][0];
+      times_element1[times_element1.length - 1][3] =
+        times_element1[times_element1.length - 1][2] -
+        times_element1[times_element1.length - 1][1];
       this.setState({
         img1: Cover,
         show1: null,
@@ -121,13 +135,13 @@ class ElementsFullDisplay extends React.Component {
       });
     } else if (elNr === 2) {
       var times_element2 = this.state.times_element2;
-
-      times_element2[times_element2.length - 1][1] = Math.round(
+      times_element2[times_element2.length - 1][0] = this.props.trialNum;
+      times_element2[times_element2.length - 1][2] = Math.round(
         performance.now()
       );
-      times_element2[times_element2.length - 1][2] =
-        times_element2[times_element2.length - 1][1] -
-        times_element2[times_element2.length - 1][0];
+      times_element2[times_element2.length - 1][3] =
+        times_element2[times_element2.length - 1][2] -
+        times_element2[times_element2.length - 1][1];
       this.setState({
         img2: Cover,
         show2: null,
@@ -136,12 +150,13 @@ class ElementsFullDisplay extends React.Component {
       });
     } else if (elNr === 3) {
       var times_element3 = this.state.times_element3;
-      times_element3[times_element3.length - 1][1] = Math.round(
+      times_element3[times_element3.length - 1][0] = this.props.trialNum;
+      times_element3[times_element3.length - 1][2] = Math.round(
         performance.now()
       );
-      times_element3[times_element3.length - 1][2] =
-        times_element3[times_element3.length - 1][1] -
-        times_element3[times_element3.length - 1][0];
+      times_element3[times_element3.length - 1][3] =
+        times_element3[times_element3.length - 1][2] -
+        times_element3[times_element3.length - 1][1];
       this.setState({
         img3: Cover,
         show3: null,

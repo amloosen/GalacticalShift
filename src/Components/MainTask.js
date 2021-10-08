@@ -2,13 +2,12 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 // import { DATABASE_URL } from "./config";
 import styles from "./style/taskStyle.module.css";
-import Slider from "./slider";
-import { View } from "react-native";
-import OutcomeSlider from "./sliderOutcome";
-import OutcomeSliderBar from "./sliderOutcomeBar";
-import ElementsFullDisplay from "./elementsFulldisplay";
+import DispSlider from "./DisplaySlider";
+import DispElements from "./DisplayElements";
 
-import ElementsIndicator from "./elementsIndicator";
+import { View } from "react-native";
+import OutcomeSlider from "./SliderOutcome";
+import OutcomeSliderBar from "./SliderOutcomeBar";
 import { range } from "lodash";
 ////////////////////////////////////////////////////////////////////////////////
 function shuffle(array) {
@@ -116,6 +115,16 @@ class MainTask extends React.Component {
       indicReq_tmp[k] = 1;
     }
 
+    var times_element1 = Array(nr_trial)
+      .fill()
+      .map(() => Array(3).fill(0));
+    var times_element2 = Array(nr_trial)
+      .fill()
+      .map(() => Array(3).fill(0));
+    var times_element3 = Array(nr_trial)
+      .fill()
+      .map(() => Array(3).fill(0));
+
     var element_colours = [1, 2, 3]; // from left to right
     shuffle(element_colours);
 
@@ -141,7 +150,9 @@ class MainTask extends React.Component {
       element1Col: element_colours[0],
       element2Col: element_colours[1],
       element3Col: element_colours[2],
-      indicTrials: [10, 87, 163, 240], //generate by Matlab function linspace(min(10),max(240),4)
+      times_element1: times_element1,
+      times_element2: times_element2,
+      times_element3: times_element3,
       trialSliderRT: null,
       trialSgmMu: trialSgmMu,
       timerCountDur: 10,
@@ -171,44 +182,10 @@ class MainTask extends React.Component {
     }
   };
 
-  _handleIndicKey = (event) => {
-    var pressed;
-    switch (event.keyCode) {
-      case 49:
-        pressed = 1;
-        this.nextTrial(1, pressed);
-        break;
-      case 50:
-        pressed = 2;
-        this.nextTrial(1, pressed);
-        break;
-      case 51:
-        pressed = 3;
-        this.nextTrial(1, pressed);
-        break;
-      default:
-    }
-  };
-
   nextTrial(event, pressed) {
-    if (event === 1) {
-      document.removeEventListener("keyup", this._handleBreakKey);
-      var indicReq = this.state.indicReq;
-      indicReq[this.state.trialNum - 1] = 0;
-      var indicKey_tmp = this.state.indicKey;
-      indicKey_tmp[this.state.trialNum - 1][1] = this.state.trialNum;
-      indicKey_tmp[this.state.trialNum - 1][2] = pressed;
-      debugger;
-      this.setState({
-        indicReq: indicReq,
-        indicKey: indicKey_tmp,
-      });
-    } else if (event === 2) {
-      document.removeEventListener("keyup", this._handleIndicKey);
+    if (event === 2) {
     } else if (event === 0) {
-      if (
-        this.state.trialNum === this.state.trialTotal
-      ) {
+      if (this.state.trialNum === this.state.trialTotal) {
         this.redirectToNextStage();
       } else {
         if (this.state.trialBlockNum === this.state.trialPerBlock) {
@@ -232,20 +209,20 @@ class MainTask extends React.Component {
   }
 
   componentDidMount() {
-    setTimeout(
-      function () {
-        this.setState({
-          mounted: 1,
-        });
-      }.bind(this),
-      5000
-    );
+    // setTimeout(
+    //   function () {
+    //     this.setState({
+    //       mounted: 1,
+    //     });
+    //   }.bind(this),
+    //   5000
+    // );
   }
 
   componentWillUnmount() {
-    this.setState = (state, callback) => {
-      return;
-    };
+    // this.setState = (state, callback) => {
+    //   return;
+    // };
   }
   //
   // sendBlock(user_no_, block_no_) {
@@ -273,156 +250,127 @@ class MainTask extends React.Component {
   // }
   /////////////////////////////////////////////////////////////////////////////////
   render() {
-    debugger;
-    if (!this.state.timePassed && this.state.feedback === false) {
-      return <div className={styles.cockpit}>{this.disp_elements()}</div>;
-    } else if (this.state.feedback === true && !this.state.timePassed2) {
-      return (
-        <div className={styles.cockpit}>
-          {this.disp_feedback()} {this.handleIncrement}{" "}
-        </div>
-      );
-    } else if (!this.state.feedback && this.state.timePassed2 === false) {
-      return <div className={styles.cockpit}>{this.disp_slider()}</div>;
-    } else if (
-      this.state.timePassed2 === true &&
-      this.state.feedback === true
-    ) {
-      if (
-        this.state.trialBlockNum === this.state.trialPerBlock &&
-        this.state.blockNum < this.state.blockTotal
-      ) {
-        return (
-          <div className={styles.cockpit}>
-            {this.disp_break(this.state.blockNum, this.state.blockTotal)}
-          </div>
-        );
-      } else if (this.state.trialBlockNum === this.state.trialPerBlock) {
-        this.sendBlock(this.props.UserNo, this.state.blockNum);
-      }
-      {
-        this.nextTrial(0);
-      }
-      return null;
-    }
+    // if (!this.state.timePassed && this.state.feedback === false) {
+    return (
+      <DispElements
+        element1Col={this.state.element1Col}
+        element2Col={this.state.element2Col}
+        element3Col={this.state.element3Col}
+        all_element_values={this.state.all_element_values}
+        indicReq={this.state.indicReq}
+        trialNum={this.state.trialNum}
+        onElementsEnd={this.handleElementsData}
+        onElementsIndic={this.handleIndicData}
+      />
+    );
+    // } else if (this.state.feedback === true && !this.state.timePassed2) {
+    //   return (
+    //     <div className={styles.cockpit}>
+    //       {this.disp_feedback()} {this.handleIncrement}{" "}
+    //     </div>
+    //   );
+    // } else if (!this.state.feedback && this.state.timePassed2 === false) {
+    // return (
+    //   <DispSlider
+    //     trialSgmMu={this.state.trialSgmMu}
+    //     trialRT={this.state.trialRT}
+    //     trialNum={this.state.trialNum}
+    //     onSliderEnd={this.handleSliderData}
+    //   />
+    // );
+    // } else if (
+    //   this.state.timePassed2 === true &&
+    //   this.state.feedback === true
+    // ) {
+    //   if (
+    //     this.state.trialBlockNum === this.state.trialPerBlock &&
+    //     this.state.blockNum < this.state.blockTotal
+    //   ) {
+    //     return (
+    //       <div className={styles.cockpit}>
+    //         {this.disp_break(this.state.blockNum, this.state.blockTotal)}
+    //       </div>
+    //     );
+    //   } else if (this.state.trialBlockNum === this.state.trialPerBlock) {
+    //     this.sendBlock(this.props.UserNo, this.state.blockNum);
+    //   }
+    //   {
+    //     this.nextTrial(0);
+    //   }
+    //   return null;
+    // }
   }
 
   /////////////////////////////////////////////////////////////////////////////////
-  disp_slider() {
-    let choiceTime0 = Math.round(performance.now());
+  // disp_feedback() {
+  //   let text2 = (
+  //     <div className={styles.questions}>
+  //       The true population on the planet was{" "}
+  //       {this.state.all_true_pop_size[this.state.trialNum - 1]} million.
+  //       <br />
+  //       <br />
+  //       <br />
+  //     </div>
+  //   );
+  //
+  //   setTimeout(() => {
+  //     this.setState({ timePassed2: true, timePassed: false });
+  //   }, 700);
+  //
+  //   return (
+  //     <div className={styles.cockpit}>
+  //       <div>{text2}</div>
+  //       <View style={styles.container}>
+  //         <div className={styles.overlaybar}>
+  //           <OutcomeSlider
+  //             mu={this.state.trialSgmMu[this.state.trialNum - 1][2]}
+  //             sgm={this.state.trialSgmMu[this.state.trialNum - 1][1]}
+  //           />
+  //         </div>
+  //         <div className={styles.overlaybar}>
+  //           <OutcomeSliderBar
+  //             mu={this.state.trialSgmMu[this.state.trialNum - 1][2]}
+  //             sgm={this.state.trialSgmMu[this.state.trialNum - 1][1]}
+  //             value={this.state.all_true_pop_size[this.state.trialNum - 1]}
+  //           />
+  //         </div>
+  //       </View>
+  //     </div>
+  //   );
+  // }
 
-    let text = (
-      <div className={styles.questions}>
-        How large is the alien population?
-        <br />
-        <br />
-        <br />
-      </div>
-    );
+  handleElementsData = (times_element1, times_element2, times_element3) => {
 
-    return (
-      <div className={styles.cockpit}>
-        <div>{text}</div>
-        <Slider
-          onSpacebarHit={(result) => {
-            this.saveSgmMu(result, choiceTime0);
-          }}
-        />
-      </div>
-    );
-  }
+    var times_element1_tmp = this.state.times_element1;
+    var times_element2_tmp = this.state.times_element2;
+    var times_element3_tmp = this.state.times_element3;
+    times_element1_tmp[this.state.trialNum - 1] = times_element1;
+    times_element2_tmp[this.state.trialNum - 1] = times_element2;
+    times_element3_tmp[this.state.trialNum - 1] = times_element3;
 
-  disp_elements() {
-    if (this.state.indicReq[this.state.trialNum - 1] === 1) {
-      document.addEventListener("keyup", this._handleIndicKey);
+    this.setState({
+      times_element1: times_element1_tmp,
+      times_element2: times_element2_tmp,
+      times_element3: times_element3_tmp
+    });
+  };
 
-      return (
-        <div className={styles.overlaybar}>
-          <ElementsIndicator
-            img1={this.state.element1Col}
-            img2={this.state.element2Col}
-            img3={this.state.element3Col}
-            userID={this.state.userID}
-            trialNum={this.state.trialNum}
-            blockNum={this.state.blockNum}
-          />
-        </div>
-      );
-    } else {
-      setTimeout(() => {
-        this.setState({ timePassed: true, timePassed2: false });
-      }, 5000);
-      return (
-        <div className={styles.overlaybar}>
-          <ElementsFullDisplay
-            value1={this.state.all_element_values[this.state.trialNum - 1][0]}
-            value2={this.state.all_element_values[this.state.trialNum - 1][1]}
-            value3={this.state.all_element_values[this.state.trialNum - 1][2]}
-            img1={this.state.element1Col}
-            img2={this.state.element2Col}
-            img3={this.state.element3Col}
-          />
-        </div>
-      );
-    }
-  }
-
-  disp_feedback() {
-    let text2 = (
-      <div className={styles.questions}>
-        The true population on the planet was{" "}
-        {this.state.all_true_pop_size[this.state.trialNum - 1]} million.
-        <br />
-        <br />
-        <br />
-      </div>
-    );
-
-    setTimeout(() => {
-      this.setState({ timePassed2: true, timePassed: false });
-    }, 700);
-
-    return (
-      <div className={styles.cockpit}>
-        <div>{text2}</div>
-        <View style={styles.container}>
-          <div className={styles.overlaybar}>
-            <OutcomeSlider
-              mu={this.state.trialSgmMu[this.state.trialNum - 1][2]}
-              sgm={this.state.trialSgmMu[this.state.trialNum - 1][1]}
-            />
-          </div>
-          <div className={styles.overlaybar}>
-            <OutcomeSliderBar
-              mu={this.state.trialSgmMu[this.state.trialNum - 1][2]}
-              sgm={this.state.trialSgmMu[this.state.trialNum - 1][1]}
-              value={this.state.all_true_pop_size[this.state.trialNum - 1]}
-            />
-          </div>
-        </View>
-      </div>
-    );
-  }
-
-  saveSgmMu(result, time) {
-    let trialSgmMu = this.state.trialSgmMu;
-    let trialRT = this.state.trialRT;
-    let trialNum = this.state.trialNum;
-    trialSgmMu[trialNum - 1][1] = result.sgm;
-    trialSgmMu[trialNum - 1][2] = result.mu;
-    trialRT[trialNum - 1][0] = trialNum;
-    trialRT[trialNum - 1][1] = time;
-    trialRT[trialNum - 1][2] = Math.round(performance.now());
-    trialRT[trialNum - 1][3] = trialRT[trialNum - 1][2] - time;
-
+  handleSliderData = (trialSgmMu, trialRT) => {
     this.setState({
       trialSgmMu: trialSgmMu,
       trialRT: trialRT,
-      feedback: true,
-      //trialNum : trialNum+1,
-      // outcome: show
+      feedback: true
     });
-  }
+  };
+
+  handleIndicData = (pressed) => {
+    var indicKey_tmp = this.state.indicKey;
+    indicKey_tmp[this.state.trialNum - 1][1] = this.state.trialNum;
+    indicKey_tmp[this.state.trialNum - 1][2] = pressed;
+    this.setState({
+      indicKey: indicKey_tmp
+    });
+  };
 
   disp_break(blockNum, blockTotal) {
     document.addEventListener("keyup", this._handleBreakKey);
