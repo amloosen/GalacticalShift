@@ -105,6 +105,14 @@ span.center {
   padding-bottom: 20px;
   position: relative;
 }
+span.centerOne{
+  display: table;
+  margin: 0 auto;
+  padding-top: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 span.centerThree {
   display: table;
@@ -118,6 +126,15 @@ span.centerThree {
 span.centerThree_intro {
   display: table;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+span.centerThreeIndic {
+  display: table;
+  margin: 0 auto;
+  padding-top: 5%;
   display: flex;
   align-items: center;
   justify-content: center;

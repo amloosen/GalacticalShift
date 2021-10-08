@@ -173,14 +173,6 @@ class TrainingTaskA extends React.Component {
   }
   componentDidMount() {
     window.scrollTo(0, 0);
-    //send the outcomeTask conditions?
-
-    // setTimeout(
-    //   function () {
-    //     this.condSave();
-    //   }.bind(this),
-    //   0
-    // );
 
     setTimeout(
       function () {
@@ -216,12 +208,6 @@ class TrainingTaskA extends React.Component {
   //        });
   //       }
 
-  // setTimeout(
-  //   function () {
-  //     this.trainTrialSave();
-  //   }.bind(this),
-  //   5
-  // );
   /////////////////////////////////////////////////////////////////////////////////
   render() {
     if (!this.state.timePassed && this.state.feedback === 0) {

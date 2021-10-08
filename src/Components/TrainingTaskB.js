@@ -301,8 +301,9 @@ class TrainingTaskB extends React.Component {
         value1={this.state.all_element_values[this.state.traintrialNum - 1][0]}
         value2={this.state.all_element_values[this.state.traintrialNum - 1][1]}
         value3={this.state.all_element_values[this.state.traintrialNum - 1][2]}
-        trialTotal={this.state.trialTotal}
-        trialNum={this.state.trialNum}
+        img1={1}
+        img2={2}
+        img3={3}
       />
     );
   }

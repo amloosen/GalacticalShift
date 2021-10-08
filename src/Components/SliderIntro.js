@@ -1,6 +1,5 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { DATABASE_URL } from "./config";
 
 import styles from "./style/taskStyle.module.css";
 
@@ -147,6 +146,7 @@ class SliderIntro extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
+              <span className={styles.center}>TRAINING I</span>
               <br />
               <br />
               When you make an estimate, such as how expensive something is, you
@@ -169,6 +169,7 @@ class SliderIntro extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
+              <span className={styles.center}>TRAINING I</span>
               <br />
               <br />
               For instance a scenario might be:
@@ -199,6 +200,7 @@ class SliderIntro extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
+              <span className={styles.center}>TRAINING I</span>
               <br />
               This is the slider you will use:
               <br />
@@ -222,6 +224,7 @@ class SliderIntro extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
+              <span className={styles.center}>TRAINING I</span>
               The peak of this curve shows the estimate that you think is most
               likely:
               <br />
@@ -253,6 +256,7 @@ class SliderIntro extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
+              <span className={styles.center}>TRAINING I</span>
               You can move the position of the peak
               <br />
               <br />
@@ -290,6 +294,7 @@ class SliderIntro extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
+              <span className={styles.center}>TRAINING I</span>
               You can make change the width as well.
               <br />
               <br />
@@ -326,6 +331,7 @@ class SliderIntro extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
+              <span className={styles.center}>TRAINING I</span>
               <br />
               Here you see how it looks like when the estimate is 50
               <br />
@@ -356,6 +362,7 @@ class SliderIntro extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
+              <span className={styles.center}>TRAINING I</span>
               The second aspect of the slider, the changeable width, enables you
               to indicate your certainty.
               <br />
@@ -389,6 +396,7 @@ class SliderIntro extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
+              <span className={styles.center}>TRAINING I</span>
               <br />
               <br />
               To familiarize you with the slider, we will now ask you several
@@ -413,6 +421,7 @@ class SliderIntro extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
+              <span className={styles.center}>TRAINING I</span>
               <br />
               One example could be:
               <br />
@@ -443,6 +452,7 @@ class SliderIntro extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
+              <span className={styles.center}>TRAINING I</span>
               <br />
               When indicating your estimate and certainty, please try to do be
               as precise as possible.

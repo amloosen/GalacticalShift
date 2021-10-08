@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { DATABASE_URL } from "./config";
+// import { DATABASE_URL } from "./config";
 import styles from "./style/taskStyle.module.css";
 import Slider from "./slider";
 import { View } from "react-native";
@@ -140,7 +140,6 @@ class TrainingTaskC extends React.Component {
       feedback: false,
       mounted: 0,
       traintrialTotal: nr_train_a_trial,
-      choiceTime0: 0,
       timePassed: false,
       timePassed2: false,
       all_corr_values: corr_values,

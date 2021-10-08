@@ -4,9 +4,6 @@ import * as Consent from "survey-react";
 import "../../node_modules/survey-react/survey.css";
 // import queryString from "query-string"; // I need this for prolific
 import "./style/startStyle.css";
-import img_intro1 from "./intro/ExamplePicture1.jpg";
-import img_intro2 from "./intro/ExamplePicture2.jpg";
-import img_intro3 from "./intro/ExamplePicture3.jpg";
 /////////
 class StartPage extends React.Component {
   constructor(props) {
@@ -76,7 +73,7 @@ class StartPage extends React.Component {
     });
 
     this.props.history.push({
-      pathname: `/sliderTraining`,
+      pathname: `/SliderIntro`,
       state: {
         userID: this.state.userID,
         date: this.state.date,

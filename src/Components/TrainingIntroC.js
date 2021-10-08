@@ -1,6 +1,5 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { DATABASE_URL } from "./config";
 import styles from "./style/taskStyle.module.css";
 import img_intro1 from "./intro/ExamplePicture1.jpg";
 import img_bar from "./intro/bar.png";
@@ -137,7 +136,7 @@ class TrainingIntroC extends React.Component {
               <br />
               <br />
               You will now be introduced to the main game. We will bring all the
-              parts together that you learned about so far.
+              parts together that you learned so far.
               <br />
               <br />
               This means, these task will be similar to the previous training
@@ -158,8 +157,8 @@ class TrainingIntroC extends React.Component {
               <br />
               <br />
               From now on, you will be asked to use the slider.
-              Remember, with the slider you can indicate your <strong>estimate</strong> as well
-              as your <strong> certainty</strong>  in your estimate by changing the shape of the
+              Remember, with the slider you can indicate your <strong>estimate</strong>, by changing the peak of the slider
+              and your <strong> certainty</strong> in your estimate by changing the shape of the
               slider.
               <br />
               <br />

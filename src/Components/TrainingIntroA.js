@@ -1,6 +1,5 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { DATABASE_URL } from "./config";
 import styles from "./style/taskStyle.module.css";
 import img_intro1 from "./intro/ExamplePicture1.jpg";
 import img_left from "./intro/left.png";

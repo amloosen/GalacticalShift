@@ -23,7 +23,7 @@ class ElementsFullDisplay extends React.Component {
     var times_element3 = Array(1)
       .fill()
       .map(() => Array(3).fill(0));
-      
+
     if (this.props.img1 === 1) {
       var img1 = Blue;
       if (this.props.img2 === 2) {
@@ -160,6 +160,7 @@ class ElementsFullDisplay extends React.Component {
               <img
                 className={styles.elementsize}
                 src={this.state.img1}
+                alt="element1"
                 onMouseOver={(elNr) => this.mouseOver(1)}
                 onMouseOut={(elNr) => this.mouseOut(1)}
               />
@@ -177,6 +178,7 @@ class ElementsFullDisplay extends React.Component {
               <img
                 className={styles.elementsize}
                 src={this.state.img2}
+                alt="element2"
                 onMouseOver={(elNr) => this.mouseOver(2)}
                 onMouseOut={(elNr) => this.mouseOut(2)}
               />
@@ -194,6 +196,7 @@ class ElementsFullDisplay extends React.Component {
               <img
                 className={styles.elementsize}
                 src={this.state.img3}
+                alt="element3"
                 onMouseOver={(elNr) => this.mouseOver(3)}
                 onMouseOut={(elNr) => this.mouseOut(3)}
               />

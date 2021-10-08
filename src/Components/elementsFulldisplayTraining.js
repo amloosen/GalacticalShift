@@ -1,9 +1,7 @@
 import React from "react";
-import { render } from "react-dom";
 import styles from "./style/taskStyle.module.css";
-import { ImageBackground, View, Image, StyleSheet, Text } from "react-native";
+import { View } from "react-native";
 import ElementBar from "./elementBar";
-
 import Cover from "./img/cover.jpg";
 import Blue from "./img/stimuli3_blue.jpg";
 import Red from "./img/stimuli3_red.jpg";
@@ -142,12 +140,6 @@ class ElementsFullDisplayTraining extends React.Component {
     }
   }
 
-  // {styles.elementsize}
-  // <div className={styles.overlaybar}>
-  //   <span className={styles.centerThree}>
-  //     <img className={styles.relevInd_game} />
-  //   </span>
-  // </div>
 
   render() {
     return (
@@ -158,6 +150,7 @@ class ElementsFullDisplayTraining extends React.Component {
               <img
                 className={this.state.style1}
                 src={this.state.img1}
+                alt="trainelement1"
                 onMouseOver={(elNr) => this.mouseOver(1)}
                 onMouseOut={(elNr) => this.mouseOut(1)}
               />
@@ -175,6 +168,7 @@ class ElementsFullDisplayTraining extends React.Component {
               <img
                 className={this.state.style2}
                 src={this.state.img2}
+                alt="trainelement2"
                 onMouseOver={(elNr) => this.mouseOver(2)}
                 onMouseOut={(elNr) => this.mouseOut(2)}
               />
@@ -192,6 +186,7 @@ class ElementsFullDisplayTraining extends React.Component {
               <img
                 className={this.state.style3}
                 src={this.state.img3}
+                alt="trainelement3"
                 onMouseOver={(elNr) => this.mouseOver(3)}
                 onMouseOut={(elNr) => this.mouseOut(3)}
               />

@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { DATABASE_URL } from "./config";
+// import { DATABASE_URL } from "./config";
 import styles from "./style/taskStyle.module.css";
 import Slider from "./slider";
 import { View } from "react-native";
@@ -61,14 +61,12 @@ class MainTask extends React.Component {
     var val_corr_elem = StructToRender[4];
     var epsilon = StructToRender[5];
     var true_pop_size_tmp = StructToRender[6];
-    var true_pop_size = true_pop_size_tmp.map(function (
-      each_element
-    ) {
+    var true_pop_size = true_pop_size_tmp.map(function (each_element) {
       return Number(each_element.toFixed(0));
     });
 
     var nr_trial = w0.length;
-  //pregenerate the values of the remaining elements
+    //pregenerate the values of the remaining elements
     var check_al2 = [];
     var check_al1 = [];
 
@@ -87,17 +85,17 @@ class MainTask extends React.Component {
       .fill()
       .map(() => Array(3).fill(0));
 
-    for (var i = 0; i <= nr_trial - 1; i++) {
-      all_element_values[i][corPos_sq[i] - 1] = val_corr_elem[i];
-      if (corPos_sq[i] === 1) {
-        all_element_values[i][1] = check_al1[i];
-        all_element_values[i][2] = check_al2[i];
-      } else if (corPos_sq[i] === 2) {
-        all_element_values[i][0] = check_al1[i];
-        all_element_values[i][2] = check_al2[i];
-      } else if (corPos_sq[i] === 3) {
-        all_element_values[i][0] = check_al1[i];
-        all_element_values[i][1] = check_al2[i];
+    for (var j = 0; j <= nr_trial - 1; i++) {
+      all_element_values[j][corPos_sq[j] - 1] = val_corr_elem[j];
+      if (corPos_sq[j] === 1) {
+        all_element_values[j][1] = check_al1[j];
+        all_element_values[j][2] = check_al2[j];
+      } else if (corPos_sq[j] === 2) {
+        all_element_values[j][0] = check_al1[j];
+        all_element_values[j][2] = check_al2[j];
+      } else if (corPos_sq[j] === 3) {
+        all_element_values[j][0] = check_al1[j];
+        all_element_values[j][1] = check_al2[j];
       }
     }
 
@@ -107,37 +105,47 @@ class MainTask extends React.Component {
     let trialRT = Array(nr_trial)
       .fill()
       .map(() => Array(3).fill(0));
+    let indicKey_tmp = Array(nr_trial)
+      .fill()
+      .map(() => Array(2).fill(0));
 
-      let array_tmp = Array(nr_trial).fill(0);
+    let array_tmp = Array(nr_trial).fill(0);
+    let indicReq_tmp = Array(nr_trial).fill(0);
 
-      var element_colours = [1, 2, 3]; // from left to right
-      shuffle(element_colours);
+    for (var k = 5; k <= nr_trial - 1; i += 20) {
+      indicReq_tmp[k] = 1;
+    }
+    var element_colours = [1, 2, 3]; // from left to right
+    shuffle(element_colours);
+
+    var currentDate = new Date();
+    var MainStartTime = currentDate.toTimeString();
 
     this.state = {
-      // userID: userID,
-      // date: date,
-      // startTime: startTime,
-      // sectionTime: timeString,
-      // taskSessionTry: 1,
-      // taskSession: "MainTaskC",
+      // userID: this.props.userID,
+      date: currentDate,
+      // startTime: this.props.startTime,
+      sectionStartTime: MainStartTime,
+      taskSession: "MainTask",
       trialTotal: nr_trial,
       trialPerBlock: 50,
       trialNum: 1,
       trialBlockNum: 1,
       blockTotal: 5,
       blockNum: 1,
+      indicReq: indicReq_tmp,
+      indicKey: indicKey_tmp,
       trialRT: trialRT,
       choiceTime0: 0,
       element1Col: element_colours[0],
       element2Col: element_colours[1],
       element3Col: element_colours[2],
-      indicTrials: [10,87,163,240],//generate by Matlab function linspace(min(10),max(240),4)
+      indicTrials: [10, 87, 163, 240], //generate by Matlab function linspace(min(10),max(240),4)
       trialSliderRT: null,
       trialSgmMu: trialSgmMu,
       timerCountDur: 10,
       feedback: false,
       mounted: 0,
-      choiceTime0: 0,
       timePassed: false,
       timePassed2: false,
       all_true_pop_size: true_pop_size,
@@ -157,31 +165,70 @@ class MainTask extends React.Component {
   }
   /////////////////////////////////////////////////////////////////////////////////
   _handleBreakKey = (event) => {
-      if (event.keyCode === 32) {
-        this.nextTrial();
-      }
-    };
+    if (event.keyCode === 32) {
+      this.nextTrial(2);
+    }
+  };
 
-  nextTrial() {
-   if (
-      this.state.trialNum === this.state.trialTotal &&
-      this.state.blockNum === this.state.blockTotal
-    ) {
-      this.redirectToNextStage();
-    } else {
-      var trialNum_tmp = this.state.trialNum + 1;
-      var block_tmp = this.state.blockNum + 1;
+  _handleIndicKey = (event) => {
+    var pressed;
+    switch (event.keyCode) {
+      case 49:
+        pressed = 1;
+        this.nextTrial(1, pressed);
+        break;
+      case 50:
+        pressed = 2;
+        this.nextTrial(1, pressed);
+        break;
+      case 51:
+        pressed = 3;
+        this.nextTrial(1, pressed);
+        break;
+      default:
+    }
+  };
 
+  nextTrial(event, pressed) {
+    if (event === 1) {
+      document.removeEventListener("keyup", this._handleBreakKey);
+      var indicReq = this.state.indicReq;
+      indicReq[this.state.trialNum - 1] = 0;
+      var indicKey_tmp = this.state.indicKey;
+      indicKey_tmp[this.state.trialNum - 1][1] = this.state.trialNum;
+      indicKey_tmp[this.state.trialNum - 1][2] = pressed;
+      debugger;
       this.setState({
-        trialNum: trialNum_tmp,
-        blockNum: block_tmp,
-        feedback: false,
-        timePassed: false,
-        timePassed2: false,
+        indicReq: indicReq,
+        indicKey: indicKey_tmp,
       });
+    } else if (event === 2) {
+      document.removeEventListener("keyup", this._handleIndicKey);
+    } else if (event === 0) {
+      if (
+        this.state.trialNum === this.state.trialTotal
+      ) {
+        this.redirectToNextStage();
+      } else {
+        if (this.state.trialBlockNum === this.state.trialPerBlock) {
+          var block_tmp = this.state.blockNum + 1;
+          var trialBlockNum_tmp = 1;
+        } else {
+          var trialBlockNum_tmp = this.state.trialBlockNum + 1;
+        }
+
+        var trialNum_tmp = this.state.trialNum + 1;
+        this.setState({
+          trialNum: trialNum_tmp,
+          blockNum: block_tmp,
+          trialBlockNum: trialBlockNum_tmp,
+          feedback: false,
+          timePassed: false,
+          timePassed2: false,
+        });
+      }
     }
   }
-
 
   componentDidMount() {
     setTimeout(
@@ -200,73 +247,65 @@ class MainTask extends React.Component {
     };
   }
   //
-  //   fetchUserInfo () {
-  //        fetch(`${API_URL}/questions_behaviour/last_user_no`)
-  //          .then(handleResponse)
-  //          .then((data) => {
-  //            const user_no_ = parseInt(data['new_user_no'])
-  //            //console.log("fetchUserInfo in Intro ", "user_no", user_no_)
+  // sendBlock(user_no_, block_no_) {
+  //   // var currentDate   = new Date();
+  //   // var BlockFinishTime    = currentDate.toTimeString();
+  //   // let trial_per_block = this.state.trial_per_block;
+  //   // let ind_block = block_no_-1;
+  //   //
+  //   // var subset_Horizon = this.state.block_info.Horizon.slice(0,trial_per_block);
   //
-  //            this.setState({
-  //                    UserNo : user_no_,
-  //                    fetched: 1,
-  //                });
-  //        })
-  //          .catch((error) => {
-  //           console.log(error)
-  //        });
-  //       }
+  //   let behaviour = {
+  //     BlockNo: block_no_,
+  //     //                         'Date'                : this.props.user_info.date,
+  //     //                         'UserStartTime'       : this.props.user_info.startTime,
+  //   };
 
+  // fetch(`${API_URL}/behaviour/` + user_no_ + `/` + block_no_, {
+  //    method: 'POST',
+  //    headers: {
+  //      'Accept': 'application/json',
+  //      'Content-Type': 'application/json',
+  //    },
+  //    body: JSON.stringify(behaviour)
+  //  })
+  // }
   /////////////////////////////////////////////////////////////////////////////////
   render() {
-    if (this.state.indicTrials.includes(this.state.trialNum)) {
-      return <div className={styles.cockpit}>{this.disp_elementIndicator()}</div>;
-    } else {
-      if (!this.state.timePassed && this.state.feedback === false) {
-        return <div className={styles.cockpit}>{this.disp_elements()}</div>;
-      } else if (this.state.feedback === true && !this.state.timePassed2) {
+    if (!this.state.timePassed && this.state.feedback === false) {
+      return <div className={styles.cockpit}>{this.disp_elements()}</div>;
+    } else if (this.state.feedback === true && !this.state.timePassed2) {
+      return (
+        <div className={styles.cockpit}>
+          {this.disp_feedback()} {this.handleIncrement}{" "}
+        </div>
+      );
+    } else if (!this.state.feedback && this.state.timePassed2 === false) {
+      return <div className={styles.cockpit}>{this.disp_slider()}</div>;
+    } else if (
+      this.state.timePassed2 === true &&
+      this.state.feedback === true
+    ) {
+      if (
+        this.state.trialBlockNum === this.state.trialPerBlock &&
+        this.state.blockNum < this.state.blockTotal
+      ) {
         return (
           <div className={styles.cockpit}>
-            {this.disp_feedback()} {this.handleIncrement}{" "}
+            {this.disp_break(this.state.blockNum, this.state.blockTotal)}
           </div>
         );
-      } else if (!this.state.feedback && this.state.timePassed2 === false) {
-        return <div className={styles.cockpit}>{this.disp_slider()}</div>;
-      } else if (
-        this.state.timePassed2 === true &&
-        this.state.feedback === true
-      ) {
-        // if (this.state.trialNum === this.state.trialTotal && this.state.blockNum < this.state.blockTotal
-        if (this.state.trialNum === 1
-        ) {return <div className={styles.cockpit}>{this.disp_break(this.state.blockNum,this.state.blockTotal)}</div>;}
-
-        {
-          this.nextTrial();
-        }
-        return null;
+      } else if (this.state.trialBlockNum === this.state.trialPerBlock) {
+        this.sendBlock(this.props.UserNo, this.state.blockNum);
       }
+      {
+        this.nextTrial(0);
+      }
+      return null;
     }
-
   }
 
   /////////////////////////////////////////////////////////////////////////////////
-  disp_elementIndicator() {
-    return (
-      <div className={styles.cockpit}>
-        <ElementsIndicator
-          value1={this.state.all_element_values[this.state.trialNum - 1][0]}
-          value2={this.state.all_element_values[this.state.trialNum - 1][1]}
-          value3={this.state.all_element_values[this.state.trialNum - 1][2]}
-          corAns={this.state.corr_elem_pos} //adapt later
-          element_col={[1, 2, 3]} //adapt later
-          userID={100} //props.userID,
-          trialNum={this.state.trialNum}
-          blockNum={this.state.blockNum}
-        />
-      </div>
-    );
-  }
-
   disp_slider() {
     let choiceTime0 = Math.round(performance.now());
 
@@ -292,23 +331,38 @@ class MainTask extends React.Component {
   }
 
   disp_elements() {
-    setTimeout(() => {
-      this.setState({ timePassed: true, timePassed2: false });
-    }, 5000);
+    if (this.state.indicReq[this.state.trialNum - 1] === 1) {
+      document.addEventListener("keyup", this._handleIndicKey);
 
-    return (
-      <div className={styles.overlaybar}>
-        <ElementsFullDisplay
-          value1={this.state.all_element_values[this.state.trialNum - 1][0]}
-          value2={this.state.all_element_values[this.state.trialNum - 1][1]}
-          value3={this.state.all_element_values[this.state.trialNum - 1][2]}
-          img1={this.state.element1Col}
-          img2={this.state.element2Col}
-          img3={this.state.element3Col}
-          elem_indic={1} //adapt later
-        />
-      </div>
-    );
+      return (
+        <div className={styles.overlaybar}>
+          <ElementsIndicator
+            img1={this.state.element1Col}
+            img2={this.state.element2Col}
+            img3={this.state.element3Col}
+            userID={this.state.userID}
+            trialNum={this.state.trialNum}
+            blockNum={this.state.blockNum}
+          />
+        </div>
+      );
+    } else {
+      setTimeout(() => {
+        this.setState({ timePassed: true, timePassed2: false });
+      }, 5000);
+      return (
+        <div className={styles.overlaybar}>
+          <ElementsFullDisplay
+            value1={this.state.all_element_values[this.state.trialNum - 1][0]}
+            value2={this.state.all_element_values[this.state.trialNum - 1][1]}
+            value3={this.state.all_element_values[this.state.trialNum - 1][2]}
+            img1={this.state.element1Col}
+            img2={this.state.element2Col}
+            img3={this.state.element3Col}
+          />
+        </div>
+      );
+    }
   }
 
   disp_feedback() {
@@ -368,11 +422,7 @@ class MainTask extends React.Component {
     });
   }
 
-  disp_break(blockNum,blockTotal) {
-  // setTimeout(() => {
-  //     this.setState({ timePassed2: true, feedback: true });
-  // }, 700);
-  //
+  disp_break(blockNum, blockTotal) {
     document.addEventListener("keyup", this._handleBreakKey);
     let text = (
       <div className={styles.main}>
@@ -389,7 +439,8 @@ class MainTask extends React.Component {
           <br />
           You should take the opportunity to refresh your memory of the room and
           outcome images.
-          <br /><br />
+          <br />
+          <br />
           <span className={styles.centerTwo}>
             If you are ready to continue, please press the [
             <strong>SPACEBAR</strong>].
@@ -400,20 +451,21 @@ class MainTask extends React.Component {
 
     return (
       <div className={styles.cockpit}>
-        <div className={styles.textblock}>{text} {this.handleBreakKey}</div>
+        <div className={styles.textblock}>
+          {text} {this.handleBreakKey}
+        </div>
       </div>
     );
   }
 
-
-
   redirectToNextStage() {
     this.props.history.push({
-      pathname: `/MainTaskIntro`,
+      pathname: `/EndPage`,
       state: {
         // userID: this.state.userID,
         // date: this.state.date,
         // startTime: this.state.startTime,
+        //rewardTotal:
       },
     });
 

@@ -59,11 +59,12 @@ var times_element = this.state.times_element
     return (
       <div className={styles.cockpit}>
         <div className={styles.main}>
-          <span className={styles.centerTwo}>
+          <span className={styles.centerOne}>
             <View style={styles.container}>
               <img
                 className={styles.elementsize}
                 src={this.state.img}
+                alt="element1"
                 onMouseOver={(elNr) => this.mouseOver(1)}
                 onMouseOut={(elNr) => this.mouseOut(1)}
               />

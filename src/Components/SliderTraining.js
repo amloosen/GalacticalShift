@@ -1,6 +1,5 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
-import { DATABASE_URL } from "./config";
+// import { DATABASE_URL } from "./config";
 import styles from "./style/taskStyle.module.css";
 import Slider from "./slider";
 /////////////////////////////////////////////////////////////////////////////////
@@ -55,11 +54,11 @@ class SliderPractice extends React.Component {
   }
 
   componentWillUnmount() {
-  // fix Warning: Can't perform a React state update on an unmounted component
-  this.setState = (state, callback) => {
-    return;
-  };
-}
+    // fix Warning: Can't perform a React state update on an unmounted component
+    this.setState = (state, callback) => {
+      return;
+    };
+  }
   //
   //   fetchUserInfo () {
   //        fetch(`${API_URL}/questions_behaviour/last_user_no`)
@@ -79,21 +78,17 @@ class SliderPractice extends React.Component {
   //       }
   /////////////////////////////////////////////////////////////////////////////////
   render() {
-    if (this.state.practNum <= this.state.practTotal) {
-      let choiceTime0 = Math.round(performance.now());
-      return (
-        <div className={styles.cockpit}>
-          <div> {this.quest_text(this.state.practNum)} </div>{" "}
-          <Slider
-            onSpacebarHit={(result) => {
-              this.saveSgmMu(result, choiceTime0)
-            }}
-          />{" "}
-        </div>
-      );
-    } else {
-      this.redirectToNextStage();
-    }
+    let choiceTime0 = Math.round(performance.now());
+    return (
+      <div className={styles.cockpit}>
+        <div> {this.quest_text(this.state.practNum)} </div>{" "}
+        <Slider
+          onSpacebarHit={(result) => {
+            this.saveSgmMu(result, choiceTime0);
+          }}
+        />{" "}
+      </div>
+    );
   }
   /////////////////////////////////////////////////////////////////////////////////
   saveSgmMu(result, time) {
@@ -106,11 +101,16 @@ class SliderPractice extends React.Component {
     practRT[practNum - 1][1] = time;
     practRT[practNum - 1][2] = Math.round(performance.now());
     practRT[practNum - 1][3] = practRT[practNum - 1][2] - time;
-    this.setState({
-      practSgmMu: practSgmMu,
-      practRT: practRT,
-      practNum: practNum + 1,
-    });
+
+    if (this.state.practNum === this.state.practTotal) {
+      this.redirectToNextStage();
+    } else {
+      this.setState({
+        practSgmMu: practSgmMu,
+        practRT: practRT,
+        practNum: practNum + 1,
+      });
+    }
   }
 
   quest_text(practNum) {
@@ -175,7 +175,6 @@ class SliderPractice extends React.Component {
   }
 
   redirectToNextStage() {
-
     this.props.history.push({
       pathname: `/TrainingIntroA`,
       state: {

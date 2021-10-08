@@ -1,6 +1,5 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { DATABASE_URL } from "./config";
 import styles from "./style/taskStyle.module.css";
 import img_indicat1 from "./intro/indicat1.png";
 import img_indicat2 from "./intro/indicat2.png";
@@ -93,14 +92,13 @@ class MainTaskIntro extends React.Component {
   /////////////////////////////////////////////////////////////////////////////////
   redirectToNextStage() {
     document.removeEventListener("keyup", this._handleInstructKey);
-    document.removeEventListener("keyup", this._handleDebugKey);
     this.props.history.push({
       pathname: `/MainTask`,
-      state: {
-        userID: this.state.userID,
-        date: this.state.date,
-        startTime: this.state.startTime,
-      },
+      // state: {
+      //   // userID: this.state.userID,
+      //   // date: this.state.date,
+      //   // startTime: this.state.startTime,
+      // },
     });
   }
 
