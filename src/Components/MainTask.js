@@ -85,7 +85,7 @@ class MainTask extends React.Component {
       .fill()
       .map(() => Array(3).fill(0));
 
-    for (var j = 0; j <= nr_trial - 1; i++) {
+    for (var j = 0; j <= nr_trial - 1; j++) {
       all_element_values[j][corPos_sq[j] - 1] = val_corr_elem[j];
       if (corPos_sq[j] === 1) {
         all_element_values[j][1] = check_al1[j];
@@ -112,9 +112,10 @@ class MainTask extends React.Component {
     let array_tmp = Array(nr_trial).fill(0);
     let indicReq_tmp = Array(nr_trial).fill(0);
 
-    for (var k = 5; k <= nr_trial - 1; i += 20) {
+    for (var k = 5; k <= nr_trial - 1; k += 20) {
       indicReq_tmp[k] = 1;
     }
+
     var element_colours = [1, 2, 3]; // from left to right
     shuffle(element_colours);
 
@@ -272,6 +273,7 @@ class MainTask extends React.Component {
   // }
   /////////////////////////////////////////////////////////////////////////////////
   render() {
+    debugger;
     if (!this.state.timePassed && this.state.feedback === false) {
       return <div className={styles.cockpit}>{this.disp_elements()}</div>;
     } else if (this.state.feedback === true && !this.state.timePassed2) {
