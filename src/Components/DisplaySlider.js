@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import styles from "./style/taskStyle.module.css";
 import Slider from "./MainSlider";
 
-class DispSlider extends React.Component {
+class DisplaySlider extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -46,4 +46,4 @@ class DispSlider extends React.Component {
   }
 }
 
-export default withRouter(DispSlider);
+export default withRouter(DisplaySlider);

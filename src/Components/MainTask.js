@@ -4,10 +4,7 @@ import { withRouter } from "react-router-dom";
 import styles from "./style/taskStyle.module.css";
 import DispSlider from "./DisplaySlider";
 import DispElements from "./DisplayElements";
-
-import { View } from "react-native";
-import OutcomeSlider from "./SliderOutcome";
-import OutcomeSliderBar from "./SliderOutcomeBar";
+import DispFeedback from "./DisplayFeedback";
 import { range } from "lodash";
 ////////////////////////////////////////////////////////////////////////////////
 function shuffle(array) {
@@ -111,10 +108,13 @@ class MainTask extends React.Component {
     let array_tmp = Array(nr_trial).fill(0);
     let indicReq_tmp = Array(nr_trial).fill(0);
 
-    for (var k = 5; k <= nr_trial - 1; k += 20) {
-      indicReq_tmp[k] = 1;
-    }
+    // for (var k = 5; k <= nr_trial - 1; k += 20) {
+    //   indicReq_tmp[k] = 1;
+    // }
 
+        for (var k = 0; k <= nr_trial - 1; k += 20) {
+          indicReq_tmp[k] = 1;
+        }
     var times_element1 = Array(nr_trial)
       .fill()
       .map(() => Array(3).fill(0));
@@ -124,6 +124,9 @@ class MainTask extends React.Component {
     var times_element3 = Array(nr_trial)
       .fill()
       .map(() => Array(3).fill(0));
+
+      var outcomeHeight_tmp = Array(nr_trial)
+        .fill(0);
 
     var element_colours = [1, 2, 3]; // from left to right
     shuffle(element_colours);
@@ -155,6 +158,7 @@ class MainTask extends React.Component {
       times_element3: times_element3,
       trialSliderRT: null,
       trialSgmMu: trialSgmMu,
+      outcomeHeight: outcomeHeight_tmp,
       timerCountDur: 10,
       feedback: false,
       mounted: 0,
@@ -250,26 +254,19 @@ class MainTask extends React.Component {
   // }
   /////////////////////////////////////////////////////////////////////////////////
   render() {
-    // if (!this.state.timePassed && this.state.feedback === false) {
-    return (
-      <DispElements
-        element1Col={this.state.element1Col}
-        element2Col={this.state.element2Col}
-        element3Col={this.state.element3Col}
-        all_element_values={this.state.all_element_values}
-        indicReq={this.state.indicReq}
-        trialNum={this.state.trialNum}
-        onElementsEnd={this.handleElementsData}
-        onElementsIndic={this.handleIndicData}
-      />
-    );
-    // } else if (this.state.feedback === true && !this.state.timePassed2) {
-    //   return (
-    //     <div className={styles.cockpit}>
-    //       {this.disp_feedback()} {this.handleIncrement}{" "}
-    //     </div>
-    //   );
-    // } else if (!this.state.feedback && this.state.timePassed2 === false) {
+    // return (
+    //   <DispElements
+    //     element1Col={this.state.element1Col}
+    //     element2Col={this.state.element2Col}
+    //     element3Col={this.state.element3Col}
+    //     all_element_values={this.state.all_element_values}
+    //     indicReq={this.state.indicReq}
+    //     trialNum={this.state.trialNum}
+    //     onElementsEnd={this.handleElementsData}
+    //     onElementsIndic={this.handleIndicData}
+    //   />
+    // );
+
     // return (
     //   <DispSlider
     //     trialSgmMu={this.state.trialSgmMu}
@@ -278,6 +275,22 @@ class MainTask extends React.Component {
     //     onSliderEnd={this.handleSliderData}
     //   />
     // );
+
+    return (
+      <DispFeedback
+        element1Col={this.state.element1Col}
+        element2Col={this.state.element2Col}
+        element3Col={this.state.element3Col}
+        all_element_values={this.state.all_element_values}
+        all_true_pop_size={this.state.all_true_pop_size}
+        trialSgmMu={this.state.trialSgmMu}
+        indicReq={this.state.indicReq}
+        trialNum={this.state.trialNum}
+        onFeedbackEnd={this.handleOutcomeData}
+      />
+    );
+
+
     // } else if (
     //   this.state.timePassed2 === true &&
     //   this.state.feedback === true
@@ -369,6 +382,15 @@ class MainTask extends React.Component {
     indicKey_tmp[this.state.trialNum - 1][2] = pressed;
     this.setState({
       indicKey: indicKey_tmp
+    });
+  };
+
+  handleOutcomeData = (height) => {
+    debugger;
+    var outcomeHeight_tmp = this.state.outcomeHeight;
+    outcomeHeight_tmp[this.state.trialNum-1]=height
+    this.setState({
+      height: outcomeHeight_tmp
     });
   };
 

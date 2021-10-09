@@ -8,39 +8,39 @@ class DispElements extends React.Component {
   constructor(props) {
     super(props);
   }
-  
+
   handleIndicKey = (event) => {
     var pressed;
     switch (event.keyCode) {
       case 49:
         pressed = 1;
-        // this.nextTrial(1, pressed);
+        this.props.onElementsIndic(pressed);
         break;
       case 50:
         pressed = 2;
-        // this.nextTrial(1, pressed);
+        this.props.onElementsIndic(pressed);
         break;
       case 51:
         pressed = 3;
-        // this.nextTrial(1, pressed);
+        this.props.onElementsIndic(pressed);
         break;
       default:
     }
   };
 
-  handleTimes = (times_element1,times_element2,times_element3) => {
-    this.props.onElementsEnd(times_element1,times_element2,times_element3);
+  handleTimes = (times_element1, times_element2, times_element3) => {
+    this.props.onElementsEnd(times_element1, times_element2, times_element3);
   };
 
   componentDidMount() {
     if (this.props.indicReq[this.props.trialNum - 1] === 1) {
-      document.addEventListener("keyup", this._handleIndicKey);
+      document.addEventListener("keyup", this.handleIndicKey);
     }
   }
 
   componentWillUnmount() {
     if (this.props.indicReq[this.props.trialNum - 1] === 1) {
-      document.removeEventListener("keyup", this._handleIndicKey);
+      document.removeEventListener("keyup", this.handleIndicKey);
     }
   }
 
