@@ -4,7 +4,7 @@ import styles from "./style/taskStyle.module.css";
 import ElementsFullDisplay from "./ElementsFulldisplay";
 import ElementsIndicator from "./ElementsIndicator";
 
-class DispElements extends React.Component {
+class DisplayElements extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -75,4 +75,4 @@ class DispElements extends React.Component {
     }
   }
 }
-export default withRouter(DispElements);
+export default withRouter(DisplayElements);

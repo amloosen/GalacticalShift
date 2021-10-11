@@ -11,7 +11,6 @@ import TrainingIntroC from "./Components/TrainingIntroC";
 import TrainingTaskC from "./Components/TrainingTaskC";
 import MainTaskIntro from "./Components/MainTaskIntro";
 import MainTask from "./Components/MainTask";
-import OutcomeSliderBar from "./Components/SliderOutcomeBar";
 import EndPage from "./Components/EndPage";
 
 import "./App.css";
@@ -31,7 +30,6 @@ function App() {
         <Route path="/TrainingTaskB" component={TrainingTaskB} exact />
         <Route path="/TrainingTaskC" component={TrainingTaskC} exact />
         <Route path="/MainTask" component={MainTask} exact />
-        <Route path="/SliderOutcomeBar" component={OutcomeSliderBar} exact />
         <Route path="/EndPage" component={EndPage} exact />
       </Switch>
     </BrowserRouter>

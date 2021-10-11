@@ -2,10 +2,12 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 // import { DATABASE_URL } from "./config";
 import styles from "./style/taskStyle.module.css";
+import Slider from "./MainSlider";
+import { View } from "react-native";
+import OutcomeSlider from "./SliderOutcome";
+import OutcomeSliderBar from "./SliderOutcomeBar";
+import ElementsFullDisplayTraining from "./ElementsFulldisplayTraining";
 import { range } from "lodash";
-import DisplayElements from "./DisplayElements";
-import DisplayTrainOptions from "./DisplayTrainOptions";
-import DisplayTrainFeedback from "./DisplayTrainFeedback";
 ////////////////////////////////////////////////////////////////////////////////
 function shuffle(array) {
   let currentIndex = array.length,
@@ -36,13 +38,12 @@ function getRand(array) {
     return getRand(array);
   }
 }
-
-////////////////////////////////////////////////////////////////////////////////
-class TrainingTaskB extends React.Component {
+/////////////////////////////////////////////////////////////////////////////////
+class TrainingTaskC extends React.Component {
   constructor(props) {
     super(props);
 
-    var nr_train_a_trial = 12;
+    let nr_train_a_trial = 10; //update later
     var val_options = range(0, 110, 10);
     val_options.splice(val_options.indexOf(50), 1); //remove the 50 to make it clearer which element is correct
     var random_val = [];
@@ -69,19 +70,7 @@ class TrainingTaskB extends React.Component {
     );
     let array_tmp = Array(nr_train_a_trial).fill(0);
 
-    // var rightCodeAns = [4, 4, 4, 4, 4, 5, 5, 5, 5];
-    var corr_pos = [4, 4, 4, 4, 4, 5, 5, 5, 5, 5]; //1 is left and 2 is right; determine where the correct value is displayed
-    shuffle(corr_pos);
-    // initialize options for the first trial
-    if (corr_pos[0] === 4) {
-      // var ansTwo = 100 - corr_values[0];
-      var ansOne = corr_values[0];
-    } else {
-      // var ansOne = 100 - corr_values[0];
-      var ansTwo = corr_values[0];
-    }
-
-    var corr_elem_tmp = [1, 2, 3]; //1 is left and 2 is right; determine where the correct value is displayed
+    var corr_elem_tmp = [1, 2, 3]; // from left to right
     shuffle(corr_elem_tmp);
     var corr_elem = Array(nr_train_a_trial).fill(0);
 
@@ -126,18 +115,13 @@ class TrainingTaskB extends React.Component {
         all_element_values[i][1] = check_al2[i];
       }
     }
-    // initialize options for the first trial
-    if (corr_pos[0] === 4) {
-      var ansTwo = 100 - corr_values[0];
-      var ansOne = corr_values[0];
-    } else {
-      var ansOne = 100 - corr_values[0];
-      var ansTwo = corr_values[0];
-    }
 
-    let indicReq_tmp = Array(nr_train_a_trial)
+    let trialSgmMu = Array(nr_train_a_trial)
       .fill()
-      .map(() => Array(2).fill(0));
+      .map(() => Array(3).fill(0));
+    let trialRT = Array(nr_train_a_trial)
+      .fill()
+      .map(() => Array(3).fill(0));
 
     this.state = {
       // userID: userID,
@@ -145,25 +129,28 @@ class TrainingTaskB extends React.Component {
       // startTime: startTime,
       // sectionTime: timeString,
       // taskSessionTry: 1,
-      // taskSession: "TrainingTaskA",
-      trialKeypress: array_tmp,
+      // taskSession: "TrainingTaskC",
       traintrialNum: 1,
+      trialRT: trialRT,
+      choiceTime0: 0,
+      // //
+      // trialSliderRT: null,
+      trialSgmMu: trialSgmMu,
+      timerCountDur: 10,
+      feedback: false,
+      mounted: 0,
       traintrialTotal: nr_train_a_trial,
-      feedback: 0,
-      disp_el: 1,
-      disp_opt: 0,
+      timePassed: false,
+      timePassed2: false,
       all_corr_values: corr_values,
       trainAcc: array_tmp,
-      ansOne: ansOne,
-      ansTwo: ansTwo,
-      corr_pos: corr_pos,
       corr_elem: corr_elem,
       all_element_values: all_element_values,
-      indicReq: indicReq_tmp,
-      element1Col: 1,
-      element2Col: 2,
-      element3Col: 3,
+      times_element1: Array(nr_train_a_trial).fill(0),
+      times_element2: Array(nr_train_a_trial).fill(0),
+      times_element3: Array(nr_train_a_trial).fill(0),
     };
+
     // this.displayFeedback = this.displayFeedback.bind(this)
     /* prevents page from going to the right/left when arrows are pressed .*/
     window.addEventListener("keydown", function (e) {
@@ -175,22 +162,20 @@ class TrainingTaskB extends React.Component {
     });
   }
   /////////////////////////////////////////////////////////////////////////////////
-  componentDidMount() {
-    window.scrollTo(0, 0);
-    // setTimeout(
-    //   function () {
-    //     this.condSave();
-    //   }.bind(this),
-    //   0
-    // );
+  nextTrial() {
+    if (this.state.traintrialNum === this.state.traintrialTotal) {
+      this.redirectToNextStage();
+    } else {
+      var traintrialNum_tmp = this.state.traintrialNum + 1;
+      this.setState({
+        traintrialNum: traintrialNum_tmp,
+        feedback: false,
+        timePassed: false,
+        timePassed2: false,
+      });
+    }
   }
 
-  componentWillUnmount() {
-    // fix Warning: Can't perform a React state update on an unmounted component
-    this.setState = (state, callback) => {
-      return;
-    };
-  }
   //
   //   fetchUserInfo () {
   //        fetch(`${API_URL}/questions_behaviour/last_user_no`)
@@ -209,98 +194,138 @@ class TrainingTaskB extends React.Component {
   //        });
   //       }
 
-  // setTimeout(
-  //   function () {
-  //     this.trainTrialSave();
-  //   }.bind(this),
-  //   5
-  // );
   /////////////////////////////////////////////////////////////////////////////////
   render() {
-    if (this.state.disp_el === 1) {
+    if (!this.state.timePassed && this.state.feedback === false) {
+      return <div className={styles.cockpit}>{this.disp_elements()}</div>;
+    } else if (this.state.feedback === true && !this.state.timePassed2) {
       return (
-        <DisplayElements
-          element1Col={this.state.element1Col}
-          element2Col={this.state.element2Col}
-          element3Col={this.state.element3Col}
-          all_element_values={this.state.all_element_values}
-          indicReq={this.state.indicReq}
-          trialNum={this.state.traintrialNum}
-          onElementsEnd={this.handleElementsData}
-          onElementsIndic={this.handleIndicData}
-        />
+        <div className={styles.cockpit}>
+          {this.disp_feedback()} {this.handleIncrement}{" "}
+        </div>
       );
-    } else if (this.state.disp_opt === 1) {
-      return (
-        <DisplayTrainOptions
-          ansTwo={this.state.ansTwo}
-          ansOne={this.state.ansOne}
-          trainIndic={this.trainIndic}
-        />
-      );
-    } else if (this.state.feedback === 1) {
-      return (
-        <DisplayTrainFeedback
-          corr_value={this.state.all_corr_values[this.state.traintrialNum-1]}
-          handleFeedback={this.feedbackShown}
-        />
-      );
+    } else if (!this.state.feedback && this.state.timePassed2 === false) {
+      return <div className={styles.cockpit}>{this.disp_slider()}</div>;
+    } else if (
+      this.state.timePassed2 === true &&
+      this.state.feedback === true
+    ) {
+      {
+        this.nextTrial();
+      }
+      return null;
     }
   }
-  handleElementsData = () => {
+
+  /////////////////////////////////////////////////////////////////////////////////
+  disp_slider() {
+    let choiceTime0 = Math.round(performance.now());
+
+    let text = (
+      <div className={styles.questions}>
+        How large is the alien population?
+        <br />
+        <br />
+        <br />
+      </div>
+    );
+
+    return (
+      <div className={styles.cockpit}>
+        <div>{text}</div>
+        <Slider
+          onSpacebarHit={(result) => {
+            this.saveSgmMu(result, choiceTime0);
+          }}
+        />
+      </div>
+    );
+  }
+
+  disp_elements() {
+    setTimeout(() => {
+      this.setState({ timePassed: true, timePassed2: false });
+    }, 5000);
+
+    return (
+      <div className={styles.overlaybar}>
+        <ElementsFullDisplayTraining
+          value1={
+            this.state.all_element_values[this.state.traintrialNum - 1][0]
+          }
+          value2={
+            this.state.all_element_values[this.state.traintrialNum - 1][1]
+          }
+          value3={
+            this.state.all_element_values[this.state.traintrialNum - 1][2]
+          }
+          corr_elem={this.state.corr_elem[this.state.traintrialNum - 1]}
+
+        />
+      </div>
+    );
+  }
+
+  disp_feedback() {
+    let text2 = (
+      <div className={styles.questions}>
+        The true population on the planet was{" "}
+        {this.state.all_corr_values[this.state.traintrialNum - 1]} million.
+        <br />
+        <br />
+        <br />
+      </div>
+    );
+
+    setTimeout(() => {
+      this.setState({ timePassed2: true, timePassed: false });
+    }, 700);
+
+    return (
+      <div className={styles.cockpit}>
+        <div>{text2}</div>
+        <View style={styles.container}>
+          <div className={styles.overlaybar}>
+            <OutcomeSlider
+              mu={this.state.trialSgmMu[this.state.traintrialNum - 1][2]}
+              sgm={this.state.trialSgmMu[this.state.traintrialNum - 1][1]}
+            />
+          </div>
+          <div className={styles.overlaybar}>
+            <OutcomeSliderBar
+              mu={this.state.trialSgmMu[this.state.traintrialNum - 1][2]}
+              sgm={this.state.trialSgmMu[this.state.traintrialNum - 1][1]}
+              value={this.state.all_corr_values[this.state.traintrialNum - 1]}
+            />
+          </div>
+        </View>
+      </div>
+    );
+  }
+
+  saveSgmMu(result, time) {
+    let trialSgmMu = this.state.trialSgmMu;
+    let trialRT = this.state.trialRT;
+    let traintrialNum = this.state.traintrialNum;
+    trialSgmMu[traintrialNum - 1][1] = result.sgm;
+    trialSgmMu[traintrialNum - 1][2] = result.mu;
+    trialRT[traintrialNum - 1][0] = traintrialNum;
+    trialRT[traintrialNum - 1][1] = time;
+    trialRT[traintrialNum - 1][2] = Math.round(performance.now());
+    trialRT[traintrialNum - 1][3] = trialRT[traintrialNum - 1][2] - time;
+
     this.setState({
-      disp_el: 0,
-      disp_opt: 1,
+      trialSgmMu: trialSgmMu,
+      trialRT: trialRT,
+      feedback: true,
+      //traintrialNum : traintrialNum+1,
+      // outcome: show
     });
-  };
-
-  trainIndic = (pressed) => {
-    var trainAcc = this.state.trainAcc;
-    var trialKeypress = this.state.trialKeypress;
-    trialKeypress[this.state.traintrialNum - 1] = pressed;
-
-    if (pressed === this.state.corr_pos[this.state.traintrialNum - 1]) {
-      trainAcc[this.state.traintrialNum - 1] = 1;
-    } else {
-      trainAcc[this.state.traintrialNum - 1] = 0;
-    }
-debugger;
-    this.setState({
-      trialKeypress: trialKeypress,
-      trainAcc: trainAcc,
-      disp_opt: 0,
-      feedback: 1,
-    });
-  };
-
-  feedbackShown = () => {
-    if (this.state.traintrialNum === this.state.traintrialTotal) {
-      this.redirectToNextStage();
-    } else {
-      var traintrialNum_tmp = this.state.traintrialNum + 1;
-      var all_corr_values = this.state.all_corr_values;
-      var corr_pos = this.state.corr_pos;
-      if (corr_pos[traintrialNum_tmp - 1] === 4) {
-        var ansTwo = 100 - all_corr_values[traintrialNum_tmp - 1];
-        var ansOne = all_corr_values[traintrialNum_tmp - 1];
-      } else {
-        var ansOne = 100 - all_corr_values[traintrialNum_tmp - 1];
-        var ansTwo = all_corr_values[traintrialNum_tmp - 1];
-      }
-
-      this.setState({
-        traintrialNum: traintrialNum_tmp,
-        disp_el: 1,
-        feedback: 0,
-        ansTwo: ansTwo,
-        ansOne: ansOne,
-      });
-    }
-  };
+  }
 
   redirectToNextStage() {
     this.props.history.push({
-      pathname: `/TrainingIntroC`,
+      pathname: `/MainTaskIntro`,
       state: {
         // userID: this.state.userID,
         // date: this.state.date,
@@ -312,4 +337,4 @@ debugger;
   }
 }
 
-export default withRouter(TrainingTaskB);
+export default withRouter(TrainingTaskC);

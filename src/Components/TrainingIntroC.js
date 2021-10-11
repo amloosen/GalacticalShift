@@ -105,22 +105,8 @@ class TrainingIntroC extends React.Component {
   componentDidMount() {
     window.scrollTo(0, 0);
 
-    setTimeout(
-      function () {
-        this.setState({
-          mounted: 1,
-        });
-      }.bind(this),
-      5000
-    );
   }
 
-  componentWillUnmount() {
-    // fix Warning: Can't perform a React state update on an unmounted component
-    this.setState = (state, callback) => {
-      return;
-    };
-  }
   //////////////////////////////////////////////////////////////////////////////////////////////
   render() {
     let text;

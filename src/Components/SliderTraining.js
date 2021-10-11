@@ -1,7 +1,8 @@
 import React from "react";
 // import { DATABASE_URL } from "./config";
 import styles from "./style/taskStyle.module.css";
-import Slider from "./MainSlider";
+import DisplaySliderTrainer from "./DisplaySliderTrainer";
+
 /////////////////////////////////////////////////////////////////////////////////
 class SliderPractice extends React.Component {
   constructor(props) {
@@ -26,9 +27,8 @@ class SliderPractice extends React.Component {
       choiceTime0: 0,
       practSgmMu: practSgmMu,
       timerCountDur: 10,
-      timePassed: false,
-      mounted: 0,
-      trueValue: 50,
+      startSgm: 30,
+      startMu: 50,
     };
     this.redirectToNextStage = this.redirectToNextStage.bind(this);
 
@@ -42,23 +42,9 @@ class SliderPractice extends React.Component {
     });
   }
   /////////////////////////////////////////////////////////////////////////////////
-  componentDidMount() {
-    setTimeout(
-      function () {
-        this.setState({
-          mounted: 1,
-        });
-      }.bind(this),
-      5000
-    );
-  }
+  componentDidMount() {}
 
-  componentWillUnmount() {
-    // fix Warning: Can't perform a React state update on an unmounted component
-    this.setState = (state, callback) => {
-      return;
-    };
-  }
+  componentWillUnmount() {}
   //
   //   fetchUserInfo () {
   //        fetch(`${API_URL}/questions_behaviour/last_user_no`)
@@ -80,18 +66,19 @@ class SliderPractice extends React.Component {
   render() {
     let choiceTime0 = Math.round(performance.now());
     return (
-      <div className={styles.cockpit}>
-        <div> {this.quest_text(this.state.practNum)} </div>{" "}
-        <Slider
-          onSpacebarHit={(result) => {
-            this.saveSgmMu(result, choiceTime0);
-          }}
-        />{" "}
-      </div>
+      <DisplaySliderTrainer
+        trialSgmMu={this.state.practSgmMu}
+        trialRT={this.state.practRT}
+        trialNum={this.state.practNum}
+        startSgm={this.state.startSgm}
+        startMu={this.state.startMu}
+        onSliderEnd={this.handleSliderData}
+        practNum={this.state.practNum}
+      />
     );
   }
   /////////////////////////////////////////////////////////////////////////////////
-  saveSgmMu(result, time) {
+  handleSliderData = (result, time) => {
     let practSgmMu = this.state.practSgmMu;
     let practRT = this.state.practRT;
     let practNum = this.state.practNum;
@@ -111,68 +98,8 @@ class SliderPractice extends React.Component {
         practNum: practNum + 1,
       });
     }
-  }
+  };
 
-  quest_text(practNum) {
-    if (practNum === 1) {
-      return (
-        <div className={styles.questions}>
-          Please indicate the number 65 with high certainty. <br />
-          <br />
-          <br />
-        </div>
-      );
-    } else if (practNum === 2) {
-      return (
-        <div className={styles.questions}>
-          Please indicate the number 65 with high UNcertainty. <br />
-          <br />
-          <br />
-        </div>
-      );
-    } else if (practNum === 3) {
-      return (
-        <div className={styles.questions}>
-          Please indicate the number 25 with high certainty. <br />
-          <br />
-          <br />
-        </div>
-      );
-    } else if (practNum === 4) {
-      return (
-        <div className={styles.questions}>
-          Please indicate the number 25 with high UNcertainty. <br />
-          <br />
-          <br />
-        </div>
-      );
-    } else if (practNum === 5) {
-      return (
-        <div className={styles.questions}>
-          What is your age ? (If the scale refers to 0 - 100). <br />
-          <br />
-          <br />
-        </div>
-      );
-    } else if (practNum === 6) {
-      return (
-        <div className={styles.questions}>
-          What is the population of Connecticut ?
-          <br />
-          (If the scale refers to 0 - 100 Million). <br />
-          <br />
-        </div>
-      );
-    } else if (practNum === 7) {
-      return (
-        <div className={styles.questions}>
-          What is the population of New York City <br />
-          (If the scale refers to 0 - 100 Million). <br />
-          <br />
-        </div>
-      );
-    }
-  }
 
   redirectToNextStage() {
     this.props.history.push({

@@ -1,11 +1,10 @@
 import React from "react";
 import styles from "./style/taskStyle.module.css";
-import ElementBar from "./ElementBar.js";
-
-import { View} from "react-native";
+import { View } from "react-native";
+import ElementBar from "./ElementBar";
+import "./style/barstyles.css";
 import Cover from "./img/cover.jpg";
 import Blue from "./img/stimuli3_blue.jpg";
-import "./style/barstyles.css";
 
 class ElementsOneDisplay extends React.Component {
   constructor(props) {
@@ -43,10 +42,10 @@ class ElementsOneDisplay extends React.Component {
   }
 
   mouseOut(elNr) {
-var times_element = this.state.times_element
-
+    var times_element = this.state.times_element;
     times_element[times_element.length - 1][1] = Math.round(performance.now());
-    times_element[times_element.length - 1][2] = times_element[times_element.length - 1][1] -
+    times_element[times_element.length - 1][2] =
+      times_element[times_element.length - 1][1] -
       times_element[times_element.length - 1][0];
     this.setState({
       times_element: times_element,

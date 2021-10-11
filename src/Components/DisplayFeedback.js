@@ -11,7 +11,6 @@ class DispFeedback extends React.Component {
   }
 
   handleHeight = (barHeight) => {
-    debugger;
     this.props.onFeedbackEnd(barHeight);
   };
 
@@ -26,18 +25,15 @@ class DispFeedback extends React.Component {
       </div>
     );
 
-      // mu={this.props.trialSgmMu[this.props.trialNum - 1][2]}
-      // sgm={this.props.trialSgmMu[this.props.trialNum - 1][1]}
-    // value={this.props.all_true_pop_size[this.props.trialNum - 1]}
     return (
       <div className={styles.cockpit}>
         <div>{text2}</div>
         <View style={styles.container}>
           <div className={styles.cockpit}>
             <OutcomeSliderBar
-            mu={50}
-            sgm={20}
-              value={40}
+              mu={this.props.trialSgmMu[this.props.trialNum - 1][2]}
+              sgm={this.props.trialSgmMu[this.props.trialNum - 1][1]}
+              value={this.props.all_true_pop_size[this.props.trialNum - 1]}
               getBarHeight={this.handleHeight}
             />
           </div>

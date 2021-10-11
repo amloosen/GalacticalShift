@@ -8,7 +8,9 @@ class DisplaySlider extends React.Component {
     super(props);
   }
 
+
   logData = (result, time) => {
+    debugger;
     let trialSgmMu = this.props.trialSgmMu;
     let trialRT = this.props.trialRT;
     let trialNum = this.props.trialNum;
@@ -22,8 +24,6 @@ class DisplaySlider extends React.Component {
   };
 
   render() {
-    let choiceTime0 = Math.round(performance.now());
-
     let text = (
       <div className={styles.questions}>
         How large is the alien population?
@@ -37,9 +37,9 @@ class DisplaySlider extends React.Component {
       <div className={styles.cockpit}>
         <div>{text}</div>
         <Slider
-          onSpacebarHit={(result) => {
-            this.logData(result, choiceTime0);
-          }}
+          mu={this.props.startMu}
+          sgm={this.props.startSgm}
+          onSpacebarHit={this.logData}
         />
       </div>
     );

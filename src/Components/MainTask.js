@@ -3,14 +3,14 @@ import { withRouter } from "react-router-dom";
 // import { DATABASE_URL } from "./config";
 import styles from "./style/taskStyle.module.css";
 import DispSlider from "./DisplaySlider";
-import DispElements from "./DisplayElements";
+import DisplayElements from "./DisplayElements";
 import DispFeedback from "./DisplayFeedback";
+import DispBreak from "./DisplayBreak";
 import { range } from "lodash";
 ////////////////////////////////////////////////////////////////////////////////
 function shuffle(array) {
   let currentIndex = array.length,
     randomIndex;
-
   // While there remain elements to shuffle...
   while (currentIndex !== 0) {
     // Pick a remaining element...
@@ -25,7 +25,7 @@ function shuffle(array) {
   }
   return array;
 }
-//
+
 function getRandomInt(min, max) {
   const minimum = Math.ceil(min);
   const maximum = Math.floor(max);
@@ -108,13 +108,10 @@ class MainTask extends React.Component {
     let array_tmp = Array(nr_trial).fill(0);
     let indicReq_tmp = Array(nr_trial).fill(0);
 
-    // for (var k = 5; k <= nr_trial - 1; k += 20) {
-    //   indicReq_tmp[k] = 1;
-    // }
+    for (var k = 5; k <= nr_trial - 1; k += 20) {
+      indicReq_tmp[k] = 1;
+    }
 
-        for (var k = 0; k <= nr_trial - 1; k += 20) {
-          indicReq_tmp[k] = 1;
-        }
     var times_element1 = Array(nr_trial)
       .fill()
       .map(() => Array(3).fill(0));
@@ -125,10 +122,9 @@ class MainTask extends React.Component {
       .fill()
       .map(() => Array(3).fill(0));
 
-      var outcomeHeight_tmp = Array(nr_trial)
-        .fill(0);
+    var outcomeHeight_tmp = Array(nr_trial).fill(0);
 
-    var element_colours = [1, 2, 3]; // from left to right
+    var element_colours = [1, 2, 3];
     shuffle(element_colours);
 
     var currentDate = new Date();
@@ -156,21 +152,18 @@ class MainTask extends React.Component {
       times_element1: times_element1,
       times_element2: times_element2,
       times_element3: times_element3,
-      trialSliderRT: null,
       trialSgmMu: trialSgmMu,
       outcomeHeight: outcomeHeight_tmp,
-      timerCountDur: 10,
-      feedback: false,
-      mounted: 0,
-      timePassed: false,
-      timePassed2: false,
+      break: 0,
       all_true_pop_size: true_pop_size,
-      trainAcc: array_tmp,
-      corr_elem_pos: corPos_sq,
       all_element_values: all_element_values,
+      disp_el: 1,
+      disp_slider: 0,
+      startMu: 50,
+      startSgm: 30
     };
-    // this.displayFeedback = this.displayFeedback.bind(this)
-    /* prevents page from going to the right/left when arrows are pressed .*/
+
+    //* prevents page from going to the right/left when arrows are pressed .*/
     window.addEventListener("keydown", function (e) {
       if (e.keyCode === 37 && e.target === document.body) {
         e.preventDefault();
@@ -180,54 +173,15 @@ class MainTask extends React.Component {
     });
   }
   /////////////////////////////////////////////////////////////////////////////////
-  _handleBreakKey = (event) => {
-    if (event.keyCode === 32) {
-      this.nextTrial(2);
-    }
-  };
-
-  nextTrial(event, pressed) {
-    if (event === 2) {
-    } else if (event === 0) {
-      if (this.state.trialNum === this.state.trialTotal) {
-        this.redirectToNextStage();
-      } else {
-        if (this.state.trialBlockNum === this.state.trialPerBlock) {
-          var block_tmp = this.state.blockNum + 1;
-          var trialBlockNum_tmp = 1;
-        } else {
-          var trialBlockNum_tmp = this.state.trialBlockNum + 1;
-        }
-
-        var trialNum_tmp = this.state.trialNum + 1;
-        this.setState({
-          trialNum: trialNum_tmp,
-          blockNum: block_tmp,
-          trialBlockNum: trialBlockNum_tmp,
-          feedback: false,
-          timePassed: false,
-          timePassed2: false,
-        });
-      }
-    }
-  }
-
-  componentDidMount() {
-    // setTimeout(
-    //   function () {
-    //     this.setState({
-    //       mounted: 1,
-    //     });
-    //   }.bind(this),
-    //   5000
-    // );
-  }
-
-  componentWillUnmount() {
-    // this.setState = (state, callback) => {
-    //   return;
-    // };
-  }
+  // componentDidMount() {
+  //   // if (this.state.trialBlockNum===this.state.trialPerBlock){
+  //   //   this.sendBlock(this.state.userID, this.state.BlockNo)
+  //   // }
+  // }
+  // //
+  // componentWillUnmount() {
+  //   //
+  // }
   //
   // sendBlock(user_no_, block_no_) {
   //   // var currentDate   = new Date();
@@ -254,117 +208,71 @@ class MainTask extends React.Component {
   // }
   /////////////////////////////////////////////////////////////////////////////////
   render() {
-    // return (
-    //   <DispElements
-    //     element1Col={this.state.element1Col}
-    //     element2Col={this.state.element2Col}
-    //     element3Col={this.state.element3Col}
-    //     all_element_values={this.state.all_element_values}
-    //     indicReq={this.state.indicReq}
-    //     trialNum={this.state.trialNum}
-    //     onElementsEnd={this.handleElementsData}
-    //     onElementsIndic={this.handleIndicData}
-    //   />
-    // );
-
-    // return (
-    //   <DispSlider
-    //     trialSgmMu={this.state.trialSgmMu}
-    //     trialRT={this.state.trialRT}
-    //     trialNum={this.state.trialNum}
-    //     onSliderEnd={this.handleSliderData}
-    //   />
-    // );
-
-    return (
-      <DispFeedback
-        element1Col={this.state.element1Col}
-        element2Col={this.state.element2Col}
-        element3Col={this.state.element3Col}
-        all_element_values={this.state.all_element_values}
-        all_true_pop_size={this.state.all_true_pop_size}
-        trialSgmMu={this.state.trialSgmMu}
-        indicReq={this.state.indicReq}
-        trialNum={this.state.trialNum}
-        onFeedbackEnd={this.handleOutcomeData}
-      />
-    );
-
-
-    // } else if (
-    //   this.state.timePassed2 === true &&
-    //   this.state.feedback === true
-    // ) {
-    //   if (
-    //     this.state.trialBlockNum === this.state.trialPerBlock &&
-    //     this.state.blockNum < this.state.blockTotal
-    //   ) {
-    //     return (
-    //       <div className={styles.cockpit}>
-    //         {this.disp_break(this.state.blockNum, this.state.blockTotal)}
-    //       </div>
-    //     );
-    //   } else if (this.state.trialBlockNum === this.state.trialPerBlock) {
-    //     this.sendBlock(this.props.UserNo, this.state.blockNum);
-    //   }
-    //   {
-    //     this.nextTrial(0);
-    //   }
-    //   return null;
-    // }
+    if (this.state.disp_el === 1) {
+      return (
+        <DisplayElements
+          element1Col={this.state.element1Col}
+          element2Col={this.state.element2Col}
+          element3Col={this.state.element3Col}
+          all_element_values={this.state.all_element_values}
+          indicReq={this.state.indicReq}
+          trialNum={this.state.trialNum}
+          onElementsEnd={this.handleElementsData}
+          onElementsIndic={this.handleIndicData}
+        />
+      );
+    } else if (this.state.disp_slider === 1) {
+      return (
+        <DispSlider
+          trialSgmMu={this.state.trialSgmMu}
+          trialRT={this.state.trialRT}
+          trialNum={this.state.trialNum}
+          onSliderEnd={this.handleSliderData}
+          startSgm={this.state.startSgm}
+          startMu={this.state.startMu}
+        />
+      );
+    } else if (this.state.disp_feedback === 1) {
+      return (
+        <DispFeedback
+          element1Col={this.state.element1Col}
+          element2Col={this.state.element2Col}
+          element3Col={this.state.element3Col}
+          all_element_values={this.state.all_element_values}
+          all_true_pop_size={this.state.all_true_pop_size}
+          trialSgmMu={this.state.trialSgmMu}
+          indicReq={this.state.indicReq}
+          trialNum={this.state.trialNum}
+          onFeedbackEnd={this.handleOutcomeData}
+        />
+      );
+    } else if (
+      this.state.trialPerBlock === this.state.trialPerBlock &&
+      this.state.BlockNo < this.state.blockTotal
+    ) {
+      return (
+        <DispBreak
+          blockTotal={this.state.blockTotal}
+          blockNum={this.state.blockNum}
+          onBreakEnd={this.handleBreak}
+        />
+      );
+    }
   }
-
   /////////////////////////////////////////////////////////////////////////////////
-  // disp_feedback() {
-  //   let text2 = (
-  //     <div className={styles.questions}>
-  //       The true population on the planet was{" "}
-  //       {this.state.all_true_pop_size[this.state.trialNum - 1]} million.
-  //       <br />
-  //       <br />
-  //       <br />
-  //     </div>
-  //   );
-  //
-  //   setTimeout(() => {
-  //     this.setState({ timePassed2: true, timePassed: false });
-  //   }, 700);
-  //
-  //   return (
-  //     <div className={styles.cockpit}>
-  //       <div>{text2}</div>
-  //       <View style={styles.container}>
-  //         <div className={styles.overlaybar}>
-  //           <OutcomeSlider
-  //             mu={this.state.trialSgmMu[this.state.trialNum - 1][2]}
-  //             sgm={this.state.trialSgmMu[this.state.trialNum - 1][1]}
-  //           />
-  //         </div>
-  //         <div className={styles.overlaybar}>
-  //           <OutcomeSliderBar
-  //             mu={this.state.trialSgmMu[this.state.trialNum - 1][2]}
-  //             sgm={this.state.trialSgmMu[this.state.trialNum - 1][1]}
-  //             value={this.state.all_true_pop_size[this.state.trialNum - 1]}
-  //           />
-  //         </div>
-  //       </View>
-  //     </div>
-  //   );
-  // }
-
   handleElementsData = (times_element1, times_element2, times_element3) => {
-
     var times_element1_tmp = this.state.times_element1;
     var times_element2_tmp = this.state.times_element2;
     var times_element3_tmp = this.state.times_element3;
     times_element1_tmp[this.state.trialNum - 1] = times_element1;
     times_element2_tmp[this.state.trialNum - 1] = times_element2;
     times_element3_tmp[this.state.trialNum - 1] = times_element3;
-
     this.setState({
       times_element1: times_element1_tmp,
       times_element2: times_element2_tmp,
-      times_element3: times_element3_tmp
+      times_element3: times_element3_tmp,
+      disp_el: 0,
+      disp_slider: 1,
     });
   };
 
@@ -372,7 +280,8 @@ class MainTask extends React.Component {
     this.setState({
       trialSgmMu: trialSgmMu,
       trialRT: trialRT,
-      feedback: true
+      disp_slider: 0,
+      disp_feedback: 1,
     });
   };
 
@@ -381,54 +290,47 @@ class MainTask extends React.Component {
     indicKey_tmp[this.state.trialNum - 1][1] = this.state.trialNum;
     indicKey_tmp[this.state.trialNum - 1][2] = pressed;
     this.setState({
-      indicKey: indicKey_tmp
+      indicKey: indicKey_tmp,
+      disp_el: 0
     });
   };
 
   handleOutcomeData = (height) => {
-    debugger;
     var outcomeHeight_tmp = this.state.outcomeHeight;
-    outcomeHeight_tmp[this.state.trialNum-1]=height
-    this.setState({
-      height: outcomeHeight_tmp
-    });
+    outcomeHeight_tmp[this.state.trialNum - 1] = height;
+    this.nextTrial(0,outcomeHeight_tmp);
   };
 
-  disp_break(blockNum, blockTotal) {
-    document.addEventListener("keyup", this._handleBreakKey);
-    let text = (
-      <div className={styles.main}>
-        <p>
-          <span className={styles.center}>BREAK</span>
-          <br />
-          <br />
-          You have completed {blockNum} out of&nbsp;
-          {blockTotal} blocks!
-          <br />
-          <br />
-          You may take a short break.
-          <br />
-          <br />
-          You should take the opportunity to refresh your memory of the room and
-          outcome images.
-          <br />
-          <br />
-          <span className={styles.centerTwo}>
-            If you are ready to continue, please press the [
-            <strong>SPACEBAR</strong>].
-          </span>
-        </p>
-      </div>
-    );
+  handleBreak = (breakEnd) => {
+    this.nextTrial(1,0);
+  };
 
-    return (
-      <div className={styles.cockpit}>
-        <div className={styles.textblock}>
-          {text} {this.handleBreakKey}
-        </div>
-      </div>
-    );
-  }
+  nextTrial = (b,h) => {
+    if (b === 1) {
+      var block_tmp = this.state.blockNum + 1;
+      var trialBlockNum_tmp = 1;
+      var trialNum_tmp = this.state.trialNum + 1;
+      this.setState({
+        trialNum: trialNum_tmp,
+        blockNum: block_tmp,
+        trialBlockNum: trialBlockNum_tmp,
+      });
+    }
+    if (this.state.trialNum === this.state.trialTotal) {
+      this.redirectToNextStage();
+    } else {
+      var trialNum_tmp = this.state.trialNum + 1;
+      var trialBlockNum_tmp = this.state.trialBlockNum + 1;
+      debugger;
+      this.setState({
+        trialNum: trialNum_tmp,
+        trialBlockNum: trialBlockNum_tmp,
+        height: h,
+        disp_feedback: 0,
+        disp_el:1
+      });
+    }
+  };
 
   redirectToNextStage() {
     this.props.history.push({
@@ -440,8 +342,6 @@ class MainTask extends React.Component {
         //rewardTotal:
       },
     });
-
-    // console.log("UserID is: " + this.state.userID);
   }
 }
 

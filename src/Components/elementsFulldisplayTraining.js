@@ -5,11 +5,9 @@ import ElementBar from "./ElementBar";
 import Cover from "./img/cover.jpg";
 import Blue from "./img/stimuli3_blue.jpg";
 import Red from "./img/stimuli3_red.jpg";
-// import Green from "./img/stimuli3_green.jpg";
 import Yellow from "./img/stimuli3_yellow.jpg";
 import "./style/barstyles.css";
 //
-
 class ElementsFullDisplayTraining extends React.Component {
   constructor(props) {
     super(props);
@@ -38,6 +36,37 @@ class ElementsFullDisplayTraining extends React.Component {
       var style3_tmp = styles.relevInd_game;
     }
 
+    if (this.props.img1 === 1) {
+      var img1 = Blue;
+      if (this.props.img2 === 2) {
+        var img2 = Red;
+        var img3 = Yellow;
+      } else if (this.props.img2 === 3) {
+        var img2 = Yellow;
+        var img3 = Red;
+      }
+    } else if (this.props.img1 === 2) {
+      var img1 = Red;
+
+      if (this.props.img2 === 3) {
+        var img2 = Yellow;
+        var img3 = Blue;
+      } else if (this.props.img2 === 1) {
+        var img2 = Blue;
+        var img3 = Yellow;
+      }
+    } else if (this.props.img1 === 3) {
+      var img1 = Yellow;
+
+      if (this.props.img2 === 1) {
+        var img2 = Blue;
+        var img3 = Red;
+      } else if (this.props.img2 === 2) {
+        var img2 = Red;
+        var img3 = Blue;
+      }
+    }
+
     this.state = {
       img1: Cover,
       img2: Cover,
@@ -45,6 +74,9 @@ class ElementsFullDisplayTraining extends React.Component {
       show1: null,
       show2: null,
       show3: null,
+      shownImg1: img1,
+      shownImg3: img2,
+      shownImg2: img3,
       style1: styles.elementsize,
       style2: styles.elementsize,
       style3: styles.elementsize,
@@ -140,6 +172,19 @@ class ElementsFullDisplayTraining extends React.Component {
     }
   }
 
+  componentDidMount() {
+    setTimeout(() => {
+      this.props.onViewEnd(
+        this.state.times_element1,
+        this.state.times_element2,
+        this.state.times_element3
+      );
+    }, 5000);
+  }
+
+  componentWillUnmount() {
+    clearTimeout();
+  }
 
   render() {
     return (
