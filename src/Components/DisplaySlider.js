@@ -36,11 +36,14 @@ class DisplaySlider extends React.Component {
     return (
       <div className={styles.cockpit}>
         <div>{text}</div>
+
+          <div>
         <Slider
           mu={this.props.startMu}
           sgm={this.props.startSgm}
           onSpacebarHit={this.logData}
         />
+        </div>
       </div>
     );
   }

@@ -12,7 +12,7 @@ class OutcomeSliderBar extends React.Component {
 
     const trueValue = props.value;
     const xValues = range(0, 100, 0.5);
-    const yValues = xValues.map((x) => normalPdf(x, props.mu, props.sgm));
+    const yValues = xValues.map((x) => normalPdf(x, this.props.mu, this.props.sgm));
     const yValuesAdaptNew = yValues.map(function (element) {
       return element * 1000;
     });
@@ -108,8 +108,8 @@ class OutcomeSliderBar extends React.Component {
       <View style={styles.container}>
           <div className={styles.overlaybar}>
             <OutcomeSlider
-              mu={50}
-              sgm={20}
+              mu={this.props.mu}
+              sgm={this.props.sgm}
             />
           </div>
       <div className={styles.overlaybar}>
