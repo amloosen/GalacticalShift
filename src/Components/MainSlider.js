@@ -17,6 +17,7 @@ class Slider extends React.Component {
     });
 
     this.state = {
+      timesKeyDown: 0,
       mu: this.props.mu,
       sgm: this.props.sgm,
       series: [{ data: yValuesAdapt }],
@@ -85,17 +86,25 @@ class Slider extends React.Component {
       },
     };
   }
-
+  ////////////////////////////////////////////////////////////////////////////////
   componentDidMount() {
-    document.addEventListener("keydown", this.handleSlider);
+    document.addEventListener("keydown", this.handleKeyDown);
+    document.addEventListener("keyup", this.handleKeyUp);
   }
 
   componentWillUnmount() {
-    document.removeEventListener("keydown", this.handleSlider);
+    document.removeEventListener("keydown", this.handleKeyDown);
+    document.removeEventListener("keyup", this.handleKeyUp);
   }
 
-  handleSlider = (event) => {
-    var pressed;
+  handleKeyUp = () => {
+    this.setState({ timesKeyDown: 0 });
+  };
+
+  handleKeyDown = (event) => {
+    this.setState((prevState) => ({
+      timesKeyDown: prevState.timesKeyDown + 1,
+    }));
     var mu = this.state.mu;
     var sgm = this.state.sgm;
     switch (event.keyCode) {
@@ -104,59 +113,66 @@ class Slider extends React.Component {
         this.props.onSpacebarHit({ mu, sgm }, choiceTime0);
         this.resetSlider();
         break;
-      case 39:
-        this.muPlus();
-        break;
-      case 37:
-        this.muMinus();
-        break;
       case 38:
-        this.sgmPlus();
+        this.setState((prevState) => ({
+          sgm: prevState.sgm + this.stepsSgm(prevState.timesKeyDown),
+        }));
+        this.setValue(this.state.mu, this.state.sgm);
         break;
       case 40:
-        this.sgmMinus();
+        this.setState((prevState) => ({
+          sgm: prevState.sgm - this.stepsSgm(prevState.timesKeyDown),
+        }));
+        this.setValue(this.state.mu, this.state.sgm);
+        break;
+      case 39:
+      if (this.state.mu === 100) {
+          var mu_tmp = this.state.mu;
+          this.setValue(mu_tmp, this.state.sgm);
+        } else {
+          this.setState((prevState) => ({
+            mu: prevState.mu + this.stepsMu(prevState.timesKeyDown),
+          }));
+          this.setValue(this.state.mu, this.state.sgm);
+        }
+        break;
+      case 37:
+      if (this.state.mu === 0) {
+        var mu_tmp = this.state.mu;
+        this.setValue(mu_tmp, this.state.sgm);
+      } else {
+        this.setState((prevState) => ({
+          mu: prevState.mu - this.stepsMu(prevState.timesKeyDown),
+        }));
+        this.setValue(this.state.mu, this.state.sgm);
+      }
         break;
       default:
     }
   };
 
-  muPlus = (event) => {
-    if (this.state.mu === 100) {
-      var mu_tmp = this.state.mu;
-      this.setValue(mu_tmp, this.state.sgm);
-    } else {
-      var mu_tmp = this.state.mu;
-      mu_tmp = mu_tmp + 1;
-      this.setValue(mu_tmp, this.state.sgm);
+  stepsSgm = (pressed) => {
+    if (pressed < 10) {
+      return 1;
+    }else if (pressed >= 10 && pressed < 30) {
+      return 10;
+    }else if (pressed >= 30 && pressed < 60) {
+      return 50;
+    } else if (pressed >= 60 && pressed < 100) {
+      return 100;
+    }else if (pressed >= 100) {
+      return 200;
     }
   };
 
-  muMinus = (event) => {
-    if (this.state.mu === 0) {
-      var mu_tmp = this.state.mu;
-      this.setValue(mu_tmp, this.state.sgm);
-    } else {
-      var mu_tmp = this.state.mu;
-      mu_tmp = mu_tmp - 1;
-      this.setValue(mu_tmp, this.state.sgm);
+  stepsMu = (pressed) => {
+    if (pressed < 10) {
+      return 1;
+    }else if (pressed >= 10) {
+      return 2;
     }
   };
 
-  sgmPlus = (event) => {
-    var sgm_tmp = this.state.sgm;
-    sgm_tmp = sgm_tmp + 10;
-    this.setValue(this.state.mu, sgm_tmp);
-  };
-
-  sgmMinus = (event) => {
-    if (this.state.sgm <= 10) {
-      return null;
-    } else {
-      var sgm_tmp = this.state.sgm;
-      sgm_tmp = sgm_tmp - 10;
-      this.setValue(this.state.mu, sgm_tmp);
-    }
-  };
 
   resetSlider = (event) => {
     this.setState({
@@ -184,7 +200,7 @@ class Slider extends React.Component {
         <Chart
           options={this.state.options}
           series={this.state.series}
-          type= "line"
+          type="line"
           height={350}
           width={700}
           align="center"

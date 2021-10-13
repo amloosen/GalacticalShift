@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as Quest from "survey-react";
 import "../../node_modules/survey-react/survey.css";
-import { DATABASE_URL } from "./config";
+import { API_URL } from "./config";
 
 import styles from "./style/taskStyle.module.css";
 
@@ -96,7 +96,7 @@ class Questionnaires extends Component {
 
     var saveString = JSON.stringify(survey.data);
 
-    fetch(`${DATABASE_URL}/psych_quiz/` + userID, {
+    fetch(`${API_URL}/psych_quiz/` + userID, {
       method: "POST",
       headers: {
         Accept: "application/json",

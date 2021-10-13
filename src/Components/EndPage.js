@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { DATABASE_URL } from "./Config";
+import { API_URL } from '../config.js';
 import styles from "./style/taskStyle.module.css";
 /////////////////////////////////////////////////////////////////////
 class EndPage extends React.Component {
@@ -83,18 +83,18 @@ class EndPage extends React.Component {
       feedback: this.state.feedback,
     };
 
-    try {
-      fetch(`${DATABASE_URL}/feedback/` + userID, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(saveString),
-      });
-    } catch (e) {
-      console.log("Cant post?");
-    }
+    // try {
+    //   fetch(`${API_URL}/feedback/` + userID, {
+    //     method: "POST",
+    //     headers: {
+    //       Accept: "application/json",
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(saveString),
+    //   });
+    // } catch (e) {
+    //   console.log("Cant post?");
+    // }
 
     alert("Thanks for your feedback!");
     event.preventDefault();

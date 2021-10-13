@@ -1,5 +1,5 @@
 import React from "react";
-// import { DATABASE_URL } from "./config";
+// import { API_URL } from "./config";
 import styles from "./style/taskStyle.module.css";
 import DisplaySliderTrainer from "./DisplaySliderTrainer";
 
