@@ -19,36 +19,36 @@
   font-size: 30px;
   font-family: "Helvetica";
   font-weight: bold;
-
-  margin-top:200px;
+  margin-top: 200px;
 }
-
 
 .cockpit {
   /* The image used */
   background-image: url(../img/CockpitBlank.jpg);
-
+  /* Set rules to fill background */
   min-height: 100%;
   min-width: 1024px;
-
-  /* Full height */
-  height: auto;
+  /* Set up proportionate scaling */
   width: 100%;
-
-  /* Center and scale the image nicely */
-  background-position: center;
+  height: auto;
+  /* Set up positioning */
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: auto;
   background-repeat: no-repeat;
+  background-position: center;
   background-size: cover;
-  position: absolute;
+  /* Center and scale the image nicely */
+  /* background-size: cover; */
+  /* position: absolute; */
 }
 
-/* .textblockOld {
-display: flex;
-justify-content: center;
-align-items: center;
-padding-top: 20px;
-padding-bottom: 20px;
-} */
+.textblockOld {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .textblock {
   display: inline-block;
@@ -81,7 +81,7 @@ input[type="submit"] {
   cursor: pointer;
 }
 
-img.relevInd{
+img.relevInd {
   width: 200px;
   height: auto;
   border: 10px solid green;
@@ -89,7 +89,7 @@ img.relevInd{
   justify-content: center;
 }
 
-img.relevInd_game{
+img.relevInd_game {
   border: 10px solid green;
   width: 30vh;
   height: auto;
@@ -105,7 +105,8 @@ span.center {
   padding-bottom: 20px;
   position: relative;
 }
-span.centerOne{
+
+span.centerOne {
   display: table;
   margin: 0 auto;
   padding-top: 20%;
@@ -162,6 +163,7 @@ img.introImgTwo2 {
   width: 50px;
   height: auto;
 }
+
 img.introImgTwo3 {
   width: 200px;
   height: auto;
@@ -198,36 +200,31 @@ img.introImgTwo3 {
   font-family: "Calibri", "Calibri";
 }
 
-.overlaybar{
+.overlaybar {
   height: 100%;
   width: 1024px;
-
   /* Full height */
   width: 100%;
-
   /* Center and scale the image nicely */
-
   position: absolute;
 }
 
-.overlaybarsecond{
+.overlaybarsecond {
   height: 100%;
   width: 1024px;
-
   /* Full height */
   width: 100%;
-
   /* Center and scale the image nicely */
-
   position: absolute;
 }
 
 .container_1 {
-        width: 300px;
-        height: 100px;
-      }
+  width: 300px;
+  height: 100px;
+}
 
-.right {  float: right;
+.right {
+  float: right;
   height: auto;
   margin: 0px;
   color: white;
@@ -235,7 +232,8 @@ img.introImgTwo3 {
   font-family: "Calibri", "Calibri";
 }
 
-.left {float: left;
+.left {
+  float: left;
   height: auto;
   margin: 0px;
   color: white;
@@ -246,7 +244,6 @@ img.introImgTwo3 {
 span.likeP {
   padding: 20px;
 }
-
 
 .indicatortext {
   position: absolute;

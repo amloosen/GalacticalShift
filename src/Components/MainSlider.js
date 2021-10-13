@@ -1,5 +1,6 @@
 import { range } from "lodash";
 import normalPdf from "normal-pdf";
+import styles from "./style/taskStyle.module.css";
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -120,10 +121,14 @@ class Slider extends React.Component {
         this.setValue(this.state.mu, this.state.sgm);
         break;
       case 40:
+      if (this.state.sgm <= 10) {
+      return null;
+    } else {
         this.setState((prevState) => ({
           sgm: prevState.sgm - this.stepsSgm(prevState.timesKeyDown),
         }));
         this.setValue(this.state.mu, this.state.sgm);
+      }
         break;
       case 39:
       if (this.state.mu === 100) {
@@ -196,7 +201,7 @@ class Slider extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className={styles.main}>
         <Chart
           options={this.state.options}
           series={this.state.series}
