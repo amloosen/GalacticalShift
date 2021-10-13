@@ -119,7 +119,6 @@ class OutcomeSliderBar extends React.Component {
           series={this.state.series}
           type="line"
           height={350}
-          height={350}
           width={700}
           align="center"
         />

@@ -1,6 +1,5 @@
 import React from "react";
 // import { API_URL } from "./config";
-import styles from "./style/taskStyle.module.css";
 import DisplaySliderTrainer from "./DisplaySliderTrainer";
 
 /////////////////////////////////////////////////////////////////////////////////
@@ -24,7 +23,6 @@ class SliderPractice extends React.Component {
       practTotal: 7,
       practNum: 1, //adapt
       practRT: practRT,
-      choiceTime0: 0,
       practSgmMu: practSgmMu,
       timerCountDur: 10,
       startSgm: 30,
@@ -42,9 +40,14 @@ class SliderPractice extends React.Component {
     });
   }
   /////////////////////////////////////////////////////////////////////////////////
-  componentDidMount() {}
+  componentDidMount() {
 
-  componentWillUnmount() {}
+  }
+
+  componentWillUnmount() {
+
+
+  }
   //
   //   fetchUserInfo () {
   //        fetch(`${API_URL}/questions_behaviour/last_user_no`)
@@ -64,7 +67,6 @@ class SliderPractice extends React.Component {
   //       }
   /////////////////////////////////////////////////////////////////////////////////
   render() {
-    let choiceTime0 = Math.round(performance.now());
     return (
       <DisplaySliderTrainer
         trialSgmMu={this.state.practSgmMu}

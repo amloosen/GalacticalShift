@@ -23,32 +23,28 @@
 }
 
 .cockpit {
-  /* The image used */
   background-image: url(../img/CockpitBlank.jpg);
   /* Set rules to fill background */
   min-height: 100%;
-  min-width: 1024px;
   /* Set up proportionate scaling */
-  width: 100%;
-  height: auto;
+  width: 100vw;
+  height: 100vh;
   /* Set up positioning */
-  position: fixed;
   top: 0;
   left: 0;
-  margin: auto;
   background-repeat: no-repeat;
-  background-position: center;
   background-size: cover;
-  /* Center and scale the image nicely */
-  /* background-size: cover; */
-  /* position: absolute; */
-}
+  background-position: center center;
+  align-items: center;
 
-.textblockOld {
+flex-direction: column;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 
 .textblock {
   display: inline-block;
@@ -109,7 +105,7 @@ span.center {
 span.centerOne {
   display: table;
   margin: 0 auto;
-  padding-top: 20%;
+  padding-top: 20vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -118,7 +114,7 @@ span.centerOne {
 span.centerThree {
   display: table;
   margin: 0 auto;
-  padding-top: 20%;
+  padding-top: 20vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -135,7 +131,7 @@ span.centerThree_intro {
 span.centerThreeIndic {
   display: table;
   margin: 0 auto;
-  padding-top: 5%;
+  padding-top: 5vh;
   display: flex;
   align-items: center;
   justify-content: center;

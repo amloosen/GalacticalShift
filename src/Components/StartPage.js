@@ -1,8 +1,8 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import * as Consent from "survey-react";
-import { API_URL } from '../config';
-import { handleResponse } from './helpers';
+import { API_URL } from "../config";
+import { handleResponse } from "./helpers";
 import "../../node_modules/survey-react/survey.css";
 // import queryString from "query-string"; // I need this for prolific
 import "./style/startStyle.css";
@@ -25,7 +25,6 @@ class StartPage extends React.Component {
     var prolific_id = Math.floor(100000 + Math.random() * 900000);
     // var prolific_id = 120000; //for testing
 
-
     // Set state
     this.state = {
       //    userID: userID,
@@ -38,6 +37,7 @@ class StartPage extends React.Component {
 
     // update State when consent is complete
     this.fetchParticipantInfo.bind(this);
+    this.postParticipant.bind(this);
     // this.postParticipant.bind(this);
     this.redirectToTarget = this.redirectToTarget.bind(this);
   }
@@ -50,34 +50,47 @@ class StartPage extends React.Component {
     [introPic].forEach((image) => {
       new Image().src = image;
     });
-   this.fetchParticipantInfo();
+    this.fetchParticipantInfo();
     // this.setState({
     //   introPic: introPic,
     //   mounted: 1,
     // });
   }
 
-  fetchParticipantInfo () {
-       fetch(`${API_URL}/table_test/magda/2`)
-          .then(handleResponse)
-         .then((data) => {
+  fetchParticipantInfo() {
+    fetch(`${API_URL}/table_test/hallo/5`)
+      .then(handleResponse)
+      .then((data) => {
+        const participant_id_ = data["user_id"];
+        const block_number = parseInt(data["block_number"]);
 
-           const participant_id_ = data['user_id']
-           const block_number    = parseInt(data['block_number'])
+        console.log("participant_id", participant_id_);
+        console.log("block_number", block_number);
 
-           console.log('participant_id', participant_id_)
-           console.log('block_number', block_number)
+        this.setState({
+          participant_id: participant_id_,
+        });
+        // this.fetchParticipantGameId(participant_id_)
+        this.postParticipant();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
-           this.setState({
-                   participant_id : participant_id_,
-               });
-           // this.fetchParticipantGameId(participant_id_)
-           this.postParticipant()
-       })
-         .catch((error) => {
-          console.log(error)
-       });
-      }
+  postParticipant() {
+    let body = { block_type: "training" };
+
+    fetch(`${API_URL}/create_table_test/` + "hey" + `/` + 1, {
+      //eigentlich auch in den body beim ersten mal
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+  }
 
   componentWillUnmount() {
     // fix Warning: Can't perform a React state update on an unmounted component

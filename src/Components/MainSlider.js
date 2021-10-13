@@ -2,8 +2,7 @@ import { range } from "lodash";
 import normalPdf from "normal-pdf";
 import styles from "./style/taskStyle.module.css";
 import React from "react";
-import { withRouter } from "react-router-dom";
-import { useEffect, useState } from "react";
+// import { withRouter } from "react-router-dom";
 import Chart from "react-apexcharts";
 
 class Slider extends React.Component {

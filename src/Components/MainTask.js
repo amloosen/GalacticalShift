@@ -1,7 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 // import { API_URL } from "./config";
-import styles from "./style/taskStyle.module.css";
 import DispSlider from "./DisplaySlider";
 import DisplayElements from "./DisplayElements";
 import DispFeedback from "./DisplayFeedback";
@@ -105,7 +104,6 @@ class MainTask extends React.Component {
       .fill()
       .map(() => Array(2).fill(0));
 
-    let array_tmp = Array(nr_trial).fill(0);
     let indicReq_tmp = Array(nr_trial).fill(0);
 
     for (var k = 5; k <= nr_trial - 1; k += 20) {
@@ -247,7 +245,7 @@ class MainTask extends React.Component {
         />
       );
     } else if (
-      this.state.trialPerBlock === this.state.trialPerBlock &&
+      this.state.trialBlockNum === this.state.trialPerBlock&&
       this.state.BlockNo < this.state.blockTotal
     ) {
       return (
@@ -306,10 +304,10 @@ class MainTask extends React.Component {
   };
 
   nextTrial = (b,h) => {
+    var trialNum_tmp = this.state.trialNum + 1;
     if (b === 1) {
       var block_tmp = this.state.blockNum + 1;
       var trialBlockNum_tmp = 1;
-      var trialNum_tmp = this.state.trialNum + 1;
       this.setState({
         trialNum: trialNum_tmp,
         blockNum: block_tmp,
@@ -319,7 +317,6 @@ class MainTask extends React.Component {
     if (this.state.trialNum === this.state.trialTotal) {
       this.redirectToNextStage();
     } else {
-      var trialNum_tmp = this.state.trialNum + 1;
       var trialBlockNum_tmp = this.state.trialBlockNum + 1;
       debugger;
       this.setState({
