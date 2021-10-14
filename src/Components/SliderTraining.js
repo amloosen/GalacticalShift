@@ -1,11 +1,13 @@
 import React from "react";
-// import { API_URL } from "./config";
+import { API_URL } from "../config";
 import DisplaySliderTrainer from "./DisplaySliderTrainer";
 
 /////////////////////////////////////////////////////////////////////////////////
 class SliderPractice extends React.Component {
   constructor(props) {
     super(props);
+    var currentDate = new Date(); // maybe change to local
+    var timeString = currentDate.toTimeString();
 
     let practSgmMu = Array(7)
       .fill()
@@ -15,13 +17,13 @@ class SliderPractice extends React.Component {
       .map(() => Array(3).fill(0));
 
     this.state = {
-      // userID: userID,
-      // date: date,
-      // startTime: startTime,
-      // sectionTime: timeString,
+      sectionTime: timeString,
+      userID: this.props.userID,
+      date: this.props.date,
+      startTime: this.props.startTime,
       taskSession: "SliderPractice",
       practTotal: 7,
-      practNum: 1, //adapt
+      practNum: 1,
       practRT: practRT,
       practSgmMu: practSgmMu,
       timerCountDur: 10,
@@ -104,12 +106,36 @@ class SliderPractice extends React.Component {
 
 
   redirectToNextStage() {
+    let body = {
+      sectionStartTime: this.state.sectionTime,
+      startTime: this.state.startTime,
+      practSgmMu: this.state.practSgmMu,
+      practNum: this.state.practNum
+    };
+
+    fetch(
+      `${API_URL}/start_info/create/` +
+        this.state.userID +
+        `/` +
+        this.state.study_part,
+      {
+        //eigentlich auch in den body beim ersten mal
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }
+    );
+
+    ////////////////////////
     this.props.history.push({
       pathname: `/TrainingIntroA`,
       state: {
-        // userID: this.state.userID,
-        // date: this.state.date,
-        // startTime: this.state.startTime,
+        userID: this.state.userID,
+        date: this.state.date,
+        startTime: this.state.startTime,
       },
     });
 

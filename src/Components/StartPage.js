@@ -12,14 +12,15 @@ class StartPage extends React.Component {
     super(props);
 
     // Get data and time
-    var dateTime = new Date().toLocaleString();
+    var dateAndTime = new Date().toLocaleString();
 
     var currentDate = new Date(); // maybe change to local
+    var timeString = currentDate.toTimeString();
+
     var date = currentDate.getDate();
     var month = currentDate.getMonth(); //Be careful! January is 0 not 1
     var year = currentDate.getFullYear();
     var dateString = date + "-" + (month + 1) + "-" + year;
-    var timeString = currentDate.toTimeString();
 
     // Gen a random 6 digit number for now
     var prolific_id = Math.floor(100000 + Math.random() * 900000);
@@ -27,17 +28,16 @@ class StartPage extends React.Component {
 
     // Set state
     this.state = {
-      //    userID: userID,
       userID: prolific_id,
       date: dateString,
-      dateTime: dateTime,
+      dateAndTime: dateAndTime,
       startTime: timeString,
       consentComplete: 0,
+      study_part: 0,
     };
 
     // update State when consent is complete
-    this.fetchParticipantInfo.bind(this);
-    this.postParticipant.bind(this);
+    // this.fetchParticipantInfo.bind(this);
     // this.postParticipant.bind(this);
     this.redirectToTarget = this.redirectToTarget.bind(this);
   }
@@ -50,56 +50,100 @@ class StartPage extends React.Component {
     [introPic].forEach((image) => {
       new Image().src = image;
     });
-    this.fetchParticipantInfo();
-    // this.setState({
-    //   introPic: introPic,
-    //   mounted: 1,
-    // });
+    // this.fetchParticipantInfo();
   }
 
-  fetchParticipantInfo() {
-    fetch(`${API_URL}/table_test/hallo/5`)
-      .then(handleResponse)
-      .then((data) => {
-        const participant_id_ = data["user_id"];
-        const block_number = parseInt(data["block_number"]);
+  // fetchParticipantInfo() {
+  //   fetch(`${API_URL}/start_info/user_id/study_part`)
+  //     .then(handleResponse)
+  //     .then((data) => {
+  //       const participant_id_ = data["user_id"];
+  //       const block_number = parseInt(data["block_number"]);
+  //
+  //       console.log("participant_id", participant_id_);
+  //       console.log("block_number", block_number);
+  //
+  //       this.setState({
+  //         participant_id: participant_id_,
+  //       });
+  //       // this.fetchParticipantGameId(participant_id_)
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }
 
-        console.log("participant_id", participant_id_);
-        console.log("block_number", block_number);
-
-        this.setState({
-          participant_id: participant_id_,
-        });
-        // this.fetchParticipantGameId(participant_id_)
-        this.postParticipant();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
-  postParticipant() {
-    let body = { block_type: "training" };
-
-    fetch(`${API_URL}/create_table_test/` + "hey" + `/` + 1, {
-      //eigentlich auch in den body beim ersten mal
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    });
-  }
+  // postParticipant() {
+  //   let saveString= {
+  //     userID: this.state.prolific_id,
+  //     study_part: 0,
+  //     startTime: this.state.startTime,
+  //     dateAndTime:this.state.dateAndTime
+  //
+  //   };
+  //   console.log(saveString);
+  //
+  //   try {
+  //     fetch(
+  //       `${API_URL}/start_info/create/` + this.state.userID + `/` + 1,
+  //       {
+  //         //eigentlich auch in den body beim ersten mal
+  //         method: "POST",
+  //         headers: {
+  //           Accept: "application/json",
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify(saveString),
+  //       }
+  //     );
+  //   } catch (e) {
+  //     console.log("Cant post?");
+  //   }
+  // }
+  // postParticipant() {
+  //   debugger;
+  // let body     = {'block_type':'training'}
+  //
+  //    fetch(`${API_URL}/start_info/create/` + 'tobias' + `/` + 10, {//eigentlich auch in den body beim ersten mal
+  //    method: 'POST',
+  //    headers: {
+  //      'Accept': 'application/json',
+  //      'Content-Type': 'application/json',
+  //    },
+  //    body: JSON.stringify(body)
+  //  })
+  //
+  //
+  // }
 
   componentWillUnmount() {
-    // fix Warning: Can't perform a React state update on an unmounted component
     this.setState = (state, callback) => {
       return;
     };
   }
 
   redirectToTarget() {
+    let body = {
+      startTime: this.state.startTime,
+      dateAndTime: this.state.dateAndTime,
+    };
+
+    fetch(
+      `${API_URL}/start_info/create/` +
+        this.state.userID +
+        `/` +
+        this.state.study_part,
+      {
+        //eigentlich auch in den body beim ersten mal
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }
+    );
+
     this.setState({
       consentComplete: 1,
     });
@@ -110,7 +154,6 @@ class StartPage extends React.Component {
         userID: this.state.userID,
         date: this.state.date,
         startTime: this.state.startTime,
-        introPic: this.state.introPic,
       },
     });
 

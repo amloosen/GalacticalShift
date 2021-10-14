@@ -111,7 +111,7 @@ class Slider extends React.Component {
       case 32:
         let choiceTime0 = Math.round(performance.now());
         this.props.onSpacebarHit({ mu, sgm }, choiceTime0);
-        this.resetSlider();
+        this.resetSlider(50,30);
         break;
       case 38:
         this.setState((prevState) => ({
@@ -178,10 +178,16 @@ class Slider extends React.Component {
   };
 
 
-  resetSlider = (event) => {
+  resetSlider = (mu,sgm) => {
+    const xValues = range(0, 100.5, 0.5);
+    const yValues = xValues.map((x) => normalPdf(x, mu, sgm));
+    const yValuesAdapt_tmp = yValues.map(function (element) {
+      return element * 1000;
+    });
     this.setState({
-      sgm: 30,
-      mu: 50,
+      series: [{ data: yValuesAdapt_tmp }],
+      sgm: sgm,
+      mu: mu,
     });
   };
 

@@ -132,7 +132,7 @@ class Questionnaires extends Component {
     );
   }
 
-  updateTime() {
+  updateAndTime() {
     var qnTime = Math.round(performance.now()) - 10;
     this.setState({ qnTime: qnTime });
   }
@@ -187,7 +187,7 @@ class Questionnaires extends Component {
 
     setTimeout(
       function () {
-        this.updateTime();
+        this.updateAndTime();
       }.bind(this),
       10
     );

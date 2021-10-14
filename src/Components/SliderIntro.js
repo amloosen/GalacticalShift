@@ -20,20 +20,16 @@ import img_slider7 from "./intro/SliderExamplePicture5.png";
 class SliderIntro extends React.Component {
   constructor(props) {
     super(props);
-
-    // var user_info = this.props.location.state.user_info;
-
-    var currentDate = new Date();
-    var introSliderStartTime = currentDate.toTimeString();
+    var currentDate = new Date(); // maybe change to local
+    var timeString = currentDate.toTimeString();
 
     /////////////////////////////////////////////////////////////////////////////////
     // SET COMPONENT STATES
     this.state = {
-      // userID: userID,
-      date: currentDate,
-      startTime: introSliderStartTime,
-      sectionTime: introSliderStartTime,
-      taskSessionTry: 1,
+      userID: this.props.userID,
+      date: this.props.date,
+      startTime: this.props.startTime,
+      sectionTime: timeString,
       taskSession: "SliderIntro",
       instructScreenText: 1,
       instructScreen: true,

@@ -55,7 +55,7 @@ class Instructions extends React.Component {
     }
 
     fetchParticipantInfo () {
-         fetch(`${API_URL}/table_test/magda/2`)
+         fetch(`${API_URL}/start_info/user_id/study_part`)
             .then(handleResponse)
            .then((data) => {
 
@@ -78,10 +78,9 @@ class Instructions extends React.Component {
 
 
     postParticipant() {
-
     let body     = {'block_type':'training'}
 
-       fetch(`${API_URL}/create_table_test/` + 'tobias' + `/` + 10, {//eigentlich auch in den body beim ersten mal
+       fetch(`${API_URL}/create_start_info/` + 'tobias' + `/` + 10, {//eigentlich auch in den body beim ersten mal
        method: 'POST',
        headers: {
          'Accept': 'application/json',
