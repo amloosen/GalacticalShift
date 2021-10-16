@@ -140,7 +140,9 @@ class MainTaskIntro extends React.Component {
               <br />
               <br />
               Now, you have to find out which instrument is important at a given
-              time and it will not be highlighted anymore.
+              time <br />
+              <br />
+              and it will not be highlighted anymore.
               <br />
               <br />
               <span className={styles.center}>
@@ -182,8 +184,11 @@ class MainTaskIntro extends React.Component {
               <br />
               <br />
               Planets (trials) that you encounter after each other, are more
-              similar to each other than planets that are further apart. This
-              means, their population size depends on the same instrument.
+              similar to each other <br />
+              <br />
+              than planets that are further apart. <br />
+              <br />
+              This means, their population size depends on the same instrument.
               <br /> <br />
               Keep this in mind when indicating your answers.
               <br />
@@ -202,9 +207,10 @@ class MainTaskIntro extends React.Component {
               <br />
               <br />
               As in the training, not only your estimate is important, but also
-              your certainty in your estimate. After each trial you will be
-              rewarded for the correctness of your estimate and your certainty
-              in it.
+              your certainty in your estimate. <br />
+              <br />
+              After each trial you will be rewarded for the correctness of your
+              estimate and your certainty in it.
               <br />
               <br />
               Please try to indicate your estimate and certainty as precisely as
@@ -231,10 +237,12 @@ class MainTaskIntro extends React.Component {
               determines the population size at a given moment.
               <br /> <br />
               To probe your understanding of the task we will sometimes,
-              randomly ask you to indicate which colour/instrument is the
-              important one at a given stage of the task by pressing the
-              indicated number key (see example below). Please answer the
-              question as accurately as possible.
+              randomly ask you to indicate which colour/instrument <br />
+              <br />
+              is the important one at a given stage of the task by pressing the
+              indicated number key (see example below). <br />
+              <br />
+              Please answer the question as accurately as possible.
               <br /> <br />
               <span className={styles.centerThree_intro}>
                 <img
@@ -269,9 +277,12 @@ class MainTaskIntro extends React.Component {
               <span className={styles.center}>MAIN GAME</span>
               <br />
               <br />
-              It is important, that you complete the game in one go. However,
-              there will be short breaks in between, that you can choose to take
-              or you can continue by pressing the space bar.
+              It is important, that you complete the game in one go. <br />
+              <br />
+              However, there will be short breaks in between, that you can
+              choose to take or you can continue <br />
+              <br />
+              by pressing the space bar.
               <br />
               <br />
               Good luck with the main game!

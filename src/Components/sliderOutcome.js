@@ -68,7 +68,7 @@ class OutcomeSlider extends React.Component {
           labels: {
             rotate: 0,
             style: {
-              fontSize: "1.7vh",
+              fontSize: "2.5vh",
               colors: [
                 "#1C00ff00",
                 "#1C00ff00",

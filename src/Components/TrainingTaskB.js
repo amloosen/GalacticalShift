@@ -74,10 +74,8 @@ class TrainingTaskB extends React.Component {
     shuffle(corr_pos);
     // initialize options for the first trial
     if (corr_pos[0] === 4) {
-      // var ansTwo = 100 - corr_values[0];
       var ansOne = corr_values[0];
     } else {
-      // var ansOne = 100 - corr_values[0];
       var ansTwo = corr_values[0];
     }
 
@@ -102,13 +100,23 @@ class TrainingTaskB extends React.Component {
       var restricted = [corr_values[i], 100 - corr_values[i]];
       if (i < nr_train_a_trial / 2) {
         check_al1[i] = getRand(restricted);
-        check_al2[i] = 100 - corr_values[i];
+        var restrictedsecond = [
+          corr_values[i],
+          100 - corr_values[i],
+          check_al1[i],
+        ];
+        check_al2[i] = getRand(restrictedsecond);
       } else {
-        check_al1[i] = 100 - corr_values[i];
+        var restrictedsecond = [
+          corr_values[i],
+          100 - corr_values[i],
+          check_al1[i],
+        ];
         check_al2[i] = getRand(restricted);
+        check_al1[i] = getRand(restrictedsecond);
       }
     }
-
+    debugger;
     var all_element_values = Array(nr_train_a_trial)
       .fill()
       .map(() => Array(3).fill(0));
@@ -126,6 +134,7 @@ class TrainingTaskB extends React.Component {
         all_element_values[i][1] = check_al2[i];
       }
     }
+    debugger;
     // initialize options for the first trial
     if (corr_pos[0] === 4) {
       var ansTwo = 100 - corr_values[0];
@@ -166,9 +175,13 @@ class TrainingTaskB extends React.Component {
     // this.displayFeedback = this.displayFeedback.bind(this)
     /* prevents page from going to the right/left when arrows are pressed .*/
     window.addEventListener("keydown", function (e) {
-      if (e.keyCode === 37 && e.target === document.body) {
+      if (e.keyCode === 32 && e.target === document.body) {
         e.preventDefault();
-      } else if (e.keyCode === 39 && e.target === document.body) {
+      }
+      if (e.keyCode === 39 && e.target === document.body) {
+        e.preventDefault();
+      }
+      if (e.keyCode === 37 && e.target === document.body) {
         e.preventDefault();
       }
     });
@@ -297,7 +310,7 @@ class TrainingTaskB extends React.Component {
       state: {
         userID: this.state.userID,
         date: this.state.date,
-        startTime: this.state.startTime
+        startTime: this.state.startTime,
       },
     });
   }

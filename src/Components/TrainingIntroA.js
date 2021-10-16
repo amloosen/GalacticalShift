@@ -31,6 +31,12 @@ class TrainingIntroA extends React.Component {
       if (e.keyCode === 32 && e.target === document.body) {
         e.preventDefault();
       }
+      if (e.keyCode === 39 && e.target === document.body) {
+        e.preventDefault();
+      }
+      if (e.keyCode === 37 && e.target === document.body) {
+        e.preventDefault();
+      }
     });
   }
   /////////////////////////////////////////////////////////////////////////////////
@@ -54,7 +60,6 @@ class TrainingIntroA extends React.Component {
       );
     }
   }
-
 
   _handleInstructKey = (event) => {
     var key_pressed;
@@ -87,7 +92,7 @@ class TrainingIntroA extends React.Component {
       state: {
         userID: this.state.userID,
         date: this.state.date,
-        startTime: this.state.startTime
+        startTime: this.state.startTime,
       },
     });
   }
@@ -104,20 +109,20 @@ class TrainingIntroA extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
-            <span className={styles.center}>TRAINING II</span>
+              <span className={styles.center}>TRAINING II</span>
               <br />
               Well done so far!
               <br /> <br />
-              We will now introduce you to the main task itself, step-by-step by
-              letting you complete a few training trials.
+              We will now introduce you to the main task itself, letting you
+              complete few training trials.
               <br /> <br />
               For today&apos;s game, you will be a space explorer on an
-              intergalactic mission.
-              <br />
+              intergalactic mission. <br />
               <br />
               Your mission is it to tell your station on earth of how many
               aliens live on the planets you visit.
-              <br /> <br />
+              <br />
+              <br />
               It is critical that you give your best estimate of the alien
               population size for the mission to be successful.
               <br /> <br />
@@ -134,12 +139,14 @@ class TrainingIntroA extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
-            <span className={styles.center}>TRAINING II</span>
+              <span className={styles.center}>TRAINING II</span>
               So how can you find out how many aliens live on a planet?
               <br />
               <br />
               Your spaceship is equipped with several measuring instruments that
-              will help you determine how many aliens live on the planet.
+              will help you determine <br />
+              <br />
+              how many aliens live on the planet.
               <br />
               <br />A measuring instrument may look like this:
               <span className={styles.center}>
@@ -159,16 +166,16 @@ class TrainingIntroA extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
-            <span className={styles.center}>TRAINING II</span>
+              <span className={styles.center}>TRAINING II</span>
               <br />
               The aliens living on these planets rely on natural resources,
-              <br />   <br />
-              and thus the population size is related to the measurement
-              of your instrument.
+              <br /> <br />
+              and thus the population size is related to the measurement of your
+              instrument.
               <br />
               <br />
-              For example, the reading of the measurement  <br /> could be reflecting
-              the population size (in million) one-to-one.  <br />
+              For example, the reading of the measurement could be reflecting
+              the population size (in million) one-to-one. <br />
               <br />
               This would mean that if the instrument shows you ‘40%’ 40 million
               aliens live on that planet. <br />
@@ -183,7 +190,7 @@ class TrainingIntroA extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
-            <span className={styles.center}>TRAINING II</span>
+              <span className={styles.center}>TRAINING II</span>
               <br />
               However, a challenge makes your mission more difficult:
               <br />
@@ -193,11 +200,14 @@ class TrainingIntroA extends React.Component {
               <br />
               <br />
               The association between the instrument reading and the population
-              size will be <strong>more complex</strong> and also{" "}
+              size <br />
+              <br />
+              will be <strong>more complex</strong> and also{" "}
               <strong>change</strong> at some point.
               <br />
               <br />
-              It is your task to learn the associations and keep track of changes.
+              It is your task to learn the associations and keep track of
+              changes.
               <br /> <br />
               <span className={styles.center}>
                 [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
@@ -209,30 +219,39 @@ class TrainingIntroA extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
-            <span className={styles.center}>TRAINING II</span>
+              <span className={styles.center}>TRAINING II</span>
               <br />
-              For simplicity, we will now introduce you to the structure of the game by<br />
-              using one instrument with simple associations that will change at some point.
-              <br /><br />
-              We want to see whether you can detect the associations and the changes.
-              <br />  <br />First, look at the instrument by hoovering over the black square with your mouse.  <br />
+              For simplicity, we will now introduce you to the structure of the
+              game by
               <br />
-                    Second, choose between the two alternative population sizes on the screen using the
-                    corresponding arrow keys.
-                    <br /> For the option on the left side use the left arrow key
-                    <img
-                      className={styles.introImgTwo2}
-                      src={img_left}
-                      alt="example1"
-                    />
-                    <br />
-                    and for the option on the right use the right arrow key
-                    <img
-                      className={styles.introImgTwo2}
-                      src={img_right}
-                      alt="example1"
-                    />
-                    <br />
+              <br />
+              using one instrument with simple associations that will change at
+              some point.
+              <br />
+              <br />
+              We want to see whether you can detect the associations and the
+              changes.
+              <br /> <br />
+              First, look at the instrument by hoovering over the black square
+              with your mouse. <br />
+              <br />
+              Second, choose between the two alternative population sizes <br />
+              <br />
+              on the screen using the corresponding arrow keys.
+              <br /> For the option on the left side use the left arrow key
+              <img
+                className={styles.introImgTwo2}
+                src={img_left}
+                alt="example1"
+              />
+              <br />
+              and for the option on the right use the right arrow key
+              <img
+                className={styles.introImgTwo2}
+                src={img_right}
+                alt="example1"
+              />
+              <br />
               <br />
               <br /> <br />
               <span className={styles.center}>
@@ -247,8 +266,10 @@ class TrainingIntroA extends React.Component {
             <p>
               <span className={styles.center}>TRAINING II</span>
               <br />
-              For your first training, we will show you how
-              many aliens actually lived on the planet  after you indicated your answer.
+              For your first training, we will show you how many aliens actually
+              lived on the planet <br />
+              <br />
+              after you indicated your answer.
               <br />
               <br />
               This will make it possible for you to find out how the instrument

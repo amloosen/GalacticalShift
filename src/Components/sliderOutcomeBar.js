@@ -82,7 +82,7 @@ class OutcomeSliderBar extends React.Component {
           labels: {
             rotate: 0,
             style: {
-              fontSize: "1.7vh",
+              fontSize: "2.5vh",
               colors: ["#e7e6e2", "#e7e6e2", "#e7e6e2", "#e7e6e2", "#e7e6e2"],
               offsetX: 0,
               offsetY: 0,

@@ -58,10 +58,9 @@ class DisplaySliderTrainer extends React.Component {
     } else if (this.props.practNum === 5) {
       var text = (
         <div className={styles.questions}>
-        For the remaining questions, don't forget to indicate how certain you are.  <br /> <br />
-        For instance:  
           <br />
-          What is your age ? (If the scale refers to 0 - 100). <br />
+          What is your age ? <br />
+Remember to also indicate your certainty in your answer.
           <br />
           <br />
         </div>
@@ -71,15 +70,15 @@ class DisplaySliderTrainer extends React.Component {
         <div className={styles.questions}>
           What is the population of Connecticut ?
           <br />
-          (If the scale refers to 0 - 100 Million). <br />
+          (the scale refers to 0 - 100 Million). <br />
           <br />
         </div>
       );
     } else if (this.props.practNum === 7) {
       var text = (
         <div className={styles.questions}>
-          What is the population of New York City <br />
-          (If the scale refers to 0 - 100 Million). <br />
+          What is the population of New York City? <br />
+          (the scale refers to 0 - 100 Million) <br />
           <br />
         </div>
       );

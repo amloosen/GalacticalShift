@@ -122,13 +122,13 @@ class TrainingTaskC extends React.Component {
 
     var currentDate = new Date(); // maybe change to local
     var timeString = currentDate.toTimeString();
-debugger;
+    debugger;
     this.state = {
       date: currentDate,
       sectionTime: timeString,
-      userID:12,
-      startTime:12,
-      date:currentDate,
+      userID: 12,
+      startTime: 12,
+      date: currentDate,
       userID: this.props.location.state.userID,
       date: this.props.location.state.date,
       startTime: this.props.location.state.startTime,
@@ -163,9 +163,13 @@ debugger;
 
     //* prevents page from going to the right/left when arrows are pressed .*/
     window.addEventListener("keydown", function (e) {
-      if (e.keyCode === 37 && e.target === document.body) {
+      if (e.keyCode === 32 && e.target === document.body) {
         e.preventDefault();
-      } else if (e.keyCode === 39 && e.target === document.body) {
+      }
+      if (e.keyCode === 39 && e.target === document.body) {
+        e.preventDefault();
+      }
+      if (e.keyCode === 37 && e.target === document.body) {
         e.preventDefault();
       }
     });
@@ -256,7 +260,7 @@ debugger;
     indicKey_tmp[this.state.traintrialNum - 1][2] = pressed;
     this.setState({
       indicKey: indicKey_tmp,
-      disp_el: 0
+      disp_el: 0,
     });
   };
 
@@ -279,7 +283,6 @@ debugger;
         traintrialNum: traintrialNum_tmp,
         trainblockNum: block_tmp,
         traintrialtrainblockNum: traintrialtrainblockNum_tmp,
-
       });
     }
     if (this.state.traintrialNum === this.state.traintrialTotal) {

@@ -152,13 +152,15 @@ class SliderIntro extends React.Component {
               <span className={styles.center}>TRAINING I</span>
               <br />
               <br />
-              When you make an estimate, such as how expensive something is, <br />you
-              might be more or less certain about this estimate's accuracy.
+              When you make an estimate, such as how expensive something is,{" "}
+              <br />
+              you might be more or less certain about this estimate's accuracy.
               <br />
               <br />
               This means, sometimes you might be certain (sure) that your
-              estimate is correct and <br />other times you might be very uncertain
-              (unsure) about your estimate.
+              estimate is correct and <br />
+              other times you might be very uncertain (unsure) about your
+              estimate.
               <br />
               <br />
               <br /> <br />
@@ -183,12 +185,12 @@ class SliderIntro extends React.Component {
               <br />
               <br />
               <li>Your certainty in your estimate:</li>
-              “I am very certain that the ice-cream will cost £2 since this is
-              what I paid last time I went to this shop”
+              “I am very certain that the ice-cream will cost £2 <br />
+              because this is what I paid last time I went to this shop”
               <br /> <br />
               or <br />
               <br />
-              “I am very uncertain how much the ice-cream will actually cost
+              “I am very uncertain how much the ice-cream will cost <br />
               because I have never been to this shop before.”
               <br />
               <br />
@@ -247,7 +249,6 @@ class SliderIntro extends React.Component {
                   alt="example1"
                 />
               </span>
-              <br />
               <br />
               <span className={styles.center}>
                 [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
@@ -314,7 +315,8 @@ class SliderIntro extends React.Component {
                 className={styles.introImgTwo2}
                 src={img_up}
                 alt="example1"
-              />
+              />{" "}
+              <br /> <br />
               and narrower using the down arrow key
               <img
                 className={styles.introImgTwo2}
@@ -354,7 +356,6 @@ class SliderIntro extends React.Component {
                   alt="example1"
                 />
               </span>
-              <br />
               <span className={styles.center}>
                 [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
               </span>
@@ -371,7 +372,6 @@ class SliderIntro extends React.Component {
               <br />
               Here you see how it looks like when the estimate is 50 with high{" "}
               <strong>certainty</strong>
-              <br />
               <br />
               <span className={styles.center}>
                 <img
@@ -409,7 +409,7 @@ class SliderIntro extends React.Component {
               Some questions are related to yourself and some are not.
               <br />
               <br />
-              Please indicate your answer to the question, as well as your
+              Please indicate your answer to the question and <br /> <br /> your
               certainty in your answer by using the slider.
               <br />
               <br />
