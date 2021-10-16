@@ -3,7 +3,7 @@ import normalPdf from "normal-pdf";
 import styles from "./style/taskStyle.module.css";
 import React from "react";
 // import { withRouter } from "react-router-dom";
-import Chart from "react-apexcharts";
+import ReactApexChart from "react-apexcharts";
 
 class Slider extends React.Component {
   constructor(props) {
@@ -74,7 +74,7 @@ class Slider extends React.Component {
           labels: {
             rotate: 0,
             style: {
-              fontSize: "20px",
+              fontSize: "1.7vh",
               colors: ["#e7e6e2", "#e7e6e2", "#e7e6e2", "#e7e6e2", "#e7e6e2"],
               offsetX: 0,
               offsetY: 0,
@@ -207,12 +207,12 @@ class Slider extends React.Component {
   render() {
     return (
       <div className={styles.main}>
-        <Chart
+        <ReactApexChart
           options={this.state.options}
           series={this.state.series}
           type="line"
-          height={350}
-          width={700}
+          height="400px"
+          width="800px"
           align="center"
         />
       </div>

@@ -2,7 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import styles from "./style/taskStyle.module.css";
 
-class DispBreak extends React.Component {
+class DisplayBreak extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -59,4 +59,4 @@ class DispBreak extends React.Component {
     );
   }
 }
-export default withRouter(DispBreak);
+export default withRouter(DisplayBreak);

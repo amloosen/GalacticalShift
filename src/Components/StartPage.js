@@ -50,71 +50,8 @@ class StartPage extends React.Component {
     [introPic].forEach((image) => {
       new Image().src = image;
     });
-    // this.fetchParticipantInfo();
   }
 
-  // fetchParticipantInfo() {
-  //   fetch(`${API_URL}/start_info/user_id/study_part`)
-  //     .then(handleResponse)
-  //     .then((data) => {
-  //       const participant_id_ = data["user_id"];
-  //       const block_number = parseInt(data["block_number"]);
-  //
-  //       console.log("participant_id", participant_id_);
-  //       console.log("block_number", block_number);
-  //
-  //       this.setState({
-  //         participant_id: participant_id_,
-  //       });
-  //       // this.fetchParticipantGameId(participant_id_)
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }
-
-  // postParticipant() {
-  //   let saveString= {
-  //     userID: this.state.prolific_id,
-  //     study_part: 0,
-  //     startTime: this.state.startTime,
-  //     dateAndTime:this.state.dateAndTime
-  //
-  //   };
-  //   console.log(saveString);
-  //
-  //   try {
-  //     fetch(
-  //       `${API_URL}/start_info/create/` + this.state.userID + `/` + 1,
-  //       {
-  //         //eigentlich auch in den body beim ersten mal
-  //         method: "POST",
-  //         headers: {
-  //           Accept: "application/json",
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify(saveString),
-  //       }
-  //     );
-  //   } catch (e) {
-  //     console.log("Cant post?");
-  //   }
-  // }
-  // postParticipant() {
-  //   debugger;
-  // let body     = {'block_type':'training'}
-  //
-  //    fetch(`${API_URL}/start_info/create/` + 'tobias' + `/` + 10, {//eigentlich auch in den body beim ersten mal
-  //    method: 'POST',
-  //    headers: {
-  //      'Accept': 'application/json',
-  //      'Content-Type': 'application/json',
-  //    },
-  //    body: JSON.stringify(body)
-  //  })
-  //
-  //
-  // }
 
   componentWillUnmount() {
     this.setState = (state, callback) => {
@@ -153,11 +90,9 @@ class StartPage extends React.Component {
       state: {
         userID: this.state.userID,
         date: this.state.date,
-        startTime: this.state.startTime,
-      },
-    });
-
-    console.log("UserID is: " + this.state.userID);
+        startTime: this.state.startTime
+      }
+    })
   }
 
   render() {

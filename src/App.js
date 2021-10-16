@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import StartPage from "./Components/StartPage";
 import SliderIntro from "./Components/SliderIntro";
-import SliderPractice from "./Components/SliderTraining";
+import SliderTraining from "./Components/SliderTraining";
 import TrainingIntroA from "./Components/TrainingIntroA";
 import TrainingTaskA from "./Components/TrainingTaskA";
 import TrainingIntroB from "./Components/TrainingIntroB";
@@ -21,7 +21,7 @@ function App() {
       <Switch>
         <Route path="/" component={StartPage} exact />
         <Route path="/SliderIntro" component={SliderIntro} exact />
-        <Route path="/sliderTraining" component={SliderPractice} exact />
+        <Route path="/sliderTraining" component={SliderTraining} exact />
         <Route path="/TrainingIntroA" component={TrainingIntroA} exact />
         <Route path="/TrainingIntroB" component={TrainingIntroB} exact />
         <Route path="/TrainingIntroC" component={TrainingIntroC} exact />

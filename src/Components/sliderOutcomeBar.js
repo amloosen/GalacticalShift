@@ -2,7 +2,7 @@ import React from "react";
 import { range } from "lodash";
 import normalPdf from "normal-pdf";
 import styles from "./style/taskStyle.module.css";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import ReactApexChart from "react-apexcharts";
 import OutcomeSlider from "./SliderOutcome";
 
@@ -10,18 +10,20 @@ class OutcomeSliderBar extends React.Component {
   constructor(props) {
     super(props);
 
-    const trueValue = props.value;
-    const xValues = range(0, 100, 0.5);
-    const yValues = xValues.map((x) => normalPdf(x, this.props.mu, this.props.sgm));
-    const yValuesAdaptNew = yValues.map(function (element) {
-      return element * 1000;
-    });
-    const xValuesOutcome = new Array(200).fill(null);
-    var height_tmp = yValuesAdaptNew[trueValue * 2];
-    xValuesOutcome[trueValue * 2] = height_tmp;
+        const trueValue = this.props.value;//debug
+        const xValues = range(0, 100, 0.5);
+        const yValues = xValues.map((x) => normalPdf(x, this.props.mu, this.props.sgm));//debug
+        const yValuesAdaptNew = yValues.map(function (element) {
+          return element * 1000;
+        });
+        const xValuesOutcome = new Array(200).fill(null);
+        var height_tmp = yValuesAdaptNew[trueValue * 2];
+        xValuesOutcome[trueValue * 2] = height_tmp;
 
     this.state = {
       height_bar: height_tmp,
+      mu: this.props.mu,
+      sgm: this.props.sgm,
       series: [
         { data: yValuesAdaptNew, type: "line" },
         { data: xValuesOutcome, type: "column" },
@@ -37,7 +39,7 @@ class OutcomeSliderBar extends React.Component {
           },
         },
         colors: ["#1C00ff00", "#DAA520"],
-        fill: { colors: ["#1C00ff00", "#DAA520"] },
+        fill: { colors: ["#d2eaf2", "#DAA520"] },
         dataLabels: {
           enabled: false,
         },
@@ -80,7 +82,7 @@ class OutcomeSliderBar extends React.Component {
           labels: {
             rotate: 0,
             style: {
-              fontSize: "20px",
+              fontSize: "1.7vh",
               colors: ["#e7e6e2", "#e7e6e2", "#e7e6e2", "#e7e6e2", "#e7e6e2"],
               offsetX: 0,
               offsetY: 0,
@@ -93,6 +95,7 @@ class OutcomeSliderBar extends React.Component {
       },
     };
   }
+
   componentDidMount() {
     setTimeout(() => {
       this.props.getBarHeight(this.state.height_bar);
@@ -103,30 +106,46 @@ class OutcomeSliderBar extends React.Component {
     clearTimeout();
   }
 
+
   render() {
+
+    const { options, series } = this.state;
+
     return (
-      <View style={styles.container}>
-          <div className={styles.overlaybar}>
+      <View style={stylesNew.container}>
+      <View style={stylesNew.header}>
             <OutcomeSlider
-              mu={this.props.mu}
-              sgm={this.props.sgm}
-            />
-          </div>
-      <div className={styles.overlaybar}>
-      <div id="chart">
+              mu={this.state.mu}//debug
+              sgm={this.state.sgm}//debug
+              />
+                </View>
+      <View style={stylesNew.circle}>
         <ReactApexChart
           options={this.state.options}
           series={this.state.series}
           type="line"
-          height={350}
-          width={700}
+          height="400px"
+          width="800px"
           align="center"
         />
-      </div>
+        </View>
+  </View>
 
-    </div>
-      </View>
     );
   }
 }
 export default OutcomeSliderBar;
+
+const stylesNew = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  header: {
+    width: '100%',
+    position: 'relative',
+  },
+  circle: {
+    width: '100%',
+    position: 'absolute',
+  },
+});

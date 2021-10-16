@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-// import { API_URL } from "./config";
+import { API_URL } from "../config";
 import styles from "./style/taskStyle.module.css";
 import { range } from "lodash";
 import ElementsOneDisplay from "./ElementsOneDisplay";
@@ -32,6 +32,8 @@ function shuffle(array) {
 class TrainingTaskA extends React.Component {
   constructor(props) {
     super(props);
+    var currentDate = new Date(); // maybe change to local
+    var timeString = currentDate.toTimeString();
 
     var nr_train_a_trial = 10;
     var val_options = range(0, 110, 10);
@@ -59,7 +61,6 @@ class TrainingTaskA extends React.Component {
     );
     let array_tmp = Array(nr_train_a_trial).fill(0);
 
-    // var rightCodeAns = [4, 4, 4, 4, 4, 5, 5, 5, 5];
     var corr_pos = [4, 4, 4, 4, 4, 5, 5, 5, 5]; //1 is left and 2 is right; determine where the correct value is displayed
     shuffle(corr_pos);
     // initialize options for the first trial
@@ -72,21 +73,18 @@ class TrainingTaskA extends React.Component {
     }
 
     this.state = {
-      // userID: userID,
-      // date: date,
-      // startTime: startTime,
-      // sectionTime: timeString,
-      // taskSessionTry: 1,
-      // taskSession: "TrainingTaskA",
+      sectionTime: timeString,
+      userID: this.props.location.state.userID,
+      date: this.props.location.state.date,
+      startTime: this.props.location.state.startTime,
+      taskSession: "TrainingTaskA",
       trialKeypress: array_tmp,
+      valueOnElement: array_tmp,
       elements: 1,
       disp_opt: 0,
       traintrialNum: 1,
       traintrialTotal: nr_train_a_trial,
       feedback: 0,
-      timePassed: false,
-      timePassed2: false,
-      mounted: 0,
       all_corr_values: corr_values,
       valTrainElem: corr_values[0],
       corr_value: corr_values[0],
@@ -94,6 +92,7 @@ class TrainingTaskA extends React.Component {
       ansOne: ansOne,
       ansTwo: ansTwo,
       corr_pos: corr_pos,
+      study_part: 2
     };
     /* prevents page from going to the right/left when arrows are pressed .*/
     window.addEventListener("keydown", function (e) {
@@ -109,26 +108,6 @@ class TrainingTaskA extends React.Component {
   componentDidMount() {
     window.scrollTo(0, 0);
   }
-
-  //
-  //   fetchUserInfo () {
-  //        fetch(`${API_URL}/questions_behaviour/last_user_no`)
-  //          .then(handleResponse)
-  //          .then((data) => {
-  //            const user_no_ = parseInt(data['new_user_no'])
-  //            //console.log("fetchUserInfo in Intro ", "user_no", user_no_)
-  //
-  //            this.setState({
-  //                    UserNo : user_no_,
-  //                    fetched: 1,
-  //                });
-  //        })
-  //          .catch((error) => {
-  //           console.log(error)
-  //        });
-  //       }
-
-  /////////////////////////////////////////////////////////////////////////////////
 
   render() {
     if (this.state.elements === 1) {
@@ -196,7 +175,8 @@ class TrainingTaskA extends React.Component {
       } else {
         var valTrainElem = 100 - all_corr_values[traintrialNum_tmp - 1];
       }
-
+      let valueOnElement = this.state.valueOnElement;
+      valueOnElement[traintrialNum_tmp - 1] = valTrainElem;
       var corr_pos = this.state.corr_pos;
       if (corr_pos[traintrialNum_tmp - 1] === 4) {
         var ansTwo = 100 - all_corr_values[traintrialNum_tmp - 1];
@@ -211,6 +191,7 @@ class TrainingTaskA extends React.Component {
         elements: 1,
         disp_opt: 0,
         feedback: 0,
+        valueOnElement: valueOnElement,
         valTrainElem: valTrainElem,
         corr_value: this.state.all_corr_values[traintrialNum_tmp - 1],
         ansTwo: ansTwo,
@@ -220,12 +201,38 @@ class TrainingTaskA extends React.Component {
   };
 
   redirectToNextStage() {
+    let body = {
+      sectionStartTime: this.state.sectionTime,
+      startTime: this.state.startTime,
+      corr_pos: this.state.corr_pos,
+      all_corr_values: this.state.all_corr_values,
+      valueOnElement: this.state.valueOnElement,
+      trainAcc: this.state.trainAcc,
+    };
+
+    fetch(
+      `${API_URL}/training_a/create/` +
+        this.state.userID +
+        `/` +
+        this.state.study_part,
+      {
+        //eigentlich auch in den body beim ersten mal
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }
+    );
+
+    ////////////////////////
     this.props.history.push({
       pathname: `/TrainingIntroB`,
       state: {
-        // userID: this.state.userID,
-        // date: this.state.date,
-        // startTime: this.state.startTime,
+        userID: this.state.userID,
+        date: this.state.date,
+        startTime: this.state.startTime,
       },
     });
   }

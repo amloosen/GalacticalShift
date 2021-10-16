@@ -22,7 +22,6 @@ class DisplayTrainElements extends React.Component {
 
   render() {
       return (
-        <div className={styles.overlaybar}>
           <ElementsFullDisplayTraining
             value1={this.props.all_element_values[this.props.trialNum - 1][0]}
             value2={this.props.all_element_values[this.props.trialNum - 1][1]}
@@ -34,7 +33,6 @@ class DisplayTrainElements extends React.Component {
             trialNum={this.props.trialNum}
             onViewEnd={this.handleTimes}
           />
-        </div>
       );
     }
 }

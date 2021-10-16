@@ -11,8 +11,8 @@
 
 .progress.vertical {
   position: relative;
-  width: 50px;
-  height: 120px;
+  width: 5vh;
+  height: 15vh;
   display: inline-block;
   margin-right: 10px;
 }

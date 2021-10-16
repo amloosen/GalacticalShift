@@ -47,7 +47,6 @@ class DisplayElements extends React.Component {
   render() {
     if (this.props.indicReq[this.props.trialNum - 1] === 1) {
       return (
-        <div className={styles.overlaybar}>
           <ElementsIndicator
             img1={this.props.element1Col}
             img2={this.props.element2Col}
@@ -55,11 +54,9 @@ class DisplayElements extends React.Component {
             trialNum={this.props.trialNum}
             onKeyPressed={this.handleIndicKey}
           />
-        </div>
       );
     } else {
       return (
-        <div className={styles.overlaybar}>
           <ElementsFullDisplay
             value1={this.props.all_element_values[this.props.trialNum - 1][0]}
             value2={this.props.all_element_values[this.props.trialNum - 1][1]}
@@ -70,7 +67,6 @@ class DisplayElements extends React.Component {
             trialNum={this.props.trialNum}
             onViewEnd={this.handleTimes}
           />
-        </div>
       );
     }
   }

@@ -25,10 +25,11 @@ class SliderIntro extends React.Component {
 
     /////////////////////////////////////////////////////////////////////////////////
     // SET COMPONENT STATES
+
     this.state = {
-      userID: this.props.userID,
-      date: this.props.date,
-      startTime: this.props.startTime,
+      userID: this.props.location.state.userID,
+      date: this.props.location.state.date,
+      startTime: this.props.location.state.startTime,
       sectionTime: timeString,
       taskSession: "SliderIntro",
       instructScreenText: 1,
@@ -97,7 +98,7 @@ class SliderIntro extends React.Component {
     document.removeEventListener("keyup", this._handleInstructKey);
     document.removeEventListener("keyup", this._handleDebugKey);
     this.props.history.push({
-      pathname: `/sliderTraining`,
+      pathname: `/SliderTraining`,
       state: {
         userID: this.state.userID,
         date: this.state.date,
@@ -145,12 +146,12 @@ class SliderIntro extends React.Component {
               <span className={styles.center}>TRAINING I</span>
               <br />
               <br />
-              When you make an estimate, such as how expensive something is, you
+              When you make an estimate, such as how expensive something is, <br />you
               might be more or less certain about this estimate's accuracy.
               <br />
               <br />
-              This means, sometimes you might be certain (sure.) that your
-              estimate is correct and other times you might be very uncertain
+              This means, sometimes you might be certain (sure) that your
+              estimate is correct and <br />other times you might be very uncertain
               (unsure) about your estimate.
               <br />
               <br />

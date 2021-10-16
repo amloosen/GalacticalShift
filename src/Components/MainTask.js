@@ -1,10 +1,10 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 // import { API_URL } from "./config";
-import DispSlider from "./DisplaySlider";
+import DisplaySlider from "./DisplaySlider";
 import DisplayElements from "./DisplayElements";
-import DispFeedback from "./DisplayFeedback";
-import DispBreak from "./DisplayBreak";
+import DisplayFeedback from "./DisplayFeedback";
+import DisplayBreak from "./DisplayBreak";
 import { range } from "lodash";
 ////////////////////////////////////////////////////////////////////////////////
 function shuffle(array) {
@@ -221,7 +221,7 @@ class MainTask extends React.Component {
       );
     } else if (this.state.disp_slider === 1) {
       return (
-        <DispSlider
+        <DisplaySlider
           trialSgmMu={this.state.trialSgmMu}
           trialRT={this.state.trialRT}
           trialNum={this.state.trialNum}
@@ -232,7 +232,7 @@ class MainTask extends React.Component {
       );
     } else if (this.state.disp_feedback === 1) {
       return (
-        <DispFeedback
+        <DisplayFeedback
           element1Col={this.state.element1Col}
           element2Col={this.state.element2Col}
           element3Col={this.state.element3Col}
@@ -249,7 +249,7 @@ class MainTask extends React.Component {
       this.state.BlockNo < this.state.blockTotal
     ) {
       return (
-        <DispBreak
+        <DisplayBreak
           blockTotal={this.state.blockTotal}
           blockNum={this.state.blockNum}
           onBreakEnd={this.handleBreak}

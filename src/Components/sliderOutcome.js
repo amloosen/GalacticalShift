@@ -68,7 +68,7 @@ class OutcomeSlider extends React.Component {
           labels: {
             rotate: 0,
             style: {
-              fontSize: "20px",
+              fontSize: "1.7vh",
               colors: [
                 "#1C00ff00",
                 "#1C00ff00",
@@ -94,8 +94,8 @@ class OutcomeSlider extends React.Component {
           options={this.state.options}
           series={this.state.series}
           type="line"
-          height={350}
-          width={700}
+          height="400px"
+          width="800px"
           align="center"
         />
       </div>

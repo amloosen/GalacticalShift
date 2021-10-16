@@ -11,13 +11,14 @@ class DisplaySliderTrainer extends React.Component {
   logData = (result, time) => {
     let trialSgmMu = this.props.trialSgmMu;
     let trialRT = this.props.trialRT;
-    let trialNum = this.props.trialNum;
-    trialSgmMu[trialNum - 1][1] = result.sgm;
-    trialSgmMu[trialNum - 1][2] = result.mu;
-    trialRT[trialNum - 1][0] = trialNum;
-    trialRT[trialNum - 1][1] = time;
-    trialRT[trialNum - 1][2] = Math.round(performance.now());
-    trialRT[trialNum - 1][3] = trialRT[trialNum - 1][2] - time;
+    let practNum = this.props.practNum;
+    trialSgmMu[practNum - 1][1] = result.sgm;
+    trialSgmMu[practNum - 1][2] = result.mu;
+    trialSgmMu[practNum - 1][0] = practNum;
+    trialRT[practNum - 1][0] = practNum;
+    trialRT[practNum - 1][1] = time;
+    trialRT[practNum - 1][2] = Math.round(performance.now());
+    trialRT[practNum - 1][3] = trialRT[practNum - 1][2] - time;
     this.props.onSliderEnd(trialSgmMu, trialRT);
   };
 
@@ -57,6 +58,9 @@ class DisplaySliderTrainer extends React.Component {
     } else if (this.props.practNum === 5) {
       var text = (
         <div className={styles.questions}>
+        For the remaining questions, don't forget to indicate how certain you are.  <br /> <br />
+        For instance:  
+          <br />
           What is your age ? (If the scale refers to 0 - 100). <br />
           <br />
           <br />

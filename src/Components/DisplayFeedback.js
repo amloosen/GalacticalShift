@@ -28,17 +28,15 @@ class DispFeedback extends React.Component {
     return (
       <div className={styles.cockpit}>
         <div>{text2}</div>
-        <View style={styles.container}>
-          <div className={styles.cockpit}>
+        <div>
             <OutcomeSliderBar
               mu={this.props.trialSgmMu[this.props.trialNum - 1][2]}
               sgm={this.props.trialSgmMu[this.props.trialNum - 1][1]}
               value={this.props.all_true_pop_size[this.props.trialNum - 1]}
               getBarHeight={this.handleHeight}
-            />
+              />
+            </div>
           </div>
-        </View>
-      </div>
     );
   }
 }

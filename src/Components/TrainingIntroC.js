@@ -9,29 +9,21 @@ class TrainingIntroC extends React.Component {
   constructor(props) {
     super(props);
 
-    // var user_info = this.props.location.state.user_info;
+
     var currentDate = new Date();
     var introTrainingStartTime = currentDate.toTimeString();
 
     /////////////////////////////////////////////////////////////////////////////////
     // SET COMPONENT STATES
     this.state = {
-      // userID: userID,
+      userID: this.props.location.state.userID,
+      date: this.props.location.state.date,
+      startTime: this.props.location.state.startTime,
       sectionStartTime: introTrainingStartTime,
       taskSessionTry: 1,
       taskSession: "TrainingIntroC",
       instructScreenText: 1,
-
-      // outcomeNotAnsLog2: outcomeNotAnsLog2,
-
-      // trialNum: 1,
-      // trialTotal: trialTotal,
-      // trialRT: 0,
-      // trialTime: 0,
       instructScreen: true,
-      // testScreen: false,
-      //
-      // debug: false //if true, skip this section
     };
 
     this.handleInstructLocal = this.handleInstructLocal.bind(this);
@@ -97,7 +89,7 @@ class TrainingIntroC extends React.Component {
       state: {
         userID: this.state.userID,
         date: this.state.date,
-        startTime: this.state.startTime,
+        startTime: this.state.startTime
       },
     });
   }
@@ -121,12 +113,12 @@ class TrainingIntroC extends React.Component {
               Great job!
               <br />
               <br />
-              You will now be introduced to the main game. We will bring all the
+              You will now be introduced to the main game.<br /><br /> We will bring all the
               parts together that you learned so far.
               <br />
               <br />
               This means, these task will be similar to the previous training
-              trials but the introduced challenges will be combined and become more difficult.
+              trials but <br /><br />the introduced challenges will be combined and become more difficult.
               <br />
               <br />
               <span className={styles.center}>
@@ -142,16 +134,17 @@ class TrainingIntroC extends React.Component {
               <span className={styles.center}>TRAINING IV</span>
               <br />
               <br />
-              From now on, you will be asked to use the slider.
+              From now on, you will be asked to use the slider.<br /><br />
               Remember, with the slider you can indicate your <strong>estimate</strong>, by changing the peak of the slider
+              <br /><br />
               and your <strong> certainty</strong> in your estimate by changing the shape of the
               slider.
               <br />
               <br />
-              Again, you have to find out <strong>(1)</strong> which instrument
-              is important and <strong>(2)</strong> how it is associated with
+              Again, you have to find out <br /><br /><strong>(1)</strong> which instrument
+              is important and <br /><br /><strong>(2)</strong> how it is associated with
               the population size. This association as well as the instrument of
-              importance will <strong>(3)</strong> change over time. Detect these changes and adapt your estimate accordingly.
+              importance will<br /><br /> <strong>(3)</strong> change over time. Detect these changes and adapt your estimate accordingly.
               <br />
               <br />
               <span className={styles.center}>
@@ -171,7 +164,7 @@ class TrainingIntroC extends React.Component {
               the population size will be <strong>more complex</strong>.
               <br />
               <br />
-              For this training, we will, therefore, give you some help. We will show you which instrument is of
+              For this training, we will, therefore, give you some help. <br /><br />We will show you which instrument is of
               importance by highlighting it like this:
               <br />
               <br />
@@ -198,10 +191,9 @@ class TrainingIntroC extends React.Component {
               <br />
               <strong>An additional hint:</strong><br /><br />
               As you might have noticed in the trainig session, planets (trials)
-              that you encounter after each other, are more similar to each other than planets that are further
-              apart. <br />
-              <br />
-              This means, their population size depends on the same instrument.
+              that you encounter after each other, <br /><br />are more similar to each other than planets that are further
+              apart.<br /><br />
+              This means, their population size depends on the same instrument.<br /><br />
               Keep this in mind when indicating your answers.
               <br /> <br />
               <span className={styles.center}>
@@ -218,7 +210,7 @@ class TrainingIntroC extends React.Component {
               <br />
               <br />
               Also, not only your estimate is important, but also your
-              certainty in your estimate. After each trial you will be rewarded
+              certainty in your estimate. <br /><br />After each trial you will be rewarded
               for the correctness of your estimate and your certainty in it.
               <br />
               <br />
@@ -228,7 +220,7 @@ class TrainingIntroC extends React.Component {
                 <img src={img_bar} alt="bar" />
               </span>
               During this training stage the collected reward is however only
-              for demonstration and will be deleted after the training. Please
+              for demonstration <br /><br />and will be deleted after the training. Please
               try to indicate your estimate and certainty as precisely as
               possible.
               <br /> <br />
@@ -246,7 +238,7 @@ class TrainingIntroC extends React.Component {
               <br />
               <br />
               Again, the true population size shown after each planet will make
-              it possible for you to find out which instrument (i.e. which
+              it possible <br /><br />for you to find out which instrument (i.e. which
               colour) is of importance.
               <br />
               <br />

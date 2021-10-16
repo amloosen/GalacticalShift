@@ -1,11 +1,11 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-// import { API_URL } from "./config";
+import { API_URL } from "../config";
 import styles from "./style/taskStyle.module.css";
-import DispSlider from "./DisplaySlider";
+import DisplaySlider from "./DisplaySlider";
 import DisplayTrainElements from "./DisplayTrainElements";
-import DispFeedback from "./DisplayFeedback";
-import DispBreak from "./DisplayBreak";
+import DisplayFeedback from "./DisplayFeedback";
+import DisplayBreak from "./DisplayBreak";
 import { range } from "lodash";
 ////////////////////////////////////////////////////////////////////////////////
 function shuffle(array) {
@@ -61,7 +61,7 @@ class TrainingTaskC extends React.Component {
       return Number(each_element.toFixed(0));
     });
 
-    var nr_traintrial = w0.length;
+    var nr_traintrial = 2;
     //pregenerate the values of the remaining elements
     var check_al2 = [];
     var check_al1 = [];
@@ -101,16 +101,9 @@ class TrainingTaskC extends React.Component {
     let traintrialRT = Array(nr_traintrial)
       .fill()
       .map(() => Array(3).fill(0));
-    let indicKey_tmp = Array(nr_traintrial)
-      .fill()
-      .map(() => Array(2).fill(0));
 
     let array_tmp = Array(nr_traintrial).fill(0);
     let indicReq_tmp = Array(nr_traintrial).fill(0);
-
-    for (var k = 5; k <= nr_traintrial - 1; k += 20) {
-      indicReq_tmp[k] = 1;
-    }
 
     var times_element1 = Array(nr_traintrial)
       .fill()
@@ -127,23 +120,26 @@ class TrainingTaskC extends React.Component {
     var element_colours = [1, 2, 3];
     shuffle(element_colours);
 
-    var currentDate = new Date();
-    var TrainCStartTime = currentDate.toTimeString();
+    var currentDate = new Date(); // maybe change to local
+    var timeString = currentDate.toTimeString();
 
     this.state = {
-      // userID: this.props.userID,
       date: currentDate,
-      // startTime: this.props.startTime,
-      sectionStartTime: TrainCStartTime,
+      sectionTime: timeString,
+      userID:12,
+      startTime:12,
+      date:currentDate,
+      // userID: this.props.location.state.userID,
+      // date: this.props.location.state.date,
+      // startTime: this.props.location.state.startTime,
       taskSession: "TrainingTaskC",
       traintrialTotal: nr_traintrial,
-      traintrialPerBlock: 50,
+      traintrialPerBlock: nr_traintrial,
       traintrialNum: 1,
       traintrialtrainblockNum: 1,
-      trainblockTotal: 5,
+      trainblockTotal: 1,
       trainblockNum: 1,
       indicReq: indicReq_tmp,
-      indicKey: indicKey_tmp,
       traintrialRT: traintrialRT,
       choiceTime0: 0,
       element1Col: element_colours[0],
@@ -155,13 +151,14 @@ class TrainingTaskC extends React.Component {
       traintrialSgmMu: traintrialSgmMu,
       outcomeHeight: outcomeHeight_tmp,
       break: 0,
-      all_true_pop_size: true_pop_size,
+      all_true_pop_size: true_pop_size.slice(0, 10),
       all_element_values: all_element_values,
       disp_el: 1,
       disp_slider: 0,
       startMu: 50,
       startSgm: 30,
-      corr_elements:corPos_sq
+      corr_elements: corPos_sq.slice(0, 10),
+      study_part: 4,
     };
 
     //* prevents page from going to the right/left when arrows are pressed .*/
@@ -173,40 +170,7 @@ class TrainingTaskC extends React.Component {
       }
     });
   }
-  /////////////////////////////////////////////////////////////////////////////////
-  // componentDidMount() {
-  //   // if (this.state.traintrialtrainblockNum===this.state.traintrialPerBlock){
-  //   //   this.sendBlock(this.state.userID, this.state.BlockNo)
-  //   // }
-  // }
-  // //
-  // componentWillUnmount() {
-  //   //
-  // }
-  //
-  // sendBlock(user_no_, block_no_) {
-  //   // var currentDate   = new Date();
-  //   // var BlockFinishTime    = currentDate.toTimeString();
-  //   // let traintrial_per_block = this.state.traintrial_per_block;
-  //   // let ind_block = block_no_-1;
-  //   //
-  //   // var subset_Horizon = this.state.block_info.Horizon.slice(0,traintrial_per_block);
-  //
-  //   let behaviour = {
-  //     BlockNo: block_no_,
-  //     //                         'Date'                : this.props.user_info.date,
-  //     //                         'UserStartTime'       : this.props.user_info.startTime,
-  //   };
 
-  // fetch(`${API_URL}/behaviour/` + user_no_ + `/` + block_no_, {
-  //    method: 'POST',
-  //    headers: {
-  //      'Accept': 'application/json',
-  //      'Content-Type': 'application/json',
-  //    },
-  //    body: JSON.stringify(behaviour)
-  //  })
-  // }
   /////////////////////////////////////////////////////////////////////////////////
   render() {
     if (this.state.disp_el === 1) {
@@ -216,16 +180,15 @@ class TrainingTaskC extends React.Component {
           element2Col={this.state.element2Col}
           element3Col={this.state.element3Col}
           all_element_values={this.state.all_element_values}
-          corr_elem={this.state.corr_elements[this.state.traintrialNum-1]}
+          corr_elem={this.state.corr_elements[this.state.traintrialNum - 1]}
           indicReq={this.state.indicReq}
           trialNum={this.state.traintrialNum}
           onElementsEnd={this.handleElementsData}
-          onElementsIndic={this.handleIndicData}
         />
       );
     } else if (this.state.disp_slider === 1) {
       return (
-        <DispSlider
+        <DisplaySlider
           trialSgmMu={this.state.traintrialSgmMu}
           trialRT={this.state.traintrialRT}
           trialNum={this.state.traintrialNum}
@@ -236,7 +199,7 @@ class TrainingTaskC extends React.Component {
       );
     } else if (this.state.disp_feedback === 1) {
       return (
-        <DispFeedback
+        <DisplayFeedback
           element1Col={this.state.element1Col}
           element2Col={this.state.element2Col}
           element3Col={this.state.element3Col}
@@ -253,7 +216,7 @@ class TrainingTaskC extends React.Component {
       this.state.BlockNo < this.state.trainblockTotal
     ) {
       return (
-        <DispBreak
+        <DisplayBreak
           trainblockTotal={this.state.trainblockTotal}
           trainblockNum={this.state.trainblockNum}
           onBreakEnd={this.handleBreak}
@@ -300,14 +263,14 @@ class TrainingTaskC extends React.Component {
   handleOutcomeData = (height) => {
     var outcomeHeight_tmp = this.state.outcomeHeight;
     outcomeHeight_tmp[this.state.traintrialNum - 1] = height;
-    this.nextTrial(0,outcomeHeight_tmp);
+    this.nextTrial(0, outcomeHeight_tmp);
   };
 
   handleBreak = (breakEnd) => {
-    this.nextTrial(1,0);
+    this.nextTrial(1, 0);
   };
 
-  nextTrial = (b,h) => {
+  nextTrial = (b, h) => {
     if (b === 1) {
       var block_tmp = this.state.trainblockNum + 1;
       var traintrialtrainblockNum_tmp = 1;
@@ -316,6 +279,7 @@ class TrainingTaskC extends React.Component {
         traintrialNum: traintrialNum_tmp,
         trainblockNum: block_tmp,
         traintrialtrainblockNum: traintrialtrainblockNum_tmp,
+
       });
     }
     if (this.state.traintrialNum === this.state.traintrialTotal) {
@@ -323,24 +287,61 @@ class TrainingTaskC extends React.Component {
     } else {
       var traintrialNum_tmp = this.state.traintrialNum + 1;
       var traintrialtrainblockNum_tmp = this.state.traintrialtrainblockNum + 1;
-      debugger;
+
       this.setState({
         traintrialNum: traintrialNum_tmp,
         traintrialtrainblockNum: traintrialtrainblockNum_tmp,
         height: h,
         disp_feedback: 0,
-        disp_el:1
+        disp_el: 1,
       });
     }
   };
 
   redirectToNextStage() {
+    debugger;
+    let body = {
+      sectionStartTime: this.state.sectionTime,
+      startTime: this.state.startTime,
+      all_element_values: this.state.all_element_values,
+      traintrialTotal: this.state.traintrialTotal,
+      traintrialRT: this.state.traintrialRT,
+
+      corr_elements: this.state.corr_elements,
+      traintrialSgmMu: this.state.traintrialSgmMu,
+      times_element1: this.state.times_element1,
+      times_element2: this.state.times_element2,
+      times_element3: this.state.times_element3,
+      element1Col: this.state.element1Col,
+      element2Col: this.state.element2Col,
+      element3Col: this.state.element3Col,
+      startSgm: this.state.startSgm,
+      startMu: this.state.startMu,
+      outcomeHeight: this.state.outcomeHeight,
+      all_true_pop_size: this.state.all_true_pop_size,
+    };
+
+    fetch(
+      `${API_URL}/training_c/create/` +
+        this.state.userID +
+        `/` +
+        this.state.study_part,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }
+    );
+    ////////////////////////
     this.props.history.push({
       pathname: `/MainTaskIntro`,
       state: {
-        // userID: this.state.userID,
-        // date: this.state.date,
-        // startTime: this.state.startTime,
+        userID: this.state.userID,
+        date: this.state.date,
+        startTime: this.state.startTime,
       },
     });
   }

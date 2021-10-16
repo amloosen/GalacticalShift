@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-// import { API_URL } from "./config";
+import { API_URL } from "../config";
 import styles from "./style/taskStyle.module.css";
 import { range } from "lodash";
 import DisplayElements from "./DisplayElements";
@@ -29,7 +29,6 @@ function shuffle(array) {
 function getRand(array) {
   var val_options = range(0, 110, 10);
   var rand = val_options[~~(Math.random() * val_options.length)];
-  // var rand = Math.floor(Math.random() * 10);
   if (array.indexOf(rand) === -1) {
     return rand;
   } else {
@@ -41,6 +40,8 @@ function getRand(array) {
 class TrainingTaskB extends React.Component {
   constructor(props) {
     super(props);
+    var currentDate = new Date(); // maybe change to local
+    var timeString = currentDate.toTimeString();
 
     var nr_train_a_trial = 12;
     var val_options = range(0, 110, 10);
@@ -69,7 +70,6 @@ class TrainingTaskB extends React.Component {
     );
     let array_tmp = Array(nr_train_a_trial).fill(0);
 
-    // var rightCodeAns = [4, 4, 4, 4, 4, 5, 5, 5, 5];
     var corr_pos = [4, 4, 4, 4, 4, 5, 5, 5, 5, 5]; //1 is left and 2 is right; determine where the correct value is displayed
     shuffle(corr_pos);
     // initialize options for the first trial
@@ -140,13 +140,11 @@ class TrainingTaskB extends React.Component {
       .map(() => Array(2).fill(0));
 
     this.state = {
-      // userID: userID,
-      // date: date,
-      // startTime: startTime,
-      // sectionTime: timeString,
-      // taskSessionTry: 1,
-      // taskSession: "TrainingTaskA",
-      trialKeypress: array_tmp,
+      sectionTime: timeString,
+      userID: this.props.location.state.userID,
+      date: this.props.location.state.date,
+      startTime: this.props.location.state.startTime,
+      taskSession: "TrainingTaskB",
       traintrialNum: 1,
       traintrialTotal: nr_train_a_trial,
       feedback: 0,
@@ -163,6 +161,7 @@ class TrainingTaskB extends React.Component {
       element1Col: 1,
       element2Col: 2,
       element3Col: 3,
+      study_part: 3,
     };
     // this.displayFeedback = this.displayFeedback.bind(this)
     /* prevents page from going to the right/left when arrows are pressed .*/
@@ -177,12 +176,6 @@ class TrainingTaskB extends React.Component {
   /////////////////////////////////////////////////////////////////////////////////
   componentDidMount() {
     window.scrollTo(0, 0);
-    // setTimeout(
-    //   function () {
-    //     this.condSave();
-    //   }.bind(this),
-    //   0
-    // );
   }
 
   componentWillUnmount() {
@@ -191,30 +184,7 @@ class TrainingTaskB extends React.Component {
       return;
     };
   }
-  //
-  //   fetchUserInfo () {
-  //        fetch(`${API_URL}/questions_behaviour/last_user_no`)
-  //          .then(handleResponse)
-  //          .then((data) => {
-  //            const user_no_ = parseInt(data['new_user_no'])
-  //            //console.log("fetchUserInfo in Intro ", "user_no", user_no_)
-  //
-  //            this.setState({
-  //                    UserNo : user_no_,
-  //                    fetched: 1,
-  //                });
-  //        })
-  //          .catch((error) => {
-  //           console.log(error)
-  //        });
-  //       }
 
-  // setTimeout(
-  //   function () {
-  //     this.trainTrialSave();
-  //   }.bind(this),
-  //   5
-  // );
   /////////////////////////////////////////////////////////////////////////////////
   render() {
     if (this.state.disp_el === 1) {
@@ -241,7 +211,7 @@ class TrainingTaskB extends React.Component {
     } else if (this.state.feedback === 1) {
       return (
         <DisplayTrainFeedback
-          corr_value={this.state.all_corr_values[this.state.traintrialNum-1]}
+          corr_value={this.state.all_corr_values[this.state.traintrialNum - 1]}
           handleFeedback={this.feedbackShown}
         />
       );
@@ -255,19 +225,16 @@ class TrainingTaskB extends React.Component {
   };
 
   trainIndic = (pressed) => {
-    var trainAcc = this.state.trainAcc;
-    var trialKeypress = this.state.trialKeypress;
-    trialKeypress[this.state.traintrialNum - 1] = pressed;
+    var trainAcc_tmp = this.state.trainAcc;
 
     if (pressed === this.state.corr_pos[this.state.traintrialNum - 1]) {
-      trainAcc[this.state.traintrialNum - 1] = 1;
+      trainAcc_tmp[this.state.traintrialNum - 1] = 1;
     } else {
-      trainAcc[this.state.traintrialNum - 1] = 0;
+      trainAcc_tmp[this.state.traintrialNum - 1] = 0;
     }
-debugger;
+
     this.setState({
-      trialKeypress: trialKeypress,
-      trainAcc: trainAcc,
+      trainAcc: trainAcc_tmp,
       disp_opt: 0,
       feedback: 1,
     });
@@ -299,16 +266,40 @@ debugger;
   };
 
   redirectToNextStage() {
+    let body = {
+      sectionStartTime: this.state.sectionTime,
+      startTime: this.state.startTime,
+      corr_elem: this.state.corr_elem,
+      trainAcc: this.state.trainAcc,
+      corr_pos: this.state.corr_pos,
+      all_corr_values: this.state.all_corr_values,
+    };
+
+    fetch(
+      `${API_URL}/training_b/create/` +
+        this.state.userID +
+        `/` +
+        this.state.study_part,
+      {
+        //eigentlich auch in den body beim ersten mal
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }
+    );
+
+    ////////////////////////
     this.props.history.push({
       pathname: `/TrainingIntroC`,
       state: {
-        // userID: this.state.userID,
-        // date: this.state.date,
-        // startTime: this.state.startTime,
+        userID: this.state.userID,
+        date: this.state.date,
+        startTime: this.state.startTime
       },
     });
-
-    // console.log("UserID is: " + this.state.userID);
   }
 }
 

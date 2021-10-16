@@ -8,6 +8,7 @@ import Red from "./img/stimuli3_red.jpg";
 import Yellow from "./img/stimuli3_yellow.jpg";
 import "./style/barstyles.css";
 //
+
 class ElementsFullDisplayTraining extends React.Component {
   constructor(props) {
     super(props);
@@ -98,6 +99,7 @@ class ElementsFullDisplayTraining extends React.Component {
       }
     });
   }
+
 
   mouseOver(elNr) {
     if (elNr === 1) {
@@ -190,7 +192,6 @@ class ElementsFullDisplayTraining extends React.Component {
     return (
       <div className={styles.cockpit}>
         <div className={styles.main}>
-          <span className={styles.centerThree}>
             <View style={styles.container}>
               <img
                 className={this.state.style1}
@@ -244,7 +245,6 @@ class ElementsFullDisplayTraining extends React.Component {
                 <div className={styles.overlaytext}>{this.props.value3}%</div>
               ) : null}
             </View>
-          </span>
         </div>
       </div>
     );

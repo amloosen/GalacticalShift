@@ -170,7 +170,6 @@ class ElementsFullDisplay extends React.Component {
     return (
       <div className={styles.cockpit}>
         <div className={styles.main}>
-          <span className={styles.centerThree}>
             <View style={styles.container}>
               <img
                 className={styles.elementsize}
@@ -224,7 +223,6 @@ class ElementsFullDisplay extends React.Component {
                 <div className={styles.overlaytext}>{this.props.value3}%</div>
               ) : null}
             </View>
-          </span>
         </div>
       </div>
     );

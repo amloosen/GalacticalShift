@@ -16,22 +16,12 @@ class TrainingIntroA extends React.Component {
     /////////////////////////////////////////////////////////////////////////////////
     // SET COMPONENT STATES
     this.state = {
-      // userID: userID,
-      sectionStartTime: introTrainingStartTime,
-      taskSessionTry: 1,
+      userID: this.props.location.state.userID,
+      date: this.props.location.state.date,
+      startTime: this.props.location.state.startTime,
       taskSession: "TrainingIntroA",
       instructScreenText: 1,
-
-      // outcomeNotAnsLog2: outcomeNotAnsLog2,
-
-      // trialNum: 1,
-      // trialTotal: trialTotal,
-      // trialRT: 0,
-      // trialTime: 0,
       instructScreen: true,
-      // testScreen: false,
-      //
-      // debug: false //if true, skip this section
     };
 
     this.handleInstructLocal = this.handleInstructLocal.bind(this);
@@ -65,7 +55,7 @@ class TrainingIntroA extends React.Component {
     }
   }
 
-  // handle key key_pressed
+
   _handleInstructKey = (event) => {
     var key_pressed;
 
@@ -89,10 +79,6 @@ class TrainingIntroA extends React.Component {
     }
   };
 
-  /////////////////////////////////////////////////////////////////////////////////
-
-  // }
-
   redirectToNextStage() {
     document.removeEventListener("keyup", this._handleInstructKey);
     document.removeEventListener("keyup", this._handleDebugKey);
@@ -101,7 +87,7 @@ class TrainingIntroA extends React.Component {
       state: {
         userID: this.state.userID,
         date: this.state.date,
-        startTime: this.state.startTime,
+        startTime: this.state.startTime
       },
     });
   }
@@ -109,10 +95,6 @@ class TrainingIntroA extends React.Component {
   componentDidMount() {
     window.scrollTo(0, 0);
   }
-
-  //////////////////////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////////////////////
-  // render time
 
   render() {
     let text;
@@ -152,7 +134,7 @@ class TrainingIntroA extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
-              <span className={styles.center}>TRAINING II</span>
+            <span className={styles.center}>TRAINING II</span>
               So how can you find out how many aliens live on a planet?
               <br />
               <br />
@@ -177,15 +159,16 @@ class TrainingIntroA extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
-              <span className={styles.center}>TRAINING II</span>
+            <span className={styles.center}>TRAINING II</span>
               <br />
               The aliens living on these planets rely on natural resources,
-              <br /> and thus the population size is related to the measurement
+              <br />   <br />
+              and thus the population size is related to the measurement
               of your instrument.
               <br />
               <br />
-              For example, the reading of the measurement could be reflecting
-              the population size (in million) one-to-one.
+              For example, the reading of the measurement  <br /> could be reflecting
+              the population size (in million) one-to-one.  <br />
               <br />
               This would mean that if the instrument shows you ‘40%’ 40 million
               aliens live on that planet. <br />
@@ -200,7 +183,7 @@ class TrainingIntroA extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
-              <span className={styles.center}>TRAINING II</span>
+            <span className={styles.center}>TRAINING II</span>
               <br />
               However, a challenge makes your mission more difficult:
               <br />
@@ -226,9 +209,9 @@ class TrainingIntroA extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
-              <span className={styles.center}>TRAINING II</span>
+            <span className={styles.center}>TRAINING II</span>
               <br />
-              For simplicity, we will now introduce you to the structure of the game by
+              For simplicity, we will now introduce you to the structure of the game by<br />
               using one instrument with simple associations that will change at some point.
               <br /><br />
               We want to see whether you can detect the associations and the changes.

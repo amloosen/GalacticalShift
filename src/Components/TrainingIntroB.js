@@ -6,30 +6,20 @@ import styles from "./style/taskStyle.module.css";
 class TrainingIntroB extends React.Component {
   constructor(props) {
     super(props);
-
-    // var user_info = this.props.location.state.user_info;
     var currentDate = new Date();
     var introTrainingStartTime = currentDate.toTimeString();
 
     /////////////////////////////////////////////////////////////////////////////////
     // SET COMPONENT STATES
     this.state = {
-      // userID: userID,
+      userID: this.props.location.state.userID,
+      date: this.props.location.state.date,
+      startTime: this.props.location.state.startTime,
       sectionStartTime: introTrainingStartTime,
       taskSessionTry: 1,
       taskSession: "TrainingIntroB",
       instructScreenText: 1,
-
-      // outcomeNotAnsLog2: outcomeNotAnsLog2,
-
-      // trialNum: 1,
-      // trialTotal: trialTotal,
-      // trialRT: 0,
-      // trialTime: 0,
       instructScreen: true,
-      // testScreen: false,
-      //
-      // debug: false //if true, skip this section
     };
 
     this.handleInstructLocal = this.handleInstructLocal.bind(this);
@@ -143,7 +133,7 @@ class TrainingIntroB extends React.Component {
               <br />
               <br />
               Again, sometimes this might change, which means suddenly a new
-              instrument will be relevant. You have to recognize these changes.
+              instrument will be relevant. <br /> <br />  You have to recognize these changes.
               <br />
               <br />
               This means, now you have to <br />
@@ -167,7 +157,7 @@ class TrainingIntroB extends React.Component {
           <div className={styles.main}>
             <p>
               <span className={styles.center}>TRAINING III</span>
-              Again, the true population size will for now be shown after each planet. This will make
+              Again, the true population size will for now be shown after each planet. <br /> <br /> This will make
               it possible for you to find out which instrument is of importance and how it is associated to the population size.
               <br />
               <br />

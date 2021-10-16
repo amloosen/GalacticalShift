@@ -3,7 +3,7 @@ import { API_URL } from "../config";
 import DisplaySliderTrainer from "./DisplaySliderTrainer";
 
 /////////////////////////////////////////////////////////////////////////////////
-class SliderPractice extends React.Component {
+class SliderTraining extends React.Component {
   constructor(props) {
     super(props);
     var currentDate = new Date(); // maybe change to local
@@ -16,12 +16,13 @@ class SliderPractice extends React.Component {
       .fill()
       .map(() => Array(3).fill(0));
 
+
     this.state = {
       sectionTime: timeString,
-      userID: this.props.userID,
-      date: this.props.date,
-      startTime: this.props.startTime,
-      taskSession: "SliderPractice",
+      userID: this.props.location.state.userID,
+      date: this.props.location.state.date,
+      startTime: this.props.location.state.startTime,
+      taskSession: "SliderTraining",
       practTotal: 7,
       practNum: 1,
       practRT: practRT,
@@ -29,6 +30,7 @@ class SliderPractice extends React.Component {
       timerCountDur: 10,
       startSgm: 30,
       startMu: 50,
+      study_part:1
     };
     this.redirectToNextStage = this.redirectToNextStage.bind(this);
 
@@ -43,37 +45,20 @@ class SliderPractice extends React.Component {
   }
   /////////////////////////////////////////////////////////////////////////////////
   componentDidMount() {
-
   }
 
   componentWillUnmount() {
 
 
   }
-  //
-  //   fetchUserInfo () {
-  //        fetch(`${API_URL}/questions_behaviour/last_user_no`)
-  //          .then(handleResponse)
-  //          .then((data) => {
-  //            const user_no_ = parseInt(data['new_user_no'])
-  //            //console.log("fetchUserInfo in Intro ", "user_no", user_no_)
-  //
-  //            this.setState({
-  //                    UserNo : user_no_,
-  //                    fetched: 1,
-  //                });
-  //        })
-  //          .catch((error) => {
-  //           console.log(error)
-  //        });
-  //       }
+
   /////////////////////////////////////////////////////////////////////////////////
   render() {
     return (
       <DisplaySliderTrainer
         trialSgmMu={this.state.practSgmMu}
         trialRT={this.state.practRT}
-        trialNum={this.state.practNum}
+        practNum={this.state.practNum}
         startSgm={this.state.startSgm}
         startMu={this.state.startMu}
         onSliderEnd={this.handleSliderData}
@@ -83,23 +68,14 @@ class SliderPractice extends React.Component {
   }
   /////////////////////////////////////////////////////////////////////////////////
   handleSliderData = (result, time) => {
-    let practSgmMu = this.state.practSgmMu;
-    let practRT = this.state.practRT;
-    let practNum = this.state.practNum;
-    practSgmMu[practNum - 1][1] = result.sgm;
-    practSgmMu[practNum - 1][2] = result.mu;
-    practRT[practNum - 1][0] = practNum;
-    practRT[practNum - 1][1] = time;
-    practRT[practNum - 1][2] = Math.round(performance.now());
-    practRT[practNum - 1][3] = practRT[practNum - 1][2] - time;
 
     if (this.state.practNum === this.state.practTotal) {
       this.redirectToNextStage();
     } else {
       this.setState({
-        practSgmMu: practSgmMu,
-        practRT: practRT,
-        practNum: practNum + 1,
+        practSgmMu: result,
+        practRT: time,
+        practNum: this.state.practNum + 1,
       });
     }
   };
@@ -114,7 +90,7 @@ class SliderPractice extends React.Component {
     };
 
     fetch(
-      `${API_URL}/start_info/create/` +
+      `${API_URL}/slider_training/create/` +
         this.state.userID +
         `/` +
         this.state.study_part,
@@ -135,7 +111,7 @@ class SliderPractice extends React.Component {
       state: {
         userID: this.state.userID,
         date: this.state.date,
-        startTime: this.state.startTime,
+        startTime: this.state.startTime
       },
     });
 
@@ -143,4 +119,4 @@ class SliderPractice extends React.Component {
   }
 }
 
-export default SliderPractice;
+export default SliderTraining;
