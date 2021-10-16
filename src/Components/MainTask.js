@@ -232,6 +232,7 @@ class MainTask extends React.Component {
           onSliderEnd={this.handleSliderData}
           startSgm={this.state.startSgm}
           startMu={this.state.startMu}
+
         />
       );
     } else if (this.state.disp_feedback === 1) {
@@ -243,6 +244,7 @@ class MainTask extends React.Component {
           all_element_values={this.state.all_element_values}
           all_true_pop_size={this.state.all_true_pop_size}
           trialSgmMu={this.state.trialSgmMu}
+          distHeight={this.state.distHeight}
           indicReq={this.state.indicReq}
           trialNum={this.state.trialNum}
           onFeedbackEnd={this.handleOutcomeData}
@@ -278,10 +280,11 @@ class MainTask extends React.Component {
     });
   };
 
-  handleSliderData = (trialSgmMu, trialRT) => {
+  handleSliderData = (trialSgmMu, trialRT, distHeight) => {
     this.setState({
       trialSgmMu: trialSgmMu,
       trialRT: trialRT,
+      distHeight: distHeight,
       disp_slider: 0,
       disp_feedback: 1,
     });

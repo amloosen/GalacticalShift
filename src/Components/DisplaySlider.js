@@ -21,7 +21,6 @@ class DisplaySlider extends React.Component {
   }
 
   logData = (result, distHeight,time) => {
-    debugger;
     let trialSgmMu = this.props.trialSgmMu;
     let trialRT = this.props.trialRT;
     let trialNum = this.props.trialNum;
