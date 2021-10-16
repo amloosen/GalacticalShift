@@ -12,13 +12,6 @@ class DisplayTrainElements extends React.Component {
     this.props.onElementsEnd(times_element1, times_element2, times_element3);
   };
 
-  // componentDidMount() {
-  //
-  // }
-  //
-  // componentWillUnmount() {
-  //
-  // }
 
   render() {
       return (

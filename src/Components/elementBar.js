@@ -6,7 +6,7 @@ const ElementBar = ({ progress }) => {
   return (
     <Spring from={{ percent: 0 }} to={{ percent: progress }}>
       {({ percent }) => (
-        <div class="progress vertical">
+        <div className="progress vertical">
           <div style={{ height: `${progress}%` }} className="progress-bar">
           <p className="text-danger">
             <span className="sr-only">{`${progress}%`}</span>

@@ -9,24 +9,25 @@ class Slider extends React.Component {
   constructor(props) {
     super(props);
     const xValues = range(0, 100.5, 0.5);
-    const yValues = xValues.map((x) =>
+    const yValues  = xValues.map((x) =>
       normalPdf(x, this.props.mu, this.props.sgm)
     );
     const yValuesAdapt = yValues.map(function (element) {
       return element * 1000;
     });
+    var dispheight_tmp = (Math.max.apply(null, yValuesAdapt)*5);
 
     this.state = {
       timesKeyDown: 0,
       mu: this.props.mu,
       sgm: this.props.sgm,
+      distHeight:  dispheight_tmp,
       series: [{ data: yValuesAdapt }],
       options: {
         chart: {
           toolbar: {
             show: false,
           },
-          height: 350,
           type: "line",
           zoom: {
             enabled: false,
@@ -107,10 +108,12 @@ class Slider extends React.Component {
     }));
     var mu = this.state.mu;
     var sgm = this.state.sgm;
+    var distHeight = this.state.distHeight;
+
     switch (event.keyCode) {
       case 32:
         let choiceTime0 = Math.round(performance.now());
-        this.props.onSpacebarHit({ mu, sgm }, choiceTime0);
+        this.props.onSpacebarHit({ mu, sgm}, distHeight,choiceTime0);
         this.resetSlider(50,30);
         break;
       case 38:
@@ -197,10 +200,13 @@ class Slider extends React.Component {
     const yValuesAdapt_tmp = yValues.map(function (element) {
       return element * 1000;
     });
+    var Dispheight_tmp = Math.max.apply(null, yValuesAdapt_tmp)*5;
+
     this.setState({
       series: [{ data: yValuesAdapt_tmp }],
       sgm: sgm,
       mu: mu,
+      distHeight: Dispheight_tmp
     });
   };
 
@@ -211,7 +217,7 @@ class Slider extends React.Component {
           options={this.state.options}
           series={this.state.series}
           type="line"
-          height="400px"
+          height={this.state.distHeight}
           width="800px"
           align="center"
         />

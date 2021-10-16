@@ -13,6 +13,10 @@ import MainTaskIntro from "./Components/MainTaskIntro";
 import MainTask from "./Components/MainTask";
 import EndPage from "./Components/EndPage";
 
+
+
+import ApexChart from "./Components/try_apexchart";
+
 import "./App.css";
 
 function App() {
@@ -31,6 +35,10 @@ function App() {
         <Route path="/TrainingTaskC" component={TrainingTaskC} exact />
         <Route path="/MainTask" component={MainTask} exact />
         <Route path="/EndPage" component={EndPage} exact />
+
+
+
+        <Route path="/try_apexchart" component={ApexChart} exact />
       </Switch>
     </BrowserRouter>
   );

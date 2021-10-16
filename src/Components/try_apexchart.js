@@ -1,18 +1,19 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+import ReactApexChart from "react-apexcharts";
 import { range } from "lodash";
 import normalPdf from "normal-pdf";
-import ReactApexChart from "react-apexcharts";
 
-class OutcomeSlider extends React.Component {
+class ApexChart extends React.Component {
   constructor(props) {
     super(props);
-
-    const xValues = range(0, 100, 0.5);
-    const yValues = xValues.map((x) => normalPdf(x, props.mu, props.sgm));
-    const yValuesAdapt = yValues.map(function (element) {
-      return element * 1000;
-    });
+    const xValues = range(0, 100.5, 0.5);
+    const yValuesAdapt  = xValues.map((x) =>
+      normalPdf(x, 50, 80)
+    );
+    // const yValuesAdapt = yValues.map(function (element) {
+    //   return element * 1000;
+    // });
 
     this.state = {
       series: [{ data: yValuesAdapt }],
@@ -48,20 +49,20 @@ class OutcomeSlider extends React.Component {
           },
         },
         xaxis: {
-          color: "#1C00ff00",
-          show: false,
+          color: "#d2eaf2",
           tickAmount: 5,
           overwriteCategories: ["0", "25", "50", "75", "100"],
           lines: {
             show: false,
           },
           axisTicks: {
-            show: false,
+            color: "#e7e6e2",
+            width: 3,
+            height: 10,
           },
           axisBorder: {
-            show: false,
-            color: "#1C00ff00",
-            opacity: 1,
+            show: true,
+            color: "#e7e6e2",
             height: 4,
             width: "100%",
           },
@@ -69,13 +70,7 @@ class OutcomeSlider extends React.Component {
             rotate: 0,
             style: {
               fontSize: "2.5vh",
-              colors: [
-                "#1C00ff00",
-                "#1C00ff00",
-                "#1C00ff00",
-                "#1C00ff00",
-                "#1C00ff00",
-              ],
+              colors: ["#e7e6e2", "#e7e6e2", "#e7e6e2", "#e7e6e2", "#e7e6e2"],
               offsetX: 0,
               offsetY: 0,
             },
@@ -89,19 +84,15 @@ class OutcomeSlider extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id="chart">
         <ReactApexChart
           options={this.state.options}
           series={this.state.series}
           type="line"
-          height={this.props.height}
-          width="800px"
-          align="center"
         />
       </div>
     );
   }
 }
-export default withRouter(OutcomeSlider);
 
-// export default OutcomeSlider;
+export default withRouter(ApexChart);

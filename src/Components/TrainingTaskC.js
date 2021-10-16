@@ -122,16 +122,16 @@ class TrainingTaskC extends React.Component {
 
     var currentDate = new Date(); // maybe change to local
     var timeString = currentDate.toTimeString();
-    debugger;
+
     this.state = {
       date: currentDate,
       sectionTime: timeString,
       userID: 12,
       startTime: 12,
       date: currentDate,
-      userID: this.props.location.state.userID,
-      date: this.props.location.state.date,
-      startTime: this.props.location.state.startTime,
+      // userID: this.props.location.state.userID,
+      // date: this.props.location.state.date,
+      // startTime: this.props.location.state.startTime,
       taskSession: "TrainingTaskC",
       traintrialTotal: nr_traintrial,
       traintrialPerBlock: nr_traintrial,
@@ -151,13 +151,13 @@ class TrainingTaskC extends React.Component {
       traintrialSgmMu: traintrialSgmMu,
       outcomeHeight: outcomeHeight_tmp,
       break: 0,
-      all_true_pop_size: true_pop_size.slice(0, 10),
+      all_true_pop_size: true_pop_size,
       all_element_values: all_element_values,
       disp_el: 1,
       disp_slider: 0,
       startMu: 50,
       startSgm: 30,
-      corr_elements: corPos_sq.slice(0, 10),
+      corr_elements: corPos_sq,
       study_part: 4,
     };
 
@@ -210,6 +210,7 @@ class TrainingTaskC extends React.Component {
           all_element_values={this.state.all_element_values}
           all_true_pop_size={this.state.all_true_pop_size}
           trialSgmMu={this.state.traintrialSgmMu}
+          distHeight={this.state.distHeight}
           indicReq={this.state.indicReq}
           trialNum={this.state.traintrialNum}
           onFeedbackEnd={this.handleOutcomeData}
@@ -245,10 +246,11 @@ class TrainingTaskC extends React.Component {
     });
   };
 
-  handleSliderData = (traintrialSgmMu, traintrialRT) => {
+  handleSliderData = (traintrialSgmMu, traintrialRT, distHeight) => {
     this.setState({
       traintrialSgmMu: traintrialSgmMu,
       traintrialRT: traintrialRT,
+      distHeight: distHeight,
       disp_slider: 0,
       disp_feedback: 1,
     });
@@ -302,7 +304,6 @@ class TrainingTaskC extends React.Component {
   };
 
   redirectToNextStage() {
-    debugger;
     let body = {
       sectionStartTime: this.state.sectionTime,
       startTime: this.state.startTime,

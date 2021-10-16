@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import styles from "./style/taskStyle.module.css";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import OutcomeSlider from "./SliderOutcome";
 import OutcomeSliderBar from "./SliderOutcomeBar";
 
@@ -23,21 +23,48 @@ class DispFeedback extends React.Component {
         <br />
         <br />
       </div>
+      // <div className={styles.cockpit}>
+      //   <div>{text2}</div>
+      //   <div>
+      //     <OutcomeSliderBar
+      //       mu={this.props.trialSgmMu[this.props.trialNum - 1][2]}
+      //       sgm={this.props.trialSgmMu[this.props.trialNum - 1][1]}
+      //       value={this.props.all_true_pop_size[this.props.trialNum - 1]}
+      //       distHeight={this.props.distHeight}
+      //       getBarHeight={this.handleHeight}
+      //     />
+      //   </div>
+      // </div>
     );
 
     return (
-      <div className={styles.cockpit}>
-        <div>{text2}</div>
-        <div>
-            <OutcomeSliderBar
-              mu={this.props.trialSgmMu[this.props.trialNum - 1][2]}
-              sgm={this.props.trialSgmMu[this.props.trialNum - 1][1]}
-              value={this.props.all_true_pop_size[this.props.trialNum - 1]}
-              getBarHeight={this.handleHeight}
+      <div className={styles.cockpitslider}>
+          <View style={stylesNew.header}>
+            <span className={styles.slidertext}>
+              <div>{text2}</div>
+            </span>
+          </View>
+          <span className={styles.slider}>
+          <OutcomeSliderBar
+                mu={this.props.trialSgmMu[this.props.trialNum - 1][2]}
+                sgm={this.props.trialSgmMu[this.props.trialNum - 1][1]}
+                value={this.props.all_true_pop_size[this.props.trialNum - 1]}
+                distHeight={this.props.distHeight}
+                getBarHeight={this.handleHeight}
               />
-            </div>
-          </div>
+          </span>
+      </div>
     );
   }
 }
 export default withRouter(DispFeedback);
+
+const stylesNew = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  header: {
+    width: "100%",
+    position: "absolute",
+  }
+});
