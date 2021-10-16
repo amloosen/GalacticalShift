@@ -61,7 +61,7 @@ class TrainingTaskC extends React.Component {
       return Number(each_element.toFixed(0));
     });
 
-    var nr_traintrial = 2;
+    var nr_traintrial = 20;
     //pregenerate the values of the remaining elements
     var check_al2 = [];
     var check_al1 = [];
@@ -122,16 +122,16 @@ class TrainingTaskC extends React.Component {
 
     var currentDate = new Date(); // maybe change to local
     var timeString = currentDate.toTimeString();
-
+debugger;
     this.state = {
       date: currentDate,
       sectionTime: timeString,
       userID:12,
       startTime:12,
       date:currentDate,
-      // userID: this.props.location.state.userID,
-      // date: this.props.location.state.date,
-      // startTime: this.props.location.state.startTime,
+      userID: this.props.location.state.userID,
+      date: this.props.location.state.date,
+      startTime: this.props.location.state.startTime,
       taskSession: "TrainingTaskC",
       traintrialTotal: nr_traintrial,
       traintrialPerBlock: nr_traintrial,
