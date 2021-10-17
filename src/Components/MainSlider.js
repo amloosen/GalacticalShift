@@ -15,13 +15,13 @@ class Slider extends React.Component {
     const yValuesAdapt = yValues.map(function (element) {
       return element * 1000;
     });
-    var dispheight_tmp = Math.max.apply(null, yValuesAdapt) * 5;
+    var distheight_tmp = Math.max.apply(null, yValuesAdapt) * 5;
 
     this.state = {
       timesKeyDown: 0,
       mu: this.props.mu,
       sgm: this.props.sgm,
-      distHeight: dispheight_tmp,
+      distHeight: distheight_tmp,
       series: [{ data: yValuesAdapt }],
       options: {
         chart: {
@@ -116,20 +116,23 @@ class Slider extends React.Component {
         this.props.onSpacebarHit({ mu, sgm }, distHeight, choiceTime0);
         this.resetSlider(50, 30);
         break;
-      case 38:
+      case 40:
         this.setState((prevState) => ({
           sgm: prevState.sgm + this.stepsSgm(prevState.timesKeyDown),
         }));
         this.setValue(this.state.mu, this.state.sgm);
         break;
-      case 40:
+      case 38:
         if (this.state.sgm <= 10) {
           return null;
         } else {
+          if (this.state.sgm>=16){
           this.setState((prevState) => ({
             sgm: prevState.sgm - this.stepsSgm(prevState.timesKeyDown),
           }));
+
           this.setValue(this.state.mu, this.state.sgm);
+        }
         }
         break;
       case 39:
@@ -159,7 +162,7 @@ class Slider extends React.Component {
   };
 
   stepsSgm = (pressed) => {
-    if (pressed < 10) {
+    if (pressed < 10 || this.state.sgm<=21) {
       return 1;
     } else if (pressed >= 10 && pressed < 30) {
       return 10;
@@ -182,14 +185,17 @@ class Slider extends React.Component {
 
   resetSlider = (mu, sgm) => {
     const xValues = range(0, 100.5, 0.5);
-    const yValues = xValues.map((x) => normalPdf(x, mu, sgm));
+    const yValues = xValues.map((x) => normalPdf(x, this.props.mu, this.props.sgm));
     const yValuesAdapt_tmp = yValues.map(function (element) {
       return element * 1000;
     });
+    var distheight_tmp = Math.max.apply(null, yValuesAdapt_tmp) * 5;
+
     this.setState({
       series: [{ data: yValuesAdapt_tmp }],
       sgm: sgm,
       mu: mu,
+      distHeight: distheight_tmp
     });
   };
 
@@ -200,16 +206,16 @@ class Slider extends React.Component {
       return element * 1000;
     });
 
-    var dispheight_tmp = Math.max.apply(null, yValuesAdapt_tmp) * 5;
-    if (dispheight_tmp > 457.6) {
-      dispheight_tmp = 457.6;
-    }
+    var distheight_tmp = Math.max.apply(null, yValuesAdapt_tmp) * 5;
+    // if (distheight_tmp > 457.6) {
+    //   distheight_tmp = 457.6;
+    // }
 
     this.setState({
       series: [{ data: yValuesAdapt_tmp }],
       sgm: sgm,
       mu: mu,
-      distHeight: dispheight_tmp,
+      distHeight: distheight_tmp,
     });
   };
 

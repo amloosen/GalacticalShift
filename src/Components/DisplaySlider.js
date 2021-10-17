@@ -44,7 +44,7 @@ class DisplaySlider extends React.Component {
     );
     return (
       <div className={styles.cockpitslider}>
-          <View style={stylesNew.header}>
+          <View style={stylesSliderRep.header}>
             <span className={styles.slidertext}>
               <div>{text}</div>
             </span>
@@ -63,7 +63,7 @@ class DisplaySlider extends React.Component {
 
 export default withRouter(DisplaySlider);
 
-const stylesNew = StyleSheet.create({
+const stylesSliderRep= StyleSheet.create({
   container: {
     flex: 1,
   },

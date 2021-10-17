@@ -253,7 +253,7 @@ class TrainingIntroC extends React.Component {
               <span className={styles.center}>
                 <img src={img_bar} alt="bar" />
               </span>
-              During this training stage the collected reward is however only
+              During this training stage the collected reward is only
               for demonstration <br />
               <br />
               and will be deleted after the training. <br />
@@ -277,7 +277,7 @@ class TrainingIntroC extends React.Component {
               Again, the true population size shown after each planet will make
               it possible <br />
               <br />
-              for you to find out which instrument (i.e. which colour) is of
+              for you to find out which instrument (i.e., which colour and shape) is of
               importance.
               <br />
               <br />

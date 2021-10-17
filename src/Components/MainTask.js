@@ -109,7 +109,7 @@ class MainTask extends React.Component {
     for (var k = 5; k <= nr_trial - 1; k += 20) {
       indicReq_tmp[k] = 1;
     }
-
+indicReq_tmp[0] = 1;//debugging
     var times_element1 = Array(nr_trial)
       .fill()
       .map(() => Array(3).fill(0));
@@ -291,12 +291,16 @@ class MainTask extends React.Component {
   };
 
   handleIndicData = (pressed) => {
+    debugger;
     var indicKey_tmp = this.state.indicKey;
+    var indicReq_tmp = this.state.indicReq;
+    indicReq_tmp[this.state.trialNum - 1] = 0;
     indicKey_tmp[this.state.trialNum - 1][1] = this.state.trialNum;
     indicKey_tmp[this.state.trialNum - 1][2] = pressed;
     this.setState({
       indicKey: indicKey_tmp,
-      disp_el: 0
+      disp_el: 1,
+      indicReq: indicReq_tmp
     });
   };
 

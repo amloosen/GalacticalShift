@@ -23,23 +23,11 @@ class DispFeedback extends React.Component {
         <br />
         <br />
       </div>
-      // <div className={styles.cockpit}>
-      //   <div>{text2}</div>
-      //   <div>
-      //     <OutcomeSliderBar
-      //       mu={this.props.trialSgmMu[this.props.trialNum - 1][2]}
-      //       sgm={this.props.trialSgmMu[this.props.trialNum - 1][1]}
-      //       value={this.props.all_true_pop_size[this.props.trialNum - 1]}
-      //       distHeight={this.props.distHeight}
-      //       getBarHeight={this.handleHeight}
-      //     />
-      //   </div>
-      // </div>
     );
 
     return (
       <div className={styles.cockpitslider}>
-          <View style={stylesNew.header}>
+          <View style={stylesSliderRep.header}>
             <span className={styles.slidertext}>
               <div>{text2}</div>
             </span>
@@ -59,7 +47,7 @@ class DispFeedback extends React.Component {
 }
 export default withRouter(DispFeedback);
 
-const stylesNew = StyleSheet.create({
+const stylesSliderRep= StyleSheet.create({
   container: {
     flex: 1,
   },

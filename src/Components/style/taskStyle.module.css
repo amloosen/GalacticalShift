@@ -67,11 +67,15 @@
 }
 
 .slider {
-  padding-bottom: 100px
+  padding-bottom: 10vh
 }
 
 .slidertext {
-  padding-bottom: 500px
+  padding-bottom: 70vh
+}
+
+.slidertextintro {
+  padding-bottom: 75vh
 }
 
 /* .textblock {
@@ -269,6 +273,6 @@ span.likeP {
   right: 0;
   pointer-events: none;
   color: white;
-  font-size: 100px;
+  font-size: 10vh;
   font-family: "Calibri", "Calibri";
 }

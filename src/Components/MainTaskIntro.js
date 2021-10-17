@@ -22,17 +22,7 @@ class MainTaskIntro extends React.Component {
       taskSessionTry: 1,
       taskSession: "MainTaskIntro",
       instructScreenText: 1,
-
-      // outcomeNotAnsLog2: outcomeNotAnsLog2,
-
-      // trialNum: 1,
-      // trialTotal: trialTotal,
-      // trialRT: 0,
-      // trialTime: 0,
       instructScreen: true,
-      // testScreen: false,
-      //
-      // debug: false //if true, skip this section
     };
 
     this.handleInstructLocal = this.handleInstructLocal.bind(this);
@@ -218,7 +208,10 @@ class MainTaskIntro extends React.Component {
               <br />
               <br />
               From now on, your collected reward will count towards your bonus
-              payment at the end of the experiment.
+
+              payment at the end
+              <br />
+              <br />of the experiment.
               <br /> <br />
               <span className={styles.center}>
                 [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
@@ -234,13 +227,19 @@ class MainTaskIntro extends React.Component {
               <br />
               <br />
               As you have learned in the training, only one instrument
-              determines the population size at a given moment.
-              <br /> <br />
-              To probe your understanding of the task we will sometimes,
-              randomly ask you to indicate which colour/instrument <br />
+              determines the population size
               <br />
-              is the important one at a given stage of the task by pressing the
-              indicated number key (see example below). <br />
+              <br />at a given moment.
+              To probe your understanding of the task we will sometimes,
+              <br />
+              <br />
+              randomly ask you to indicatewhich colour/instrument
+              is the important one
+              <br />
+              <br />at a given stage of the task by pressing
+              the
+              indicated number key (see example below).
+              <br />
               <br />
               Please answer the question as accurately as possible.
               <br /> <br />

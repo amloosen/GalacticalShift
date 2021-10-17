@@ -101,7 +101,7 @@ class OutcomeSliderBar extends React.Component {
   componentDidMount() {
     setTimeout(() => {
       this.props.getBarHeight(this.state.height_bar);
-    }, 5000);
+    }, 2000);
   }
 
   componentWillUnmount() {
@@ -112,15 +112,15 @@ class OutcomeSliderBar extends React.Component {
     const { options, series } = this.state;
 
     return (
-      <View style={stylesNew.container}>
-        <View style={stylesNew.header}>
+      <View style={stylesSliderRep.container}>
+        <View style={stylesSliderRep.header}>
           <OutcomeSlider
             mu={this.state.mu} //debug
             sgm={this.state.sgm} //debug
             height={this.props.distHeight}
           />
         </View>
-        <View style={stylesNew.circle}>
+        <View style={stylesSliderRep.circle}>
           <ReactApexChart
             options={this.state.options}
             series={this.state.series}
@@ -136,7 +136,7 @@ class OutcomeSliderBar extends React.Component {
 }
 export default OutcomeSliderBar;
 
-const stylesNew = StyleSheet.create({
+const stylesSliderRep= StyleSheet.create({
   container: {
     flex: 1,
   },

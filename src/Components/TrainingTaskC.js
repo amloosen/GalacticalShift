@@ -123,6 +123,7 @@ class TrainingTaskC extends React.Component {
     var currentDate = new Date(); // maybe change to local
     var timeString = currentDate.toTimeString();
 
+debugger;
     this.state = {
       date: currentDate,
       sectionTime: timeString,
@@ -247,6 +248,7 @@ class TrainingTaskC extends React.Component {
   };
 
   handleSliderData = (traintrialSgmMu, traintrialRT, distHeight) => {
+    debugger;
     this.setState({
       traintrialSgmMu: traintrialSgmMu,
       traintrialRT: traintrialRT,
