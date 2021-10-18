@@ -21,6 +21,18 @@
   font-weight: bold;
 }
 
+.quizend {
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  color: white;
+  font-size: 4vh;
+  font-family: "Helvetica";
+  font-weight: bold;
+}
+
 
 .cockpit {
   /* The image used */
