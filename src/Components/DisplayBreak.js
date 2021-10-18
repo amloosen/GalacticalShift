@@ -9,13 +9,13 @@ class DisplayBreak extends React.Component {
 
   handleBreakKey = (event) => {
     if (event.keyCode === 32) {
-      this.props.handleBreak(1);
+      this.props.onBreakEnd(1);
     }
   };
 
   componentDidMount() {
     setTimeout(() => {
-      this.props.handleBreak(1);
+      this.props.onBreakEnd(1);
     }, 60000); // if space not pressed timeout after a minute
     document.addEventListener("keyup", this.handleBreakKey);
   }
@@ -38,8 +38,8 @@ class DisplayBreak extends React.Component {
           You may take a short break.
           <br />
           <br />
-          You should take the opportunity to refresh your memory of the room and
-          outcome images.
+          You should take the opportunity to look away from the screen and <br />
+          <br />focus on something in the distance for a few seconds.
           <br />
           <br />
           <span className={styles.centerTwo}>

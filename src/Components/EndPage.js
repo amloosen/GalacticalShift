@@ -3,37 +3,53 @@ import { withRouter } from "react-router-dom";
 import { API_URL } from '../config.js';
 import styles from "./style/taskStyle.module.css";
 /////////////////////////////////////////////////////////////////////
+function roundTo(n, digits) {
+  if (digits === undefined) {
+    digits = 0;
+  }
+
+  var multiplicator = Math.pow(10, digits);
+  n = parseFloat((n * multiplicator).toFixed(11));
+  var test = Math.round(n) / multiplicator;
+  return +test.toFixed(digits);
+}
+/////////////////////////////////////////////////////////////////////
 class EndPage extends React.Component {
   constructor(props) {
     super(props);
+    const bonisum =  this.props.location.state.rewardTotal.reduce((result,number)=> result+number);
+    debugger;
+    var bonus = ((bonisum/(89*this.props.location.state.trialTotal))*5);
 
-    // const userID = this.props.location.state.userID;
-    // const date = this.props.location.state.date;
-    // const startTime = this.props.location.state.startTime;
-    // const bonus = this.props.location.state.bonus;
+        // if you earn negative then no bonus at all?
+        if (bonus < 0) {
+          bonus = 0;
+        } else if (bonus>5) {
+          bonus = 5;
+        }else {
+          bonus = roundTo(bonus, 2); //2 dec pl
+        }
 
     // This will change for the questionnaires going AFTER the main task
     this.state = {
-      // userID: userID,
-      // date: date,
-      // startTime: startTime,
+      // userID: this.props.location.state.userID,//debugger
+      userID: 12,//debugger
+      startTime:1,//debugger
+      // startTime: this.props.location.state.startTime,//debugger
+      // startTime: this.props.location.state.startTime,//debugger
+      sectionStartTime: 12,//debugger
       instructScreenText: 1,
       instructScreen: true,
       feedback: [],
-      bonus: 2,
       placeholder:
         "Were the task instructions clear? Did you encounter any problems?",
-      // bonus: bonus,
-
-
+      bonus: bonus,
+      study_part: 6
     };
 
-    this.handleInstructLocal = this.handleInstructLocal.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleInstructLocal(key_pressed) {
+  handleInstructLocal=(key_pressed)=> {
     var curText = this.state.instructScreenText;
     var whichButton = key_pressed;
 
@@ -69,32 +85,40 @@ class EndPage extends React.Component {
   };
 
   // for the feedback box
-  handleChange(event) {
+  handleChange=(event)=> {
     this.setState({ feedback: event.target.value });
   }
 
-  handleSubmit(event) {
+  handleSubmit= (event) =>{
     var userID = this.state.userID;
 
-    let saveString = {
+    let body = {
       userID: this.state.userID,
-      date: this.state.date,
+      sectionStartTime: this.state.sectionStartTime,
       startTime: this.state.startTime,
       feedback: this.state.feedback,
+      bonus: this.state.bonus
     };
-
-    // try {
-    //   fetch(`${API_URL}/feedback/` + userID, {
-    //     method: "POST",
-    //     headers: {
-    //       Accept: "application/json",
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(saveString),
-    //   });
-    // } catch (e) {
-    //   console.log("Cant post?");
-    // }
+debugger;
+    try {
+      fetch(
+        `${API_URL}/end_info/create/` +
+          this.state.userID +
+          `/` +
+          this.state.study_part,
+        {
+          //eigentlich auch in den body beim ersten mal
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
+        }
+      );
+    } catch (e) {
+      console.log("Cant post?");
+    }
 
     alert("Thanks for your feedback!");
     event.preventDefault();
@@ -121,7 +145,6 @@ class EndPage extends React.Component {
   }
 
   componentWillUnmount() {
-    // fix Warning: Can't perform a React state update on an unmounted component
     this.setState = (state, callback) => {
       return;
     };
@@ -147,10 +170,10 @@ class EndPage extends React.Component {
               mental health.
               <br />
               <br />
-              In this study, we were interested in how you detect complex associations and how you react when they change.
+              In this study, we were interested in how you detect complex associations and how <br /> <br />you react when they change.
               <br /> <br />
               Previous work have linked differences in behaviour to psychiatric
-              disorders, which we are aiming to understand better.
+              disorders, <br /> <br />which we are aiming to understand better.
               <br />
               <br />
               <span className={styles.centerTwo}>
@@ -251,7 +274,7 @@ class EndPage extends React.Component {
               </span>
               <span className={styles.centerTwo}>
                 If you are ready to return to Prolific, press [
-                <strong>SPACEBAR</strong>] and follow the pop-up to complete the
+                <strong>SPACEBAR</strong>] <br /><br />and follow the pop-up to complete the
                 session.
               </span>
               &nbsp;

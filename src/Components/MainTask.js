@@ -140,14 +140,15 @@ class MainTask extends React.Component {
     var trialPerBlock = nr_trial/5;
 
     this.state = {
-      // userID: this.props.userID,
+      // userID: this.props.location.state.userID,
       userID: 1, //debugger
       date: currentDate,
-      startTime: mainStartTime, //debugger
-      // startTime: this.props.startTime,
+      startTime: mainStartTime, //debugger this.props.location.state.startTime
+      // startTime: this.props.location.state.startTime,
       sectionStartTime: mainStartTime,
       taskSession: "MainTask",
-      trialTotal: nr_trial,
+      // trialTotal: nr_trial,//debugger
+      trialTotal: 10,
       trialPerBlock: 2, //debugger
       // trialPerBlock: trialPerBlock_tmp,
       trialNum: 1,
@@ -279,7 +280,6 @@ class MainTask extends React.Component {
         }
       );
     }
-debugger;
     if (this.state.blockNum===this.state.blockTotal){
       this.redirectToNextStage();
     }
@@ -436,14 +436,14 @@ debugger;
 
 
   redirectToNextStage() {
-    debugger;
     this.props.history.push({
       pathname: `/EndPage`,
       state: {
-        // userID: this.state.userID,
-        // date: this.state.date,
-        // startTime: this.state.startTime,
-        //rewardTotal: this.state.outcomeHeight
+        userID: this.state.userID,
+        date: this.state.date,
+        startTime: this.state.startTime,
+        rewardTotal: this.state.outcomeHeight,
+        trialTotal: this.state.trialTotal
       },
     });
   }
