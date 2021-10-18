@@ -32,6 +32,12 @@ class MainTaskIntro extends React.Component {
       if (e.keyCode === 32 && e.target === document.body) {
         e.preventDefault();
       }
+      if (e.keyCode === 39 && e.target === document.body) {
+        e.preventDefault();
+      }
+      if (e.keyCode === 37 && e.target === document.body) {
+        e.preventDefault();
+      }
     });
   }
   /////////////////////////////////////////////////////////////////////////////////
@@ -82,14 +88,14 @@ class MainTaskIntro extends React.Component {
   /////////////////////////////////////////////////////////////////////////////////
   redirectToNextStage() {
     document.removeEventListener("keyup", this._handleInstructKey);
-    // this.props.history.push({
-    //   pathname: `/MainTask`,
-    //   // state: {
-    //   //   // userID: this.state.userID,
-    //   //   // date: this.state.date,
-    //   //   // startTime: this.state.startTime,
-    //   // },
-    // });
+    this.props.history.push({
+      pathname: `/MainTask`,
+      state: {
+        userID: this.state.userID,
+        date: this.state.date,
+        startTime: this.state.startTime,
+      },
+    });
   }
 
   componentDidMount() {

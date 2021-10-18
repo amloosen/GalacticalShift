@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-// import { API_URL } from "./config";
+import { API_URL } from "../config";
 import DisplaySlider from "./DisplaySlider";
 import DisplayElements from "./DisplayElements";
 import DisplayFeedback from "./DisplayFeedback";
@@ -109,7 +109,7 @@ class MainTask extends React.Component {
     for (var k = 5; k <= nr_trial - 1; k += 20) {
       indicReq_tmp[k] = 1;
     }
-indicReq_tmp[0] = 1;//debugging
+
     var times_element1 = Array(nr_trial)
       .fill()
       .map(() => Array(3).fill(0));
@@ -126,16 +126,19 @@ indicReq_tmp[0] = 1;//debugging
     shuffle(element_colours);
 
     var currentDate = new Date();
-    var MainStartTime = currentDate.toTimeString();
+    var mainStartTime = currentDate.toTimeString();
 
     this.state = {
       // userID: this.props.userID,
+      userID: 1, //debugger
       date: currentDate,
+      startTime: mainStartTime, //debugger
       // startTime: this.props.startTime,
-      sectionStartTime: MainStartTime,
+      sectionStartTime: mainStartTime,
       taskSession: "MainTask",
       trialTotal: nr_trial,
-      trialPerBlock: 50,
+      trialPerBlock: 2, //debugger
+      // trialPerBlock: 50,
       trialNum: 1,
       trialBlockNum: 1,
       blockTotal: 5,
@@ -158,7 +161,16 @@ indicReq_tmp[0] = 1;//debugging
       disp_el: 1,
       disp_slider: 0,
       startMu: 50,
-      startSgm: 30
+      startSgm: 30,
+      study_part: 5,
+      //task data
+      corPos_sq: corPos_sq,
+      w0: w0,
+      relevant_w: relevant_w,
+      val_corr_elem: val_corr_elem,
+      epsilon: epsilon,
+      precededShift: precededShift,
+      epsilon: epsilon
     };
 
     //* prevents page from going to the right/left when arrows are pressed .*/
@@ -175,39 +187,89 @@ indicReq_tmp[0] = 1;//debugging
     });
   }
   /////////////////////////////////////////////////////////////////////////////////
-  // componentDidMount() {
-  //   // if (this.state.trialBlockNum===this.state.trialPerBlock){
-  //   //   this.sendBlock(this.state.userID, this.state.BlockNo)
-  //   // }
-  // }
-  // //
-  // componentWillUnmount() {
-  //   //
-  // }
-  //
-  // sendBlock(user_no_, block_no_) {
-  //   // var currentDate   = new Date();
-  //   // var BlockFinishTime    = currentDate.toTimeString();
-  //   // let trial_per_block = this.state.trial_per_block;
-  //   // let ind_block = block_no_-1;
-  //   //
-  //   // var subset_Horizon = this.state.block_info.Horizon.slice(0,trial_per_block);
-  //
-  //   let behaviour = {
-  //     BlockNo: block_no_,
-  //     //                         'Date'                : this.props.user_info.date,
-  //     //                         'UserStartTime'       : this.props.user_info.startTime,
-  //   };
 
-  // fetch(`${API_URL}/behaviour/` + user_no_ + `/` + block_no_, {
-  //    method: 'POST',
-  //    headers: {
-  //      'Accept': 'application/json',
-  //      'Content-Type': 'application/json',
-  //    },
-  //    body: JSON.stringify(behaviour)
-  //  })
-  // }
+  sendBlock(height) {
+    let trial_per_block = this.state.trialPerBlock;
+
+    var subset_all_element_values = this.state.all_element_values.slice(0,trial_per_block);
+    var subset_corr_elements = this.state.corPos_sq.slice(0,trial_per_block);
+    var subset_trialSgmMu = this.state.trialSgmMu.slice(0,trial_per_block);
+    var subset_times_element1 = this.state.times_element1.slice(0,trial_per_block);
+    var subset_times_element2 = this.state.times_element2.slice(0,trial_per_block);
+    var subset_times_element3 = this.state.times_element3.slice(0,trial_per_block);
+    var subset_all_true_pop_size = this.state.all_true_pop_size.slice(0,trial_per_block);
+    var subset_indicKey = this.state.indicKey.slice(0,trial_per_block);
+    var subset_outcomeHeight = height.slice(0,trial_per_block);
+    var subset_indicReq = this.state.indicReq.slice(0,trial_per_block);
+
+  let body = {
+      sectionStartTime: this.state.sectionStartTime,
+      startTime: this.state.startTime,
+      all_element_values: subset_all_element_values,
+      trialTotal: this.state.trialTotal,
+      corr_elements: subset_corr_elements,
+      trialSgmMu: subset_trialSgmMu,
+      times_element1: subset_times_element1,
+      times_element2: subset_times_element2,
+      times_element3: subset_times_element3,
+      element1Col: this.state.element1Col,
+      element2Col: this.state.element2Col,
+      element3Col: this.state.element3Col,
+      startSgm: this.state.startSgm,
+      startMu: this.state.startMu,
+      all_true_pop_size: subset_all_true_pop_size,
+      indicKey: subset_indicKey ,
+      outcomeHeight: subset_outcomeHeight,
+      trialRT: this.state.trialRT,
+      blockTotal: this.state.blockTotal,
+      indicReq: subset_indicReq,
+      trialPerBlock: this.state.trialPerBlock,
+      blockNum: this.state.blockNum,
+    };
+
+    fetch(
+      `${API_URL}/main_task/create/` +
+        this.state.userID +
+        `/` +
+        this.state.study_part,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }
+    );
+
+    if (this.state.blockNum === 1) {
+      let taskstruct = {
+        corPos_sq: this.state.corPos_sq,
+        w0: this.state.w0,
+        relevant_w: this.state.relevant_w,
+        val_corr_elem: this.state.val_corr_elem,
+        epsilon: this.state.epsilon,
+        precededShift: this.state.precededShift,
+        true_pop_size: this.state.all_true_pop_size
+      };
+      fetch(
+        `${API_URL}/task_params/create/` +
+          this.state.userID +
+          `/` +
+          this.state.study_part,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(taskstruct),
+        }
+      );
+    }
+
+    this.nextBlock();
+  }
   /////////////////////////////////////////////////////////////////////////////////
   render() {
     if (this.state.disp_el === 1) {
@@ -232,7 +294,6 @@ indicReq_tmp[0] = 1;//debugging
           onSliderEnd={this.handleSliderData}
           startSgm={this.state.startSgm}
           startMu={this.state.startMu}
-
         />
       );
     } else if (this.state.disp_feedback === 1) {
@@ -251,7 +312,7 @@ indicReq_tmp[0] = 1;//debugging
         />
       );
     } else if (
-      this.state.trialBlockNum === this.state.trialPerBlock&&
+      this.state.trialBlockNum === this.state.trialPerBlock &&
       this.state.BlockNo < this.state.blockTotal
     ) {
       return (
@@ -291,7 +352,6 @@ indicReq_tmp[0] = 1;//debugging
   };
 
   handleIndicData = (pressed) => {
-    debugger;
     var indicKey_tmp = this.state.indicKey;
     var indicReq_tmp = this.state.indicReq;
     indicReq_tmp[this.state.trialNum - 1] = 0;
@@ -300,21 +360,21 @@ indicReq_tmp[0] = 1;//debugging
     this.setState({
       indicKey: indicKey_tmp,
       disp_el: 1,
-      indicReq: indicReq_tmp
+      indicReq: indicReq_tmp,
     });
   };
 
   handleOutcomeData = (height) => {
     var outcomeHeight_tmp = this.state.outcomeHeight;
     outcomeHeight_tmp[this.state.trialNum - 1] = height;
-    this.nextTrial(0,outcomeHeight_tmp);
+    this.nextTrial(0, outcomeHeight_tmp);
   };
 
   handleBreak = (breakEnd) => {
-    this.nextTrial(1,0);
+    this.nextTrial(1, 0);
   };
 
-  nextTrial = (b,h) => {
+  nextTrial = (b, h) => {
     var trialNum_tmp = this.state.trialNum + 1;
     if (b === 1) {
       var block_tmp = this.state.blockNum + 1;
@@ -325,20 +385,38 @@ indicReq_tmp[0] = 1;//debugging
         trialBlockNum: trialBlockNum_tmp,
       });
     }
+
+    if (this.state.trialBlockNum === this.state.trialPerBlock ) {
+      this.sendBlock(h);
+    }
+
     if (this.state.trialNum === this.state.trialTotal) {
       this.redirectToNextStage();
     } else {
       var trialBlockNum_tmp = this.state.trialBlockNum + 1;
-      debugger;
       this.setState({
         trialNum: trialNum_tmp,
         trialBlockNum: trialBlockNum_tmp,
         height: h,
         disp_feedback: 0,
-        disp_el:1
+        disp_el: 1,
       });
     }
   };
+
+  nextBlock = () => {
+    var trialNum_tmp = this.state.trialNum + 1;
+    var trialBlockNum_tmp = 1;
+    var blockNum_tmp = this.state.blockNum +1;
+      this.setState({
+        trialNum: trialNum_tmp,
+        trialBlockNum: trialBlockNum_tmp,
+        disp_feedback: 0,
+        disp_el: 1,
+        blockNum: blockNum_tmp
+      });
+    }
+
 
   redirectToNextStage() {
     this.props.history.push({

@@ -127,11 +127,10 @@ debugger;
     this.state = {
       date: currentDate,
       sectionTime: timeString,
-      userID: 12,
-      startTime: 12,
+      userID: 12,//debugger
+      startTime: 12,//debugger
       date: currentDate,
       // userID: this.props.location.state.userID,
-      // date: this.props.location.state.date,
       // startTime: this.props.location.state.startTime,
       taskSession: "TrainingTaskC",
       traintrialTotal: nr_traintrial,
