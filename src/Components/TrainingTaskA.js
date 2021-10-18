@@ -35,11 +35,11 @@ class TrainingTaskA extends React.Component {
     var currentDate = new Date(); // maybe change to local
     var timeString = currentDate.toTimeString();
 
-    var nr_train_a_trial = 10;
+    var nr_traintrial = 10;
     var val_options = range(0, 110, 10);
     val_options.splice(val_options.indexOf(50), 1); //remove the 50 to make it clearer which element is correct
     var random_val = [];
-    for (var i = 0; i <= nr_train_a_trial - 1; i++) {
+    for (var i = 0; i <= nr_traintrial - 1; i++) {
       var val_tmp = val_options[~~(Math.random() * val_options.length)];
       do {
         var val_tmp = val_options[~~(Math.random() * val_options.length)];
@@ -59,7 +59,7 @@ class TrainingTaskA extends React.Component {
       inverse[3],
       inverse[4]
     );
-    let array_tmp = Array(nr_train_a_trial).fill(0);
+    let array_tmp = Array(nr_traintrial).fill(0);
 
     var corr_pos = [4, 4, 4, 4, 4, 5, 5, 5, 5]; //1 is left and 2 is right; determine where the correct value is displayed
     shuffle(corr_pos);
@@ -83,7 +83,7 @@ class TrainingTaskA extends React.Component {
       elements: 1,
       disp_opt: 0,
       traintrialNum: 1,
-      traintrialTotal: nr_train_a_trial,
+      traintrialTotal: nr_traintrial,
       feedback: 0,
       all_corr_values: corr_values,
       valTrainElem: corr_values[0],

@@ -69,13 +69,22 @@ class MainTask extends React.Component {
       var restricted = [val_corr_elem[i], 100 - val_corr_elem[i]];
       if (i < nr_trial / 2) {
         check_al1[i] = getRand(restricted);
-        check_al2[i] = 100 - val_corr_elem[i];
+        var restrictedsecond = [
+          val_corr_elem[i],
+          100 - val_corr_elem[i],
+          check_al1[i],
+        ];
+        check_al2[i] = getRand(restrictedsecond);
       } else {
-        check_al1[i] = 100 - val_corr_elem[i];
+        var restrictedsecond = [
+          val_corr_elem[i],
+          100 - val_corr_elem[i],
+          check_al1[i],
+        ];
         check_al2[i] = getRand(restricted);
+        check_al1[i] = getRand(restrictedsecond);
       }
     }
-
     var all_element_values = Array(nr_trial)
       .fill()
       .map(() => Array(3).fill(0));

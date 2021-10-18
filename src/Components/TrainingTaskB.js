@@ -43,11 +43,11 @@ class TrainingTaskB extends React.Component {
     var currentDate = new Date(); // maybe change to local
     var timeString = currentDate.toTimeString();
 
-    var nr_train_a_trial = 12;
+    var nr_traintrial = 12;
     var val_options = range(0, 110, 10);
     val_options.splice(val_options.indexOf(50), 1); //remove the 50 to make it clearer which element is correct
     var random_val = [];
-    for (var i = 0; i <= nr_train_a_trial - 1; i++) {
+    for (var i = 0; i <= nr_traintrial - 1; i++) {
       var val_tmp = val_options[~~(Math.random() * val_options.length)];
       do {
         var val_tmp = val_options[~~(Math.random() * val_options.length)];
@@ -68,7 +68,7 @@ class TrainingTaskB extends React.Component {
       inverse[4],
       inverse[5]
     );
-    let array_tmp = Array(nr_train_a_trial).fill(0);
+    let array_tmp = Array(nr_traintrial).fill(0);
 
     var corr_pos = [4, 4, 4, 4, 4, 5, 5, 5, 5, 5]; //1 is left and 2 is right; determine where the correct value is displayed
     shuffle(corr_pos);
@@ -81,12 +81,12 @@ class TrainingTaskB extends React.Component {
 
     var corr_elem_tmp = [1, 2, 3]; //1 is left and 2 is right; determine where the correct value is displayed
     shuffle(corr_elem_tmp);
-    var corr_elem = Array(nr_train_a_trial).fill(0);
+    var corr_elem = Array(nr_traintrial).fill(0);
 
-    for (var i = 0; i <= nr_train_a_trial - 1; i++) {
-      if (i < nr_train_a_trial / 3) {
+    for (var i = 0; i <= nr_traintrial - 1; i++) {
+      if (i < nr_traintrial / 3) {
         corr_elem[i] = corr_elem_tmp[0];
-      } else if (i >= nr_train_a_trial / 3 && i < (nr_train_a_trial / 3) * 2) {
+      } else if (i >= nr_traintrial / 3 && i < (nr_traintrial / 3) * 2) {
         corr_elem[i] = corr_elem_tmp[1];
       } else {
         corr_elem[i] = corr_elem_tmp[2];
@@ -96,9 +96,9 @@ class TrainingTaskB extends React.Component {
     var check_al2 = [];
     var check_al1 = [];
 
-    for (var i = 0; i <= nr_train_a_trial - 1; i++) {
+    for (var i = 0; i <= nr_traintrial - 1; i++) {
       var restricted = [corr_values[i], 100 - corr_values[i]];
-      if (i < nr_train_a_trial / 2) {
+      if (i < nr_traintrial / 2) {
         check_al1[i] = getRand(restricted);
         var restrictedsecond = [
           corr_values[i],
@@ -116,12 +116,12 @@ class TrainingTaskB extends React.Component {
         check_al1[i] = getRand(restrictedsecond);
       }
     }
-    debugger;
-    var all_element_values = Array(nr_train_a_trial)
+
+    var all_element_values = Array(nr_traintrial)
       .fill()
       .map(() => Array(3).fill(0));
 
-    for (var i = 0; i <= nr_train_a_trial - 1; i++) {
+    for (var i = 0; i <= nr_traintrial - 1; i++) {
       all_element_values[i][corr_elem[i] - 1] = corr_values[i];
       if (corr_elem[i] === 1) {
         all_element_values[i][1] = check_al1[i];
@@ -144,7 +144,7 @@ class TrainingTaskB extends React.Component {
       var ansTwo = corr_values[0];
     }
 
-    let indicReq_tmp = Array(nr_train_a_trial)
+    let indicReq_tmp = Array(nr_traintrial)
       .fill()
       .map(() => Array(2).fill(0));
 
@@ -155,7 +155,7 @@ class TrainingTaskB extends React.Component {
       startTime: this.props.location.state.startTime,
       taskSession: "TrainingTaskB",
       traintrialNum: 1,
-      traintrialTotal: nr_train_a_trial,
+      traintrialTotal: nr_traintrial,
       feedback: 0,
       disp_el: 1,
       disp_opt: 0,
