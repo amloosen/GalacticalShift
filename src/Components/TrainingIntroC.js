@@ -216,10 +216,10 @@ class TrainingIntroC extends React.Component {
               <strong>An additional hint:</strong>
               <br />
               <br />
-              As you might have noticed in the trainig session, planets (trials)
-              that you encounter after each other, <br />
-              <br />
-              are more similar to each other than planets that are further
+              As you might have noticed in the trainig session, planets <br /><br />(trials)
+              that you encounter after each other,
+              are more similar to each other <br />
+              <br />than planets that are further
               apart.
               <br />
               <br />

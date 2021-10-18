@@ -113,7 +113,7 @@ class TrainingIntroA extends React.Component {
               <br />
               Well done so far!
               <br /> <br />
-              We will now introduce you to the main task itself, letting you
+              We will now introduce you to the main task itself, letting you<br /><br />
               complete few training trials.
               <br /> <br />
               For today&apos;s game, you will be a space explorer on an
@@ -124,7 +124,7 @@ class TrainingIntroA extends React.Component {
               <br />
               <br />
               It is critical that you give your best estimate of the alien
-              population size for the mission to be successful.
+              population size <br /><br />for the mission to be successful.
               <br /> <br />
               <span className={styles.center}>
                 <i>(Use the ← → keys to navigate the pages.)</i>
@@ -175,7 +175,7 @@ class TrainingIntroA extends React.Component {
               <br />
               <br />
               For example, the reading of the measurement could be reflecting
-              the population size (in million) one-to-one. <br />
+              the population size <br /><br />(in million) one-to-one. <br />
               <br />
               This would mean that if the instrument shows you ‘40%’ 40 million
               aliens live on that planet. <br />
@@ -273,7 +273,7 @@ class TrainingIntroA extends React.Component {
               <br />
               <br />
               This will make it possible for you to find out how the instrument
-              relates to the alien population size.
+              relates to <br /><br />the alien population size.
               <br /> <br />
               Let's practice this!
               <br /> <br />

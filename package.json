@@ -22,7 +22,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-spring": "^9.2.4",
-    "survey-react": "^1.8.52",
+    "survey-react": "^1.8.72",
+    "surveyjs-react": "^1.0.1",
     "web-vitals": "^2.0.1"
   },
   "scripts": {

@@ -140,7 +140,7 @@ class TrainingIntroB extends React.Component {
               <br />
               <br />
               Again, sometimes this might change, which means suddenly a new
-              instrument will be relevant. <br /> <br /> You have to recognize
+              instrument <br /><br />will be relevant. <br /> <br /> You have to recognize
               these changes.
               <br />
               <br />
@@ -153,7 +153,7 @@ class TrainingIntroB extends React.Component {
               <br />
               <br />
               <strong>(3)</strong> detect when suddenly a new instrument is
-              relevant or when the association to the population size changes.
+              relevant <br /><br />or when the association to the population size changes.
               <br />
               <br />
               <span className={styles.center}>

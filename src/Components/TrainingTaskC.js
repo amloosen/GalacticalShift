@@ -133,7 +133,6 @@ class TrainingTaskC extends React.Component {
     var currentDate = new Date(); // maybe change to local
     var timeString = currentDate.toTimeString();
 
-debugger;
     this.state = {
       date: currentDate,
       sectionTime: timeString,
@@ -257,7 +256,6 @@ debugger;
   };
 
   handleSliderData = (traintrialSgmMu, traintrialRT, distHeight) => {
-    debugger;
     this.setState({
       traintrialSgmMu: traintrialSgmMu,
       traintrialRT: traintrialRT,
@@ -352,7 +350,7 @@ debugger;
     );
     ////////////////////////
     this.props.history.push({
-      pathname: `/MainTaskIntro`,
+      pathname: `/DisplayQuiz`,
       state: {
         userID: this.state.userID,
         date: this.state.date,

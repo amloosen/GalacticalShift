@@ -7,39 +7,58 @@ class DisplayQuiz extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showQuiz: 1,
+      showIntro: 1,
+      showQuiz: 0,
       nextRound: 0,
-      allCorrect: 0
+      allCorrect: 0,
     };
   }
+  handleStartKey = (event) => {
+    var key_pressed;
 
+    switch (event.keyCode) {
+      case 32:
+        //    this is SPACEBAR
+        key_pressed = 10;
+          if (this.state.allCorrect === 0){
+        this.setState({ showIntro: 0, showQuiz: 1 });}
+        else {
+          this.redirectToNextStage();
+        }
+        break;
+      default:
+    }
+  };
   componentDidMount() {
-
+    document.addEventListener("keyup", this.handleStartKey)
+    // if (this.state.showIntro === 1) {
+    //   setTimeout(() => {
+    //     this.setState({ showIntro: 0, showQuiz: 1 });
+    //   }, 5000);
+    // }
   }
 
   componentWillUnmount() {
-    clearTimeout()
+    document.removeEventListener("keyup", this.handleStartKey)
+    clearTimeout();
   }
 
-componentDidUpdate(){
-  if (this.state.nextRound==1) {
-  setTimeout(() => {
-    this.nextRound();
-  },3000);
-}
-if (this.state.allCorrect===1) {
-setTimeout(() => {
-  this.redirectToNextStage();
-},3000);
-}
-
-}
+  componentDidUpdate() {
+    if (this.state.nextRound == 1) {
+      setTimeout(() => {
+        this.nextRound();
+      }, 3000);
+    }
+    if (this.state.allCorrect === 1) {
+        document.addEventListener("keyup", this.handleStartKey)
+    }
+  }
 
   nextRound = () => {
-      this.setState({
-        showQuiz: 1,
-        nextRound: 0,
-      });
+    this.setState({
+      showQuiz: 1,
+      nextRound: 0,
+    });
   };
 
   quizCompleted = (score) => {
@@ -47,10 +66,10 @@ setTimeout(() => {
       this.setState({
         showQuiz: 0,
         nextRound: 0,
-        allCorrect:1
+        allCorrect: 1,
       });
       // this.redirectToNextStage();
-    } else if (score<5){
+    } else if (score < 5) {
       this.setState({
         showQuiz: 0,
         nextRound: 1,
@@ -67,9 +86,9 @@ setTimeout(() => {
           <Quiz onQuizEnd={this.quizCompleted} />
         </div>
       );
-    } else if (this.state.nextRound===1) {
+    } else if (this.state.nextRound === 1) {
       let text = (
-        <div className={styles.quizend}>
+        <div className={styles.main}>
           <p>
             <br />
             You unfortunately, made some mistakes.
@@ -85,16 +104,22 @@ setTimeout(() => {
           <div className={styles.textblock}>{text}</div>
         </div>
       );
-    } else if (this.state.allCorrect===1) {
+    } else if (this.state.allCorrect === 1) {
       let text = (
-        <div className={styles.quizend}>
+        <div className={styles.main}>
           <p>
             <br />
             Congratulations, you succesfully passed the quiz and will now
-            <br /><br />
+            <br />
+            <br />
             start the main game.
-            <br /><br />
+            <br />
+            <br />
             Good luck!
+            <br /><br />
+            <span className={styles.center}>
+              Press the [<strong>SPACEBAR</strong>] to start the main game.
+            </span>
             <br />
           </p>
         </div>
@@ -104,9 +129,35 @@ setTimeout(() => {
           <div className={styles.textblock}>{text}</div>
         </div>
       );
-}
+    } else if (this.state.showIntro === 1) {
+      let text = (
+        <div className={styles.main}>
+          <p>
+            <br />
+            Good job, you are done with the training.
+            <br />
+            <br />
+            You will now see a short quiz. <br />
+            <br />
+            Answer all questions correctly in order to proceed to the main game.
+            <br />
+            <br />
+            Good luck!
+            <br /><br />
+            <span className={styles.center}>
+              Press the [<strong>SPACEBAR</strong>] to start the quiz.
+            </span>
+            <br />
+          </p>
+        </div>
+      );
+      return (
+        <div className={styles.cockpit}>
+          <div className={styles.textblock}>{text}</div>
+        </div>
+      );
+    }
   }
-
   redirectToNextStage(h) {
     this.props.history.push({
       pathname: `/MainTask`,

@@ -137,6 +137,8 @@ class MainTask extends React.Component {
     var currentDate = new Date();
     var mainStartTime = currentDate.toTimeString();
 
+    var trialPerBlock = nr_trial/5;
+
     this.state = {
       // userID: this.props.userID,
       userID: 1, //debugger
@@ -147,8 +149,9 @@ class MainTask extends React.Component {
       taskSession: "MainTask",
       trialTotal: nr_trial,
       trialPerBlock: 2, //debugger
-      // trialPerBlock: 50,
+      // trialPerBlock: trialPerBlock_tmp,
       trialNum: 1,
+      showBreak:0,
       trialBlockNum: 1,
       blockTotal: 5,
       blockNum: 1,
@@ -276,8 +279,10 @@ class MainTask extends React.Component {
         }
       );
     }
-
-    this.nextBlock();
+debugger;
+    if (this.state.blockNum===this.state.blockTotal){
+      this.redirectToNextStage();
+    }
   }
   /////////////////////////////////////////////////////////////////////////////////
   render() {
@@ -320,10 +325,12 @@ class MainTask extends React.Component {
           onFeedbackEnd={this.handleOutcomeData}
         />
       );
-    } else if (
-      this.state.trialBlockNum === this.state.trialPerBlock &&
-      this.state.BlockNo < this.state.blockTotal
-    ) {
+    }
+    if (
+      this.state.showBreak ===1
+    )
+    debugger;
+    {
       return (
         <DisplayBreak
           blockTotal={this.state.blockTotal}
@@ -380,7 +387,7 @@ class MainTask extends React.Component {
   };
 
   handleBreak = (breakEnd) => {
-    this.nextTrial(1, 0);
+        this.nextBlock();
   };
 
   nextTrial = (b, h) => {
@@ -397,10 +404,11 @@ class MainTask extends React.Component {
 
     if (this.state.trialBlockNum === this.state.trialPerBlock ) {
       this.sendBlock(h);
-    }
-
-    if (this.state.trialNum === this.state.trialTotal) {
-      this.redirectToNextStage(h);
+      this.setState({
+        showBreak: 1,
+        disp_el:0,
+        disp_feedback:0
+      });
     } else {
       var trialBlockNum_tmp = this.state.trialBlockNum + 1;
       this.setState({
@@ -427,16 +435,15 @@ class MainTask extends React.Component {
     }
 
 
-  redirectToNextStage(h) {
-    this.sendBlock(h);
-
+  redirectToNextStage() {
+    debugger;
     this.props.history.push({
       pathname: `/EndPage`,
       state: {
         // userID: this.state.userID,
         // date: this.state.date,
         // startTime: this.state.startTime,
-        //rewardTotal:
+        //rewardTotal: this.state.outcomeHeight
       },
     });
   }

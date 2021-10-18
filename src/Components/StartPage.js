@@ -36,9 +36,6 @@ class StartPage extends React.Component {
       study_part: 0,
     };
 
-    // update State when consent is complete
-    // this.fetchParticipantInfo.bind(this);
-    // this.postParticipant.bind(this);
     this.redirectToTarget = this.redirectToTarget.bind(this);
   }
 
@@ -96,7 +93,9 @@ class StartPage extends React.Component {
   }
 
   render() {
-    Consent.StylesManager.applyTheme("default");
+
+Consent.StylesManager.applyTheme('default');
+
     // Full consent, non-NHS version
     var json1 = {
       title: null,
@@ -287,11 +286,13 @@ class StartPage extends React.Component {
           to the study unless you give your full consent.
           <br />
           <br />
+          <div className="surveyElement">
           <Consent.Survey
             json={json1}
             showCompletedPage={false}
             onComplete={this.redirectToTarget}
           />
+            </div>
         </div>
       );
     } else {

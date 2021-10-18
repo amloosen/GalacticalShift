@@ -20,17 +20,17 @@ const Quiz = ({ onQuizEnd = () => {} }) => {
       answerOptions: [
         {
           answerText:
-						"Find out which instrument is determining the population size and how.",
+						"Find out (1)  which instrument is determining the population size and (2) how it is associated with it.",
 						isCorrect: false,
         },
         {
           answerText:
-            "Find out which instrument is determining the population size the population size, how it is associated with it and how this changes.",
+            "Find out (1) which instrument is determining the population size, (2) how it is associated with it and (3) how this changes.",
           isCorrect: true,
         },
         {
           answerText:
-            "Find out which two instruments is determining the population size, how the slider is associated with it and how this changes.",
+            "Find out (1) which two instruments is determining the population size,(2) how the slider is associated with it and (3) how this changes.",
           isCorrect: false,
         },
       ],
@@ -80,7 +80,6 @@ const Quiz = ({ onQuizEnd = () => {} }) => {
   const [score, setScore] = useState(1);
 
   const handleAnswerOptionClick = (isCorrect) => {
-    debugger;
     if (isCorrect) {
       setScore(score + 1);
     }

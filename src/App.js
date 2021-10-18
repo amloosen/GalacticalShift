@@ -9,17 +9,10 @@ import TrainingIntroB from "./Components/TrainingIntroB";
 import TrainingTaskB from "./Components/TrainingTaskB";
 import TrainingIntroC from "./Components/TrainingIntroC";
 import TrainingTaskC from "./Components/TrainingTaskC";
-
-import Quiz from "./Components/Quiz";
 import DisplayQuiz from "./Components/DisplayQuiz";
-
 import MainTaskIntro from "./Components/MainTaskIntro";
 import MainTask from "./Components/MainTask";
 import EndPage from "./Components/EndPage";
-
-
-
-import ApexChart from "./Components/try_apexchart";
 
 import "./App.css";
 
@@ -34,18 +27,12 @@ function App() {
         <Route path="/TrainingIntroB" component={TrainingIntroB} exact />
         <Route path="/TrainingIntroC" component={TrainingIntroC} exact />
         <Route path="/MainTaskIntro" component={MainTaskIntro} exact />
-
-        <Route path="/Quiz" component={Quiz} exact />
-          <Route path="/DisplayQuiz" component={DisplayQuiz} exact />
+        <Route path="/DisplayQuiz" component={DisplayQuiz} exact />
         <Route path="/TrainingTaskA" component={TrainingTaskA} exact />
         <Route path="/TrainingTaskB" component={TrainingTaskB} exact />
         <Route path="/TrainingTaskC" component={TrainingTaskC} exact />
         <Route path="/MainTask" component={MainTask} exact />
         <Route path="/EndPage" component={EndPage} exact />
-
-
-
-        <Route path="/try_apexchart" component={ApexChart} exact />
       </Switch>
     </BrowserRouter>
   );
