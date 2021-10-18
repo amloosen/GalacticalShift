@@ -400,7 +400,7 @@ class MainTask extends React.Component {
     }
 
     if (this.state.trialNum === this.state.trialTotal) {
-      this.redirectToNextStage();
+      this.redirectToNextStage(h);
     } else {
       var trialBlockNum_tmp = this.state.trialBlockNum + 1;
       this.setState({
@@ -428,6 +428,8 @@ class MainTask extends React.Component {
 
 
   redirectToNextStage() {
+    this.sendBlock(h);
+    
     this.props.history.push({
       pathname: `/EndPage`,
       state: {
