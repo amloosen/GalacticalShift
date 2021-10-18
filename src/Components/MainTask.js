@@ -427,9 +427,9 @@ class MainTask extends React.Component {
     }
 
 
-  redirectToNextStage() {
+  redirectToNextStage(h) {
     this.sendBlock(h);
-    
+
     this.props.history.push({
       pathname: `/EndPage`,
       state: {

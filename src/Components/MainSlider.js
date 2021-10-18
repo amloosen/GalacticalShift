@@ -6,6 +6,7 @@ import React from "react";
 import ReactApexChart from "react-apexcharts";
 
 class Slider extends React.Component {
+  _isMounted = false;
   constructor(props) {
     super(props);
     const xValues = range(0, 100.5, 0.5);
@@ -89,13 +90,17 @@ class Slider extends React.Component {
   }
   ////////////////////////////////////////////////////////////////////////////////
   componentDidMount() {
+    this._isMounted = true;
     document.addEventListener("keydown", this.handleKeyDown);
     document.addEventListener("keyup", this.handleKeyUp);
+      this.resetSlider(50, 30);
   }
 
   componentWillUnmount() {
+    this._isMounted = false;
     document.removeEventListener("keydown", this.handleKeyDown);
     document.removeEventListener("keyup", this.handleKeyUp);
+
   }
 
   handleKeyUp = () => {
@@ -114,7 +119,10 @@ class Slider extends React.Component {
       case 32:
         let choiceTime0 = Math.round(performance.now());
         this.props.onSpacebarHit({ mu, sgm }, distHeight, choiceTime0);
-        this.resetSlider(50, 30);
+        if (this._isMounted) {
+            this.resetSlider(50, 30);
+        }
+
         break;
       case 40:
         this.setState((prevState) => ({
@@ -207,9 +215,6 @@ class Slider extends React.Component {
     });
 
     var distheight_tmp = Math.max.apply(null, yValuesAdapt_tmp) * 5;
-    // if (distheight_tmp > 457.6) {
-    //   distheight_tmp = 457.6;
-    // }
 
     this.setState({
       series: [{ data: yValuesAdapt_tmp }],
