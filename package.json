@@ -18,7 +18,8 @@
     "react-scripts": "^4.0.3",
     "react-spring": "^9.3.0",
     "react-transition-group": "^4.4.2",
-    "survey-react": "^1.8.72"
+    "survey-react": "^1.8.72",
+    "webpack-dev-server": "^2.5.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
