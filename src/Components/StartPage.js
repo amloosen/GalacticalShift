@@ -94,8 +94,16 @@ class StartPage extends React.Component {
 
   render() {
 
-Consent.StylesManager.applyTheme('default');
+// var consentstyle = Consent.StylesManager.applyTheme('default');
+let defaultThemeColors = Consent
+    .StylesManager
+    .ThemeColors["default"];
 
+// Change the main color
+defaultThemeColors["$main-color"] = "#363868";
+defaultThemeColors["$sv_complete_btn"] = "#8c94b4";
+// Apply your changes
+Consent.StylesManager.applyTheme();
     // Full consent, non-NHS version
     var json1 = {
       title: null,

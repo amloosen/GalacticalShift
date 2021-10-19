@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./style/quizStyles.css";
+import "./style/quizStylesAdapt.css";
 import styles from "./style/taskStyle.module.css";
 
 const Quiz = ({ onQuizEnd = () => {} }) => {
