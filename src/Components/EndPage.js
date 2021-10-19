@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { API_URL } from '../config.js';
+import { API_URL } from "../config.js";
 import styles from "./style/taskStyle.module.css";
 /////////////////////////////////////////////////////////////////////
 function roundTo(n, digits) {
@@ -17,39 +17,37 @@ function roundTo(n, digits) {
 class EndPage extends React.Component {
   constructor(props) {
     super(props);
-    const bonisum =  this.props.location.state.rewardTotal.reduce((result,number)=> result+number);
-    debugger;
-    var bonus = ((bonisum/(89*this.props.location.state.trialTotal))*5);
-
-        // if you earn negative then no bonus at all?
-        if (bonus < 0) {
-          bonus = 0;
-        } else if (bonus>5) {
-          bonus = 5;
-        }else {
-          bonus = roundTo(bonus, 2); //2 dec pl
-        }
+    const bonisum = this.props.location.state.rewardTotal.reduce(
+      (result, number) => result + number
+    ); //debugger
+    var bonus = (bonisum / (89 * this.props.location.state.trialTotal)) * 5;
+    if (bonus < 0) {
+      bonus = 0;
+    } else if (bonus > 5) {
+      bonus = 5;
+    } else {
+      bonus = roundTo(bonus, 2); //2 dec pl
+    }
 
     // This will change for the questionnaires going AFTER the main task
     this.state = {
       // userID: this.props.location.state.userID,//debugger
-      userID: 12,//debugger
-      startTime:1,//debugger
+      userID: 12, //debugger
+      startTime: 1, //debugger
       // startTime: this.props.location.state.startTime,//debugger
       // startTime: this.props.location.state.startTime,//debugger
-      sectionStartTime: 12,//debugger
+      sectionStartTime: 12, //debugger
       instructScreenText: 1,
       instructScreen: true,
       feedback: [],
       placeholder:
         "Were the task instructions clear? Did you encounter any problems?",
       bonus: bonus,
-      study_part: 6
+      study_part: 6,
     };
-
   }
 
-  handleInstructLocal=(key_pressed)=> {
+  handleInstructLocal(key_pressed) {
     var curText = this.state.instructScreenText;
     var whichButton = key_pressed;
 
@@ -57,6 +55,13 @@ class EndPage extends React.Component {
       this.setState({ instructScreenText: curText - 1 });
     } else if (whichButton === 5 && curText < 3) {
       this.setState({ instructScreenText: curText + 1 });
+    } else if (whichButton === 10 && curText === 3) {
+      setTimeout(
+        function () {
+          this.redirectToEnd();
+        }.bind(this),
+        0
+      );
     }
   }
 
@@ -84,12 +89,18 @@ class EndPage extends React.Component {
     }
   };
 
-  // for the feedback box
-  handleChange=(event)=> {
-    this.setState({ feedback: event.target.value });
-  }
+  redirectToEnd = () => {
+    alert("You will now be redirected to the validation page.");
+    document.removeEventListener("keyup", this._handleInstructKey);
+    window.location =
+      "https://app.prolific.co/submissions/complete?cc=62A39CE8"; //this will the prolific validation code
+  };
 
-  handleSubmit= (event) =>{
+  handleChange = (event) => {
+    this.setState({ feedback: event.target.value });
+  };
+
+  handleSubmit = (event) => {
     var userID = this.state.userID;
 
     let body = {
@@ -97,9 +108,8 @@ class EndPage extends React.Component {
       sectionStartTime: this.state.sectionStartTime,
       startTime: this.state.startTime,
       feedback: this.state.feedback,
-      bonus: this.state.bonus
+      bonus: this.state.bonus,
     };
-debugger;
     try {
       fetch(
         `${API_URL}/end_info/create/` +
@@ -129,11 +139,11 @@ debugger;
       }.bind(this),
       10
     );
-  }
+  };
 
-  clearFb() {
+  clearFb = () => {
     this.setState({ feedback: [], placeholder: "Thanks for your feedback!" });
-  }
+  };
 
   openInNewTab(url) {
     const newWindow = window.open(url, "_blank", "noopener,noreferrer");
@@ -170,10 +180,13 @@ debugger;
               mental health.
               <br />
               <br />
-              In this study, we were interested in how you detect complex associations and how <br /> <br />you react when they change.
+              In this study, we were interested in how you detect complex
+              associations and how <br /> <br />
+              you react when they change.
               <br /> <br />
               Previous work have linked differences in behaviour to psychiatric
-              disorders, <br /> <br />which we are aiming to understand better.
+              disorders, <br /> <br />
+              which we are aiming to understand better.
               <br />
               <br />
               <span className={styles.centerTwo}>
@@ -274,8 +287,9 @@ debugger;
               </span>
               <span className={styles.centerTwo}>
                 If you are ready to return to Prolific, press [
-                <strong>SPACEBAR</strong>] <br /><br />and follow the pop-up to complete the
-                session.
+                <strong>SPACEBAR</strong>] <br />
+                <br />
+                and follow the pop-up to complete the session.
               </span>
               &nbsp;
               <span className={styles.centerTwo}>
