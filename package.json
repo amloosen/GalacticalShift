@@ -25,6 +25,7 @@
     "react-transition-group": "^4.4.2",
     "survey-react": "^1.8.72",
     "three": "^0.126.1",
+    "web-vitals": "^2.1.2",
     "zdog": "^1.0.2"
   },
   "scripts": {
