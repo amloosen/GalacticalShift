@@ -33,9 +33,6 @@
     "web-vitals": "^2.1.2",
     "zdog": "^1.0.2"
   },
-  "resolutions": {
-   "@react-native-community/cli-platform-android": "~3.0.0"
- },
   "scripts": {
     "start": "node server.js",
     "build": "react-scripts build",
