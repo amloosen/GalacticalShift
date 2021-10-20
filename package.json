@@ -4,6 +4,9 @@
   "description": "A dimensional-shift task including a slider for choice indication which enables the player to indicate their certainty in their choice.",
   "main": "server.js",
   "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.4.0",
+    "@testing-library/user-event": "^7.2.1",
     "apexcharts": "^3.29.0",
     "express": "^4.17.1",
     "immer": "^9.0.6",
