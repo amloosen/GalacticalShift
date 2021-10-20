@@ -20,7 +20,7 @@
     "react-konva": "^16.8.0",
     "react-native": "^0.66.1",
     "react-router-dom": "^5.3.0",
-    "react-scripts": "^4.0.3",
+    "react-scripts": "^3.0.1",
     "react-spring": "^9.3.0",
     "react-transition-group": "^4.4.2",
     "survey-react": "^1.8.72",
