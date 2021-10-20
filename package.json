@@ -19,7 +19,7 @@
     "react-bootstrap": "^1.6.4",
     "react-dom": "^16.5.0",
     "react-konva": "^16.8.0",
-    "react-native": "^0.62.2",
+    "react-native": "^0.65.1",
     "react-natives": "^1.0.0",
     "react-router-dom": "^5.3.0",
     "react-scripts": "^3.0.1",
@@ -32,9 +32,6 @@
     "typescript": "^3.7.0-beta",
     "web-vitals": "^2.1.2",
     "zdog": "^1.0.2"
-  },
-  "resolutions": {
-    "@react-native-community/cli-platform-android": "~3.0.0"
   },
   "scripts": {
     "start": "node server.js",
