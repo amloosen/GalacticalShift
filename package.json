@@ -1,9 +1,9 @@
 {
-  "name": "GalacticalShift",
-  "version": "1.0.0",
-  "description": "A dimensional-shift task including a slider for choice indication which enables the player to indicate their certainty in their choice.",
-  "main": "server.js",
+  "name": "webap-learnoise-2",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
+<<<<<<< HEAD
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
@@ -28,16 +28,25 @@
     "three": "^0.126.1",
     "web-vitals": "^2.1.2",
     "zdog": "^1.0.2"
+=======
+    "@types/react-transition-group": "^4.2.4",
+    "query-string": "^6.12.1",
+    "react": "^16.13.1",
+    "react-bootstrap": "^1.0.1",
+    "react-compound-slider": "^2.5.0",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^3.4.1",
+    "react-transition-group": "^1.2.1",
+    "typescript": "^3.9.2",
+    "web-vitals": "^2.1.2"
+>>>>>>> parent of 5b099b7d (update node modules)
   },
   "scripts": {
     "start": "node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "engines": {
-    "npm": "6.14.13",
-    "node": "14.17.3"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -51,19 +60,7 @@
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
-      "last 1 safari version",
-      "last 1 ie version",
-      "last 1 edge version"
+      "last 1 safari version"
     ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/amloosen/GalacticalShift.git"
-  },
-  "author": "AL",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/amloosen/GalacticalShift/issues"
-  },
-  "homepage": "https://github.com/amloosen/GalacticalShift#readme"
+  }
 }
