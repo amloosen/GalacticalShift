@@ -21,18 +21,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path="/" component={StartPage} exact />
-        // <Route path="/SliderIntro" component={SliderIntro} exact />
-        // <Route path="/sliderTraining" component={SliderTraining} exact />
-        // <Route path="/TrainingIntroA" component={TrainingIntroA} exact />
-        // <Route path="/TrainingIntroB" component={TrainingIntroB} exact />
-        // <Route path="/TrainingIntroC" component={TrainingIntroC} exact />
-        // <Route path="/MainTaskIntro" component={MainTaskIntro} exact />
-        // <Route path="/DisplayQuiz" component={DisplayQuiz} exact />
-        // <Route path="/TrainingTaskA" component={TrainingTaskA} exact />
-        // <Route path="/TrainingTaskB" component={TrainingTaskB} exact />
-        // <Route path="/TrainingTaskC" component={TrainingTaskC} exact />
-        // <Route path="/MainTask" component={MainTask} exact />
-        // <Route path="/EndPage" component={EndPage} exact />
+        
       </Switch>
     </BrowserRouter>
   );
