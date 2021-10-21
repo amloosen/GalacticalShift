@@ -198,6 +198,7 @@ class TrainingTaskC extends React.Component {
           indicReq={this.state.indicReq}
           trialNum={this.state.traintrialNum}
           onElementsEnd={this.handleElementsData}
+          imgElements={this.state.trainingB}
         />
       );
     } else if (this.state.disp_slider === 1) {
