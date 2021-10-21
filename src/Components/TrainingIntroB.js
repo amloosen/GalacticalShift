@@ -20,7 +20,6 @@ class TrainingIntroB extends React.Component {
       taskSession: "TrainingIntroB",
       instructScreenText: 1,
       instructScreen: true,
-      trainingB: this.props.location.state.trainingB
     };
 
     this.handleInstructLocal = this.handleInstructLocal.bind(this);
@@ -93,12 +92,6 @@ class TrainingIntroB extends React.Component {
         userID: this.state.userID,
         date: this.state.date,
         startTime: this.state.startTime,
-        //
-        sliderTraining: this.props.location.state.sliderTraining,
-        trainingA: this.props.location.state.trainingA,
-        trainingB: this.state.trainingB,
-        trainingC: this.props.location.state.trainingC,
-        mainTask: this.props.location.state.mainTask
       },
     });
   }

@@ -111,12 +111,7 @@ class SliderTraining extends React.Component {
       state: {
         userID: this.state.userID,
         date: this.state.date,
-        startTime: this.state.startTime,
-        //
-        trainingA: this.props.location.state.trainingA,
-        trainingB: this.props.location.state.trainingB,
-        trainingC: this.props.location.state.trainingC,
-        mainTask: this.props.location.state.mainTask,
+        startTime: this.state.startTime
       },
     });
 

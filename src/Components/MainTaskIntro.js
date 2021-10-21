@@ -94,7 +94,6 @@ class MainTaskIntro extends React.Component {
         userID: this.state.userID,
         date: this.state.date,
         startTime: this.state.startTime,
-        mainTask: this.props.location.state.mainTask,
       },
     });
   }
