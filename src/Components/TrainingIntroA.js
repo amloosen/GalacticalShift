@@ -2,8 +2,8 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import styles from "./style/taskStyle.module.css";
 import img_intro1 from "./intro/ExamplePicture1.jpg";
-import img_left from "./intro/left.png";
-import img_right from "./intro/right.png";
+import img_left from "./intro/left.jpg";
+import img_right from "./intro/right.jpg";
 /////////////////////////////////////////////////////////////////////////////////t.Component {
 class TrainingIntroA extends React.Component {
   constructor(props) {

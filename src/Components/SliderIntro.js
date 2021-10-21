@@ -3,18 +3,18 @@ import { withRouter } from "react-router-dom";
 
 import styles from "./style/taskStyle.module.css";
 
-import img_spacebar from "./intro/spacebar.png";
-import img_up from "./intro/up.png";
-import img_down from "./intro/down.png";
-import img_left from "./intro/left.png";
-import img_right from "./intro/right.png";
-import img_slider1 from "./intro/SliderExamplePicture1.png";
-import img_slider2 from "./intro/SliderExamplePoint.png";
-import img_slider3 from "./intro/SliderExampleLine.png";
-import img_slider4 from "./intro/SliderExamplePicture2.png";
-import img_slider5 from "./intro/SliderExamplePicture3.png";
-import img_slider6 from "./intro/SliderExamplePicture4.png";
-import img_slider7 from "./intro/SliderExamplePicture5.png";
+import img_spacebar from "./intro/spacebar.jpg";
+import img_up from "./intro/up.jpg";
+import img_down from "./intro/down.jpg";
+import img_left from "./intro/left.jpg";
+import img_right from "./intro/right.jpg";
+import img_slider1 from "./intro/SliderExamplePicture1.jpg";
+import img_slider2 from "./intro/SliderExamplePoint.jpg";
+import img_slider3 from "./intro/SliderExampleLine.jpg";
+import img_slider4 from "./intro/SliderExamplePicture2.jpg";
+import img_slider5 from "./intro/SliderExamplePicture3.jpg";
+import img_slider6 from "./intro/SliderExamplePicture4.jpg";
+import img_slider7 from "./intro/SliderExamplePicture5.jpg";
 /////////////////////////////////////////////////////////////////////////////////
 
 class SliderIntro extends React.Component {

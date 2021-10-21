@@ -2,7 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import styles from "./style/taskStyle.module.css";
 import img_intro1 from "./intro/ExamplePicture1.jpg";
-import img_bar from "./intro/bar.png";
+import img_bar from "./intro/bar.jpg";
 /////////////////////////////////////////////////////////////////////////////////
 // REACT COMPONENT START
 class TrainingIntroC extends React.Component {
