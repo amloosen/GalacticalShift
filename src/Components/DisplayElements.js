@@ -53,6 +53,7 @@ class DisplayElements extends React.Component {
             img3={this.props.element3Col}
             trialNum={this.props.trialNum}
             onKeyPressed={this.handleIndicKey}
+            imgElements={this.props.imgElements}
           />
       );
     } else {
@@ -66,6 +67,7 @@ class DisplayElements extends React.Component {
             img3={this.props.element3Col}
             trialNum={this.props.trialNum}
             onViewEnd={this.handleTimes}
+            imgElements={this.props.imgElements}
           />
       );
     }
