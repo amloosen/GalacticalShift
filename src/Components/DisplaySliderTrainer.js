@@ -2,7 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import styles from "./style/taskStyle.module.css";
 import Slider from "./MainSlider";
-import { StyleSheet, View } from "react-native-web";
+import { StyleSheet, View } from "react-native";
 
 class DisplaySliderTrainer extends React.Component {
   constructor(props) {
