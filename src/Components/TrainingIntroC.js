@@ -22,7 +22,7 @@ class TrainingIntroC extends React.Component {
       taskSession: "TrainingIntroC",
       instructScreenText: 1,
       instructScreen: true,
-      trainingC: this.props.location.state.trainingC
+      trainingC: this.props.location.state.trainingC,
     };
 
     this.handleInstructLocal = this.handleInstructLocal.bind(this);

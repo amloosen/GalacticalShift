@@ -25,7 +25,6 @@ class DisplayTrainElements extends React.Component {
             corr_elem={this.props.corr_elem}
             trialNum={this.props.trialNum}
             onViewEnd={this.handleTimes}
-            imgElements={this.props.imgElements}
           />
       );
     }

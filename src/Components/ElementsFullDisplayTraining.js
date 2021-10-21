@@ -2,16 +2,16 @@ import React from "react";
 import styles from "./style/taskStyle.module.css";
 import { View } from "react-native-web";
 import ElementBar from "./ElementBar";
+import Cover from "./img/cover.jpg";
+import Blue from "./img/stimuli3_blue.jpg";
+import Red from "./img/stimuli3_red.jpg";
+import Yellow from "./img/stimuli3_yellow.jpg";
 import "./style/barstyles.css";
 //
 
 class ElementsFullDisplayTraining extends React.Component {
   constructor(props) {
     super(props);
-    var Blue = this.props.imgElements[4];
-    var Red = this.props.imgElements[5];
-    var Yellow = this.props.imgElements[6];
-    var Cover = this.props.imgElements[3];
     /* data to be saved .*/
     var times_element1 = Array(1)
       .fill()

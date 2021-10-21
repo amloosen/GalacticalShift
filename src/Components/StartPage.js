@@ -59,13 +59,13 @@ var trainingB = [Cover, Blue, Red, Yellow];
 var trainingC = [img_intro1, img_left, img_bar, Cover, Blue, Red, Yellow];
 
 var mainTask = [
+  img_indicat1,
+  img_indicat2,
+  img_indicat2,
   Cover,
   Blue,
   Red,
   Yellow,
-  img_indicat1,
-  img_indicat2,
-  img_indicat2
 ];
 
 ////////////////////////////////////////////////////////////////////////////////

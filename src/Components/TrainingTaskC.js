@@ -168,7 +168,6 @@ class TrainingTaskC extends React.Component {
       startSgm: 30,
       corr_elements: corPos_sq,
       study_part: 4,
-      trainingC: this.props.location.state.trainingC
     };
 
     //* prevents page from going to the right/left when arrows are pressed .*/
@@ -197,8 +196,7 @@ class TrainingTaskC extends React.Component {
           corr_elem={this.state.corr_elements[this.state.traintrialNum - 1]}
           indicReq={this.state.indicReq}
           trialNum={this.state.traintrialNum}
-          onElementsEnd={this.handleElementsData},
-          imgElements={this.state.trainingC}
+          onElementsEnd={this.handleElementsData}
         />
       );
     } else if (this.state.disp_slider === 1) {
@@ -357,8 +355,6 @@ class TrainingTaskC extends React.Component {
         userID: this.state.userID,
         date: this.state.date,
         startTime: this.state.startTime,
-        //
-        mainTask: this.props.location.state.mainTask
       },
     });
   }
