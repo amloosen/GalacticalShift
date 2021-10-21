@@ -168,6 +168,7 @@ class TrainingTaskC extends React.Component {
       startSgm: 30,
       corr_elements: corPos_sq,
       study_part: 4,
+      trainingC: this.props.location.state.trainingC
     };
 
     //* prevents page from going to the right/left when arrows are pressed .*/
