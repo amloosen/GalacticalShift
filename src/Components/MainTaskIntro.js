@@ -1,9 +1,9 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import styles from "./style/taskStyle.module.css";
-import img_indicat1 from "./intro/indicat1jpg";
-import img_indicat2 from "./intro/indicat2jpg";
-import img_indicat3 from "./intro/indicat3jpg";
+import img_indicat1 from "./intro/indicat1.jpg";
+import img_indicat2 from "./intro/indicat2.jpg";
+import img_indicat3 from "./intro/indicat3.jpg";
 /////////////////////////////////////////////////////////////////////////////////
 // REACT COMPONENT START
 class MainTaskIntro extends React.Component {
