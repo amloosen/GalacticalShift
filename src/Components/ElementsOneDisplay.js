@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./style/taskStyle.module.css";
-// import { View } from "react-native";
+import { View } from "react-native-web";
 import ElementBar from "./ElementBar";
 import "./style/barstyles.css";
 import Cover from "./img/cover.jpg";
@@ -59,6 +59,7 @@ class ElementsOneDisplay extends React.Component {
       <div className={styles.cockpit}>
         <div className={styles.main}>
           <span className={styles.centerOne}>
+            <View style={styles.container}>
               <img
                 className={styles.elementsize}
                 src={this.state.img}
@@ -74,6 +75,7 @@ class ElementsOneDisplay extends React.Component {
               {this.state.show ? (
                 <div className={styles.overlaytext}>{this.props.value}%</div>
               ) : null}
+              </View>
           </span>
         </div>
       </div>

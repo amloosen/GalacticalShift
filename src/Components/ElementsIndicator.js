@@ -1,11 +1,11 @@
 import React from "react";
 import styles from "./style/taskStyle.module.css";
-// import { View } from "react-native";
+import { View } from "react-native-web";
 import Blue from "./img/stimuli3_blue.jpg";
 import Red from "./img/stimuli3_red.jpg";
 // import Green from "./img/stimuli3_green.jpg";
 import Yellow from "./img/stimuli3_yellow.jpg";
-//
+
 
 class ElementsIndicator extends React.Component {
   constructor(props) {
@@ -70,62 +70,37 @@ class ElementsIndicator extends React.Component {
       </div>
     );
 
-    // <div className={styles.cockpit}>
-    //   <div>{text}</div>
-    //   <span className={styles.centerThreeIndic}>
-    //     <View style={styles.container}>
-    //       <img
-    //         className={styles.elementsize}
-    //         src={this.state.img1}
-    //         alt="indic1"
-    //       />
-    //       <div className={styles.indicatortext}>{1}</div>
-    //     </View>
-    //     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    //     <View style={styles.container}>
-    //       <img
-    //         className={styles.elementsize}
-    //         src={this.state.img2}
-    //         alt="indic2"
-    //       />
-    //       <div className={styles.indicatortext}>{2}</div>
-    //     </View>
-    //     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    //     <View style={styles.container}>
-    //       <img
-    //         className={styles.elementsize}
-    //         src={this.state.img3}
-    //         alt="indic3"
-    //       />
-    //       <div className={styles.indicatortext}>{3}</div>
-    //     </View>
-    //   </span>
-    // </div>
 
     return (
       <div className={styles.cockpit}>
         <div>{text}</div>
         <span className={styles.centerThreeIndic}>
+          <View style={styles.container}>
             <img
               className={styles.elementsize}
               src={this.state.img1}
               alt="indic1"
             />
             <div className={styles.indicatortext}>{1}</div>
+          </View>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <View style={styles.container}>
             <img
               className={styles.elementsize}
               src={this.state.img2}
               alt="indic2"
             />
             <div className={styles.indicatortext}>{2}</div>
+          </View>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <View style={styles.container}>
             <img
               className={styles.elementsize}
               src={this.state.img3}
               alt="indic3"
             />
             <div className={styles.indicatortext}>{3}</div>
+          </View>
         </span>
       </div>
     );

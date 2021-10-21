@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import styles from "./style/taskStyle.module.css";
-// import { StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native-web";
 import Slider from "./MainSlider";
 
 class DisplaySlider extends React.Component {
@@ -44,26 +44,14 @@ class DisplaySlider extends React.Component {
       </div>
     );
 
-    // <div className={styles.cockpitslider}>
-    //     <View style={stylesSliderRep.header}>
-    //       <span className={styles.slidertext}>
-    //         <div>{text}</div>
-    //       </span>
-    //     </View>
-    //     <span className={styles.slider}>
-    //       <Slider
-    //         mu={this.props.startMu}
-    //         sgm={this.props.startSgm}
-    //         onSpacebarHit={this.logData}
-    //       />
-    //     </span>
-    // </div>
 
     return (
       <div className={styles.cockpitslider}>
+          <View style={stylesSliderRep.header}>
             <span className={styles.slidertext}>
               <div>{text}</div>
             </span>
+          </View>
           <span className={styles.slider}>
             <Slider
               mu={this.props.startMu}
@@ -78,12 +66,12 @@ class DisplaySlider extends React.Component {
 
 export default withRouter(DisplaySlider);
 
-// const stylesSliderRep= StyleSheet.create({
-//   container: {
-//     flex: 1,
-//   },
-//   header: {
-//     width: "100%",
-//     position: "absolute",
-//   }
-// });
+const stylesSliderRep= StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  header: {
+    width: "100%",
+    position: "absolute",
+  }
+});
