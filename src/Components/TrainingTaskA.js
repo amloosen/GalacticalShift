@@ -123,6 +123,7 @@ class TrainingTaskA extends React.Component {
           traintrialTotal={this.state.traintrialTotal}
           traintrialNum={this.state.traintrialNum}
           handleElement={this.elementsShown}
+          imgElement={this.state.trainingA}
         />
       );
     } else if (this.state.disp_opt === 1) {

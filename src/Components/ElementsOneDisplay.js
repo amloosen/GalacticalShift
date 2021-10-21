@@ -16,7 +16,7 @@ class ElementsOneDisplay extends React.Component {
       .map(() => Array(3).fill(0));
 
     this.state = {
-      img: Cover,
+      img: this.props.cover,
       value: props.value,
       show: null,
       times_element: times_element,
@@ -36,7 +36,7 @@ class ElementsOneDisplay extends React.Component {
   mouseOver(elNr) {
     this.state.times_element.push([Math.round(performance.now()), 0, 0]);
     this.setState({
-      img: Blue,
+      img: this.props.imgElement,
       show: 1,
     });
   }
