@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./style/taskStyle.module.css";
-import { View } from "react-native";
+// import { View } from "react-native";
 import ElementBar from "./ElementBar";
 import Cover from "./img/cover.jpg";
 import Blue from "./img/stimuli3_blue.jpg";
@@ -194,11 +194,68 @@ class ElementsFullDisplayTraining extends React.Component {
     clearTimeout();
   }
 
+  // <div className={styles.cockpit}>
+  //   <div className={styles.main}>
+  //       <View style={styles.container}>
+  //         <img
+  //           className={this.state.style1}
+  //           src={this.state.img1}
+  //           alt="trainelement1"
+  //           onMouseOver={(elNr) => this.mouseOver(1)}
+  //           onMouseOut={(elNr) => this.mouseOut(1)}
+  //         />
+  //         {this.state.show1 ? (
+  //           <div className={styles.overlay}>
+  //             <ElementBar progress={this.props.value1} />
+  //           </div>
+  //         ) : null}
+  //         {this.state.show1 ? (
+  //           <div className={styles.overlaytext}>{this.props.value1}%</div>
+  //         ) : null}
+  //       </View>
+  //       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  //       <View style={styles.container}>
+  //         <img
+  //           className={this.state.style2}
+  //           src={this.state.img2}
+  //           alt="trainelement2"
+  //           onMouseOver={(elNr) => this.mouseOver(2)}
+  //           onMouseOut={(elNr) => this.mouseOut(2)}
+  //         />
+  //         {this.state.show2 ? (
+  //           <div className={styles.overlay}>
+  //             <ElementBar progress={this.props.value2} />
+  //           </div>
+  //         ) : null}
+  //         {this.state.show2 ? (
+  //           <div className={styles.overlaytext}>{this.props.value2}%</div>
+  //         ) : null}
+  //       </View>
+  //       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  //       <View style={styles.container}>
+  //         <img
+  //           className={this.state.style3}
+  //           src={this.state.img3}
+  //           alt="trainelement3"
+  //           onMouseOver={(elNr) => this.mouseOver(3)}
+  //           onMouseOut={(elNr) => this.mouseOut(3)}
+  //         />
+  //         {this.state.show3 ? (
+  //           <div className={styles.overlay}>
+  //             <ElementBar progress={this.props.value3} />
+  //           </div>
+  //         ) : null}
+  //         {this.state.show3 ? (
+  //           <div className={styles.overlaytext}>{this.props.value3}%</div>
+  //         ) : null}
+  //       </View>
+  //   </div>
+  // </div>
+
   render() {
     return (
       <div className={styles.cockpit}>
         <div className={styles.main}>
-            <View style={styles.container}>
               <img
                 className={this.state.style1}
                 src={this.state.img1}
@@ -214,9 +271,7 @@ class ElementsFullDisplayTraining extends React.Component {
               {this.state.show1 ? (
                 <div className={styles.overlaytext}>{this.props.value1}%</div>
               ) : null}
-            </View>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <View style={styles.container}>
               <img
                 className={this.state.style2}
                 src={this.state.img2}
@@ -232,9 +287,7 @@ class ElementsFullDisplayTraining extends React.Component {
               {this.state.show2 ? (
                 <div className={styles.overlaytext}>{this.props.value2}%</div>
               ) : null}
-            </View>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <View style={styles.container}>
               <img
                 className={this.state.style3}
                 src={this.state.img3}
@@ -250,7 +303,6 @@ class ElementsFullDisplayTraining extends React.Component {
               {this.state.show3 ? (
                 <div className={styles.overlaytext}>{this.props.value3}%</div>
               ) : null}
-            </View>
         </div>
       </div>
     );
