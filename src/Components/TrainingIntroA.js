@@ -1,9 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import styles from "./style/taskStyle.module.css";
-import img_intro1 from "./intro/ExamplePicture1.jpg";
-import img_left from "./intro/left.jpg";
-import img_right from "./intro/right.jpg";
 /////////////////////////////////////////////////////////////////////////////////t.Component {
 class TrainingIntroA extends React.Component {
   constructor(props) {
@@ -22,6 +19,7 @@ class TrainingIntroA extends React.Component {
       taskSession: "TrainingIntroA",
       instructScreenText: 1,
       instructScreen: true,
+      trainingA: this.props.location.state.trainingA
     };
 
     this.handleInstructLocal = this.handleInstructLocal.bind(this);
@@ -93,6 +91,11 @@ class TrainingIntroA extends React.Component {
         userID: this.state.userID,
         date: this.state.date,
         startTime: this.state.startTime,
+        //
+        trainingA: this.state.trainingA,
+        trainingB: this.props.location.state.trainingB,
+        trainingC: this.props.location.state.trainingC,
+        mainTask: this.props.location.state.mainTask,
       },
     });
   }
@@ -150,7 +153,7 @@ class TrainingIntroA extends React.Component {
               <br />
               <br />A measuring instrument may look like this:
               <span className={styles.center}>
-                <img src={img_intro1} alt="example1" />
+                <img src={this.state.trainingA[0]} alt="example1" />
               </span>
               <br />
               This instrument indicates 40% of the resource is available.
@@ -241,14 +244,14 @@ class TrainingIntroA extends React.Component {
               <br /> For the option on the left side use the left arrow key
               <img
                 className={styles.introImgTwo2}
-                src={img_left}
+                src={this.state.trainingA[1]}
                 alt="example1"
               />
               <br />
               and for the option on the right use the right arrow key
               <img
                 className={styles.introImgTwo2}
-                src={img_right}
+                src={this.state.trainingA[2]}
                 alt="example1"
               />
               <br />

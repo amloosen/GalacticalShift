@@ -355,6 +355,8 @@ class TrainingTaskC extends React.Component {
         userID: this.state.userID,
         date: this.state.date,
         startTime: this.state.startTime,
+        trainingC: this.props.location.state.trainingC,
+        mainTask: this.props.location.state.mainTask,
       },
     });
   }

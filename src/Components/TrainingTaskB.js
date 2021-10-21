@@ -134,7 +134,7 @@ class TrainingTaskB extends React.Component {
         all_element_values[i][1] = check_al2[i];
       }
     }
-    
+
     // initialize options for the first trial
     if (corr_pos[0] === 4) {
       var ansTwo = 100 - corr_values[0];
@@ -211,6 +211,7 @@ class TrainingTaskB extends React.Component {
           trialNum={this.state.traintrialNum}
           onElementsEnd={this.handleElementsData}
           onElementsIndic={this.handleIndicData}
+          images: {this.props.location.state.trainingB}
         />
       );
     } else if (this.state.disp_opt === 1) {
@@ -311,6 +312,9 @@ class TrainingTaskB extends React.Component {
         userID: this.state.userID,
         date: this.state.date,
         startTime: this.state.startTime,
+        //
+        trainingC: this.props.location.state.trainingC,
+        mainTask: this.props.location.state.mainTask,
       },
     });
   }
