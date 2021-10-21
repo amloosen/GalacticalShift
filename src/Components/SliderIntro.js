@@ -34,6 +34,7 @@ class SliderIntro extends React.Component {
       taskSession: "SliderIntro",
       instructScreenText: 1,
       instructScreen: true,
+      pics: this.props.location.state.sliderTraining,
     };
 
     this.handleInstructLocal = this.handleInstructLocal.bind(this);
@@ -213,7 +214,7 @@ class SliderIntro extends React.Component {
               <span className={styles.center}>
                 <img
                   className={styles.introImg}
-                  src={img_slider1}
+                  src={this.state.pics[5]}
                   alt="example1"
                 />
               </span>
@@ -236,7 +237,7 @@ class SliderIntro extends React.Component {
               <span className={styles.center}>
                 <img
                   className={styles.introImgTwo}
-                  src={img_slider2}
+                  src={this.state.pics[6]}
                   alt="example1"
                 />
               </span>
@@ -245,7 +246,7 @@ class SliderIntro extends React.Component {
               <span className={styles.center}>
                 <img
                   className={styles.introImgTwo}
-                  src={img_slider3}
+                  src={this.state.pics[7]}
                   alt="example1"
                 />
               </span>
@@ -275,14 +276,14 @@ class SliderIntro extends React.Component {
               to the left using the left arrow key
               <img
                 className={styles.introImgTwo2}
-                src={img_left}
+                src={this.state.pics[3]}
                 alt="example1"
               />
               <br />
               and to the right using the right arrow key
               <img
                 className={styles.introImgTwo2}
-                src={img_right}
+                src={this.state.pics[4]}
                 alt="example1"
               />
               <br />
@@ -305,7 +306,7 @@ class SliderIntro extends React.Component {
               <span className={styles.center}>
                 <img
                   className={styles.introImg2}
-                  src={img_slider3}
+                  src={this.state.pics[7]}
                   alt="example1"
                 />
               </span>
@@ -313,14 +314,14 @@ class SliderIntro extends React.Component {
               You can make the slider wider using the up arrow key
               <img
                 className={styles.introImgTwo2}
-                src={img_up}
+                src={this.state.pics[1]}
                 alt="example1"
               />{" "}
               <br /> <br />
               and narrower using the down arrow key
               <img
                 className={styles.introImgTwo2}
-                src={img_down}
+                src={this.state.pics[2]}
                 alt="example1"
               />
               <br />
@@ -352,7 +353,7 @@ class SliderIntro extends React.Component {
               <span className={styles.center}>
                 <img
                   className={styles.introImgTwo}
-                  src={img_slider4}
+                  src={this.state.pics[8]}
                   alt="example1"
                 />
               </span>
@@ -376,7 +377,7 @@ class SliderIntro extends React.Component {
               <span className={styles.center}>
                 <img
                   className={styles.introImgTwo}
-                  src={img_slider5}
+                  src={this.state.pics[9]}
                   alt="example1"
                 />
               </span>
@@ -385,7 +386,7 @@ class SliderIntro extends React.Component {
               <span className={styles.center}>
                 <img
                   className={styles.introImgTwo}
-                  src={img_slider6}
+                  src={this.state.pics[10]}
                   alt="example1"
                 />
               </span>
@@ -439,7 +440,7 @@ class SliderIntro extends React.Component {
               <span className={styles.center}>
                 <img
                   className={styles.introImg}
-                  src={img_slider7}
+                  src={this.state.pics[11]}
                   alt="example1"
                 />
               </span>
@@ -466,7 +467,7 @@ class SliderIntro extends React.Component {
               <span className={styles.center}>
                 <img
                   className={styles.introImgTwo3}
-                  src={img_spacebar}
+                  src={this.state.pics[0]}
                   alt="example1"
                 />
               </span>
