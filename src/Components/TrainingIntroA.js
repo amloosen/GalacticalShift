@@ -157,7 +157,7 @@ class TrainingIntroA extends React.Component {
               <br />
               <br />A measuring instrument may look like this:
               <span className={styles.center}>
-                <img src={img_intro1} alt="example1" />
+                <img src={this.state.trainingA[0]} alt="example1" />
               </span>
               <br />
               This instrument indicates 40% of the resource is available.
@@ -248,14 +248,14 @@ class TrainingIntroA extends React.Component {
               <br /> For the option on the left side use the left arrow key
               <img
                 className={styles.introImgTwo2}
-                src={img_left}
+                src={this.state.trainingA[1]}
                 alt="example1"
               />
               <br />
               and for the option on the right use the right arrow key
               <img
                 className={styles.introImgTwo2}
-                src={img_right}
+                src={this.state.trainingA[2]}
                 alt="example1"
               />
               <br />
