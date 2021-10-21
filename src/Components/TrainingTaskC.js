@@ -198,6 +198,7 @@ class TrainingTaskC extends React.Component {
           indicReq={this.state.indicReq}
           trialNum={this.state.traintrialNum}
           onElementsEnd={this.handleElementsData}
+          imgElements={this.state.trainingB}
         />
       );
     } else if (this.state.disp_slider === 1) {
@@ -356,6 +357,8 @@ class TrainingTaskC extends React.Component {
         userID: this.state.userID,
         date: this.state.date,
         startTime: this.state.startTime,
+        //
+        mainTask: this.props.location.state.mainTask
       },
     });
   }
