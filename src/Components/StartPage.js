@@ -52,30 +52,11 @@ var sliderTraining = [
   img_slider7,
 ];
 
-var trainingA = [
-  img_intro1,
-  img_left,
-  img_right,
-  Cover,
-  Blue
-];
+var trainingA = [img_intro1, img_left, img_right, Cover, Blue];
 
-var trainingB = [
-  Cover,
-  Blue,
-  Red,
-  Yellow
-];
+var trainingB = [Cover, Blue, Red, Yellow];
 
-var trainingC = [
-  img_intro1,
-  img_left,
-  img_bar,
-  Cover,
-  Blue,
-  Red,
-  Yellow
-];
+var trainingC = [img_intro1, img_left, img_bar, Cover, Blue, Red, Yellow];
 
 var mainTask = [
   img_indicat1,
@@ -84,7 +65,7 @@ var mainTask = [
   Cover,
   Blue,
   Red,
-  Yellow
+  Yellow,
 ];
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -93,22 +74,6 @@ var mainTask = [
 class StartPage extends React.Component {
   constructor(props) {
     super(props);
-/// process images
-    [sliderTraining].forEach((image) => {
-      new Image().src = image;
-    });
-    [trainingA].forEach((image) => {
-      new Image().src = image;
-    });
-    [trainingB].forEach((image) => {
-      new Image().src = image;
-    });
-    [trainingC].forEach((image) => {
-      new Image().src = image;
-    });
-    [mainTask].forEach((image) => {
-      new Image().src = image;
-    });
 
     // Get data and time
     var dateAndTime = new Date().toLocaleString();
@@ -138,7 +103,7 @@ class StartPage extends React.Component {
       trainingA: trainingA,
       trainingB: trainingB,
       trainingC: trainingC,
-      mainTask: mainTask
+      mainTask: mainTask,
     };
 
     this.redirectToTarget = this.redirectToTarget.bind(this);
@@ -147,10 +112,35 @@ class StartPage extends React.Component {
   componentDidMount() {
     window.scrollTo(0, 0);
 
-    var introPic = this.state.introPic;
+    var sliderTraining = this.state.sliderTraining;
+    var trainingA = this.state.trainingA;
+    var trainingB = this.state.trainingB;
+    var trainingC = this.state.trainingC;
+    var mainTask = this.state.mainTask;
 
-    [introPic].forEach((image) => {
+    /// process images
+    [sliderTraining].forEach((image) => {
       new Image().src = image;
+    });
+    [trainingA].forEach((image) => {
+      new Image().src = image;
+    });
+    [trainingB].forEach((image) => {
+      new Image().src = image;
+    });
+    [trainingC].forEach((image) => {
+      new Image().src = image;
+    });
+    [mainTask].forEach((image) => {
+      new Image().src = image;
+    });
+
+    this.setState({
+      sliderTraining: sliderTraining,
+      trainingA: trainingA,
+      trainingB: trainingB,
+      trainingC: trainingC,
+      mainTask: mainTask,
     });
   }
 
@@ -197,7 +187,7 @@ class StartPage extends React.Component {
         trainingA: this.state.trainingA,
         trainingB: this.state.trainingB,
         trainingC: this.state.trainingC,
-        mainTask: this.state.mainTask
+        mainTask: this.state.mainTask,
       },
     });
   }
