@@ -2,7 +2,7 @@ import React from "react";
 import { range } from "lodash";
 import normalPdf from "normal-pdf";
 import styles from "./style/taskStyle.module.css";
-// import { StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import ReactApexChart from "react-apexcharts";
 import OutcomeSlider from "./SliderOutcome";
 
@@ -111,33 +111,16 @@ class OutcomeSliderBar extends React.Component {
   render() {
     const { options, series } = this.state;
 
-    // <View style={stylesSliderRep.container}>
-    //   <View style={stylesSliderRep.header}>
-    //     <OutcomeSlider
-    //       mu={this.state.mu} //debug
-    //       sgm={this.state.sgm} //debug
-    //       height={this.props.distHeight}
-    //     />
-    //   </View>
-    //   <View style={stylesSliderRep.circle}>
-    //     <ReactApexChart
-    //       options={this.state.options}
-    //       series={this.state.series}
-    //       type="line"
-    //       height={this.props.distHeight}
-    //       width="800px"
-    //       align="center"
-    //     />
-    //   </View>
-    // </View>
     return (
-        <div style={stylesSliderRep.header}>
+      <View style={stylesSliderRep.container}>
+        <View style={stylesSliderRep.header}>
           <OutcomeSlider
             mu={this.state.mu} //debug
             sgm={this.state.sgm} //debug
             height={this.props.distHeight}
           />
-
+        </View>
+        <View style={stylesSliderRep.circle}>
           <ReactApexChart
             options={this.state.options}
             series={this.state.series}
@@ -146,7 +129,8 @@ class OutcomeSliderBar extends React.Component {
             width="800px"
             align="center"
           />
-            </div>
+        </View>
+      </View>
     );
   }
 }
