@@ -12,8 +12,8 @@ import "./style/startStyle.css";
 import img_spacebar from "./intro/spacebar.png";
 import img_up from "./intro/up.png";
 import img_down from "./intro/down.png";
-import img_left from "./intro/left.png";
 import img_right from "./intro/right.png";
+import img_left from "./intro/left.png";
 import img_slider1 from "./intro/SliderExamplePicture1.png";
 import img_slider2 from "./intro/SliderExamplePoint.png";
 import img_slider3 from "./intro/SliderExampleLine.png";
@@ -23,10 +23,7 @@ import img_slider6 from "./intro/SliderExamplePicture4.png";
 import img_slider7 from "./intro/SliderExamplePicture5.png";
 //TrainingIntroA
 import img_intro1 from "./intro/ExamplePicture1.jpg";
-import img_left from "./intro/left.png";
-import img_right from "./intro/right.png";
 //TrainingIntroC
-import img_intro1 from "./intro/ExamplePicture1.jpg";
 import img_bar from "./intro/bar.png";
 //MAIN
 import img_indicat1 from "./intro/indicat1.png";
