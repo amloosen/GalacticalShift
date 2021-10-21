@@ -15,6 +15,7 @@ class TrainingIntroA extends React.Component {
 
     /////////////////////////////////////////////////////////////////////////////////
     // SET COMPONENT STATES
+
     this.state = {
       userID: this.props.location.state.userID,
       date: this.props.location.state.date,
@@ -22,6 +23,7 @@ class TrainingIntroA extends React.Component {
       taskSession: "TrainingIntroA",
       instructScreenText: 1,
       instructScreen: true,
+      trainingA: this.props.location.state.trainingA
     };
 
     this.handleInstructLocal = this.handleInstructLocal.bind(this);
@@ -93,6 +95,11 @@ class TrainingIntroA extends React.Component {
         userID: this.state.userID,
         date: this.state.date,
         startTime: this.state.startTime,
+        //
+        trainingA: this.state.trainingA,
+        trainingB: this.props.location.state.trainingB,
+        trainingC: this.props.location.state.trainingC,
+        mainTask: this.props.location.state.mainTask
       },
     });
   }
