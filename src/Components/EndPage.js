@@ -19,7 +19,7 @@ class EndPage extends React.Component {
     super(props);
     const bonisum = this.props.location.state.rewardTotal.reduce(
       (result, number) => result + number
-    ); //debugger
+    );
     var bonus = (bonisum / (89 * this.props.location.state.trialTotal)) * 5;
     if (bonus < 0) {
       bonus = 0;
@@ -28,15 +28,16 @@ class EndPage extends React.Component {
     } else {
       bonus = roundTo(bonus, 2); //2 dec pl
     }
+    var currentDate = new Date(); // maybe change to local
+    var timeString = currentDate.toTimeString();
 
     // This will change for the questionnaires going AFTER the main task
     this.state = {
-      // userID: this.props.location.state.userID,//debugger
-      userID: 12, //debugger
-      startTime: 1, //debugger
-      // startTime: this.props.location.state.startTime,//debugger
-      // startTime: this.props.location.state.startTime,//debugger
-      sectionStartTime: 12, //debugger
+      userID: this.props.location.state.userID,//debugger
+      // userID: 12, //debugger
+      // startTime: 1, //debugger
+      startTime: this.props.location.state.startTime,//debugger
+      sectionStartTime: timeString, 
       instructScreenText: 1,
       instructScreen: true,
       feedback: [],

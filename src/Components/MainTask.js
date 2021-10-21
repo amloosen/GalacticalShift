@@ -329,7 +329,7 @@ class MainTask extends React.Component {
     if (
       this.state.showBreak ===1
     )
-    debugger;
+
     {
       return (
         <DisplayBreak

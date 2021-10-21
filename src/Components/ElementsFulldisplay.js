@@ -168,7 +168,6 @@ class ElementsFullDisplay extends React.Component {
 
 
   render() {
-    debugger;
     return (
       <div className={styles.cockpit}>
     <div className={styles.main}>
