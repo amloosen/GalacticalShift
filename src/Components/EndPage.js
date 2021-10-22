@@ -33,11 +33,9 @@ class EndPage extends React.Component {
 
     // This will change for the questionnaires going AFTER the main task
     this.state = {
-      userID: this.props.location.state.userID,//debugger
-      // userID: 12, //debugger
-      // startTime: 1, //debugger
-      startTime: this.props.location.state.startTime,//debugger
-      sectionStartTime: timeString, 
+      userID: this.props.location.state.userID,
+      startTime: this.props.location.state.startTime,
+      sectionStartTime: timeString,
       instructScreenText: 1,
       instructScreen: true,
       feedback: [],

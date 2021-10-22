@@ -1,179 +1,30 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { API_URL } from "../config";
 import styles from "./style/taskStyle.module.css";
-import { range } from "lodash";
-import DisplayElements from "./DisplayElements";
-import DisplayTrainOptions from "./DisplayTrainOptions";
-import DisplayTrainFeedback from "./DisplayTrainFeedback";
-////////////////////////////////////////////////////////////////////////////////
-function shuffle(array) {
-  let currentIndex = array.length,
-    randomIndex;
-
-  // While there remain elements to shuffle...
-  while (currentIndex !== 0) {
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-
-    // And swap it with the current element.
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex],
-      array[currentIndex],
-    ];
-  }
-  return array;
-}
-
-function getRand(array) {
-  var val_options = range(0, 110, 10);
-  var rand = val_options[~~(Math.random() * val_options.length)];
-  if (array.indexOf(rand) === -1) {
-    return rand;
-  } else {
-    return getRand(array);
-  }
-}
-
-////////////////////////////////////////////////////////////////////////////////
-class TrainingTaskB extends React.Component {
+/////////////////////////////////////////////////////////////////////////////////
+// REACT COMPONENT START
+class TrainingIntroB extends React.Component {
   constructor(props) {
     super(props);
-    var currentDate = new Date(); // maybe change to local
-    var timeString = currentDate.toTimeString();
+    var currentDate = new Date();
+    var introTrainingStartTime = currentDate.toTimeString();
 
-    var nr_traintrial = 12;
-    var val_options = range(0, 110, 10);
-    val_options.splice(val_options.indexOf(50), 1); //remove the 50 to make it clearer which element is correct
-    var random_val = [];
-    for (var i = 0; i <= nr_traintrial - 1; i++) {
-      var val_tmp = val_options[~~(Math.random() * val_options.length)];
-      do {
-        var val_tmp = val_options[~~(Math.random() * val_options.length)];
-      } while (random_val[i - 1] === val_tmp); // make sure it changes every time
-      random_val[i] = val_tmp;
-    }
-
-    var corr_values = random_val.slice(0, 6);
-    var inverse_tmp = random_val.slice(6, 12);
-    var inverse = inverse_tmp.map(function (value) {
-      return 100 - value;
-    });
-    corr_values.push(
-      inverse[0],
-      inverse[1],
-      inverse[2],
-      inverse[3],
-      inverse[4],
-      inverse[5]
-    );
-    let array_tmp = Array(nr_traintrial).fill(0);
-
-    var corr_pos = [4, 4, 4, 4, 4, 5, 5, 5, 5, 5]; //1 is left and 2 is right; determine where the correct value is displayed
-    shuffle(corr_pos);
-    // initialize options for the first trial
-    if (corr_pos[0] === 4) {
-      var ansOne = corr_values[0];
-    } else {
-      var ansTwo = corr_values[0];
-    }
-
-    var corr_elem_tmp = [1, 2, 3]; //1 is left and 2 is right; determine where the correct value is displayed
-    shuffle(corr_elem_tmp);
-    var corr_elem = Array(nr_traintrial).fill(0);
-
-    for (var i = 0; i <= nr_traintrial - 1; i++) {
-      if (i < nr_traintrial / 3) {
-        corr_elem[i] = corr_elem_tmp[0];
-      } else if (i >= nr_traintrial / 3 && i < (nr_traintrial / 3) * 2) {
-        corr_elem[i] = corr_elem_tmp[1];
-      } else {
-        corr_elem[i] = corr_elem_tmp[2];
-      }
-    }
-    //pregenerate the values for all elements
-    var check_al2 = [];
-    var check_al1 = [];
-
-    for (var i = 0; i <= nr_traintrial - 1; i++) {
-      var restricted = [corr_values[i], 100 - corr_values[i]];
-      if (i < nr_traintrial / 2) {
-        check_al1[i] = getRand(restricted);
-        var restrictedsecond = [
-          corr_values[i],
-          100 - corr_values[i],
-          check_al1[i],
-        ];
-        check_al2[i] = getRand(restrictedsecond);
-      } else {
-        var restrictedsecond = [
-          corr_values[i],
-          100 - corr_values[i],
-          check_al1[i],
-        ];
-        check_al2[i] = getRand(restricted);
-        check_al1[i] = getRand(restrictedsecond);
-      }
-    }
-
-    var all_element_values = Array(nr_traintrial)
-      .fill()
-      .map(() => Array(3).fill(0));
-
-    for (var i = 0; i <= nr_traintrial - 1; i++) {
-      all_element_values[i][corr_elem[i] - 1] = corr_values[i];
-      if (corr_elem[i] === 1) {
-        all_element_values[i][1] = check_al1[i];
-        all_element_values[i][2] = check_al2[i];
-      } else if (corr_elem[i] === 2) {
-        all_element_values[i][0] = check_al1[i];
-        all_element_values[i][2] = check_al2[i];
-      } else if (corr_elem[i] === 3) {
-        all_element_values[i][0] = check_al1[i];
-        all_element_values[i][1] = check_al2[i];
-      }
-    }
-
-    // initialize options for the first trial
-    if (corr_pos[0] === 4) {
-      var ansTwo = 100 - corr_values[0];
-      var ansOne = corr_values[0];
-    } else {
-      var ansOne = 100 - corr_values[0];
-      var ansTwo = corr_values[0];
-    }
-
-    let indicReq_tmp = Array(nr_traintrial)
-      .fill()
-      .map(() => Array(2).fill(0));
-
+    /////////////////////////////////////////////////////////////////////////////////
+    // SET COMPONENT STATES
     this.state = {
-      sectionTime: timeString,
       userID: this.props.location.state.userID,
       date: this.props.location.state.date,
       startTime: this.props.location.state.startTime,
-      taskSession: "TrainingTaskB",
-      traintrialNum: 1,
-      traintrialTotal: nr_traintrial,
-      feedback: 0,
-      disp_el: 1,
-      disp_opt: 0,
-      all_corr_values: corr_values,
-      trainAcc: array_tmp,
-      ansOne: ansOne,
-      ansTwo: ansTwo,
-      corr_pos: corr_pos,
-      corr_elem: corr_elem,
-      all_element_values: all_element_values,
-      indicReq: indicReq_tmp,
-      element1Col: 1,
-      element2Col: 2,
-      element3Col: 3,
-      study_part: 3,
+      sectionStartTime: introTrainingStartTime,
+      taskSessionTry: 1,
+      taskSession: "TrainingIntroB",
+      instructScreenText: 1,
+      instructScreen: true,
     };
-    // this.displayFeedback = this.displayFeedback.bind(this)
-    /* prevents page from going to the right/left when arrows are pressed .*/
+
+    this.handleInstructLocal = this.handleInstructLocal.bind(this);
+
+    /* prevents page from going down when space bar is hit .*/
     window.addEventListener("keydown", function (e) {
       if (e.keyCode === 32 && e.target === document.body) {
         e.preventDefault();
@@ -187,126 +38,56 @@ class TrainingTaskB extends React.Component {
     });
   }
   /////////////////////////////////////////////////////////////////////////////////
-  componentDidMount() {
-    window.scrollTo(0, 0);
+  // END COMPONENT STATE
+
+  // This handles instruction screen within the component USING KEYBOARD
+  handleInstructLocal(key_pressed) {
+    var curText = this.state.instructScreenText;
+    var whichButton = key_pressed;
+
+    if (whichButton === 4 && curText > 1) {
+      this.setState({ instructScreenText: curText - 1 });
+    } else if (whichButton === 5 && curText < 3) {
+      this.setState({ instructScreenText: curText + 1 });
+    } else if (curText === 3 && whichButton === 10) {
+      setTimeout(
+        function () {
+          this.redirectToNextStage();
+        }.bind(this),
+        0
+      );
+    }
   }
 
-  componentWillUnmount() {
-    // fix Warning: Can't perform a React state update on an unmounted component
-    this.setState = (state, callback) => {
-      return;
-    };
-  }
+  // handle key key_pressed
+  _handleInstructKey = (event) => {
+    var key_pressed;
 
+    switch (event.keyCode) {
+      case 37:
+        //    this is left arrow
+        key_pressed = 4;
+        this.handleInstructLocal(key_pressed);
+        break;
+      case 39:
+        //    this is right arrow
+        key_pressed = 5;
+        this.handleInstructLocal(key_pressed);
+        break;
+      case 32:
+        //    this is SPACEBAR
+        key_pressed = 10;
+        this.handleInstructLocal(key_pressed);
+        break;
+      default:
+    }
+  };
   /////////////////////////////////////////////////////////////////////////////////
-  render() {
-    if (this.state.disp_el === 1) {
-      return (
-        <DisplayElements
-          element1Col={this.state.element1Col}
-          element2Col={this.state.element2Col}
-          element3Col={this.state.element3Col}
-          all_element_values={this.state.all_element_values}
-          indicReq={this.state.indicReq}
-          trialNum={this.state.traintrialNum}
-          onElementsEnd={this.handleElementsData}
-          onElementsIndic={this.handleIndicData}
-        />
-      );
-    } else if (this.state.disp_opt === 1) {
-      return (
-        <DisplayTrainOptions
-          ansTwo={this.state.ansTwo}
-          ansOne={this.state.ansOne}
-          trainIndic={this.trainIndic}
-        />
-      );
-    } else if (this.state.feedback === 1) {
-      return (
-        <DisplayTrainFeedback
-          corr_value={this.state.all_corr_values[this.state.traintrialNum - 1]}
-          handleFeedback={this.feedbackShown}
-        />
-      );
-    }
-  }
-  handleElementsData = () => {
-    this.setState({
-      disp_el: 0,
-      disp_opt: 1,
-    });
-  };
-
-  trainIndic = (pressed) => {
-    var trainAcc_tmp = this.state.trainAcc;
-
-    if (pressed === this.state.corr_pos[this.state.traintrialNum - 1]) {
-      trainAcc_tmp[this.state.traintrialNum - 1] = 1;
-    } else {
-      trainAcc_tmp[this.state.traintrialNum - 1] = 0;
-    }
-
-    this.setState({
-      trainAcc: trainAcc_tmp,
-      disp_opt: 0,
-      feedback: 1,
-    });
-  };
-
-  feedbackShown = () => {
-    if (this.state.traintrialNum === this.state.traintrialTotal) {
-      this.redirectToNextStage();
-    } else {
-      var traintrialNum_tmp = this.state.traintrialNum + 1;
-      var all_corr_values = this.state.all_corr_values;
-      var corr_pos = this.state.corr_pos;
-      if (corr_pos[traintrialNum_tmp - 1] === 4) {
-        var ansTwo = 100 - all_corr_values[traintrialNum_tmp - 1];
-        var ansOne = all_corr_values[traintrialNum_tmp - 1];
-      } else {
-        var ansOne = 100 - all_corr_values[traintrialNum_tmp - 1];
-        var ansTwo = all_corr_values[traintrialNum_tmp - 1];
-      }
-
-      this.setState({
-        traintrialNum: traintrialNum_tmp,
-        disp_el: 1,
-        feedback: 0,
-        ansTwo: ansTwo,
-        ansOne: ansOne,
-      });
-    }
-  };
-
   redirectToNextStage() {
-    let body = {
-      sectionStartTime: this.state.sectionTime,
-      startTime: this.state.startTime,
-      corr_elem: this.state.corr_elem,
-      trainAcc: this.state.trainAcc,
-      corr_pos: this.state.corr_pos,
-      all_corr_values: this.state.all_corr_values,
-    };
-
-    fetch(
-      `${API_URL}/training_b/create/` +
-        this.state.userID +
-        `/` +
-        this.state.study_part,
-      {
-        //eigentlich auch in den body beim ersten mal
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      }
-    );
-
-    ////////////////////////
+    document.removeEventListener("keyup", this._handleInstructKey);
+    document.removeEventListener("keyup", this._handleDebugKey);
     this.props.history.push({
-      pathname: `/TrainingIntroC`,
+      pathname: `/TrainingTaskB`,
       state: {
         userID: this.state.userID,
         date: this.state.date,
@@ -314,6 +95,109 @@ class TrainingTaskB extends React.Component {
       },
     });
   }
+
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////////////////
+  render() {
+    let text;
+    if (this.state.instructScreen === true) {
+      if (this.state.instructScreenText === 1) {
+        document.addEventListener("keyup", this._handleInstructKey);
+        text = (
+          <div className={styles.main}>
+            <p>
+              <span className={styles.center}>TRAINING III</span>
+              <br />
+              <br />
+              Your space-training session is going well!
+              <br />
+              <br />
+              Another challenge makes your mission even more difficult:
+              <br />
+              <br />
+              Your spaceship has <strong>three</strong> measuring instruments
+              showing different natural resources.
+              <br />
+              <br />
+              You have to find out <strong>which one is relevant</strong> and
+              determining the population size.
+              <br />
+              <br />
+              <span className={styles.center}>
+                [<strong>NEXT →</strong>]
+              </span>
+            </p>
+          </div>
+        );
+      } else if (this.state.instructScreenText === 2) {
+        text = (
+          <div className={styles.main}>
+            <p>
+              <span className={styles.center}>TRAINING III</span>
+              <br />
+              <br />
+              Again, sometimes this might change, which means suddenly a new
+              instrument <br /><br />will be relevant. <br /> <br /> You have to recognize
+              these changes.
+              <br />
+              <br />
+              This means, now you have to <br />
+              <br />
+              <strong>(1)</strong> find out which instrument is relevant, <br />
+              <br />
+              <strong>(2)</strong> what its association with the population size
+              is,
+              <br />
+              <br />
+              <strong>(3)</strong> detect when suddenly a new instrument is
+              relevant <br /><br />or when the association to the population size changes.
+              <br />
+              <br />
+              <span className={styles.center}>
+                [<strong>NEXT →</strong>]
+              </span>
+            </p>
+          </div>
+        );
+      } else if (this.state.instructScreenText === 3) {
+        text = (
+          <div className={styles.main}>
+            <p>
+              <span className={styles.center}>TRAINING III</span>
+              Again, the true population size will for now be shown after each
+              planet. <br /> <br /> This will make it possible for you to find
+              out which instrument is of importance <br />
+              <br />
+              and how it is associated to the population size.
+              <br />
+              <br />
+              Indicate the value by pressing the corresponding left and right
+              arrow key.
+              <br />
+              <br />
+              Let's practice this!
+              <br /> <br />
+              <span className={styles.center}>
+                Press the [<strong>SPACEBAR</strong>] to start the training.
+              </span>
+              <span className={styles.center}>
+                [<strong>← BACK</strong>]
+              </span>
+            </p>
+          </div>
+        );
+      }
+    }
+
+    return (
+      <div className={styles.cockpit}>
+        <div className={styles.textblock}>{text}</div>
+      </div>
+    );
+  }
 }
 
-export default withRouter(TrainingTaskB);
+export default withRouter(TrainingIntroB);
