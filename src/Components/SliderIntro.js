@@ -16,20 +16,6 @@ import img_slider5 from "./intro/SliderExamplePicture3.jpg";
 import img_slider6 from "./intro/SliderExamplePicture4.jpg";
 import img_slider7 from "./intro/SliderExamplePicture5.jpg";
 /////////////////////////////////////////////////////////////////////////////////
-var sliderTraining = [
-  img_spacebar,
-  img_up,
-  img_down,
-  img_left,
-  img_right,
-  img_slider1,
-  img_slider2,
-  img_slider3,
-  img_slider4,
-  img_slider5,
-  img_slider6,
-  img_slider7,
-];
 
 class SliderIntro extends React.Component {
   constructor(props) {
@@ -48,7 +34,7 @@ class SliderIntro extends React.Component {
       taskSession: "SliderIntro",
       instructScreenText: 1,
       instructScreen: true,
-      pics: sliderTraining,
+      pics: this.props.location.state.sliderTraining,
     };
 
     this.handleInstructLocal = this.handleInstructLocal.bind(this);
