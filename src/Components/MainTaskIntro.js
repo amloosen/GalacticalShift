@@ -17,7 +17,7 @@ class MainTaskIntro extends React.Component {
     /////////////////////////////////////////////////////////////////////////////////
     // SET COMPONENT STATES
     this.state = {
-      // userID: userID,
+      userID: this.props.location.state.userID,
       sectionStartTime: introTrainingStartTime,
       taskSessionTry: 1,
       taskSession: "MainTaskIntro",
