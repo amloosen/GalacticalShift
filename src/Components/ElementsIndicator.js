@@ -1,6 +1,10 @@
 import React from "react";
 import styles from "./style/taskStyle.module.css";
 import { View } from "react-native-web";
+import Blue from "./img/stimuli3_blue.jpg";
+import Red from "./img/stimuli3_red.jpg";
+// import Green from "./img/stimuli3_green.jpg";
+import Yellow from "./img/stimuli3_yellow.jpg";
 
 
 class ElementsIndicator extends React.Component {
