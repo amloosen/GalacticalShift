@@ -69,7 +69,7 @@ Remember to also indicate your certainty in your answer.
     } else if (this.props.practNum === 6) {
       var text = (
         <div className={styles.questions}>
-          What is the population of Connecticut ?
+          What is the population of Spain?
           <br />
           (the scale refers to 0 - 100 Million). <br />
           <br />
@@ -78,7 +78,7 @@ Remember to also indicate your certainty in your answer.
     } else if (this.props.practNum === 7) {
       var text = (
         <div className={styles.questions}>
-          What is the population of New York City? <br />
+          What is the population of London? <br />
           (the scale refers to 0 - 100 Million) <br />
           <br />
         </div>
