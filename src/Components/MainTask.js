@@ -115,7 +115,7 @@ class MainTask extends React.Component {
 
     let indicReq_tmp = Array(nr_trial).fill(0);
 
-    for (var k = 5; k <= nr_trial - 1; k += 20) {
+    for (var k = 5; k <= nr_trial - 1; k += 27) {
       indicReq_tmp[k] = 1;
     }
 
@@ -145,10 +145,8 @@ class MainTask extends React.Component {
       startTime: this.props.location.state.startTime,
       sectionStartTime: mainStartTime,
       taskSession: "MainTask",
-      // trialTotal: nr_trial,//debugger
-      trialTotal: 10,
-      trialPerBlock: 2, //debugger
-      // trialPerBlock: trialPerBlock,
+      trialTotal: nr_trial,//debugger
+      trialPerBlock: trialPerBlock,
       trialNum: 1,
       showBreak:0,
       trialBlockNum: 1,
