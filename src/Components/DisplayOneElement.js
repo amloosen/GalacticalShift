@@ -25,6 +25,7 @@ class DisplayTrainElement extends React.Component {
         value={this.props.valTrainElem}
         traintrialTotal={this.props.traintrialTotal}
         traintrialNum={this.props.traintrialNum}
+        blue={this.props.blue}
       />
     );
   }

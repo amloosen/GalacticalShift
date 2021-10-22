@@ -7,6 +7,7 @@ import ElementsOneDisplay from "./ElementsOneDisplay";
 import DisplayTrainElement from "./DisplayOneElement";
 import DisplayTrainOptions from "./DisplayTrainOptions";
 import DisplayTrainFeedback from "./DisplayTrainFeedback";
+import Blue from "./img/stimuli3_blue.jpg";
 
 ////////////////////////////////////////////////////////////////////////////////
 function shuffle(array) {
@@ -121,6 +122,7 @@ class TrainingTaskA extends React.Component {
           traintrialTotal={this.state.traintrialTotal}
           traintrialNum={this.state.traintrialNum}
           handleElement={this.elementsShown}
+          blue={Blue}
         />
       );
     } else if (this.state.disp_opt === 1) {

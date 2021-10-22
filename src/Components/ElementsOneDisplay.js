@@ -4,7 +4,7 @@ import { View } from "react-native-web";
 import ElementBar from "./ElementBar";
 import "./style/barstyles.css";
 import Cover from "./img/cover.jpg";
-import Blue from "./img/stimuli3_blue.jpg";
+// import Blue from "./img/stimuli3_blue.jpg";
 
 class ElementsOneDisplay extends React.Component {
   constructor(props) {
@@ -36,7 +36,7 @@ class ElementsOneDisplay extends React.Component {
   mouseOver(elNr) {
     this.state.times_element.push([Math.round(performance.now()), 0, 0]);
     this.setState({
-      img: Blue,
+      img: this.props.blue,
       show: 1,
     });
   }
