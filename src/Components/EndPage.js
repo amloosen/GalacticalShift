@@ -92,7 +92,7 @@ class EndPage extends React.Component {
     alert("You will now be redirected to the validation page.");
     document.removeEventListener("keyup", this._handleInstructKey);
     window.location =
-      "https://app.prolific.co/submissions/complete?cc=62A39CE8"; //this will the prolific validation code
+      "https://app.prolific.co/submissions/complete?cc=67D0ACA0"; //this will the prolific validation code
   };
 
   handleChange = (event) => {
