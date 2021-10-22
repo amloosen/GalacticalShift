@@ -145,10 +145,10 @@ class MainTask extends React.Component {
       startTime: this.props.location.state.startTime,
       sectionStartTime: mainStartTime,
       taskSession: "MainTask",
-      // trialTotal: nr_trial,//debugger
+      trialTotal: nr_trial,//debugger
       trialTotal: 10,
       trialPerBlock: 2, //debugger
-      // trialPerBlock: trialPerBlock_tmp,
+      trialPerBlock: trialPerBlock,
       trialNum: 1,
       showBreak:0,
       trialBlockNum: 1,
