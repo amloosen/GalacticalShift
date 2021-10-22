@@ -23,8 +23,13 @@ class StartPage extends React.Component {
     var dateString = date + "-" + (month + 1) + "-" + year;
 
     // Gen a random 6 digit number for now
-    var prolific_id = Math.floor(100000 + Math.random() * 900000);
-    // var prolific_id = 120000; //for testing
+    // var prolific_id = Math.floor(100000 + Math.random() * 900000);//for testing
+    
+    let url = this.props.location.search;
+        let params = queryString.parse(url);
+        const prolific_id =
+          params["USER_PID"] === undefined ? "undefined" : params["USER_PID"];
+
 
     // Set state
     this.state = {
