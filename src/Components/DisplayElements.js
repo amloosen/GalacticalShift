@@ -4,6 +4,11 @@ import styles from "./style/taskStyle.module.css";
 import ElementsFullDisplay from "./ElementsFulldisplay";
 import ElementsIndicator from "./ElementsIndicator";
 
+import Blue from "./img/stimuli3_blue.jpg";
+import Red from "./img/stimuli3_red.jpg";
+// import Green from "./img/stimuli3_green.jpg";
+import Yellow from "./img/stimuli3_yellow.jpg";
+
 class DisplayElements extends React.Component {
   constructor(props) {
     super(props);
