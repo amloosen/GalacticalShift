@@ -140,11 +140,9 @@ class MainTask extends React.Component {
     var trialPerBlock = nr_trial/5;
 
     this.state = {
-      // userID: this.props.location.state.userID,
-      userID: 1, //debugger
-      date: currentDate,
-      startTime: mainStartTime, //debugger this.props.location.state.startTime
-      // startTime: this.props.location.state.startTime,
+      userID: this.props.location.state.userID,
+      date: this.props.location.state.date,
+      startTime: this.props.location.state.startTime,
       sectionStartTime: mainStartTime,
       taskSession: "MainTask",
       // trialTotal: nr_trial,//debugger
