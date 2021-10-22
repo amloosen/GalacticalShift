@@ -90,7 +90,7 @@ class MainTaskIntro extends React.Component {
   redirectToNextStage() {
     document.removeEventListener("keyup", this._handleInstructKey);
     this.props.history.push({
-      pathname: `/DisplayQuiz`,
+      pathname: `/MainTask`,
       state: {
         userID: this.state.userID,
         date: this.state.date,
@@ -293,7 +293,7 @@ class MainTaskIntro extends React.Component {
               <br />
               Good luck with the main game!
               <br /> <br />
-              <span className={styles.main}>
+              <span className={styles.center}>
                 Press the [<strong>SPACEBAR</strong>] when you are ready to
                 start.
               </span>

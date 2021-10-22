@@ -163,7 +163,7 @@ class DisplayQuiz extends React.Component {
   }
   redirectToNextStage(h) {
     this.props.history.push({
-      pathname: `/MainTask`,
+      pathname: `/MainTaskIntro`,
       state: {
         userID: this.state.userID,
         date: this.state.date,
