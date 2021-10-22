@@ -24,36 +24,6 @@ class ElementsFullDisplay extends React.Component {
       .fill()
       .map(() => Array(4).fill(0));
 
-    if (this.props.img1 === 1) {
-      var img1 = Blue;
-      if (this.props.img2 === 2) {
-        var img2 = Red;
-        var img3 = Yellow;
-      } else if (this.props.img2 === 3) {
-        var img2 = Yellow;
-        var img3 = Red;
-      }
-    } else if (this.props.img1 === 2) {
-      var img1 = Red;
-
-      if (this.props.img2 === 3) {
-        var img2 = Yellow;
-        var img3 = Blue;
-      } else if (this.props.img2 === 1) {
-        var img2 = Blue;
-        var img3 = Yellow;
-      }
-    } else if (this.props.img1 === 3) {
-      var img1 = Yellow;
-
-      if (this.props.img2 === 1) {
-        var img2 = Blue;
-        var img3 = Red;
-      } else if (this.props.img2 === 2) {
-        var img2 = Red;
-        var img3 = Blue;
-      }
-    }
 
     this.state = {
       img1: Cover,
@@ -62,9 +32,9 @@ class ElementsFullDisplay extends React.Component {
       show1: null,
       show2: null,
       show3: null,
-      shownImg1: img1,
-      shownImg3: img2,
-      shownImg2: img3,
+      shownImg1: this.props.img1,
+      shownImg3: this.props.img2,
+      shownImg2: this.props.img3,
       times_element1: times_element1,
       times_element2: times_element2,
       times_element3: times_element3,

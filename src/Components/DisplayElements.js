@@ -7,7 +7,44 @@ import ElementsIndicator from "./ElementsIndicator";
 class DisplayElements extends React.Component {
   constructor(props) {
     super(props);
+
+    if (this.props.img1 === 1) {
+      var img1 = Blue;
+      if (this.props.img2 === 2) {
+        var img2 = Red;
+        var img3 = Yellow;
+      } else if (this.props.img2 === 3) {
+        var img2 = Yellow;
+        var img3 = Red;
+      }
+    } else if (this.props.img1 === 2) {
+      var img1 = Red;
+
+      if (this.props.img2 === 3) {
+        var img2 = Yellow;
+        var img3 = Blue;
+      } else if (this.props.img2 === 1) {
+        var img2 = Blue;
+        var img3 = Yellow;
+      }
+    } else if (this.props.img1 === 3) {
+      var img1 = Yellow;
+
+      if (this.props.img2 === 1) {
+        var img2 = Blue;
+        var img3 = Red;
+      } else if (this.props.img2 === 2) {
+        var img2 = Red;
+        var img3 = Blue;
+      }
+    }
+  this.state = {
+    img1: img1,
+    img2: img2,
+    img3: img3,
+  };
   }
+
 
   handleIndicKey = (event) => {
     var pressed;
@@ -48,9 +85,9 @@ class DisplayElements extends React.Component {
     if (this.props.indicReq[this.props.trialNum - 1] === 1) {
       return (
           <ElementsIndicator
-            img1={this.props.element1Col}
-            img2={this.props.element2Col}
-            img3={this.props.element3Col}
+            img1={this.props.img1}
+            img2={this.props.img2}
+            img3={this.props.img3}
             trialNum={this.props.trialNum}
             onKeyPressed={this.handleIndicKey}
           />
@@ -61,9 +98,9 @@ class DisplayElements extends React.Component {
             value1={this.props.all_element_values[this.props.trialNum - 1][0]}
             value2={this.props.all_element_values[this.props.trialNum - 1][1]}
             value3={this.props.all_element_values[this.props.trialNum - 1][2]}
-            img1={this.props.element1Col}
-            img2={this.props.element2Col}
-            img3={this.props.element3Col}
+            img1={this.props.img1}
+            img2={this.props.img2}
+            img3={this.props.img3}
             trialNum={this.props.trialNum}
             onViewEnd={this.handleTimes}
           />

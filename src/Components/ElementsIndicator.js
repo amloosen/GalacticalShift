@@ -11,41 +11,11 @@ class ElementsIndicator extends React.Component {
   constructor(props) {
     super(props);
 
-    if (this.props.img1 === 1) {
-      var img1 = Blue;
-      if (this.props.img2 === 2) {
-        var img2 = Red;
-        var img3 = Yellow;
-      } else if (this.props.img2 === 3) {
-        var img2 = Yellow;
-        var img3 = Red;
-      }
-    } else if (this.props.img1 === 2) {
-      var img1 = Red;
-
-      if (this.props.img2 === 3) {
-        var img2 = Yellow;
-        var img3 = Blue;
-      } else if (this.props.img2 === 1) {
-        var img2 = Blue;
-        var img3 = Yellow;
-      }
-    } else if (this.props.img1 === 3) {
-      var img1 = Yellow;
-
-      if (this.props.img2 === 1) {
-        var img2 = Blue;
-        var img3 = Red;
-      } else if (this.props.img2 === 2) {
-        var img2 = Red;
-        var img3 = Blue;
-      }
-    }
 
     this.state = {
-      img1: img1,
-      img2: img2,
-      img3: img3,
+      img1: this.props.img1,
+      img2: this.props.img2,
+      img3: this.props.img3,
     };
 
     /* prevents page from going down when space bar is hit .*/
