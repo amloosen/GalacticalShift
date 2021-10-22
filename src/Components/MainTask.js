@@ -115,9 +115,9 @@ class MainTask extends React.Component {
 
     let indicReq_tmp = Array(nr_trial).fill(0);
 
-    // for (var k = 9; k <= nr_trial - 1; k += 27) {
-    //   indicReq_tmp[k] = 1;
-    // }
+    for (var k = 9; k <= nr_trial - 1; k += 27) {
+      indicReq_tmp[k] = 1;
+    }
 
     var times_element1 = Array(nr_trial)
       .fill()
