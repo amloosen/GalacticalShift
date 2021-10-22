@@ -136,6 +136,8 @@ class TrainingTaskC extends React.Component {
     this.state = {
       date: currentDate,
       sectionTime: timeString,
+      // userID: 12,//debugger
+      // startTime: 12,//debugger
       date: currentDate,
       userID: this.props.location.state.userID,
       startTime: this.props.location.state.startTime,
