@@ -81,7 +81,7 @@ class ElementsFullDisplay extends React.Component {
         this.state.times_element2,
         this.state.times_element3
       );
-    }, 4000);
+    }, 5000);
   }
 
   componentWillUnmount() {
