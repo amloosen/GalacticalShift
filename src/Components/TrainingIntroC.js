@@ -1,6 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import styles from "./style/taskStyle.module.css";
+import img_intro1 from "./intro/ExamplePicture1.jpg";
 import img_bar from "./intro/bar.jpg";
 /////////////////////////////////////////////////////////////////////////////////
 // REACT COMPONENT START
@@ -22,7 +23,6 @@ class TrainingIntroC extends React.Component {
       taskSession: "TrainingIntroC",
       instructScreenText: 1,
       instructScreen: true,
-      trainingC: this.props.location.state.trainingC,
     };
 
     this.handleInstructLocal = this.handleInstructLocal.bind(this);
@@ -95,9 +95,6 @@ class TrainingIntroC extends React.Component {
         userID: this.state.userID,
         date: this.state.date,
         startTime: this.state.startTime,
-        //
-        trainingC: this.state.trainingC,
-        mainTask: this.props.location.state.mainTask
       },
     });
   }
@@ -198,7 +195,7 @@ class TrainingIntroC extends React.Component {
               <span className={styles.center}>
                 <img
                   className={styles.relevInd}
-                  src={this.state.trainingC[0]}
+                  src={img_intro1}
                   alt="example1"
                 />
               </span>
@@ -219,11 +216,12 @@ class TrainingIntroC extends React.Component {
               <strong>An additional hint:</strong>
               <br />
               <br />
-              As you might have noticed in the trainig session, planets <br /><br />(trials)
-              that you encounter after each other,
-              are more similar to each other <br />
-              <br />than planets that are further
-              apart.
+              As you might have noticed in the trainig session, planets <br />
+              <br />
+              (trials) that you encounter after each other, are more similar to
+              each other <br />
+              <br />
+              than planets that are further apart.
               <br />
               <br />
               This means, their population size depends on the same instrument.
@@ -254,10 +252,10 @@ class TrainingIntroC extends React.Component {
               This reward will be indicated by a bar that look like this: <br />
               <br />
               <span className={styles.center}>
-                <img src={this.state.trainingC[1]} alt="bar" />
+                <img src={img_bar} alt="bar" />
               </span>
-              During this training stage the collected reward is only
-              for demonstration <br />
+              During this training stage the collected reward is only for
+              demonstration <br />
               <br />
               and will be deleted after the training. <br />
               <br />
@@ -280,8 +278,8 @@ class TrainingIntroC extends React.Component {
               Again, the true population size shown after each planet will make
               it possible <br />
               <br />
-              for you to find out which instrument (i.e., which colour and shape) is of
-              importance.
+              for you to find out which instrument (i.e., which colour and
+              shape) is of importance.
               <br />
               <br />
               Let’s practice that!
