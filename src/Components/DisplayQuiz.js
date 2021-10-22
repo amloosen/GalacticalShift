@@ -7,6 +7,9 @@ class DisplayQuiz extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      userID: this.props.location.state.userID,
+      date: this.props.location.state.date,
+      startTime: this.props.location.state.startTime,
       showIntro: 1,
       showQuiz: 0,
       nextRound: 0,

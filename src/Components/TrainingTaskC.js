@@ -347,7 +347,7 @@ class TrainingTaskC extends React.Component {
     );
     ////////////////////////
     this.props.history.push({
-      pathname: `/DisplayQuiz`,
+      pathname: `/MainTaskIntro`,
       state: {
         userID: this.state.userID,
         date: this.state.date,
