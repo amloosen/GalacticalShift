@@ -92,9 +92,7 @@ class TrainingTaskA extends React.Component {
       ansOne: ansOne,
       ansTwo: ansTwo,
       corr_pos: corr_pos,
-      study_part: 2,
-      //
-      trainingA: this.props.location.state.trainingA,
+      study_part: 2
     };
     /* prevents page from going to the right/left when arrows are pressed .*/
     window.addEventListener("keydown", function (e) {
@@ -123,7 +121,6 @@ class TrainingTaskA extends React.Component {
           traintrialTotal={this.state.traintrialTotal}
           traintrialNum={this.state.traintrialNum}
           handleElement={this.elementsShown}
-          imgElement={this.state.trainingA}
         />
       );
     } else if (this.state.disp_opt === 1) {
@@ -240,10 +237,6 @@ class TrainingTaskA extends React.Component {
         userID: this.state.userID,
         date: this.state.date,
         startTime: this.state.startTime,
-        //
-        trainingB: this.props.location.state.trainingB,
-        trainingC: this.props.location.state.trainingC,
-        mainTask: this.props.location.state.mainTask
       },
     });
   }
