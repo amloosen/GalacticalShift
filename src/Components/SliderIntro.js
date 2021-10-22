@@ -119,7 +119,7 @@ class SliderIntro extends React.Component {
     document.removeEventListener("keyup", this._handleInstructKey);
     document.removeEventListener("keyup", this._handleDebugKey);
     this.props.history.push({
-      pathname: `/SliderTraining`,
+      pathname: `/MainTask`,
       state: {
         userID: this.state.userID,
         date: this.state.date,
