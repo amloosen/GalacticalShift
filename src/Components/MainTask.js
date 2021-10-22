@@ -365,7 +365,9 @@ class MainTask extends React.Component {
 
   handleOutcomeData = (height) => {
     var outcomeHeight_tmp = this.state.outcomeHeight;
-    outcomeHeight_tmp[this.state.trialNum - 1] = height;
+    var height_tmp = height;
+    height_round = height_tmp.toFixed(3);
+    outcomeHeight_tmp[this.state.trialNum - 1] = height_round;
     this.nextTrial(0, outcomeHeight_tmp);
   };
 
