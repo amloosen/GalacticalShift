@@ -134,7 +134,7 @@ class TrainingTaskB extends React.Component {
         all_element_values[i][1] = check_al2[i];
       }
     }
-
+    
     // initialize options for the first trial
     if (corr_pos[0] === 4) {
       var ansTwo = 100 - corr_values[0];
@@ -203,9 +203,9 @@ class TrainingTaskB extends React.Component {
     if (this.state.disp_el === 1) {
       return (
         <DisplayElements
-          img1={this.state.element1Col}
-          img2={this.state.element2Col}
-          img3={this.state.element3Col}
+          element1Col={this.state.element1Col}
+          element2Col={this.state.element2Col}
+          element3Col={this.state.element3Col}
           all_element_values={this.state.all_element_values}
           indicReq={this.state.indicReq}
           trialNum={this.state.traintrialNum}
