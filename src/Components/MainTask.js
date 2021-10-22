@@ -146,6 +146,8 @@ class MainTask extends React.Component {
       sectionStartTime: mainStartTime,
       taskSession: "MainTask",
       trialTotal: nr_trial,//debugger
+      trialTotal: 10,
+      trialPerBlock: 2, //debugger
       trialPerBlock: trialPerBlock,
       trialNum: 1,
       showBreak:0,
@@ -198,27 +200,40 @@ class MainTask extends React.Component {
   /////////////////////////////////////////////////////////////////////////////////
 
   sendBlock(height) {
+    let trial_per_block = this.state.trialPerBlock;
+
+    var subset_all_element_values = this.state.all_element_values.slice(0,trial_per_block);
+    var subset_corr_elements = this.state.corPos_sq.slice(0,trial_per_block);
+    var subset_trialSgmMu = this.state.trialSgmMu.slice(0,trial_per_block);
+    var subset_times_element1 = this.state.times_element1.slice(0,trial_per_block);
+    var subset_times_element2 = this.state.times_element2.slice(0,trial_per_block);
+    var subset_times_element3 = this.state.times_element3.slice(0,trial_per_block);
+    var subset_all_true_pop_size = this.state.all_true_pop_size.slice(0,trial_per_block);
+    var subset_indicKey = this.state.indicKey.slice(0,trial_per_block);
+    var subset_outcomeHeight = height.slice(0,trial_per_block);
+    var subset_indicReq = this.state.indicReq.slice(0,trial_per_block);
+
   let body = {
       sectionStartTime: this.state.sectionStartTime,
       startTime: this.state.startTime,
-      all_element_values: this.state.all_element_values.,
+      all_element_values: subset_all_element_values,
       trialTotal: this.state.trialTotal,
-      corr_elements: this.state.corPos_sq,
-      trialSgmMu: this.state.trialSgmMu,
-      times_element1: this.state.times_element1,
-      times_element2: this.state.times_element2,
-      times_element3: this.state.times_element3,
+      corr_elements: subset_corr_elements,
+      trialSgmMu: subset_trialSgmMu,
+      times_element1: subset_times_element1,
+      times_element2: subset_times_element2,
+      times_element3: subset_times_element3,
       element1Col: this.state.element1Col,
       element2Col: this.state.element2Col,
       element3Col: this.state.element3Col,
       startSgm: this.state.startSgm,
       startMu: this.state.startMu,
-      all_true_pop_size: this.state.all_true_pop_size,
-      indicKey: this.state.indicKey,
-      outcomeHeight: height,
+      all_true_pop_size: subset_all_true_pop_size,
+      indicKey: subset_indicKey ,
+      outcomeHeight: subset_outcomeHeight,
       trialRT: this.state.trialRT,
       blockTotal: this.state.blockTotal,
-      indicReq: this.state.indicReq,
+      indicReq: subset_indicReq,
       trialPerBlock: this.state.trialPerBlock,
       blockNum: this.state.blockNum,
     };
@@ -385,7 +400,7 @@ class MainTask extends React.Component {
       });
     }
 
-    if (this.state.trialBlockNum === this.state.trialPerBlock) {
+    if (this.state.trialBlockNum === this.state.trialPerBlock ) {
       this.sendBlock(h);
       this.setState({
         showBreak: 1,
