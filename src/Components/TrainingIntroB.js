@@ -92,10 +92,6 @@ class TrainingIntroB extends React.Component {
         userID: this.state.userID,
         date: this.state.date,
         startTime: this.state.startTime,
-        //
-        trainingB: this.props.location.state.trainingB,
-        trainingC: this.props.location.state.trainingC,
-        mainTask: this.props.location.state.mainTask
       },
     });
   }
