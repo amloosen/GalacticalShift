@@ -8,6 +8,68 @@ import "../../node_modules/survey-react/survey.css";
 import "./style/startStyle.css";
 ////////////////////////////////////////////////////////////////////////////////
 //import images used to increase the loading time
+//SliderIntro
+import img_spacebar from "./intro/spacebar.jpg";
+import img_up from "./intro/up.jpg";
+import img_down from "./intro/down.jpg";
+import img_right from "./intro/right.jpg";
+import img_left from "./intro/left.jpg";
+import img_slider1 from "./intro/SliderExamplePicture1.jpg";
+import img_slider2 from "./intro/SliderExamplePoint.jpg";
+import img_slider3 from "./intro/SliderExampleLine.jpg";
+import img_slider4 from "./intro/SliderExamplePicture2.jpg";
+import img_slider5 from "./intro/SliderExamplePicture3.jpg";
+import img_slider6 from "./intro/SliderExamplePicture4.jpg";
+import img_slider7 from "./intro/SliderExamplePicture5.jpg";
+//TrainingIntroA
+import img_intro1 from "./intro/ExamplePicture1.jpg";
+//TrainingIntroC
+import img_bar from "./intro/bar.jpg";
+//MAIN
+import img_indicat1 from "./intro/indicat1.jpg";
+import img_indicat2 from "./intro/indicat2.jpg";
+import img_indicat3 from "./intro/indicat3.jpg";
+//stimuli
+import Cover from "./img/cover.jpg";
+import Blue from "./img/stimuli3_blue.jpg";
+import Red from "./img/stimuli3_red.jpg";
+// import Green from "./img/stimuli3_green.jpg";
+import Yellow from "./img/stimuli3_yellow.jpg";
+////////////////////////////////////////////////////////////////////////////////
+//assign pictures to variables
+var sliderTraining = [
+  img_spacebar,
+  img_up,
+  img_down,
+  img_left,
+  img_right,
+  img_slider1,
+  img_slider2,
+  img_slider3,
+  img_slider4,
+  img_slider5,
+  img_slider6,
+  img_slider7,
+];
+
+var trainingA = [img_intro1, img_left, img_right, Cover, Blue];
+
+var trainingB = [Cover, Blue, Red, Yellow];
+
+var trainingC = [img_intro1, img_left, img_bar, Cover, Blue, Red, Yellow];
+
+var mainTask = [
+  img_indicat1,
+  img_indicat2,
+  img_indicat2,
+  Cover,
+  Blue,
+  Red,
+  Yellow,
+];
+
+////////////////////////////////////////////////////////////////////////////////
+
 ////////////////////////////////////////////////////////////////////////////////
 class StartPage extends React.Component {
   constructor(props) {
@@ -49,6 +111,37 @@ class StartPage extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
+
+    var sliderTraining = this.state.sliderTraining;
+    var trainingA = this.state.trainingA;
+    var trainingB = this.state.trainingB;
+    var trainingC = this.state.trainingC;
+    var mainTask = this.state.mainTask;
+
+    /// process images
+    [sliderTraining].forEach((image) => {
+      new Image().src = image;
+    });
+    [trainingA].forEach((image) => {
+      new Image().src = image;
+    });
+    [trainingB].forEach((image) => {
+      new Image().src = image;
+    });
+    [trainingC].forEach((image) => {
+      new Image().src = image;
+    });
+    [mainTask].forEach((image) => {
+      new Image().src = image;
+    });
+
+    this.setState({
+      sliderTraining: sliderTraining,
+      trainingA: trainingA,
+      trainingB: trainingB,
+      trainingC: trainingC,
+      mainTask: mainTask,
+    });
   }
 
   componentWillUnmount() {
@@ -90,6 +183,11 @@ class StartPage extends React.Component {
         date: this.state.date,
         startTime: this.state.startTime,
         //
+        sliderTraining: this.state.sliderTraining,
+        trainingA: this.state.trainingA,
+        trainingB: this.state.trainingB,
+        trainingC: this.state.trainingC,
+        mainTask: this.state.mainTask,
       },
     });
   }
