@@ -6,40 +6,32 @@ import Red from "./img/stimuli3_red.jpg";
 // import Green from "./img/stimuli3_green.jpg";
 import Yellow from "./img/stimuli3_yellow.jpg";
 
-
 class ElementsIndicator extends React.Component {
   constructor(props) {
     super(props);
 
     if (this.props.img1 === 1) {
       var img1 = Blue;
-      if (this.props.img2 === 2) {
-        var img2 = Red;
-        var img3 = Yellow;
-      } else if (this.props.img2 === 3) {
-        var img2 = Yellow;
-        var img3 = Red;
-      }
     } else if (this.props.img1 === 2) {
-      var img1 = Red;
-
-      if (this.props.img2 === 3) {
-        var img2 = Yellow;
-        var img3 = Blue;
-      } else if (this.props.img2 === 1) {
-        var img2 = Blue;
-        var img3 = Yellow;
-      }
-    } else if (this.props.img1 === 3) {
       var img1 = Yellow;
+    } else if (this.props.img1 === 3) {
+      var img1 = Red;
+    }
 
-      if (this.props.img2 === 1) {
-        var img2 = Blue;
-        var img3 = Red;
-      } else if (this.props.img2 === 2) {
-        var img2 = Red;
-        var img3 = Blue;
-      }
+    if (this.props.img2 === 1) {
+      var img2 = Blue;
+    } else if (this.props.img2 === 2) {
+      var img2 = Yellow;
+    } else if (this.props.img2 === 3) {
+      var img2 = Red;
+    }
+
+    if (this.props.img3 === 1) {
+      var img3 = Blue;
+    } else if (this.props.img3 === 2) {
+      var img3 = Yellow;
+    } else if (this.props.img3 === 3) {
+      var img3 = Red;
     }
 
     this.state = {
@@ -69,7 +61,6 @@ class ElementsIndicator extends React.Component {
         </p>
       </div>
     );
-
 
     return (
       <div className={styles.cockpit}>
