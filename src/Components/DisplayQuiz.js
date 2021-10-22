@@ -121,7 +121,7 @@ class DisplayQuiz extends React.Component {
             Good luck!
             <br /><br />
             <span className={styles.center}>
-              Press the [<strong>SPACEBAR</strong>] to start the main game.
+              Press the [<strong>SPACEBAR</strong>] to continue.
             </span>
             <br />
           </p>
@@ -148,7 +148,7 @@ class DisplayQuiz extends React.Component {
             Good luck!
             <br /><br />
             <span className={styles.center}>
-              Press the [<strong>SPACEBAR</strong>] to start the quiz.
+              Press the [<strong>SPACEBAR</strong>] to start.
             </span>
             <br />
           </p>
