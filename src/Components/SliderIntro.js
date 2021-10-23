@@ -76,9 +76,9 @@ class SliderIntro extends React.Component {
 
     if (whichButton === 4 && curText > 1) {
       this.setState({ instructScreenText: curText - 1 });
-    } else if (whichButton === 5 && curText < 12) {
+    } else if (whichButton === 5 && curText < 13) {
       this.setState({ instructScreenText: curText + 1 });
-    } else if (curText === 12 && whichButton === 10) {
+    } else if (curText === 13 && whichButton === 10) {
       setTimeout(
         function () {
           this.nextPart();
@@ -139,15 +139,17 @@ class SliderIntro extends React.Component {
               <br />
               <span className={styles.center}>Welcome to our study!</span>
               <br />
-              In the following game, you will use a special response slider.
+              Step by step, we will now introduce our online game and all its components.
               <br />
-              With this slider you can indicate both <br />
-              (1) a <strong>number</strong> we are asking for and <br />
-              (2) how <strong>certain</strong> you are about this number.
+              Please make sure to pay full attention. <br /><br />There will be a quiz after the training session
+
+              that will ensure that you fully understood the game.
               <br />
               <br />
-              We will now show you how this slider works and give you a chance
-              to get used to it.
+              You will not be able to start the main game if you do not answer all questions correctly.
+              <br />
+              <br />
+              Good luck and have fun!
               <br />
               <br />
               <br /> <br />
@@ -167,15 +169,17 @@ class SliderIntro extends React.Component {
               <span className={styles.center}>TRAINING I</span>
               <br />
               <br />
-              When you make an estimate, such as how expensive something is,{" "}
+              In the following game, you will use a special response slider.
               <br />
-              you might be more or less certain about this estimate's accuracy.
+              With this slider you can indicate both <br /><br />
               <br />
+              (1) a <strong>number</strong> you have to indicate and <br />
+              (2) how <strong>certain</strong> you are about this number.
               <br />
-              This means, sometimes you might be certain (sure) that your
-              estimate is correct and <br />
-              other times you might be very uncertain (unsure) about your
-              estimate.
+              <br /><br />
+              <br />
+              We will now show you how this slider works and give you a chance
+              to get used to it.
               <br />
               <br />
               <br /> <br />
@@ -185,28 +189,20 @@ class SliderIntro extends React.Component {
             </p>
           </div>
         );
-      } else if (this.state.instructScreenText === 3) {
+      }  else if (this.state.instructScreenText === 3) {
         text = (
           <div className={styles.main}>
             <p>
               <span className={styles.center}>TRAINING I</span>
               <br />
               <br />
-              For instance a scenario might be:
+              When you make an estimate, such as how expensive something is,{" "}
+              <br />
+              you might be more or less certain about this estimate's accuracy.
               <br />
               <br />
-              <li>Your estimate:</li>
-              “The ice cream will cost £2”
-              <br />
-              <br />
-              <li>Your certainty in your estimate:</li>
-              “I am very certain that the ice-cream will cost £2 <br />
-              because this is what I paid last time I went to this shop”
-              <br /> <br />
-              or <br />
-              <br />
-              “I am very uncertain how much the ice-cream will cost <br />
-              because I have never been to this shop before.”
+              This means, sometimes your certainty in this estimate might be high (sure) and <br />
+              other times your certainty in your estimate might be low (unsure).
               <br />
               <br />
               <br /> <br />
@@ -222,7 +218,38 @@ class SliderIntro extends React.Component {
             <p>
               <span className={styles.center}>TRAINING I</span>
               <br />
-              This is the slider you will use:
+              <br />
+              For instance a scenario might be:
+              <br />
+              <br />
+              <li>Your estimate:</li>
+              “The ice cream will cost £2”
+              <br />
+              <br />
+              <li>Your certainty in your estimate:</li>
+              “My certainty that the ice-cream will cost £2 is very high<br />
+              because this is what I paid last time I went to this shop”
+              <br /> <br />
+              or <br />
+              <br />
+              “My certainty about the price of the ice-cream is very low <br />
+              because I have never been to this shop before.”
+              <br />
+              <br />
+              <br /> <br />
+              <span className={styles.center}>
+                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
+              </span>
+            </p>
+          </div>
+        );
+      } else if (this.state.instructScreenText === 5) {
+        text = (
+          <div className={styles.main}>
+            <p>
+              <span className={styles.center}>TRAINING I</span>
+              <br />
+              This is the slider you will use to tell us your estimate and your certainty in it:
               <br />
               <br />
               <span className={styles.center}>
@@ -240,14 +267,13 @@ class SliderIntro extends React.Component {
             </p>
           </div>
         );
-      } else if (this.state.instructScreenText === 5) {
+      } else if (this.state.instructScreenText === 6) {
         text = (
           <div className={styles.main}>
             <p>
               <span className={styles.center}>TRAINING I</span>
-              The peak of this curve shows the estimate that you think is most
-              likely:
-              <br />
+              The peak of this curve indicates your estimate:
+              <br /><br />
               <span className={styles.center}>
                 <img
                   className={styles.introImgTwo}
@@ -255,7 +281,8 @@ class SliderIntro extends React.Component {
                   alt="example1"
                 />
               </span>
-              And the width of the slider shows how certain you are:
+              And the width of the slider indicates your certainty:
+              <br />
               <br />
               <span className={styles.center}>
                 <img
@@ -271,7 +298,7 @@ class SliderIntro extends React.Component {
             </p>
           </div>
         );
-      } else if (this.state.instructScreenText === 6) {
+      } else if (this.state.instructScreenText === 7) {
         text = (
           <div className={styles.main}>
             <p>
@@ -309,12 +336,12 @@ class SliderIntro extends React.Component {
             </p>
           </div>
         );
-      } else if (this.state.instructScreenText === 7) {
+      } else if (this.state.instructScreenText === 8) {
         text = (
           <div className={styles.main}>
             <p>
               <span className={styles.center}>TRAINING I</span>
-              You can make change the width as well.
+              You can change the width as well.
               <br />
               <br />
               <span className={styles.center}>
@@ -347,13 +374,14 @@ class SliderIntro extends React.Component {
             </p>
           </div>
         );
-      } else if (this.state.instructScreenText === 8) {
+      } else if (this.state.instructScreenText === 9) {
         text = (
           <div className={styles.main}>
             <p>
               <span className={styles.center}>TRAINING I</span>
               <br />
               Here you see how it looks like when the estimate is 50
+              <br />
               <br />
               <span className={styles.center}>
                 <img
@@ -363,44 +391,11 @@ class SliderIntro extends React.Component {
                 />
               </span>
               and here you see how it looks like when it is 75
-              <br />
+              <br /><br />
               <span className={styles.center}>
                 <img
                   className={styles.introImgTwo}
                   src={this.state.pics[8]}
-                  alt="example1"
-                />
-              </span>
-              <span className={styles.center}>
-                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
-              </span>
-            </p>
-          </div>
-        );
-      } else if (this.state.instructScreenText === 9) {
-        text = (
-          <div className={styles.main}>
-            <p>
-              <span className={styles.center}>TRAINING I</span>
-              The second aspect of the slider, the changeable width, enables you
-              to indicate your certainty.
-              <br />
-              Here you see how it looks like when the estimate is 50 with high{" "}
-              <strong>certainty</strong>
-              <br />
-              <span className={styles.center}>
-                <img
-                  className={styles.introImgTwo}
-                  src={this.state.pics[9]}
-                  alt="example1"
-                />
-              </span>
-              and here 50 is indicated with <strong>uncertainty</strong>
-              <br />
-              <span className={styles.center}>
-                <img
-                  className={styles.introImgTwo}
-                  src={this.state.pics[10]}
                   alt="example1"
                 />
               </span>
@@ -415,20 +410,30 @@ class SliderIntro extends React.Component {
           <div className={styles.main}>
             <p>
               <span className={styles.center}>TRAINING I</span>
+              The second aspect of the slider, the changeable width, enables you
+              to indicate your certainty.
+              <br />
+              Here you see how it looks like when the estimate is 50 with{" "}
+              <strong>high certainty</strong>
               <br />
               <br />
-              To familiarize you with the slider, we will now ask you several
-              questions.
+              <span className={styles.center}>
+                <img
+                  className={styles.introImgTwo}
+                  src={this.state.pics[9]}
+                  alt="example1"
+                />
+              </span>
+              and here 50 is indicated with <strong> low certainty</strong>
               <br />
               <br />
-              Some questions are related to yourself and some are not.
-              <br />
-              <br />
-              Please indicate your answer to the question and <br /> <br /> your
-              certainty in your answer by using the slider.
-              <br />
-              <br />
-              <br /> <br />
+              <span className={styles.center}>
+                <img
+                  className={styles.introImgTwo}
+                  src={this.state.pics[10]}
+                  alt="example1"
+                />
+              </span>
               <span className={styles.center}>
                 [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
               </span>
@@ -441,16 +446,41 @@ class SliderIntro extends React.Component {
             <p>
               <span className={styles.center}>TRAINING I</span>
               <br />
+              <br />
+              To familiarize you with the slider, we will now ask you several
+              questions.
+              <br />
+              <br />
+              Some questions are related to yourself and some are not.
+              <br />
+              <br />
+              Please indicate your answer to the question and your
+              certainty in your answer using the slider.
+              <br />
+              <br />
+              <br /> <br />
+              <span className={styles.center}>
+                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
+              </span>
+            </p>
+          </div>
+        );
+      } else if (this.state.instructScreenText === 12) {
+        text = (
+          <div className={styles.main}>
+            <p>
+              <span className={styles.center}>TRAINING I</span>
+              <br />
               One example could be:
               <br />
               <br />
               “How large is the population of Thailand? (If the scale refers to
-              0-100 Million)”
+              0-100 million)”
               <br />
               <br />
-              If you think it is approximately 65 mio and you are relatively
+              If you think it is approximately 65 million and you are relatively
               certain,your answer could be:
-              <br />
+              <br /><br />
               <span className={styles.center}>
                 <img
                   className={styles.introImg}
@@ -466,13 +496,13 @@ class SliderIntro extends React.Component {
             </p>
           </div>
         );
-      } else if (this.state.instructScreenText === 12) {
+      } else if (this.state.instructScreenText === 13) {
         text = (
           <div className={styles.main}>
             <p>
               <span className={styles.center}>TRAINING I</span>
               <br />
-              When indicating your estimate and certainty, please try to do be
+              When indicating your estimate and certainty, please try to be
               as precise as possible.
               <br />
               <br />

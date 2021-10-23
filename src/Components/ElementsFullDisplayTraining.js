@@ -187,7 +187,7 @@ class ElementsFullDisplayTraining extends React.Component {
         this.state.times_element2,
         this.state.times_element3
       );
-    }, 3000);
+    }, 5000);
   }
 
   componentWillUnmount() {
@@ -196,7 +196,7 @@ class ElementsFullDisplayTraining extends React.Component {
 
   render() {
     return (
-      <div className={styles.cockpit}>
+        <div className={styles.cockpit}>
         <div className={styles.main}>
             <View style={styles.container}>
               <img

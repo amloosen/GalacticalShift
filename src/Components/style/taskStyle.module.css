@@ -257,17 +257,29 @@ img.introImgTwo3 {
       }
 
 .right {  float: right;
+  width: 10vw;
   height: auto;
+  border-style: solid;
+  border-color: white;
   margin: 0px;
   color: white;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   font-size: 50px;
   font-family: "Calibri", "Calibri";
 }
 
 .left {float: left;
+  width: 10vw;
   height: auto;
+  border-style: solid;
+  border-color: white;
   margin: 0px;
   color: white;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   font-size: 50px;
   font-family: "Calibri", "Calibri";
 }
@@ -300,4 +312,22 @@ span.likeP {
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   cursor: pointer;
+}
+
+.counter {
+  position: absolute;
+  right: 20vw;
+  padding-top: 10vh;
+  top: 0px;
+  font-size: 30px;
+  font-family: "Calibri", "Calibri";
+  color: white;
+}
+
+.quiztext {
+  margin-bottom: 12px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  color: white;
+  font-size: 4vh;
 }

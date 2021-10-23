@@ -2,6 +2,8 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import styles from "./style/taskStyle.module.css";
 import Quiz from "./Quiz";
+import "./style/quizStylesAdapt.css";
+
 
 class DisplayQuiz extends React.Component {
   constructor(props) {
@@ -86,6 +88,11 @@ class DisplayQuiz extends React.Component {
     if (this.state.showQuiz) {
       return (
         <div className={styles.cockpit}>
+        <div className={styles.quiztext}>
+            <br />
+            Please use your mouse to click on the correct answer.
+            <br /> <br />
+        </div>
           <Quiz onQuizEnd={this.quizCompleted} />
         </div>
       );

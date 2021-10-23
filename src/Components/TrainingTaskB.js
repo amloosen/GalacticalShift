@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { API_URL } from "../config";
 import styles from "./style/taskStyle.module.css";
 import { range } from "lodash";
-import DisplayElements from "./DisplayElements";
+import DisplayElementsTrain from "./DisplayElementsTrain";
 import DisplayTrainOptions from "./DisplayTrainOptions";
 import DisplayTrainFeedback from "./DisplayTrainFeedback";
 ////////////////////////////////////////////////////////////////////////////////
@@ -79,19 +79,17 @@ class TrainingTaskB extends React.Component {
       var ansTwo = corr_values[0];
     }
 
-    var corr_elem_tmp = [1, 2, 3]; //1 is left and 2 is right; determine where the correct value is displayed
+    var corr_elem_tmp = [1, 2]; //1 is left and 2 is right
     shuffle(corr_elem_tmp);
     var corr_elem = Array(nr_traintrial).fill(0);
 
     for (var i = 0; i <= nr_traintrial - 1; i++) {
-      if (i < nr_traintrial / 3) {
+      if (i < nr_traintrial / 2) {
         corr_elem[i] = corr_elem_tmp[0];
-      } else if (i >= nr_traintrial / 3 && i < (nr_traintrial / 3) * 2) {
-        corr_elem[i] = corr_elem_tmp[1];
       } else {
-        corr_elem[i] = corr_elem_tmp[2];
+        corr_elem[i] = corr_elem_tmp[1];
       }
-    }
+      }
     //pregenerate the values for all elements
     var check_al2 = [];
     var check_al1 = [];
@@ -129,12 +127,9 @@ class TrainingTaskB extends React.Component {
       } else if (corr_elem[i] === 2) {
         all_element_values[i][0] = check_al1[i];
         all_element_values[i][2] = check_al2[i];
-      } else if (corr_elem[i] === 3) {
-        all_element_values[i][0] = check_al1[i];
-        all_element_values[i][1] = check_al2[i];
       }
     }
-    
+
     // initialize options for the first trial
     if (corr_pos[0] === 4) {
       var ansTwo = 100 - corr_values[0];
@@ -144,9 +139,6 @@ class TrainingTaskB extends React.Component {
       var ansTwo = corr_values[0];
     }
 
-    let indicReq_tmp = Array(nr_traintrial)
-      .fill()
-      .map(() => Array(2).fill(0));
 
     this.state = {
       sectionTime: timeString,
@@ -166,10 +158,8 @@ class TrainingTaskB extends React.Component {
       corr_pos: corr_pos,
       corr_elem: corr_elem,
       all_element_values: all_element_values,
-      indicReq: indicReq_tmp,
       element1Col: 1,
       element2Col: 2,
-      element3Col: 3,
       study_part: 3,
     };
     // this.displayFeedback = this.displayFeedback.bind(this)
@@ -188,24 +178,37 @@ class TrainingTaskB extends React.Component {
   }
   /////////////////////////////////////////////////////////////////////////////////
   componentDidMount() {
-    window.scrollTo(0, 0);
+    if (this.state.disp_el===1){
+    setTimeout(() => {
+      this.setState({
+        disp_el: 0,
+        disp_opt: 1,
+      });
+    }, 5000);}
+  }
+
+  componentWillUpdate() {
+    if (this.state.disp_el===1){
+    var el = setTimeout(() => {
+      this.setState({
+        disp_el: 0,
+        disp_opt: 1,
+      });
+    }, 5000);}
+    clearTimeout();
   }
 
   componentWillUnmount() {
-    // fix Warning: Can't perform a React state update on an unmounted component
-    this.setState = (state, callback) => {
-      return;
-    };
+    clearTimeout();
   }
 
   /////////////////////////////////////////////////////////////////////////////////
   render() {
     if (this.state.disp_el === 1) {
       return (
-        <DisplayElements
+        <DisplayElementsTrain
           element1Col={this.state.element1Col}
           element2Col={this.state.element2Col}
-          element3Col={this.state.element3Col}
           all_element_values={this.state.all_element_values}
           indicReq={this.state.indicReq}
           trialNum={this.state.traintrialNum}
@@ -230,12 +233,7 @@ class TrainingTaskB extends React.Component {
       );
     }
   }
-  handleElementsData = () => {
-    this.setState({
-      disp_el: 0,
-      disp_opt: 1,
-    });
-  };
+
 
   trainIndic = (pressed) => {
     var trainAcc_tmp = this.state.trainAcc;
@@ -279,6 +277,7 @@ class TrainingTaskB extends React.Component {
   };
 
   redirectToNextStage() {
+    debugger;
     let body = {
       sectionStartTime: this.state.sectionTime,
       startTime: this.state.startTime,

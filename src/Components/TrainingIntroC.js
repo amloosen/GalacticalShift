@@ -191,7 +191,7 @@ class TrainingIntroC extends React.Component {
               <br />
               We will show you which instrument is of importance by highlighting
               it like this:
-              <br />
+              <br /><br />
               <span className={styles.center}>
                 <img
                   className={styles.relevInd}
@@ -245,7 +245,7 @@ class TrainingIntroC extends React.Component {
               Also, not only your estimate is important, but also your certainty
               in your estimate. <br />
               <br />
-              After each trial you will be rewarded for the correctness of your
+              After each trial you will be rewarded for theaccuracy of your
               estimate and your certainty in it.
               <br />
               <br />

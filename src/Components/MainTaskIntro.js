@@ -206,7 +206,7 @@ class MainTaskIntro extends React.Component {
               As in the training, not only your estimate is important, but also
               your certainty in your estimate. <br />
               <br />
-              After each trial you will be rewarded for the correctness of your
+              After each trial you will be rewarded for theaccuracy of your
               estimate and your certainty in it.
               <br />
               <br />

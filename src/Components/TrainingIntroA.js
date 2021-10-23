@@ -149,6 +149,7 @@ class TrainingIntroA extends React.Component {
               how many aliens live on the planet.
               <br />
               <br />A measuring instrument may look like this:
+              <br /><br />
               <span className={styles.center}>
                 <img src={img_intro1} alt="example1" />
               </span>

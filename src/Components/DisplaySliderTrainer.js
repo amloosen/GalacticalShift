@@ -35,7 +35,7 @@ class DisplaySliderTrainer extends React.Component {
     } else if (this.props.practNum === 2) {
       var text = (
         <div className={styles.questions}>
-          Please indicate the number 65 with high UNcertainty. <br />
+          Please indicate the number 65 with low certainty. <br />
           <br />
           <br />
         </div>
@@ -51,7 +51,7 @@ class DisplaySliderTrainer extends React.Component {
     } else if (this.props.practNum === 4) {
       var text = (
         <div className={styles.questions}>
-          Please indicate the number 25 with high UNcertainty. <br />
+          Please indicate the number 25 with low certainty. <br />
           <br />
           <br />
         </div>
@@ -61,7 +61,7 @@ class DisplaySliderTrainer extends React.Component {
         <div className={styles.questions}>
           <br />
           What is your age ? <br />
-Remember to also indicate your certainty in your answer.
+          Remember to also indicate your certainty in your answer.
           <br />
           <br />
         </div>
@@ -85,21 +85,20 @@ Remember to also indicate your certainty in your answer.
       );
     }
 
-
     return (
       <div className={styles.cockpitslider}>
-          <View style={stylesSliderRep.header}>
-            <span className={styles.slidertextintro}>
-              <div>{text}</div>
-            </span>
-          </View>
-          <span className={styles.slider}>
-            <Slider
-              mu={this.props.startMu}
-              sgm={this.props.startSgm}
-              onSpacebarHit={this.logData}
-            />
+        <View style={stylesSliderRep.header}>
+          <span className={styles.slidertextintro}>
+            <div>{text}</div>
           </span>
+        </View>
+        <span className={styles.slider}>
+          <Slider
+            mu={this.props.startMu}
+            sgm={this.props.startSgm}
+            onSpacebarHit={this.logData}
+          />
+        </span>
       </div>
     );
   }
@@ -114,5 +113,5 @@ const stylesSliderRep = StyleSheet.create({
   header: {
     width: "100%",
     position: "absolute",
-  }
+  },
 });

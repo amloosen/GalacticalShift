@@ -61,7 +61,7 @@ class TrainingTaskC extends React.Component {
       return Number(each_element.toFixed(0));
     });
 
-    var nr_traintrial = 20;
+    var nr_traintrial = w0.length;
     //pregenerate the values of the remaining elements
     var check_al2 = [];
     var check_al1 = [];
@@ -193,6 +193,7 @@ class TrainingTaskC extends React.Component {
           corr_elem={this.state.corr_elements[this.state.traintrialNum - 1]}
           indicReq={this.state.indicReq}
           trialNum={this.state.traintrialNum}
+          trialTotal={this.state.traintrialTotal}
           onElementsEnd={this.handleElementsData}
         />
       );
