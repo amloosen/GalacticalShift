@@ -15,11 +15,13 @@
     "react-bootstrap": "^1.6.1",
     "react-countdown-circle-timer": "^2.5.4",
     "react-dom": "^16.14.0",
+    "react-gif-player": "^0.4.2",
     "react-native-web": "^0.17.5",
     "react-quiz-component": "^0.3.8",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-spring": "^9.2.4",
+    "sass": "^1.43.3",
     "survey-react": "^1.8.72",
     "surveyjs-react": "^1.0.1",
     "web-vitals": "^2.0.1"
