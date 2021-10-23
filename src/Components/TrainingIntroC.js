@@ -3,6 +3,8 @@ import { withRouter } from "react-router-dom";
 import styles from "./style/taskStyle.module.css";
 import img_intro1 from "./intro/ExamplePicture1.jpg";
 import img_bar from "./intro/bar.jpg";
+import img_slider2 from "./intro/SliderExamplePoint.jpg";
+import img_slider3 from "./intro/SliderExampleLine.jpg";
 /////////////////////////////////////////////////////////////////////////////////
 // REACT COMPONENT START
 class TrainingIntroC extends React.Component {
@@ -50,9 +52,9 @@ class TrainingIntroC extends React.Component {
 
     if (whichButton === 4 && curText > 1) {
       this.setState({ instructScreenText: curText - 1 });
-    } else if (whichButton === 5 && curText < 6) {
+    } else if (whichButton === 5 && curText < 7) {
       this.setState({ instructScreenText: curText + 1 });
-    } else if (curText === 6 && whichButton === 10) {
+    } else if (curText === 7 && whichButton === 10) {
       setTimeout(
         function () {
           this.redirectToNextStage();
@@ -117,17 +119,32 @@ class TrainingIntroC extends React.Component {
               Great job!
               <br />
               <br />
-              You will now be introduced to the main game.
-              <br />
-              <br /> We will bring all the parts together that you learned so
-              far.
+              You have now learned about the main challenges of our game.
               <br />
               <br />
-              This means, these task will be similar to the previous training
-              trials but <br />
+              Lets recap:
+              <br />- You learned that <strong>only one</strong> instrument at a
+              time is associated with the population size.
               <br />
-              the introduced challenges will be combined and become more
-              difficult.
+              - You also learned that this might switch and suddenly a new
+              instrument is important.
+              <br />- You learned that you first have to <strong>
+                how
+              </strong>{" "}
+              the instrument is associated with the population size.
+              <br />
+              - Finally, you learned that this association can change. The same
+              instrument might still be important <br />
+              but in a different way.
+              <br />
+              <br />
+              All these challenges are like a puzzle and you can solve it by
+              looking at the values on the instruments <br />
+              and the feedback you get after each planet where we tell you the
+              true population size.
+              <br />
+              <br />
+              All elements you learned about will now be put together.
               <br />
               <br />
               <span className={styles.center}>
@@ -143,29 +160,21 @@ class TrainingIntroC extends React.Component {
               <span className={styles.center}>TRAINING IV</span>
               <br />
               <br />
-              From now on, you will be asked to use the slider.
-              <br />
-              <br />
-              Remember, with the slider you can indicate your{" "}
-              <strong>estimate</strong>, by changing the peak of the slider
-              <br />
-              <br />
-              and your <strong> certainty</strong> in your estimate by changing
-              the shape of the slider.
+              To make this more challenging, we will show you three instead of
+              two instruments.
               <br />
               <br />
               Again, you have to find out <br />
               <br />
               <strong>(1)</strong> which instrument is important and <br />
-              <br />
               <strong>(2)</strong> how it is associated with the population
               size. <br />
               <br />
               This association as well as the instrument of importance will
-              <br />
               <br /> <strong>(3)</strong> change over time. <br />
               <br />
-              Detect these changes and adapt your estimate accordingly.
+              Detect these changes and adapt the number you estimate
+              accordingly.
               <br />
               <br />
               <span className={styles.center}>
@@ -181,17 +190,17 @@ class TrainingIntroC extends React.Component {
               <span className={styles.center}>TRAINING IV</span>
               <br />
               <br />
-              However, from now on the associations between the instruments and
-              the population size <br />
+              In addition, the associations between the instruments and the
+              population size <br />
+              will be <strong>more complex</strong> from now on.
               <br />
-              will be <strong>more complex</strong>.
+              <br />
+              To slowly introduce you to this level of difficulty, we will help
+              you a little during this final training. <br />
+              We will show you which of the three instruments is important by
+              highlighting it like this:
               <br />
               <br />
-              For this training, we will, therefore, give you some help. <br />
-              <br />
-              We will show you which instrument is of importance by highlighting
-              it like this:
-              <br /><br />
               <span className={styles.center}>
                 <img
                   className={styles.relevInd}
@@ -199,6 +208,9 @@ class TrainingIntroC extends React.Component {
                   alt="example1"
                 />
               </span>
+              <br />
+              Make sure to notice the change. At some point a new instrument
+              will be important and you should adapt your answer. <br />
               <br />
               <span className={styles.center}>
                 [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
@@ -216,17 +228,20 @@ class TrainingIntroC extends React.Component {
               <strong>An additional hint:</strong>
               <br />
               <br />
-              As you might have noticed in the trainig session, planets <br />
+              As you might have noticed in the trainig session, planets (trials)
+              that you encounter after each other, <br />
+              are more similar to each other than planets that are further
+              apart.
+              <br /> <br />
+              This means, their population size depends on the same instrument
+              in the same way.
               <br />
-              (trials) that you encounter after each other, are more similar to
-              each other <br />
+              After a while, when you enter new galaxies, this changes and the
+              association between the instrument <br />
+              and the population size changes or a completely new instrument{" "}
               <br />
-              than planets that are further apart.
-              <br />
-              <br />
-              This means, their population size depends on the same instrument.
-              <br />
-              <br />
+              is important.
+              <br /> <br />
               Keep this in mind when indicating your answers.
               <br /> <br />
               <span className={styles.center}>
@@ -242,28 +257,35 @@ class TrainingIntroC extends React.Component {
               <span className={styles.center}>TRAINING IV</span>
               <br />
               <br />
-              Also, not only your estimate is important, but also your certainty
-              in your estimate. <br />
-              <br />
-              After each trial you will be rewarded for theaccuracy of your
-              estimate and your certainty in it.
+              From now on, you will be asked to use the slider.
               <br />
               <br />
-              This reward will be indicated by a bar that look like this: <br />
+              Remember, with the slider you can indicate{" "}
+              <strong>the number you estimate</strong>, by changing the peak of
+              the slider
               <br />
               <span className={styles.center}>
-                <img src={img_bar} alt="bar" />
+                <img
+                  className={styles.introImgTwo}
+                  src={img_slider2}
+                  alt="example1"
+                />
               </span>
-              During this training stage the collected reward is only for
-              demonstration <br />
               <br />
-              and will be deleted after the training. <br />
+              and your <strong> certainty</strong> in this number by changing
+              the shape of the slider.
               <br />
-              Please try to indicate your estimate and certainty as precisely as
-              possible.
-              <br /> <br />
               <span className={styles.center}>
-                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
+                <img
+                  className={styles.introImgTwo}
+                  src={img_slider3}
+                  alt="example1"
+                />
+              </span>
+              <br />
+              <br />
+              <span className={styles.center}>
+                [<strong>NEXT →</strong>]
               </span>
             </p>
           </div>
@@ -275,12 +297,48 @@ class TrainingIntroC extends React.Component {
               <span className={styles.center}>TRAINING IV</span>
               <br />
               <br />
+              So keep in mind: not only your the number you estimate is
+              important, but also your certainty in this number <br />
+              that you indicate. <br />
+              <br />
+              After each trial you will be rewarded for the accuracy of your
+              answer and your certainty in it.
+              <br />
+              This reward will be indicated by a bar that look like this: <br />
+              <br />
+              <span className={styles.center}>
+                <img src={img_bar} alt="bar" />
+              </span>
+              During this training stage the collected reward is for
+              demonstration purposes only and will be deleted after the
+              training. <br />
+              In the main task, this reward will determine your bonus payment,
+              so try to indicate your estimated number and <br />
+              certainty as precisely as possible.
+              <br /> <br />
+              <span className={styles.center}>
+                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
+              </span>
+            </p>
+          </div>
+        );
+      } else if (this.state.instructScreenText === 7) {
+        text = (
+          <div className={styles.main}>
+            <p>
+              <span className={styles.center}>TRAINING IV</span>
+              <br />
+              <br />
               Again, the true population size shown after each planet will make
-              it possible <br />
+              it possible for you to master the three challenges.
               <br />
-              for you to find out which instrument (i.e., which colour and
-              shape) is of importance.
               <br />
+              <strong>(1)</strong> Find out which instrument is important and{" "}
+              <br />
+              <strong>(2)</strong> how it is associated with the population
+              size.
+              <br /> <strong>(3)</strong> Spot and react to changes in (1) or
+              (2). <br />
               <br />
               Let’s practice that!
               <br /> <br />
