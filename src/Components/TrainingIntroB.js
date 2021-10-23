@@ -47,9 +47,9 @@ class TrainingIntroB extends React.Component {
 
     if (whichButton === 4 && curText > 1) {
       this.setState({ instructScreenText: curText - 1 });
-    } else if (whichButton === 5 && curText < 3) {
+    } else if (whichButton === 5 && curText < 4) {
       this.setState({ instructScreenText: curText + 1 });
-    } else if (curText === 3 && whichButton === 10) {
+    } else if (curText === 4 && whichButton === 10) {
       setTimeout(
         function () {
           this.redirectToNextStage();
@@ -111,19 +111,12 @@ class TrainingIntroB extends React.Component {
             <p>
               <span className={styles.center}>TRAINING III</span>
               <br />
-              <br />
-              Your space-training session is going well!
-              <br />
-              <br />
-              Another challenge makes your mission even more difficult:
-              <br />
-              <br />
-              Your spaceship has <strong>three</strong> measuring instruments
-              showing different natural resources.
-              <br />
-              <br />
-              You have to find out <strong>which one is relevant</strong> and
-              determining the population size.
+              You might have noticed that the percent on the instrument first mapped one-to-one   <br />
+              onto the population size (40% → 40 million) but then after a while   <br />
+              it switched to an inverse (40% → 60 million), meaning you had to   <br />
+              calculate '100 - the instrument measure' to get the population size.
+              <br /><br />
+              Click next to learn about another challenge.
               <br />
               <br />
               <span className={styles.center}>
@@ -139,21 +132,14 @@ class TrainingIntroB extends React.Component {
               <span className={styles.center}>TRAINING III</span>
               <br />
               <br />
-              Again, sometimes this might change, which means suddenly a new
-              instrument <br /><br />will be relevant. <br /> <br /> You have to recognize
-              these changes.
-              <br />
-              <br />
-              This means, now you have to <br />
-              <br />
-              <strong>(1)</strong> find out which instrument is relevant, <br />
-              <br />
-              <strong>(2)</strong> what its association with the population size
-              is,
-              <br />
-              <br />
-              <strong>(3)</strong> detect when suddenly a new instrument is
-              relevant <br /><br />or when the association to the population size changes.
+              Another challenge makes your mission even more difficult:
+              <br /><br />
+              Your spaceship has not only one but <strong>three</strong> measuring instruments
+              showing different <br />natural resources that have different colours.
+              <br /><br />
+              You have to find out <strong>which single one is relevant</strong> and
+              is associated with the population size. <br />Only one instrument at a time
+              is associated with the population size.
               <br />
               <br />
               <span className={styles.center}>
@@ -167,14 +153,45 @@ class TrainingIntroB extends React.Component {
           <div className={styles.main}>
             <p>
               <span className={styles.center}>TRAINING III</span>
-              Again, the true population size will for now be shown after each
-              planet. <br /> <br /> This will make it possible for you to find
-              out which instrument is of importance <br />
-              <br />
-              and how it is associated to the population size.
               <br />
               <br />
-              Indicate the value by pressing the corresponding left and right
+              However, again, sometimes <strong>this might change</strong>, which means suddenly a new
+              instrument <br />will be relevant. You have to recognize
+              these changes and react to them.
+              <br />
+              <br />
+              This means, your challenges are: <br /><br />
+              You have to <br />
+              <br />
+              <strong>(1)</strong> find out which instrument is relevant, <br />
+              <br />
+              <strong>(2)</strong> how it is associated with the population size,
+              <br />
+              <br />
+              <strong>(3)</strong> detect when suddenly a new instrument is
+              relevant <br />or when the association to the population size changes.
+              <br />
+              <br />
+              <span className={styles.center}>
+                [<strong>NEXT →</strong>]
+              </span>
+            </p>
+          </div>
+        );
+      } else if (this.state.instructScreenText === 4) {
+        text = (
+          <div className={styles.main}>
+            <p>
+              <span className={styles.center}>TRAINING III</span>
+              Again, the true population size will be shown after each
+              you indicated your answer. <br /> <br /> This will make it possible for you to find
+              out which instrument is important <br />
+              and how it is associated with the population size.
+              <br />
+              <br />
+              For now, you will encounter two planets. Find out which one is important <br />
+              and how it is assocated with the population size.<br /><br />
+              Indicate your estimated  by pressing the corresponding left and right
               arrow key.
               <br />
               <br />
