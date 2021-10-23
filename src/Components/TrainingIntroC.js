@@ -198,7 +198,7 @@ class TrainingIntroC extends React.Component {
               To slowly introduce you to this level of difficulty, we will help
               you a little during this final training. <br />
               We will show you which of the three instruments is important by
-              highlighting it like this:
+              highlighting it with a green frame like this:
               <br />
               <br />
               <span className={styles.center}>
