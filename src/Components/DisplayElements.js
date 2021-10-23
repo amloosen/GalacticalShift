@@ -65,6 +65,7 @@ class DisplayElements extends React.Component {
             img2={this.props.element2Col}
             img3={this.props.element3Col}
             trialNum={this.props.trialNum}
+            trialTotal={this.state.trialTotal}
             onViewEnd={this.handleTimes}
           />
       );
