@@ -120,8 +120,7 @@ class DisplayQuiz extends React.Component {
           <p>
             <br />
             Congratulations, you succesfully passed the quiz and will now
-            <br />
-            <br />
+
             start the main game.
             <br />
             <br />
@@ -144,10 +143,11 @@ class DisplayQuiz extends React.Component {
         <div className={styles.main}>
           <p>
             <br />
-            Good job, you are done with the training.
+            Good job, you are done with all the trainings.
             <br />
             <br />
-            You will now see a short quiz. <br />
+            To make sure you understood the game and its challenges,
+            you will now complete a short quiz.
             <br />
             Answer all questions correctly in order to proceed to the main game.
             <br />
