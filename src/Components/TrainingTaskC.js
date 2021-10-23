@@ -61,7 +61,7 @@ class TrainingTaskC extends React.Component {
       return Number(each_element.toFixed(0));
     });
 
-    var nr_traintrial = w0.length;
+    var nr_traintrial = 20;
     //pregenerate the values of the remaining elements
     var check_al2 = [];
     var check_al1 = [];
