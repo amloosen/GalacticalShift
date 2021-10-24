@@ -47,7 +47,7 @@ class DisplaySlider extends React.Component {
 
     return (
       <div className={styles.cockpitslider}>
-          <View style={stylesSliderRep.header}>
+        <View style={stylesSliderRep.header}>
             <span className={styles.slidertext}>
               <div>{text}</div>
             </span>

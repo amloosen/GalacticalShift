@@ -2,7 +2,7 @@ import { range } from "lodash";
 import normalPdf from "normal-pdf";
 import styles from "./style/taskStyle.module.css";
 import React from "react";
-// import { withRouter } from "react-router-dom";
+import { View } from "react-native-web";
 import ReactApexChart from "react-apexcharts";
 
 class Slider extends React.Component {
@@ -57,8 +57,30 @@ class Slider extends React.Component {
         },
         xaxis: {
           color: "#d2eaf2",
-          tickAmount: 5,
-          overwriteCategories: ["0", "25", "50", "75", "100"],
+          tickAmount: 20,
+          overwriteCategories: [
+            "0",
+            "5",
+            "10",
+            "15",
+            "20",
+            "25",
+            "30",
+            "35",
+            "40",
+            "45",
+            "50",
+            "55",
+            "60",
+            "65",
+            "70",
+            "75",
+            "80",
+            "85",
+            "90",
+            "95",
+            "100",
+          ],
           lines: {
             show: false,
           },
@@ -77,7 +99,29 @@ class Slider extends React.Component {
             rotate: 0,
             style: {
               fontSize: "2.5vh",
-              colors: ["#e7e6e2", "#e7e6e2", "#e7e6e2", "#e7e6e2", "#e7e6e2"],
+              colors: [
+                "#e7e6e2",
+                "#1C00ff00",
+                "#e7e6e2",
+                "#1C00ff00",
+                "#e7e6e2",
+                "#1C00ff00",
+                "#e7e6e2",
+                "#1C00ff00",
+                "#e7e6e2",
+                "#1C00ff00",
+                "#e7e6e2",
+                "#1C00ff00",
+                "#e7e6e2",
+                "#1C00ff00",
+                "#e7e6e2",
+                "#1C00ff00",
+                "#e7e6e2",
+                "#1C00ff00",
+                "#e7e6e2",
+                "#1C00ff00",
+                "#e7e6e2",
+              ],
               offsetX: 0,
               offsetY: 0,
             },
@@ -93,14 +137,13 @@ class Slider extends React.Component {
     this._isMounted = true;
     document.addEventListener("keydown", this.handleKeyDown);
     document.addEventListener("keyup", this.handleKeyUp);
-      this.resetSlider(50, 30);
+    this.resetSlider(50, 30);
   }
 
   componentWillUnmount() {
     this._isMounted = false;
     document.removeEventListener("keydown", this.handleKeyDown);
     document.removeEventListener("keyup", this.handleKeyUp);
-
   }
 
   handleKeyUp = () => {
@@ -120,7 +163,7 @@ class Slider extends React.Component {
         let choiceTime0 = Math.round(performance.now());
         this.props.onSpacebarHit({ mu, sgm }, distHeight, choiceTime0);
         if (this._isMounted) {
-            this.resetSlider(50, 30);
+          this.resetSlider(50, 30);
         }
 
         break;
@@ -134,13 +177,13 @@ class Slider extends React.Component {
         if (this.state.sgm <= 10) {
           return null;
         } else {
-          if (this.state.sgm>=16){
-          this.setState((prevState) => ({
-            sgm: prevState.sgm - this.stepsSgm(prevState.timesKeyDown),
-          }));
+          if (this.state.sgm >= 16) {
+            this.setState((prevState) => ({
+              sgm: prevState.sgm - this.stepsSgm(prevState.timesKeyDown),
+            }));
 
-          this.setValue(this.state.mu, this.state.sgm);
-        }
+            this.setValue(this.state.mu, this.state.sgm);
+          }
         }
         break;
       case 39:
@@ -170,7 +213,7 @@ class Slider extends React.Component {
   };
 
   stepsSgm = (pressed) => {
-    if (pressed < 10 || this.state.sgm<=21) {
+    if (pressed < 10 || this.state.sgm <= 21) {
       return 1;
     } else if (pressed >= 10 && pressed < 30) {
       return 10;
@@ -193,7 +236,9 @@ class Slider extends React.Component {
 
   resetSlider = (mu, sgm) => {
     const xValues = range(0, 100.5, 0.5);
-    const yValues = xValues.map((x) => normalPdf(x, this.props.mu, this.props.sgm));
+    const yValues = xValues.map((x) =>
+      normalPdf(x, this.props.mu, this.props.sgm)
+    );
     const yValuesAdapt_tmp = yValues.map(function (element) {
       return element * 1000;
     });
@@ -203,7 +248,7 @@ class Slider extends React.Component {
       series: [{ data: yValuesAdapt_tmp }],
       sgm: sgm,
       mu: mu,
-      distHeight: distheight_tmp
+      distHeight: distheight_tmp,
     });
   };
 
@@ -225,16 +270,21 @@ class Slider extends React.Component {
   };
 
   render() {
+    // <View className={styles.main}>
+    //   <span className={styles.sliderEstimateBox}>{this.state.mu}</span>
+    // </View>
     return (
       <div className={styles.main}>
-        <ReactApexChart
-          options={this.state.options}
-          series={this.state.series}
-          type="line"
-          height={this.state.distHeight}
-          width="800px"
-          align="center"
-        />
+        <View className={styles.main}>
+          <ReactApexChart
+            options={this.state.options}
+            series={this.state.series}
+            type="line"
+            height={this.state.distHeight}
+            width="800px"
+            align="center"
+          />
+        </View>
       </div>
     );
   }
