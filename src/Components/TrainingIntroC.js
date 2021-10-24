@@ -456,7 +456,7 @@ class TrainingIntroC extends React.Component {
               <strong>(2)</strong> how it is associated with the population
               size.
               <br /> <strong>(3)</strong> Spot and react to changes in (1) or
-              (2). <br />
+              (2). <br /><br />
               Again, the true population size shown after each planet will make
               it possible for you to learn <br />and master the challenges.
               <br />
