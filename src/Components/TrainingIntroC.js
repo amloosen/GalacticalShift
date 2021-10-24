@@ -5,6 +5,11 @@ import img_intro1 from "./intro/ExamplePicture1.jpg";
 import img_bar from "./intro/bar.jpg";
 import img_slider2 from "./intro/SliderExamplePoint.jpg";
 import img_slider3 from "./intro/SliderExampleLine.jpg";
+import img_correctcert from "./intro/correctcert.jpg";
+import img_correctunc from "./intro/correctunc.jpg";
+import img_sliderwrongunc from "./intro/sliderwrongunc.jpg";
+import img_sliderwrongcert from "./intro/sliderwrongcert.jpg";
+
 /////////////////////////////////////////////////////////////////////////////////
 // REACT COMPONENT START
 class TrainingIntroC extends React.Component {
@@ -52,9 +57,9 @@ class TrainingIntroC extends React.Component {
 
     if (whichButton === 4 && curText > 1) {
       this.setState({ instructScreenText: curText - 1 });
-    } else if (whichButton === 5 && curText < 7) {
+    } else if (whichButton === 5 && curText < 10) {
       this.setState({ instructScreenText: curText + 1 });
-    } else if (curText === 7 && whichButton === 10) {
+    } else if (curText === 10 && whichButton === 10) {
       setTimeout(
         function () {
           this.redirectToNextStage();
@@ -63,7 +68,6 @@ class TrainingIntroC extends React.Component {
       );
     }
   }
-
   // handle key key_pressed
   _handleInstructKey = (event) => {
     var key_pressed;
@@ -209,7 +213,7 @@ class TrainingIntroC extends React.Component {
                 />
               </span>
               <br />
-              Make sure to notice the change. At some point a new instrument
+              Make sure to notice the change. At some point, a new instrument
               will be important and you should adapt your answer. <br />
               <br />
               <span className={styles.center}>
@@ -255,15 +259,12 @@ class TrainingIntroC extends React.Component {
           <div className={styles.main}>
             <p>
               <span className={styles.center}>TRAINING IV</span>
-              <br />
-              <br />
               From now on, you will be asked to use the slider.
-              <br />
               <br />
               Remember, with the slider you can indicate{" "}
               <strong>the number you estimate</strong>, by changing the peak of
               the slider
-              <br />
+              <br /> <br />
               <span className={styles.center}>
                 <img
                   className={styles.introImgTwo}
@@ -271,10 +272,9 @@ class TrainingIntroC extends React.Component {
                   alt="example1"
                 />
               </span>
-              <br />
               and your <strong> certainty</strong> in this number by changing
               the shape of the slider.
-              <br />
+              <br /> <br />
               <span className={styles.center}>
                 <img
                   className={styles.introImgTwo}
@@ -282,7 +282,6 @@ class TrainingIntroC extends React.Component {
                   alt="example1"
                 />
               </span>
-              <br />
               <br />
               <span className={styles.center}>
                 [<strong>NEXT →</strong>]
@@ -304,17 +303,20 @@ class TrainingIntroC extends React.Component {
               After each trial you will be rewarded for the accuracy of your
               answer and your certainty in it.
               <br />
-              This reward will be indicated by a bar that look like this: <br />
+              This reward will be indicated by a bar that looks like this:{" "}
+              <br />
               <br />
               <span className={styles.center}>
                 <img src={img_bar} alt="bar" />
               </span>
               During this training stage the collected reward is for
-              demonstration purposes only and will be deleted after the
-              training. <br />
+              demonstration purposes only and will <br />
+              be deleted after the training. <br />
+              <br />
               In the main task, this reward will determine your bonus payment,
               so try to indicate your estimated number and <br />
-              certainty as precisely as possible.
+              certainty as precisely as possible. Press 'NEXT' to learn how to
+              optimize it.
               <br /> <br />
               <span className={styles.center}>
                 [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
@@ -326,11 +328,127 @@ class TrainingIntroC extends React.Component {
         text = (
           <div className={styles.main}>
             <p>
+              <span className={styles.introImgTwo} className={styles.center}>
+                TRAINING IV
+              </span>
+              The bar will rise at the position where the true population size{" "}
+              would have been indicated up to the height <br />
+              of the slider.
+              <br />
+              To clarify, look what happens if the true population size is 50
+              million and you indicated this with high certainty: <br />
+              The bar reaches its maximum height.
+              <br />
+              <br />
+              <span className={styles.center}>
+                <img
+                  className={styles.introImgTwo}
+                  src={img_correctcert}
+                  alt="bar"
+                />
+              </span>
+              In contrast, look what happens if the true population size is 50
+              million and you indicated this with low certainty:
+              <br />
+              The bar reaches a way lower height.
+              <br />
+              <span className={styles.center}>
+                <img
+                  className={styles.introImgTwo}
+                  src={img_correctunc}
+                  alt="bar"
+                />
+              </span>
+              <br />
+              <span className={styles.center}>
+                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
+              </span>
+            </p>
+          </div>
+        );
+      } else if (this.state.instructScreenText === 8) {
+        text = (
+          <div className={styles.main}>
+            <p>
+              <span className={styles.introImgTwo} className={styles.center}>
+                TRAINING IV
+              </span>
+              However, look what happens if you indicated a wrong value with
+              high certainty <br />
+              and slider did not cover 50 at all: The bar does not rise.
+              <br />
+              <br />
+              <span className={styles.center}>
+                <img
+                  className={styles.introImgTwo}
+                  src={img_sliderwrongcert}
+                  alt="bar"
+                />
+              </span>
+              <br />
+              And finally, look what happens if you indicated a wrong value with
+              low certainty <br />
+              and slider still covers the correct value of 50: The bar rises a
+              little bit
+              <br />
+              <br />
+              <span className={styles.center}>
+                <img
+                  className={styles.introImgTwo}
+                  src={img_sliderwrongunc}
+                  alt="bar"
+                />
+              </span>
+              <br />
+              <span className={styles.center}>
+                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
+              </span>
+            </p>
+          </div>
+        );
+      } else if (this.state.instructScreenText === 9) {
+        text = (
+          <div className={styles.main}>
+            <p>
+              <span className={styles.introImgTwo} className={styles.center}>
+                TRAINING IV
+              </span>
+              <br />
+              <br />
+              To summarize, in order to maximize your reward you should:<br /> <br />
+              - Make the slider narrow when you are certain about your answer to reach the maximum height of the bar
+              <br /><br />
+              <span className={styles.center}>
+                <img
+                  className={styles.introImgTwo}
+                  src={img_correctcert}
+                  alt="bar"
+                />
+              </span>
+              - Make the slider wider when you are uncertain to cover a number of values
+              <br /><br />
+              <span className={styles.center}>
+                <img
+                  className={styles.introImgTwo}
+                  src={img_sliderwrongunc}
+                  alt="bar"
+                />
+              </span>
+              <span className={styles.center}>
+                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
+              </span>
+            </p>
+          </div>
+        );
+      } else if (this.state.instructScreenText === 10) {
+        text = (
+          <div className={styles.main}>
+            <p>
               <span className={styles.center}>TRAINING IV</span>
               <br />
               <br />
-              Again, the true population size shown after each planet will make
-              it possible for you to master the three challenges.
+              So your task is it to use the slider optimally to maximise your
+              reward and master the three challenges.
               <br />
               <br />
               <strong>(1)</strong> Find out which instrument is important and{" "}
@@ -339,6 +457,10 @@ class TrainingIntroC extends React.Component {
               size.
               <br /> <strong>(3)</strong> Spot and react to changes in (1) or
               (2). <br />
+              Again, the true population size shown after each planet will make
+              it possible for you to learn <br />and master the challenges.
+              <br />
+              <br />
               <br />
               Let’s practice that!
               <br /> <br />
