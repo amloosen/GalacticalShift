@@ -185,9 +185,8 @@ class MainTaskIntro extends React.Component {
               <strong>Remember:</strong>
               <br />
               <br />
-              Planets (trials) that you encounter after each other, are more
-              similar to each other than planets that are further apart. This
-              means, their population size <br />
+              Planets (trials) that you encounter after each other, are more similar to each other <br />
+              than planets that are further apart. This means, their population size <br />
               depends on the same instrument.
               <br /> <br />
               Keep this in mind when indicating your answers.
@@ -207,15 +206,9 @@ class MainTaskIntro extends React.Component {
               <br />
               <br />
               As in the training, not only your estimate is important, but also
-<<<<<<< HEAD
               your certainty in your estimate. <br />
               After each trial you will be rewarded for the accuracy of your estimate 
               and your certainty in it.
-=======
-              your certainty in your estimate. After each trial you will be
-              rewarded for the accuracy of your estimate and your certainty in
-              it.
->>>>>>> parent of 5fd1e572 (make feedback clearer)
               <br />
               <br />
               Try to indicate your estimate and certainty as precisely as
@@ -241,18 +234,11 @@ class MainTaskIntro extends React.Component {
               <br />
               <br />
               As you have learned in the training, only one instrument
-              determines the population size
-              <br />
-              at a given moment. To probe your understanding of the task we will
-              sometimes, randomly
-              <br />
-              ask you to indicate which colour/instrument is the important one
-              <br />
-              <br />
-              at a given stage of the task. You can indicate this by pressing
-              <br />
-              the number key indicated on the corresponding instrument (see
-              example below).
+              determines the population size <br /> at a given moment. <br /><br />
+              To probe your understanding of the task we will sometimes, randomly ask
+              you to indicate <br />which colour/instrument is the important one at a given <br />
+              stage of the task. You can indicate this by pressing the number key indicated
+              on the <br />corresponding instrument (see example below).<br />
               <br />
               <br />
               Please answer the question as accurately as possible.
