@@ -135,10 +135,8 @@ class MainTaskIntro extends React.Component {
               The main game will be very similar to the last training stage,
               with one crucial difference:
               <br />
-              <br />
               Now, you have to find out which instrument is important at a given
               time <br />
-              <br />
               and it will not be highlighted anymore.
               <br />
               <br />
@@ -160,9 +158,16 @@ class MainTaskIntro extends React.Component {
               <strong>1.</strong> Find out which instrument is important.
               <br /> <br />
               <strong>2.</strong> Find out how it is associated with the
-              population size <br /> <br />
+              population size. <br /> <br />
               <strong>3.</strong> Recognize changes in 1. or 2. and adapt your
               answer.
+              <br />
+              <br />
+              In addition, make sure to use the slider properly to maximize your
+              reward.
+              <br />
+              Change the peak to your estimated population size and the width to
+              your certainty in it.
               <br />
               <br />
               <span className={styles.center}>
@@ -180,12 +185,9 @@ class MainTaskIntro extends React.Component {
               <strong>Remember:</strong>
               <br />
               <br />
-              Planets (trials) that you encounter after each other, are more
-              similar to each other <br />
-              <br />
-              than planets that are further apart. <br />
-              <br />
-              This means, their population size depends on the same instrument.
+              Planets (trials) that you encounter after each other, are more similar to each other <br />
+              than planets that are further apart. This means, their population size <br />
+              depends on the same instrument.
               <br /> <br />
               Keep this in mind when indicating your answers.
               <br />
@@ -205,20 +207,18 @@ class MainTaskIntro extends React.Component {
               <br />
               As in the training, not only your estimate is important, but also
               your certainty in your estimate. <br />
+              After each trial you will be rewarded for the accuracy of your estimate 
+              and your certainty in it.
               <br />
-              After each trial you will be rewarded for theaccuracy of your
-              estimate and your certainty in it.
               <br />
-              <br />
-              Please try to indicate your estimate and certainty as precisely as
+              Try to indicate your estimate and certainty as precisely as
               possible.
               <br />
               <br />
               From now on, your collected reward will count towards your bonus
-
               payment at the end
               <br />
-              <br />of the experiment.
+              of the experiment.
               <br /> <br />
               <span className={styles.center}>
                 [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
@@ -234,18 +234,11 @@ class MainTaskIntro extends React.Component {
               <br />
               <br />
               As you have learned in the training, only one instrument
-              determines the population size
-              <br />
-              <br />at a given moment.
-              To probe your understanding of the task we will sometimes,
-              <br />
-              <br />
-              randomly ask you to indicatewhich colour/instrument
-              is the important one
-              <br />
-              <br />at a given stage of the task by pressing
-              the
-              indicated number key (see example below).
+              determines the population size <br /> at a given moment. <br /><br />
+              To probe your understanding of the task we will sometimes, randomly ask
+              you to indicate <br />which colour/instrument is the important one at a given <br />
+              stage of the task. You can indicate this by pressing the number key indicated
+              on the <br />corresponding instrument (see example below).<br />
               <br />
               <br />
               Please answer the question as accurately as possible.
@@ -284,10 +277,8 @@ class MainTaskIntro extends React.Component {
               <br />
               <br />
               It is important, that you complete the game in one go. <br />
-              <br />
               However, there will be short breaks in between, that you can
               choose to take or you can continue <br />
-              <br />
               by pressing the space bar.
               <br />
               <br />
