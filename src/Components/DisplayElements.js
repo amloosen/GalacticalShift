@@ -45,28 +45,31 @@ class DisplayElements extends React.Component {
   }
 
   render() {
-    if (this.props.indicReq[this.props.trialNum - 1] === 1) {
+    if (
+      this.props.indicReq[this.props.trialNum - 1] === 1 &&
+      this.props.trialBlockNum < this.props.trialPerBlock
+    ) {
       return (
-          <ElementsIndicator
-            img1={this.props.element1Col}
-            img2={this.props.element2Col}
-            img3={this.props.element3Col}
-            trialNum={this.props.trialNum}
-            onKeyPressed={this.handleIndicKey}
-          />
+        <ElementsIndicator
+          img1={this.props.element1Col}
+          img2={this.props.element2Col}
+          img3={this.props.element3Col}
+          trialNum={this.props.trialNum}
+          onKeyPressed={this.handleIndicKey}
+        />
       );
     } else {
       return (
-          <ElementsFullDisplay
-            value1={this.props.all_element_values[this.props.trialNum - 1][0]}
-            value2={this.props.all_element_values[this.props.trialNum - 1][1]}
-            value3={this.props.all_element_values[this.props.trialNum - 1][2]}
-            img1={this.props.element1Col}
-            img2={this.props.element2Col}
-            img3={this.props.element3Col}
-            trialNum={this.props.trialNum}
-            onViewEnd={this.handleTimes}
-          />
+        <ElementsFullDisplay
+          value1={this.props.all_element_values[this.props.trialNum - 1][0]}
+          value2={this.props.all_element_values[this.props.trialNum - 1][1]}
+          value3={this.props.all_element_values[this.props.trialNum - 1][2]}
+          img1={this.props.element1Col}
+          img2={this.props.element2Col}
+          img3={this.props.element3Col}
+          trialNum={this.props.trialNum}
+          onViewEnd={this.handleTimes}
+        />
       );
     }
   }

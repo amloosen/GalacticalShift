@@ -60,7 +60,8 @@ class MainTask extends React.Component {
       return Number(each_element.toFixed(0));
     });
 
-    var nr_trial = w0.length;
+    var nr_trial = w0.length;//debugger
+
     //pregenerate the values of the remaining elements
     var check_al2 = [];
     var check_al1 = [];
@@ -198,6 +199,15 @@ class MainTask extends React.Component {
   /////////////////////////////////////////////////////////////////////////////////
 
   sendBlock(height) {
+    debugger;
+    var start = (this.state.blockNum-1)*(this.state.trialPerBlock);
+    // let height_tmp = slice(height, this.state.trialNum-200, this.state.trialNum+ 1);
+  var height_tmp = height.slice(start,this.state.trialNum)
+  var times1_tmp = this.state.times_element1.slice(start,this.state.trialNum)
+  var times2_tmp = this.state.times_element2.slice(start,this.state.trialNum)
+  var times3_tmp = this.state.times_element3.slice(start,this.state.trialNum)
+  var trialSgmMu_tmp = this.state.trialSgmMu.slice(start,this.state.trialNum)
+
   let body = {
       sectionStartTime: this.state.sectionStartTime,
       startTime: this.state.startTime,
@@ -215,7 +225,7 @@ class MainTask extends React.Component {
       startMu: this.state.startMu,
       all_true_pop_size: this.state.all_true_pop_size,
       indicKey: this.state.indicKey,
-      outcomeHeight: height,
+      outcomeHeight: height_tmp,
       trialRT: this.state.trialRT,
       blockTotal: this.state.blockTotal,
       indicReq: this.state.indicReq,
@@ -263,7 +273,7 @@ class MainTask extends React.Component {
         }
       );
     }
-    if (this.state.blockNum===this.state.blockTotal){
+    if (this.state.blockNum>=this.state.blockTotal){
       this.redirectToNextStage();
     }
   }
@@ -278,6 +288,8 @@ class MainTask extends React.Component {
           all_element_values={this.state.all_element_values}
           indicReq={this.state.indicReq}
           trialNum={this.state.trialNum}
+          trialBlockNum={this.state.trialBlockNum}
+          trialPerBlock={this.state.trialPerBlock}
           onElementsEnd={this.handleElementsData}
           onElementsIndic={this.handleIndicData}
         />
@@ -364,9 +376,11 @@ class MainTask extends React.Component {
   };
 
   handleOutcomeData = (height) => {
+
     var outcomeHeight_tmp = this.state.outcomeHeight;
-    var height_rounded = Number(height).toFixed(3);
-    outcomeHeight_tmp[this.state.trialNum - 1] = height_rounded;
+    // var height_rounded = Number(height).toFixed(3);
+    // outcomeHeight_tmp[this.state.trialNum - 1] = height_rounded;
+    outcomeHeight_tmp[this.state.trialNum - 1] = height;
     this.nextTrial(0, outcomeHeight_tmp);
   };
 
@@ -376,15 +390,6 @@ class MainTask extends React.Component {
 
   nextTrial = (b, h) => {
     var trialNum_tmp = this.state.trialNum + 1;
-    if (b === 1) {
-      var block_tmp = this.state.blockNum + 1;
-      var trialBlockNum_tmp = 1;
-      this.setState({
-        trialNum: trialNum_tmp,
-        blockNum: block_tmp,
-        trialBlockNum: trialBlockNum_tmp,
-      });
-    }
 
     if (this.state.trialBlockNum === this.state.trialPerBlock ) {
       this.sendBlock(h);
@@ -395,6 +400,7 @@ class MainTask extends React.Component {
       });
     } else {
       var trialBlockNum_tmp = this.state.trialBlockNum + 1;
+
       this.setState({
         trialNum: trialNum_tmp,
         trialBlockNum: trialBlockNum_tmp,
