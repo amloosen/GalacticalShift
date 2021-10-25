@@ -6,8 +6,9 @@
   margin: 0px;
   color: white;
   font-size: 2.5vh;
-  font-family: "Calibri", "Calibri";
+  font-family: "Arial", "Arial";
 }
+
 
 .questions {
   display: flex;
@@ -17,7 +18,7 @@
   height: auto;
   color: white;
   font-size: 3vh;
-  font-family: "Helvetica";
+  font-family: "Arial";
   font-weight: bold;
 }
 
@@ -29,7 +30,7 @@
   height: auto;
   color: white;
   font-size: 4vh;
-  font-family: "Helvetica";
+  font-family: "Arial";
   font-weight: bold;
 }
 
@@ -98,7 +99,7 @@
   position: relative;
   color: white;
   font-size: 5vh;
-  font-family: "Calibri", "Calibri";
+  font-family: "Arial", "Arial";
 }
 /* .textblock {
   display: inline-block;
@@ -251,7 +252,7 @@ img.introImgTwo3 {
   pointer-events: none;
   color: white;
   font-size: 4vh;
-  font-family: "Calibri", "Calibri";
+  font-family: "Arial", "Arial";
 }
 
 .overlaybar{
@@ -287,7 +288,7 @@ img.introImgTwo3 {
   justify-content: center;
   text-align: center;
   font-size: 50px;
-  font-family: "Calibri", "Calibri";
+  font-family: "Arial", "Arial";
 }
 
 .left {float: left;
@@ -301,7 +302,7 @@ img.introImgTwo3 {
   justify-content: center;
   text-align: center;
   font-size: 50px;
-  font-family: "Calibri", "Calibri";
+  font-family: "Arial", "Arial";
 }
 
 span.likeP {
@@ -318,7 +319,7 @@ span.likeP {
   pointer-events: none;
   color: white;
   font-size: 10vh;
-  font-family: "Calibri", "Calibri";
+  font-family: "Arial", "Arial";
 }
 
 .overlaycheck {
@@ -340,7 +341,7 @@ span.likeP {
   padding-top: 10vh;
   top: 0px;
   font-size: 30px;
-  font-family: "Calibri", "Calibri";
+  font-family: "Arial", "Arial";
   color: white;
 }
 
