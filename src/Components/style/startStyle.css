@@ -7,11 +7,11 @@
   height: auto;
   color: black;
   font-size: 20px;
-  font-family: "Calibri", "Calibri",boldCenter;
+  font-family: "Arial", "Arial",boldCenter;
 }
 
 .sv_main .sv_bootstrap_css .sv_container .sv_body {
-  font-family: "Calibri", "Calibri", boldCenter;
+  font-family: "Arial", "Arial", boldCenter;
   font-size: 18px;
   padding: 10px;
   color: 
@@ -23,7 +23,7 @@
 }
 /* the button */
 .sv_nav {
-  font-family: "Calibri", "Calibri", boldCenter;
+  font-family: "Arial", "Arial", boldCenter;
   font-size: 18px;
   padding: 10px;
 }
