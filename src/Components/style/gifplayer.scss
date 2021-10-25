@@ -12,7 +12,7 @@ $gif_btn_box_shadow_color: rgba($gif_btn_box_shadow_base_color, $gif_btn_box_sha
 $gif_btn_box_shadow_color_hover: rgba($gif_btn_box_shadow_base_color, $gif_btn_box_shadow_opacity_hover) !default;
 
 $gif_btn_text_color: #fff !default;
-$gif_btn_font_family: 'Arial',  !default;
+$gif_btn_font_family: 'Calibri',  !default;
 
 $gif_btn_border_width: 3px !default;
 $gif_btn_border_style: solid !default;
@@ -44,7 +44,7 @@ $gif_btn_text_content: 'Play' !default;
     cursor: pointer;
     font-family: $gif_btn_font_family;
     font-size: 26px;
-    left: 11.5vw;
+    left: 12.5vw;
     opacity: $gif_btn_regular_opacity;
     padding: 14px 10px;
     position: absolute;
