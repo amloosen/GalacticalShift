@@ -119,6 +119,11 @@ class MainTask extends React.Component {
     for (var k = 9; k <= nr_trial - 1; k += 27) {
       indicReq_tmp[k] = 1;
     }
+    var trialPerBlock = nr_trial/5;
+
+    for (var l = 1; l <= nr_trial - 1; l += trialPerBlock) {
+          indicReq_tmp[l] = 0;//make sure the element indicator is never on the last trial of a block to not prevent sending the data
+        }
 
     var times_element1 = Array(nr_trial)
       .fill()
@@ -138,7 +143,6 @@ class MainTask extends React.Component {
     var currentDate = new Date();
     var mainStartTime = currentDate.toTimeString();
 
-    var trialPerBlock = nr_trial/5;
 
     this.state = {
       userID: this.props.location.state.userID,
