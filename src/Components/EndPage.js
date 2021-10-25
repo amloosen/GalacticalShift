@@ -100,7 +100,6 @@ class EndPage extends React.Component {
   };
 
   handleSubmit = (event) => {
-    var userID = this.state.userID;
 
     let body = {
       userID: this.state.userID,
@@ -176,16 +175,11 @@ class EndPage extends React.Component {
               <br />
               <br />
               Your data makes an important contribution to our understanding of
-              mental health.
-              <br />
-              <br />
+              mental health.<br />
               In this study, we were interested in how you detect complex
-              associations and how <br /> <br />
-              you react when they change.
-              <br /> <br />
-              Previous work have linked differences in behaviour to psychiatric
-              disorders, <br /> <br />
-              which we are aiming to understand better.
+              associations and how <br />
+              you react when they change. Previous work have linked differences<br />
+              in behaviour to psychiatric disorders, which we are aiming to understand better.
               <br />
               <br />
               <span className={styles.centerTwo}>
