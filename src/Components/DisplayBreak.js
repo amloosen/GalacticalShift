@@ -14,9 +14,6 @@ class DisplayBreak extends React.Component {
   };
 
   componentDidMount() {
-    setTimeout(() => {
-      this.props.onBreakEnd(1);
-    }, 60000); // if space not pressed timeout after a minute
     document.addEventListener("keyup", this.handleBreakKey);
   }
 
