@@ -9,7 +9,7 @@
     "@types/react-transition-group": "^1.1.7",
     "apexcharts": "^3.28.1",
     "normal-pdf": "^1.0.1",
-    "query-string": "^6.14.0",
+    "query-string": "^6.14.1",
     "react": "^16.14.0",
     "react-apexcharts": "^1.3.9",
     "react-bootstrap": "^1.6.1",

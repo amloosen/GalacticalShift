@@ -4,7 +4,7 @@ import * as Consent from "survey-react";
 import { API_URL } from "../config";
 import { handleResponse } from "./helpers";
 import "../../node_modules/survey-react/survey.css";
-// import queryString from "query-string"; // I need this for prolific
+import queryString from "query-string"; // I need this for prolific
 import "./style/startStyle.css";
 ////////////////////////////////////////////////////////////////////////////////
 class StartPage extends React.Component {
@@ -23,8 +23,16 @@ class StartPage extends React.Component {
     var dateString = date + "-" + (month + 1) + "-" + year;
 
     // Gen a random 6 digit number for now
-    var prolific_id = Math.floor(100000 + Math.random() * 900000);
-    // var prolific_id = 120000; //for testing
+    // var prolific_id = Math.floor(100000 + Math.random() * 900000);//debugger
+
+    let url = this.props.location.search;
+    let params = queryString.parse(url);
+    const prolific_id =
+      params["PROLIFIC_PID"] === undefined
+        ? "undefined"
+        : params["PROLIFIC_PID"];
+    console.log(prolific_id);
+
 
     // Set state
     this.state = {
