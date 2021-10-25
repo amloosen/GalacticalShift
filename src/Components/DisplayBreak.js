@@ -53,7 +53,7 @@ class DisplayBreak extends React.Component {
     return (
       <div className={styles.cockpit}>
         <div className={styles.textblock}>
-          {text} {this.handleBreakKey}
+          {text}
         </div>
       </div>
     );
