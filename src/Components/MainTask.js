@@ -42,6 +42,17 @@ function getRand(array) {
     return getRand(array);
   }
 }
+
+function roundTo(n, digits) {
+  if (digits === undefined) {
+    digits = 0;
+  }
+
+  var multiplicator = Math.pow(10, digits);
+  n = parseFloat((n * multiplicator).toFixed(11));
+  var test = Math.round(n) / multiplicator;
+  return +test.toFixed(digits);
+}
 /////////////////////////////////////////////////////////////////////////////////
 class MainTask extends React.Component {
   constructor(props) {
@@ -60,7 +71,7 @@ class MainTask extends React.Component {
       return Number(each_element.toFixed(0));
     });
 
-    var nr_trial = w0.length;//debugger
+    var nr_trial = w0.length; //debugger
 
     //pregenerate the values of the remaining elements
     var check_al2 = [];
@@ -119,11 +130,11 @@ class MainTask extends React.Component {
     for (var k = 9; k <= nr_trial - 1; k += 27) {
       indicReq_tmp[k] = 1;
     }
-    var trialPerBlock = nr_trial/5;
+    var trialPerBlock = nr_trial / 5;
 
     for (var l = 1; l <= nr_trial - 1; l += trialPerBlock) {
-          indicReq_tmp[l] = 0;//make sure the element indicator is never on the last trial of a block to not prevent sending the data
-        }
+      indicReq_tmp[l] = 0; //make sure the element indicator is never on the last trial of a block to not prevent sending the data
+    }
 
     var times_element1 = Array(nr_trial)
       .fill()
@@ -143,17 +154,16 @@ class MainTask extends React.Component {
     var currentDate = new Date();
     var mainStartTime = currentDate.toTimeString();
 
-
     this.state = {
       userID: this.props.location.state.userID,
       date: this.props.location.state.date,
       startTime: this.props.location.state.startTime,
       sectionStartTime: mainStartTime,
       taskSession: "MainTask",
-      trialTotal: nr_trial,//debugger
+      trialTotal: nr_trial, //debugger
       trialPerBlock: trialPerBlock,
       trialNum: 1,
-      showBreak:0,
+      showBreak: 0,
       trialBlockNum: 1,
       blockTotal: 5,
       blockNum: 1,
@@ -184,7 +194,7 @@ class MainTask extends React.Component {
       val_corr_elem: val_corr_elem,
       epsilon: epsilon,
       precededShift: precededShift,
-      epsilon: epsilon
+      epsilon: epsilon,
     };
 
     //* prevents page from going to the right/left when arrows are pressed .*/
@@ -202,53 +212,85 @@ class MainTask extends React.Component {
   }
   /////////////////////////////////////////////////////////////////////////////////
   sendBlock(height) {
-      var start = (this.state.blockNum - 1) * (this.state.trialPerBlock + 1);
-      // let height_tmp = slice(height, this.state.trialNum-200, this.state.trialNum+ 1);
-      var height_tmp = height.slice(start, this.state.trialNum);
-      var times1_tmp = this.state.times_element1.slice(
-        start,
-        this.state.trialNum
-      );
-      var times2_tmp = this.state.times_element2.slice(
-        start,
-        this.state.trialNum
-      );
-      var times3_tmp = this.state.times_element3.slice(
-        start,
-        this.state.trialNum
-      );
-      var trialSgmMu_tmp = this.state.trialSgmMu.slice(
-        start,
-        this.state.trialNum
-      );
+    var start = (this.state.blockNum - 1) * (this.state.trialPerBlock + 1);
+    // let height_tmp = slice(height, this.state.trialNum-200, this.state.trialNum+ 1);
+    var height_tmp = height.slice(start, this.state.trialNum);
+    var times1_tmp = this.state.times_element1.slice(
+      start,
+      this.state.trialNum
+    );
+    var times2_tmp = this.state.times_element2.slice(
+      start,
+      this.state.trialNum
+    );
+    var times3_tmp = this.state.times_element3.slice(
+      start,
+      this.state.trialNum
+    );
+    var trialSgmMu_tmp = this.state.trialSgmMu.slice(
+      start,
+      this.state.trialNum
+    );
 
-      let body = {
-        sectionStartTime: this.state.sectionStartTime,
-        startTime: this.state.startTime,
-        all_element_values: this.state.all_element_values,
-        trialTotal: this.state.trialTotal,
-        corr_elements: this.state.corPos_sq,
-        trialSgmMu: this.state.trialSgmMu,
-        times_element1: this.state.times_element1,
-        times_element2: this.state.times_element2,
-        times_element3: this.state.times_element3,
-        element1Col: this.state.element1Col,
-        element2Col: this.state.element2Col,
-        element3Col: this.state.element3Col,
-        startSgm: this.state.startSgm,
-        startMu: this.state.startMu,
-        all_true_pop_size: this.state.all_true_pop_size,
-        indicKey: this.state.indicKey,
-        outcomeHeight: height_tmp,
-        trialRT: this.state.trialRT,
-        blockTotal: this.state.blockTotal,
-        indicReq: this.state.indicReq,
-        trialPerBlock: this.state.trialPerBlock,
-        blockNum: this.state.blockNum,
+    var indicKey_tmp = this.state.indicKey.slice(start, this.state.trialNum);
+    var trialRT_tmp = this.state.trialRT.slice(start, this.state.trialNum);
+
+    var currentDate = new Date();
+    var blockFinishTime = currentDate.toTimeString();
+
+    let body = {
+      sectionStartTime: this.state.sectionStartTime,
+      startTime: this.state.startTime,
+      blockFinishTime: blockFinishTime,
+      all_element_values: this.state.all_element_values,
+      trialTotal: this.state.trialTotal,
+      corr_elements: this.state.corPos_sq,
+      trialSgmMu: trialSgmMu_tmp,
+      times_element1: times1_tmp,
+      times_element2: times2_tmp,
+      times_element3: times3_tmp,
+      element1Col: this.state.element1Col,
+      element2Col: this.state.element2Col,
+      element3Col: this.state.element3Col,
+      startSgm: this.state.startSgm,
+      startMu: this.state.startMu,
+      all_true_pop_size: this.state.all_true_pop_size,
+      indicKey: indicKey_tmp,
+      outcomeHeight: height_tmp,
+      trialRT: trialRT_tmp,
+      blockTotal: this.state.blockTotal,
+      indicReq: this.state.indicReq,
+      trialPerBlock: this.state.trialPerBlock,
+      blockNum: this.state.blockNum,
+    };
+
+    fetch(
+      `${API_URL}/main_task/create/` +
+        this.state.userID +
+        `/` +
+        this.state.study_part,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }
+    );
+
+    if (this.state.blockNum === 1) {
+      let taskstruct = {
+        corPos_sq: this.state.corPos_sq,
+        w0: this.state.w0,
+        relevant_w: this.state.relevant_w,
+        val_corr_elem: this.state.val_corr_elem,
+        epsilon: this.state.epsilon,
+        precededShift: this.state.precededShift,
+        true_pop_size: this.state.all_true_pop_size,
       };
-
       fetch(
-        `${API_URL}/main_task/create/` +
+        `${API_URL}/task_params/create/` +
           this.state.userID +
           `/` +
           this.state.study_part,
@@ -258,197 +300,208 @@ class MainTask extends React.Component {
             Accept: "application/json",
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(body),
+          body: JSON.stringify(taskstruct),
+        }
+      );
+    }
+    if (this.state.blockNum >= this.state.blockTotal) {
+      const bonisum = this.state.outcomeHeight.reduce(
+        (result, number) => result + number
+      );
+
+      var bonus = (bonisum / (89 * this.state.trialTotal)) * 5;
+      if (bonus < 0) {
+        bonus = 0;
+      } else if (bonus > 5) {
+        bonus = 5;
+      } else {
+        bonus = roundTo(bonus, 2); //2 dec pl
+      }
+
+      let backup = {
+        times_element1_backup: this.state.times_element1,
+        times_element2_backup: this.state.times_element2,
+        times_element3_backup: this.state.times_element3,
+        trialSgmMu_backup: this.state.trialSgmMu,
+        indicKey_backup: this.state.indicKey,
+        trialRT_backup: this.state.trialRT,
+        bonus: bonus,
+      };
+      fetch(
+        `${API_URL}/data_backup/create/` +
+          this.state.userID +
+          `/` +
+          this.state.study_part,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(backup),
         }
       );
 
-      if (this.state.blockNum === 1) {
-        let taskstruct = {
-          corPos_sq: this.state.corPos_sq,
-          w0: this.state.w0,
-          relevant_w: this.state.relevant_w,
-          val_corr_elem: this.state.val_corr_elem,
-          epsilon: this.state.epsilon,
-          precededShift: this.state.precededShift,
-          true_pop_size: this.state.all_true_pop_size,
-        };
-        fetch(
-          `${API_URL}/task_params/create/` +
-            this.state.userID +
-            `/` +
-            this.state.study_part,
-          {
-            method: "POST",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(taskstruct),
-          }
-        );
-      }
-      if (this.state.blockNum >= this.state.blockTotal) {
-        this.redirectToNextStage();
-      } else {
-        this.setState({
-          showBreak: 1,
-          disp_el: 0,
-          disp_feedback: 0,
-        });
-      }
-    }
-    /////////////////////////////////////////////////////////////////////////////////
-    render() {
-      if (this.state.disp_el === 1) {
-        return (
-          <DisplayElements
-            element1Col={this.state.element1Col}
-            element2Col={this.state.element2Col}
-            element3Col={this.state.element3Col}
-            all_element_values={this.state.all_element_values}
-            indicReq={this.state.indicReq}
-            trialNum={this.state.trialNum}
-            trialBlockNum={this.state.trialBlockNum}
-            trialPerBlock={this.state.trialPerBlock}
-            onElementsEnd={this.handleElementsData}
-            onElementsIndic={this.handleIndicData}
-          />
-        );
-      }
-
-      if (this.state.disp_slider === 1) {
-        return (
-          <DisplaySlider
-            trialSgmMu={this.state.trialSgmMu}
-            trialRT={this.state.trialRT}
-            trialNum={this.state.trialNum}
-            onSliderEnd={this.handleSliderData}
-            startSgm={this.state.startSgm}
-            startMu={this.state.startMu}
-          />
-        );
-      }
-
-      if (this.state.disp_feedback === 1) {
-        return (
-          <DisplayFeedback
-            element1Col={this.state.element1Col}
-            element2Col={this.state.element2Col}
-            element3Col={this.state.element3Col}
-            all_element_values={this.state.all_element_values}
-            all_true_pop_size={this.state.all_true_pop_size}
-            trialSgmMu={this.state.trialSgmMu}
-            distHeight={this.state.distHeight}
-            indicReq={this.state.indicReq}
-            trialNum={this.state.trialNum}
-            onFeedbackEnd={this.handleOutcomeData}
-          />
-        );
-      }
-      if (this.state.showBreak === 1) {
-        return (
-          <DisplayBreak
-            blockTotal={this.state.blockTotal}
-            blockNum={this.state.blockNum}
-            onBreakEnd={this.nextBlock}
-          />
-        );
-      }
-    }
-    /////////////////////////////////////////////////////////////////////////////////
-    handleElementsData = (times_element1, times_element2, times_element3) => {
-      var times_element1_tmp = this.state.times_element1;
-      var times_element2_tmp = this.state.times_element2;
-      var times_element3_tmp = this.state.times_element3;
-      times_element1_tmp[this.state.trialNum - 1] = times_element1;
-      times_element2_tmp[this.state.trialNum - 1] = times_element2;
-      times_element3_tmp[this.state.trialNum - 1] = times_element3;
+      this.redirectToNextStage(bonus);
+    } else {
       this.setState({
-        times_element1: times_element1_tmp,
-        times_element2: times_element2_tmp,
-        times_element3: times_element3_tmp,
+        showBreak: 1,
         disp_el: 0,
-        disp_slider: 1,
+        disp_feedback: 0,
       });
-    };
+    }
+  }
+  /////////////////////////////////////////////////////////////////////////////////
+  render() {
+    if (this.state.disp_el === 1) {
+      return (
+        <DisplayElements
+          element1Col={this.state.element1Col}
+          element2Col={this.state.element2Col}
+          element3Col={this.state.element3Col}
+          all_element_values={this.state.all_element_values}
+          indicReq={this.state.indicReq}
+          trialNum={this.state.trialNum}
+          trialBlockNum={this.state.trialBlockNum}
+          trialPerBlock={this.state.trialPerBlock}
+          onElementsEnd={this.handleElementsData}
+          onElementsIndic={this.handleIndicData}
+        />
+      );
+    }
 
-    handleSliderData = (trialSgmMu, trialRT, distHeight) => {
-      this.setState({
-        trialSgmMu: trialSgmMu,
-        trialRT: trialRT,
-        distHeight: distHeight,
-        disp_slider: 0,
-        disp_feedback: 1,
-      });
-    };
+    if (this.state.disp_slider === 1) {
+      return (
+        <DisplaySlider
+          trialSgmMu={this.state.trialSgmMu}
+          trialRT={this.state.trialRT}
+          trialNum={this.state.trialNum}
+          onSliderEnd={this.handleSliderData}
+          startSgm={this.state.startSgm}
+          startMu={this.state.startMu}
+        />
+      );
+    }
 
-    handleIndicData = (pressed) => {
-      var indicKey_tmp = this.state.indicKey;
-      var indicReq_tmp = this.state.indicReq;
-      indicReq_tmp[this.state.trialNum - 1] = 0;
-      indicKey_tmp[this.state.trialNum - 1][1] = this.state.trialNum;
-      indicKey_tmp[this.state.trialNum - 1][2] = pressed;
-      this.setState({
-        indicKey: indicKey_tmp,
-        disp_el: 1,
-        indicReq: indicReq_tmp,
-      });
-    };
+    if (this.state.disp_feedback === 1) {
+      return (
+        <DisplayFeedback
+          element1Col={this.state.element1Col}
+          element2Col={this.state.element2Col}
+          element3Col={this.state.element3Col}
+          all_element_values={this.state.all_element_values}
+          all_true_pop_size={this.state.all_true_pop_size}
+          trialSgmMu={this.state.trialSgmMu}
+          distHeight={this.state.distHeight}
+          indicReq={this.state.indicReq}
+          trialNum={this.state.trialNum}
+          onFeedbackEnd={this.handleOutcomeData}
+        />
+      );
+    }
+    if (this.state.showBreak === 1) {
+      return (
+        <DisplayBreak
+          blockTotal={this.state.blockTotal}
+          blockNum={this.state.blockNum}
+          onBreakEnd={this.nextBlock}
+        />
+      );
+    }
+  }
+  /////////////////////////////////////////////////////////////////////////////////
+  handleElementsData = (times_element1, times_element2, times_element3) => {
+    var times_element1_tmp = this.state.times_element1;
+    var times_element2_tmp = this.state.times_element2;
+    var times_element3_tmp = this.state.times_element3;
+    times_element1_tmp[this.state.trialNum - 1] = times_element1;
+    times_element2_tmp[this.state.trialNum - 1] = times_element2;
+    times_element3_tmp[this.state.trialNum - 1] = times_element3;
+    this.setState({
+      times_element1: times_element1_tmp,
+      times_element2: times_element2_tmp,
+      times_element3: times_element3_tmp,
+      disp_el: 0,
+      disp_slider: 1,
+    });
+  };
 
-    handleOutcomeData = (height) => {
-      var outcomeHeight_tmp = this.state.outcomeHeight;
-      outcomeHeight_tmp[this.state.trialNum - 1] = height;
-      this.nextTrial(outcomeHeight_tmp);
-    };
+  handleSliderData = (trialSgmMu, trialRT, distHeight) => {
+    this.setState({
+      trialSgmMu: trialSgmMu,
+      trialRT: trialRT,
+      distHeight: distHeight,
+      disp_slider: 0,
+      disp_feedback: 1,
+    });
+  };
 
-    nextBlock = () => {
+  handleIndicData = (pressed) => {
+    var indicKey_tmp = this.state.indicKey;
+    var indicReq_tmp = this.state.indicReq;
+    indicReq_tmp[this.state.trialNum - 1] = 0;
+    indicKey_tmp[this.state.trialNum - 1][1] = this.state.trialNum;
+    indicKey_tmp[this.state.trialNum - 1][2] = pressed;
+    this.setState({
+      indicKey: indicKey_tmp,
+      disp_el: 1,
+      indicReq: indicReq_tmp,
+    });
+  };
 
-      var trialNum_tmp = this.state.trialNum + 1;
-      var trialBlockNum_tmp = 1;
+  handleOutcomeData = (height) => {
+    var outcomeHeight_tmp = this.state.outcomeHeight;
+    outcomeHeight_tmp[this.state.trialNum - 1] = height;
+    this.nextTrial(outcomeHeight_tmp);
+  };
 
-      var blockNum_tmp = this.state.blockNum + 1;
+  nextBlock = () => {
+    var trialNum_tmp = this.state.trialNum + 1;
+    var trialBlockNum_tmp = 1;
+
+    var blockNum_tmp = this.state.blockNum + 1;
+
+    this.setState({
+      trialNum: trialNum_tmp,
+      trialBlockNum: trialBlockNum_tmp,
+      disp_feedback: 0,
+      disp_el: 1,
+      showBreak: 0,
+      blockNum: blockNum_tmp,
+    });
+  };
+
+  nextTrial = (height) => {
+    var trialNum_tmp = this.state.trialNum + 1;
+
+    if (this.state.trialBlockNum === this.state.trialPerBlock) {
+      this.sendBlock(height);
+    } else {
+      var trialBlockNum_tmp = this.state.trialBlockNum + 1;
 
       this.setState({
         trialNum: trialNum_tmp,
         trialBlockNum: trialBlockNum_tmp,
+        height: height,
         disp_feedback: 0,
-        disp_el: 1,
         showBreak: 0,
-        blockNum: blockNum_tmp,
-      });
-    };
-
-    nextTrial = (height) => {
-      var trialNum_tmp = this.state.trialNum + 1;
-
-      if (this.state.trialBlockNum === this.state.trialPerBlock) {
-        this.sendBlock(height);
-      } else {
-        var trialBlockNum_tmp = this.state.trialBlockNum + 1;
-
-        this.setState({
-          trialNum: trialNum_tmp,
-          trialBlockNum: trialBlockNum_tmp,
-          height: height,
-          disp_feedback: 0,
-          showBreak: 0,
-          disp_el: 1,
-        });
-      }
-    };
-
-    redirectToNextStage() {
-      this.props.history.push({
-        pathname: `/EndPage`,
-        state: {
-          userID: this.state.userID,
-          date: this.state.date,
-          startTime: this.state.startTime,
-          rewardTotal: this.state.outcomeHeight,
-          trialTotal: this.state.trialTotal,
-        },
+        disp_el: 1,
       });
     }
-  }
+  };
 
-  export default withRouter(MainTask);
+  redirectToNextStage(bonus) {
+    this.props.history.push({
+      pathname: `/EndPage`,
+      state: {
+        userID: this.state.userID,
+        date: this.state.date,
+        startTime: this.state.startTime,
+        trialTotal: this.state.trialTotal,
+        bonus: bonus,
+      },
+    });
+  }
+}
+
+export default withRouter(MainTask);

@@ -127,6 +127,26 @@ class Slider extends React.Component {
             },
           },
         },
+        //         annotations: {
+        //           points:
+        //       [
+        //         {
+        //           x: this.props.mu * 2,
+        //           y:-10,
+        //           marker: {
+        //             shape: "square",
+        //           size: 9,
+        //           fillColor: "#9CBA7F",
+        //           strokeColor: "#9CBA7F",
+        //           radius: 2
+        //         },
+        //           label: {
+        //             color:"#d2eaf2",
+        //             background:"#d2eaf2"
+        //           }
+        //         }
+        //       ]
+        // },
         grid: { show: false },
         tooltip: { enabled: false },
       },
@@ -187,9 +207,8 @@ class Slider extends React.Component {
         }
         break;
       case 39:
-        if (this.state.mu === 100) {
-          var mu_tmp = this.state.mu;
-          this.setValue(mu_tmp, this.state.sgm);
+        if (this.state.mu === 100 || this.state.mu === 0 ) {
+          return null;
         } else {
           this.setState((prevState) => ({
             mu: prevState.mu + this.stepsMu(prevState.timesKeyDown),
@@ -198,9 +217,8 @@ class Slider extends React.Component {
         }
         break;
       case 37:
-        if (this.state.mu === 0) {
-          var mu_tmp = this.state.mu;
-          this.setValue(mu_tmp, this.state.sgm);
+        if (this.state.mu === 100 || this.state.mu === 0 ) {
+          return null;
         } else {
           this.setState((prevState) => ({
             mu: prevState.mu - this.stepsMu(prevState.timesKeyDown),
@@ -227,9 +245,9 @@ class Slider extends React.Component {
   };
 
   stepsMu = (pressed) => {
-    if (pressed < 10) {
+    if (pressed < 10 || this.state.mu <= 11 || this.state.mu >= 89) {
       return 1;
-    } else if (pressed >= 10) {
+    } else if (pressed >= 10 ) {
       return 2;
     }
   };
@@ -260,19 +278,16 @@ class Slider extends React.Component {
     });
 
     var distheight_tmp = Math.max.apply(null, yValuesAdapt_tmp) * 5;
-
+    var annot = mu*7.5;
     this.setState({
       series: [{ data: yValuesAdapt_tmp }],
       sgm: sgm,
       mu: mu,
-      distHeight: distheight_tmp,
+      distHeight: distheight_tmp
     });
   };
 
   render() {
-    // <View className={styles.main}>
-    //   <span className={styles.sliderEstimateBox}>{this.state.mu}</span>
-    // </View>
     return (
       <div className={styles.main}>
         <View className={styles.main}>

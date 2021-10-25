@@ -88,77 +88,74 @@ class ElementsFullDisplay extends React.Component {
     clearTimeout();
   }
 
-  mouseOver(elNr) {
-    if (elNr === 1) {
-      this.state.times_element1.push([Math.round(performance.now()), 0, 0]);
-      this.setState({
-        img1: this.state.shownImg1,
-        show1: 1,
-      });
-    } else if (elNr === 2) {
-      this.state.times_element2.push([Math.round(performance.now()), 0, 0]);
-      this.setState({
-        img2: this.state.shownImg2,
-        show2: 1,
-      });
-    } else if (elNr === 3) {
-      this.state.times_element3.push([Math.round(performance.now()), 0, 0]);
-      this.setState({
-        img3: this.state.shownImg3,
-        show3: 1,
-      });
-    }
-  }
 
-  mouseOut(elNr) {
-    if (elNr === 1) {
-      var times_element1 = this.state.times_element1;
-      times_element1[times_element1.length - 1][0] = this.props.trialNum;
-      times_element1[times_element1.length - 1][2] = Math.round(
-        performance.now()
-      );
-      times_element1[times_element1.length - 1][3] =
-        times_element1[times_element1.length - 1][2] -
-        times_element1[times_element1.length - 1][1];
-      this.setState({
-        img1: Cover,
-        show1: null,
-        style1: styles.elementsize,
-        times_element1: times_element1,
-      });
-    } else if (elNr === 2) {
-      var times_element2 = this.state.times_element2;
-      times_element2[times_element2.length - 1][0] = this.props.trialNum;
-      times_element2[times_element2.length - 1][2] = Math.round(
-        performance.now()
-      );
-      times_element2[times_element2.length - 1][3] =
-        times_element2[times_element2.length - 1][2] -
-        times_element2[times_element2.length - 1][1];
-      this.setState({
-        img2: Cover,
-        show2: null,
-        style2: styles.elementsize,
-        times_element2: times_element2,
-      });
-    } else if (elNr === 3) {
-      var times_element3 = this.state.times_element3;
-      times_element3[times_element3.length - 1][0] = this.props.trialNum;
-      times_element3[times_element3.length - 1][2] = Math.round(
-        performance.now()
-      );
-      times_element3[times_element3.length - 1][3] =
-        times_element3[times_element3.length - 1][2] -
-        times_element3[times_element3.length - 1][1];
-      this.setState({
-        img3: Cover,
-        show3: null,
-        style3: styles.elementsize,
-        times_element3: times_element3,
-      });
+    mouseOver(elNr) {
+      if (elNr === 1) {
+        this.state.times_element1.push([this.props.trialNum,Math.round(performance.now()), 0, 0]);
+        this.setState({
+          img1: this.state.shownImg1,
+          show1: 1,
+        });
+      } else if (elNr === 2) {
+        this.state.times_element2.push([this.props.trialNum ,Math.round(performance.now()), 0, 0]);
+        this.setState({
+          img2: this.state.shownImg2,
+          show2: 1,
+        });
+      } else if (elNr === 3) {
+        this.state.times_element3.push([this.props.trialNum,Math.round(performance.now()), 0, 0]);
+        this.setState({
+          img3: this.state.shownImg3,
+          show3: 1,
+        });
+      }
     }
-  }
 
+    mouseOut(elNr) {
+      if (elNr === 1) {
+        var times_element1 = this.state.times_element1;
+        times_element1[times_element1.length - 1][2] = Math.round(
+          performance.now()
+        );
+        times_element1[times_element1.length - 1][3] =
+          times_element1[times_element1.length - 1][2] -
+          times_element1[times_element1.length - 1][1];
+        this.setState({
+          img1: Cover,
+          show1: null,
+          style1: styles.elementsize,
+          times_element1: times_element1,
+        });
+      } else if (elNr === 2) {
+        var times_element2 = this.state.times_element2;
+        times_element2[times_element2.length - 1][2] = Math.round(
+          performance.now()
+        );
+        times_element2[times_element2.length - 1][3] =
+          times_element2[times_element2.length - 1][2] -
+          times_element2[times_element2.length - 1][1];
+        this.setState({
+          img2: Cover,
+          show2: null,
+          style2: styles.elementsize,
+          times_element2: times_element2,
+        });
+      } else if (elNr === 3) {
+        var times_element3 = this.state.times_element3;
+        times_element3[times_element3.length - 1][2] = Math.round(
+          performance.now()
+        );
+        times_element3[times_element3.length - 1][3] =
+          times_element3[times_element3.length - 1][2] -
+          times_element3[times_element3.length - 1][1];
+        this.setState({
+          img3: Cover,
+          show3: null,
+          style3: styles.elementsize,
+          times_element3: times_element3,
+        });
+      }
+    }
 
   render() {
     return (

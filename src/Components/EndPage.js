@@ -3,45 +3,24 @@ import { withRouter } from "react-router-dom";
 import { API_URL } from "../config.js";
 import styles from "./style/taskStyle.module.css";
 /////////////////////////////////////////////////////////////////////
-function roundTo(n, digits) {
-  if (digits === undefined) {
-    digits = 0;
-  }
-
-  var multiplicator = Math.pow(10, digits);
-  n = parseFloat((n * multiplicator).toFixed(11));
-  var test = Math.round(n) / multiplicator;
-  return +test.toFixed(digits);
-}
-/////////////////////////////////////////////////////////////////////
 class EndPage extends React.Component {
   constructor(props) {
     super(props);
-    const bonisum = this.props.location.state.rewardTotal.reduce(
-      (result, number) => result + number
-    );
-    var bonus = (bonisum / (89 * this.props.location.state.trialTotal)) * 5;
-    if (bonus < 0) {
-      bonus = 0;
-    } else if (bonus > 5) {
-      bonus = 5;
-    } else {
-      bonus = roundTo(bonus, 2); //2 dec pl
-    }
+
     var currentDate = new Date(); // maybe change to local
     var timeString = currentDate.toTimeString();
 
     // This will change for the questionnaires going AFTER the main task
     this.state = {
-      userID: this.props.location.state.userID,//debugger
-      startTime: this.props.location.state.startTime,//debugger
+      userID: this.props.location.state.userID, //debugger
+      startTime: this.props.location.state.startTime, //debugger
       sectionStartTime: timeString,
       instructScreenText: 1,
       instructScreen: true,
       feedback: [],
       placeholder:
         "Were the task instructions clear? Did you encounter any problems?",
-      bonus: bonus,
+      bonus: this.props.location.state.bonus,
       study_part: 6,
     };
   }
@@ -100,7 +79,6 @@ class EndPage extends React.Component {
   };
 
   handleSubmit = (event) => {
-
     let body = {
       userID: this.state.userID,
       sectionStartTime: this.state.sectionStartTime,
@@ -175,11 +153,14 @@ class EndPage extends React.Component {
               <br />
               <br />
               Your data makes an important contribution to our understanding of
-              mental health.<br />
+              mental health.
+              <br />
               In this study, we were interested in how you detect complex
               associations and how <br />
-              you react when they change. Previous work have linked differences<br />
-              in behaviour to psychiatric disorders, which we are aiming to understand better.
+              you react when they change. Previous work have linked differences
+              <br />
+              in behaviour to psychiatric disorders, which we are aiming to
+              understand better.
               <br />
               <br />
               <span className={styles.centerTwo}>
