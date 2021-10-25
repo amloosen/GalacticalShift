@@ -22,7 +22,6 @@ class OutcomeSliderBar extends React.Component {
     var height_tmp = yValuesAdaptNew[trueValue * 2];
     xValuesOutcome[trueValue * 2] = height_tmp;
 
-
     this.state = {
       height_bar: height_tmp,
       mu: this.props.mu,
@@ -135,23 +134,6 @@ class OutcomeSliderBar extends React.Component {
           },
         },
         grid: { show: false },
-        annotations: {
-          points:
-      [
-        {
-          x: trueValue * 2,
-          y:-0,
-          marker: {
-            shape: "circle",
-          size: 10,
-          fillColor: "#1C00ff00",
-          strokeColor: "#b3e49d",
-          radius: 4,
-          cssClass: 'apexcharts-custom-class'
-          },
-
-      }]
-  },
         tooltip: { enabled: false },
         legend: { show: false },
       },
@@ -161,7 +143,7 @@ class OutcomeSliderBar extends React.Component {
   componentDidMount() {
     setTimeout(() => {
       this.props.getBarHeight(this.state.height_bar);
-    }, 3000);
+    }, 2000);
   }
 
   componentWillUnmount() {
@@ -180,7 +162,7 @@ class OutcomeSliderBar extends React.Component {
             height={this.props.distHeight}
           />
         </View>
-        <View style={stylesSliderRep.layer}>
+        <View style={stylesSliderRep.circle}>
           <ReactApexChart
             options={this.state.options}
             series={this.state.series}
@@ -204,7 +186,7 @@ const stylesSliderRep = StyleSheet.create({
     width: "100%",
     position: "relative",
   },
-  layer: {
+  circle: {
     width: "100%",
     position: "absolute",
   },

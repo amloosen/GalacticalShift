@@ -112,9 +112,9 @@ class TrainingIntroB extends React.Component {
               <span className={styles.center}>TRAINING III</span>
               <br />
               You might have noticed that the percent on the instrument first mapped one-to-one   <br />
-              onto the population size (40% → 40 million) but then after a while  it switched to an<br />
-              inverse (40% → 60 million), meaning you had to calculate '100 - the instrument <br />
-              measure' to get the population size.
+              onto the population size (40% → 40 million) but then after a while   <br />
+              it switched to an inverse (40% → 60 million), meaning you had to   <br />
+              calculate '100 - the instrument measure' to get the population size.
               <br /><br />
               Click next to learn about another challenge.
               <br />
