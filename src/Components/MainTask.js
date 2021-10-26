@@ -305,7 +305,12 @@ class MainTask extends React.Component {
       );
     }
     if (this.state.blockNum >= this.state.blockTotal) {
-      const bonisum = this.state.outcomeHeight.reduce(
+      var height_check = this.state.height;
+      height_check = height_check.filter(function (element) {
+        return element !== undefined;
+      });
+      ///
+      var bonisum = height_check.reduce(
         (result, number) => result + number
       );
 
@@ -317,6 +322,7 @@ class MainTask extends React.Component {
       } else {
         bonus = roundTo(bonus, 2); //2 dec pl
       }
+      
 
       let backup = {
         times_element1_backup: this.state.times_element1,
