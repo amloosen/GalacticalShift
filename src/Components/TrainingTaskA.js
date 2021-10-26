@@ -1,37 +1,101 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import GifPlayer from "react-gif-player";
-import "./style/gifplayer.scss";
 import { withRouter } from "react-router-dom";
+import { API_URL } from "../config";
 import styles from "./style/taskStyle.module.css";
-import img_intro1 from "./intro/ExamplePicture1.jpg";
-import img_left from "./intro/left.jpg";
-import img_right from "./intro/right.jpg";
-import gif from "./intro/mouse.gif";
+import { range } from "lodash";
+import ElementsOneDisplay from "./ElementsOneDisplay";
+import DisplayTrainElement from "./DisplayOneElement";
+import DisplayTrainOptions from "./DisplayTrainOptions";
+import DisplayTrainFeedback from "./DisplayTrainFeedback";
 import Blue from "./img/stimuli3_blue.jpg";
-/////////////////////////////////////////////////////////////////////////////////t.Component {
-class TrainingIntroA extends React.Component {
+
+////////////////////////////////////////////////////////////////////////////////
+function shuffle(array) {
+  let currentIndex = array.length,
+    randomIndex;
+
+  // While there remain elements to shuffle...
+  while (currentIndex !== 0) {
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex],
+    ];
+  }
+
+  return array;
+}
+////////////////////////////////////////////////////////////////////////////////
+class TrainingTaskA extends React.Component {
   constructor(props) {
     super(props);
+    var currentDate = new Date(); // maybe change to local
+    var timeString = currentDate.toTimeString();
 
-    // var user_info = this.props.location.state.user_info;
-    var currentDate = new Date();
-    var introTrainingStartTime = currentDate.toTimeString();
+    var nr_traintrial = 10;
+    var val_options = range(0, 110, 10);
+    val_options.splice(val_options.indexOf(50), 1); //remove the 50 to make it clearer which element is correct
+    var random_val = [];
+    for (var i = 0; i <= nr_traintrial - 1; i++) {
+      var val_tmp = val_options[~~(Math.random() * val_options.length)];
+      do {
+        var val_tmp = val_options[~~(Math.random() * val_options.length)];
+      } while (random_val[i - 1] === val_tmp); // make sure it changes every time
+      random_val[i] = val_tmp;
+    }
 
-    /////////////////////////////////////////////////////////////////////////////////
-    // SET COMPONENT STATES
+    var corr_values = random_val.slice(0, 5);
+    var inverse_tmp = random_val.slice(5, 10);
+    var inverse = inverse_tmp.map(function (value) {
+      return 100 - value;
+    });
+    corr_values.push(
+      inverse[0],
+      inverse[1],
+      inverse[2],
+      inverse[3],
+      inverse[4]
+    );
+    let array_tmp = Array(nr_traintrial).fill(0);
+
+    var corr_pos = [4, 4, 4, 4, 4, 5, 5, 5, 5]; //1 is left and 2 is right; determine where the correct value is displayed
+    shuffle(corr_pos);
+    // initialize options for the first trial
+    if (corr_pos[0] === 4) {
+      var ansTwo = 100 - corr_values[0];
+      var ansOne = corr_values[0];
+    } else {
+      var ansOne = 100 - corr_values[0];
+      var ansTwo = corr_values[0];
+    }
+
     this.state = {
+      sectionTime: timeString,
       userID: this.props.location.state.userID,
       date: this.props.location.state.date,
       startTime: this.props.location.state.startTime,
-      taskSession: "TrainingIntroA",
-      instructScreenText: 1,
-      instructScreen: true,
+      taskSession: "TrainingTaskA",
+      trialKeypress: array_tmp,
+      valueOnElement: array_tmp,
+      elements: 1,
+      disp_opt: 0,
+      traintrialNum: 1,
+      traintrialTotal: nr_traintrial,
+      feedback: 0,
+      all_corr_values: corr_values,
+      valTrainElem: corr_values[0],
+      corr_value: corr_values[0],
+      trainAcc: array_tmp,
+      ansOne: ansOne,
+      ansTwo: ansTwo,
+      corr_pos: corr_pos,
+      study_part: 2
     };
-
-    this.handleInstructLocal = this.handleInstructLocal.bind(this);
-
-    /* prevents page from going down when space bar is hit .*/
+    /* prevents page from going to the right/left when arrows are pressed .*/
     window.addEventListener("keydown", function (e) {
       if (e.keyCode === 32 && e.target === document.body) {
         e.preventDefault();
@@ -44,56 +108,133 @@ class TrainingIntroA extends React.Component {
       }
     });
   }
+
   /////////////////////////////////////////////////////////////////////////////////
-  // END COMPONENT STATE
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
 
-  // This handles instruction screen within the component USING KEYBOARD
-  handleInstructLocal(key_pressed) {
-    var curText = this.state.instructScreenText;
-    var whichButton = key_pressed;
-
-    if (whichButton === 4 && curText > 1) {
-      this.setState({ instructScreenText: curText - 1 });
-    } else if (whichButton === 5 && curText < 7) {
-      this.setState({ instructScreenText: curText + 1 });
-    } else if (curText === 7 && whichButton === 10) {
-      setTimeout(
-        function () {
-          this.redirectToNextStage();
-        }.bind(this),
-        0
+  render() {
+    if (this.state.elements === 1) {
+      return (
+        <DisplayTrainElement
+          valTrainElem={this.state.valTrainElem}
+          traintrialTotal={this.state.traintrialTotal}
+          traintrialNum={this.state.traintrialNum}
+          handleElement={this.elementsShown}
+          blue={Blue}
+        />
+      );
+    } else if (this.state.disp_opt === 1) {
+      return (
+        <DisplayTrainOptions
+          ansTwo={this.state.ansTwo}
+          ansOne={this.state.ansOne}
+          trainIndic={this.trainIndic}
+        />
+      );
+    } else if (this.state.feedback === 1) {
+      return (
+        <DisplayTrainFeedback
+          corr_value={this.state.corr_value}
+          handleFeedback={this.feedbackShown}
+        />
       );
     }
   }
 
-  _handleInstructKey = (event) => {
-    var key_pressed;
+  trainIndic = (pressed) => {
+    var trainAcc = this.state.trainAcc;
+    var trialKeypress = this.state.trialKeypress;
+    trialKeypress[this.state.traintrialNum - 1] = pressed;
 
-    switch (event.keyCode) {
-      case 37:
-        //    this is left arrow
-        key_pressed = 4;
-        this.handleInstructLocal(key_pressed);
-        break;
-      case 39:
-        //    this is right arrow
-        key_pressed = 5;
-        this.handleInstructLocal(key_pressed);
-        break;
-      case 32:
-        //    this is SPACEBAR
-        key_pressed = 10;
-        this.handleInstructLocal(key_pressed);
-        break;
-      default:
+    if (pressed === this.state.corr_pos[this.state.traintrialNum - 1]) {
+      trainAcc[this.state.traintrialNum - 1] = 1;
+    } else {
+      trainAcc[this.state.traintrialNum - 1] = 0;
+    }
+
+    this.setState({
+      trialKeypress: trialKeypress,
+      trainAcc: trainAcc,
+      disp_opt: 0,
+      feedback: 1,
+    });
+  };
+
+  elementsShown = () => {
+    this.setState({
+      elements: 0,
+      disp_opt: 1,
+    });
+  };
+
+  feedbackShown = () => {
+    if (this.state.traintrialNum === this.state.traintrialTotal) {
+      this.redirectToNextStage();
+    } else {
+      var traintrialNum_tmp = this.state.traintrialNum + 1;
+      var all_corr_values = this.state.all_corr_values;
+
+      if (traintrialNum_tmp <= this.state.traintrialTotal / 2) {
+        var valTrainElem = all_corr_values[traintrialNum_tmp - 1];
+      } else {
+        var valTrainElem = 100 - all_corr_values[traintrialNum_tmp - 1];
+      }
+      let valueOnElement = this.state.valueOnElement;
+      valueOnElement[traintrialNum_tmp - 1] = valTrainElem;
+      var corr_pos = this.state.corr_pos;
+      if (corr_pos[traintrialNum_tmp - 1] === 4) {
+        var ansTwo = 100 - all_corr_values[traintrialNum_tmp - 1];
+        var ansOne = all_corr_values[traintrialNum_tmp - 1];
+      } else {
+        var ansOne = 100 - all_corr_values[traintrialNum_tmp - 1];
+        var ansTwo = all_corr_values[traintrialNum_tmp - 1];
+      }
+
+      this.setState({
+        traintrialNum: traintrialNum_tmp,
+        elements: 1,
+        disp_opt: 0,
+        feedback: 0,
+        valueOnElement: valueOnElement,
+        valTrainElem: valTrainElem,
+        corr_value: this.state.all_corr_values[traintrialNum_tmp - 1],
+        ansTwo: ansTwo,
+        ansOne: ansOne,
+      });
     }
   };
 
   redirectToNextStage() {
-    document.removeEventListener("keyup", this._handleInstructKey);
-    document.removeEventListener("keyup", this._handleDebugKey);
+    let body = {
+      sectionStartTime: this.state.sectionTime,
+      startTime: this.state.startTime,
+      corr_pos: this.state.corr_pos,
+      all_corr_values: this.state.all_corr_values,
+      valueOnElement: this.state.valueOnElement,
+      trainAcc: this.state.trainAcc,
+    };
+
+    fetch(
+      `${API_URL}/training_a/create/` +
+        this.state.userID +
+        `/` +
+        this.state.study_part,
+      {
+        //eigentlich auch in den body beim ersten mal
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }
+    );
+
+    ////////////////////////
     this.props.history.push({
-      pathname: `/TrainingTaskA`,
+      pathname: `/TrainingIntroB`,
       state: {
         userID: this.state.userID,
         date: this.state.date,
@@ -101,236 +242,8 @@ class TrainingIntroA extends React.Component {
       },
     });
   }
-
-  componentDidMount() {
-    window.scrollTo(0, 0);
-  }
-
-  render() {
-    let text;
-    if (this.state.instructScreen === true) {
-      if (this.state.instructScreenText === 1) {
-        document.addEventListener("keyup", this._handleInstructKey);
-        text = (
-          <div className={styles.main}>
-            <p>
-              <span className={styles.center}>TRAINING II</span>
-              <br />
-              Well done so far!
-              <br /> <br />
-              We will now introduce you to the main task itself and you will
-              complete a few training trials.
-              <br /> <br />
-              For today&apos;s game, you will be a space explorer on an
-              intergalactic mission. Your mission is it <br />
-              to tell your station on earth how many aliens live on the planets
-              you visit.
-              <br />
-              <br />
-              It is critical that you give your best estimate of the alien
-              population size.
-              <br /> <br />
-              <span className={styles.center}>
-                <i>(Use the ← → keys to navigate the pages.)</i>
-              </span>
-              <span className={styles.center}>
-                [<strong>NEXT →</strong>]
-              </span>
-            </p>
-          </div>
-        );
-      } else if (this.state.instructScreenText === 2) {
-        text = (
-          <div className={styles.main}>
-            <p>
-              <span className={styles.center}>TRAINING II</span>
-              So how can you find out how many aliens live on a planet?
-              <br />
-              <br />
-              You can find out how large the population size is by looking at
-              the different coloured resources
-              <br />
-              available on the planet.
-              <br />
-              <br />
-              Your spaceship is equipped with several measuring instruments that
-              will help you determine
-              <br />
-              how much of each resource is available.
-              <br />
-              <br />A measuring instrument may look like this:
-              <br />
-              <br />
-              <span className={styles.center}>
-                <img src={img_intro1} alt="example1" />
-              </span>
-              <br />
-              This instrument indicates 40% of the blue resource is available.
-              <br />
-              <br />
-              <span className={styles.center}>
-                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
-              </span>
-            </p>
-          </div>
-        );
-      } else if (this.state.instructScreenText === 3) {
-        text = (
-          <div className={styles.main}>
-            <p>
-              <span className={styles.center}>TRAINING II</span>
-              <br />
-              As mentioned, the aliens living on these planets rely on natural
-              resources,
-              <br />
-              and thus the population size is related to the measurement of your
-              instrument.
-              <br />
-              <br />
-              For example, the reading of the instrument could be reflecting the
-              population size <br />
-              (in million) one-to-one. This would mean that if the instrument
-              shows you ‘40%’ 40 million aliens <br />
-              live on that planet.
-              <br />
-              <br />
-              It could also be, that the reading of the instrument could be
-              reflecting the population size <br />
-              times two. This would mean that if the instrument shows you ‘40%’
-              80 million aliens <br />
-              live on that planet. <br />
-              <br />
-              <br />
-              <span className={styles.center}>
-                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
-              </span>
-            </p>
-          </div>
-        );
-      } else if (this.state.instructScreenText === 4) {
-        text = (
-          <div className={styles.main}>
-            <p>
-              <span className={styles.center}>TRAINING II</span>
-              <br />
-              A challenge makes your mission difficult:
-              <br />
-              <br />
-              No one knows how the instrument readings map onto the population
-              size of the planet.
-              <br />
-              The association between the instrument reading and the population
-              size <br />
-              will be <strong>complex</strong> and also <strong>change</strong>{" "}
-              at some point once you enter a new galaxy.
-              <br />
-              <br />
-              It is your task to learn the associations and notice when it
-              changes because you entered a <br />
-              new galaxy.
-              <br /> <br />
-              <span className={styles.center}>
-                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
-              </span>
-            </p>
-          </div>
-        );
-      } else if (this.state.instructScreenText === 5) {
-        text = (
-          <div className={styles.main}>
-            <p>
-              <span className={styles.center}>TRAINING II</span>
-              To introduce you to the game slowly, we will now show you the
-              changing association
-              <br />
-              by, for now, only showing you one instrument. <br />
-              <br />
-              This instrument is associated with the population size in a simple
-              way but this association will change <br />
-              at some point, when you get to a new galaxy. <br />
-              You have to notice that and adapt your answer.
-              <br />
-              <br />
-              First, uncover the instrument by{" "}
-              <strong>hoovering over the black square with your mouse.</strong>
-              <br />
-              Click 'play' to see how.
-              <br /> <br />
-              <span className={styles.center}>
-                <GifPlayer gif={gif} still={Blue} />
-              </span>
-              <br />
-              <span className={styles.center}>
-                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
-              </span>
-            </p>
-          </div>
-        );
-      } else if (this.state.instructScreenText === 6) {
-        text = (
-          <div className={styles.main}>
-            <p>
-              <span className={styles.center}>TRAINING II</span>
-              <br />
-              <br />
-              You then have to choose between the two alternative population
-              sizes on the screen using the <br />
-              corresponding arrow keys.
-              <br /> For the option on the left side use the left arrow key
-              <img
-                className={styles.introImgTwo2}
-                src={img_left}
-                alt="example1"
-              />
-              <br />
-              and for the option on the right use the right arrow key
-              <img
-                className={styles.introImgTwo2}
-                src={img_right}
-                alt="example1"
-              />
-              <br />
-              <br />
-              <br /> <br />
-              <span className={styles.center}>
-                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
-              </span>
-            </p>
-          </div>
-        );
-      } else if (this.state.instructScreenText === 7) {
-        text = (
-          <div className={styles.main}>
-            <p>
-              <span className={styles.center}>TRAINING II</span>
-              <br />
-              After you indicated your answer, we will show you how many aliens
-              actually lived on the planet.
-              <br />
-              This will make it possible for you to learn how the instrument
-              relates to the alien population size.
-              <br />
-              <br />
-              Let's practice this!
-              <br /> <br />
-              <span className={styles.center}>
-                Press the [<strong>SPACEBAR</strong>] to start the training.
-              </span>
-              <span className={styles.center}>
-                [<strong>← BACK</strong>]
-              </span>
-            </p>
-          </div>
-        );
-      }
-    }
-
-    return (
-      <div className={styles.cockpit}>
-        <div className={styles.textblock}>{text}</div>
-      </div>
-    );
-  }
 }
 
-export default withRouter(TrainingIntroA);
+/////////////////////////////////////////////////////////////////////////////////
+
+export default withRouter(TrainingTaskA);
