@@ -7,7 +7,7 @@ import styles from "./style/taskStyle.module.css";
 import img_intro1 from "./intro/ExamplePicture1.jpg";
 import img_left from "./intro/left.jpg";
 import img_right from "./intro/right.jpg";
-import gif from './intro/mouse.gif'
+import gif from "./intro/mouse.gif";
 import Blue from "./img/stimuli3_blue.jpg";
 /////////////////////////////////////////////////////////////////////////////////t.Component {
 class TrainingIntroA extends React.Component {
@@ -222,11 +222,12 @@ class TrainingIntroA extends React.Component {
               The association between the instrument reading and the population
               size <br />
               will be <strong>complex</strong> and also <strong>change</strong>{" "}
-              at some point.
+              at some point once you enter a new galaxy.
               <br />
               <br />
-              It is your task to learn the associations and keep track of the
-              changes.
+              It is your task to learn the associations and notice when it
+              changes because you entered a <br />
+              new galaxy.
               <br /> <br />
               <span className={styles.center}>
                 [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
@@ -239,25 +240,25 @@ class TrainingIntroA extends React.Component {
           <div className={styles.main}>
             <p>
               <span className={styles.center}>TRAINING II</span>
+              To introduce you to the game slowly, we will now show you the
+              changing association
               <br />
-              To introduce you to the game slowly, we will now introduce you to
-              the switching association
-              <br />
-              by, for now, only showing you the important instrument. <br />
+              by, for now, only showing you one instrument. <br />
               <br />
               This instrument is associated with the population size in a simple
               way but this association will change <br />
-              at some point and you have to notice that and adapt your answer.
+              at some point, when you get to a new galaxy. <br />
+              You have to notice that and adapt your answer.
               <br />
               <br />
-              First, look at the instrument by{" "}
+              First, uncover the instrument by{" "}
               <strong>hoovering over the black square with your mouse.</strong>
-              <br /> 
-               Click 'play' to see how.
-              <br />  <br />  <br />
+              <br />
+              Click 'play' to see how.
+              <br /> <br />
               <span className={styles.center}>
-              <GifPlayer gif={gif} still={Blue} />
-                </span>
+                <GifPlayer gif={gif} still={Blue} />
+              </span>
               <br />
               <span className={styles.center}>
                 [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
@@ -272,8 +273,8 @@ class TrainingIntroA extends React.Component {
               <span className={styles.center}>TRAINING II</span>
               <br />
               <br />
-              You then have to choose between the two alternative population sizes on the
-              screen using the <br />
+              You then have to choose between the two alternative population
+              sizes on the screen using the <br />
               corresponding arrow keys.
               <br /> For the option on the left side use the left arrow key
               <img
@@ -307,8 +308,7 @@ class TrainingIntroA extends React.Component {
               actually lived on the planet.
               <br />
               This will make it possible for you to learn how the instrument
-              relates to
-              the alien population size.
+              relates to the alien population size.
               <br />
               <br />
               Let's practice this!
