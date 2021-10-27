@@ -314,15 +314,15 @@ class MainTask extends React.Component {
         (result, number) => result + number
       );
 
-      var bonus = (bonisum / (89 * this.state.trialTotal)) * 5;
+      var bonus = (bonisum / (89 * this.state.trialTotal)) * 1;
       if (bonus < 0) {
         bonus = 0;
-      } else if (bonus > 5) {
-        bonus = 5;
+      } else if (bonus > 1) {
+        bonus = 1;
       } else {
         bonus = roundTo(bonus, 2); //2 dec pl
       }
-      
+
 
       let backup = {
         times_element1_backup: this.state.times_element1,
