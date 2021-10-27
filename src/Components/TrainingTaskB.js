@@ -177,32 +177,6 @@ class TrainingTaskB extends React.Component {
     });
   }
   /////////////////////////////////////////////////////////////////////////////////
-  componentDidMount() {
-    if (this.state.disp_el===1){
-    setTimeout(() => {
-      this.setState({
-        disp_el: 0,
-        disp_opt: 1,
-      });
-    }, 5000);}
-  }
-
-  componentWillUpdate() {
-    if (this.state.disp_el===1){
-    var el = setTimeout(() => {
-      this.setState({
-        disp_el: 0,
-        disp_opt: 1,
-      });
-    }, 5000);}
-    clearTimeout();
-  }
-
-  componentWillUnmount() {
-    clearTimeout();
-  }
-
-  /////////////////////////////////////////////////////////////////////////////////
   render() {
     if (this.state.disp_el === 1) {
       return (
@@ -212,8 +186,7 @@ class TrainingTaskB extends React.Component {
           all_element_values={this.state.all_element_values}
           indicReq={this.state.indicReq}
           trialNum={this.state.traintrialNum}
-          onElementsEnd={this.handleElementsData}
-          onElementsIndic={this.handleIndicData}
+          onElementsEnd={this.onElementsEnd}
         />
       );
     } else if (this.state.disp_opt === 1) {
@@ -234,6 +207,14 @@ class TrainingTaskB extends React.Component {
     }
   }
 
+onElementsEnd = (event) => {
+
+    this.setState({
+      disp_opt: 1,
+      feedback: 0,
+      disp_el:0
+    });
+  };
 
   trainIndic = (pressed) => {
     var trainAcc_tmp = this.state.trainAcc;
@@ -250,6 +231,7 @@ class TrainingTaskB extends React.Component {
       feedback: 1,
     });
   };
+
 
   feedbackShown = () => {
     if (this.state.traintrialNum === this.state.traintrialTotal) {

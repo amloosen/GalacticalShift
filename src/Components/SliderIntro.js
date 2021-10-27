@@ -390,7 +390,7 @@ class SliderIntro extends React.Component {
                   alt="example1"
                 />
               </span>
-              and here you see how it looks like when it is 75
+              and here you see how it looks like when it is 65
               <br /><br />
               <span className={styles.center}>
                 <img

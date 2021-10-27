@@ -8,6 +8,16 @@ class DisplayElementsTrain extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+    setTimeout(() => {
+      this.props.onElementsEnd(1);
+    },5000);
+  }
+
+  componentWillUnmount() {
+    clearTimeout();
+  }
+
   render() {
       return (
           <ElementsFullDisplayTwo
