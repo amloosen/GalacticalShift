@@ -352,14 +352,14 @@ class SliderIntro extends React.Component {
                 />
               </span>
               <br />
-              You can make the slider wider using the up arrow key
+              You can make the slider narrower using the up arrow key
               <img
                 className={styles.introImgTwo2}
                 src={this.state.pics[1]}
                 alt="example1"
               />{" "}
               <br /> <br />
-              and narrower using the down arrow key
+              and wider using the down arrow key
               <img
                 className={styles.introImgTwo2}
                 src={this.state.pics[2]}
