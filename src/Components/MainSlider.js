@@ -58,6 +58,7 @@ class Slider extends React.Component {
         xaxis: {
           color: "#d2eaf2",
           tickAmount: 20,
+          tickPlacement: "on",
           overwriteCategories: [
             "0",
             "5",
@@ -97,6 +98,7 @@ class Slider extends React.Component {
           },
           labels: {
             rotate: 0,
+            offsetY: 8,
             style: {
               fontSize: "2.5vh",
               colors: [
@@ -123,32 +125,18 @@ class Slider extends React.Component {
                 "#e7e6e2",
               ],
               offsetX: 0,
-              offsetY: 0,
             },
           },
         },
-        //         annotations: {
-        //           points:
-        //       [
-        //         {
-        //           x: this.props.mu * 2,
-        //           y:-10,
-        //           marker: {
-        //             shape: "square",
-        //           size: 9,
-        //           fillColor: "#9CBA7F",
-        //           strokeColor: "#9CBA7F",
-        //           radius: 2
-        //         },
-        //           label: {
-        //             color:"#d2eaf2",
-        //             background:"#d2eaf2"
-        //           }
-        //         }
-        //       ]
-        // },
+        events: [],
         grid: { show: false },
-        tooltip: { enabled: false },
+        tooltips: { enabled: false },
+        hover: { mode: null },
+        responsive: [
+          {
+            breakpoint: 100,
+          },
+        ],
       },
     };
   }
@@ -194,36 +182,36 @@ class Slider extends React.Component {
         this.setValue(this.state.mu, this.state.sgm);
         break;
       case 38:
-        if (this.state.sgm <= 10) {
+        if (this.state.sgm <= 6) {
           return null;
         } else {
-          if (this.state.sgm >= 16) {
-            this.setState((prevState) => ({
-              sgm: prevState.sgm - this.stepsSgm(prevState.timesKeyDown),
-            }));
+        if (this.state.sgm >= 16) {
+        this.setState((prevState) => ({
+          sgm: prevState.sgm - this.stepsSgm(prevState.timesKeyDown),
+        }));
 
-            this.setValue(this.state.mu, this.state.sgm);
-          }
+        this.setValue(this.state.mu, this.state.sgm);
+        }
         }
         break;
       case 39:
-          this.setState((prevState) => ({
-            mu: prevState.mu + this.stepsMu(prevState.timesKeyDown),
-          }));
-          this.setValue(this.state.mu, this.state.sgm);
+        this.setState((prevState) => ({
+          mu: prevState.mu + this.stepsMu(prevState.timesKeyDown),
+        }));
+        this.setValue(this.state.mu, this.state.sgm);
         break;
       case 37:
-          this.setState((prevState) => ({
-            mu: prevState.mu - this.stepsMu(prevState.timesKeyDown),
-          }));
-          this.setValue(this.state.mu, this.state.sgm);
+        this.setState((prevState) => ({
+          mu: prevState.mu - this.stepsMu(prevState.timesKeyDown),
+        }));
+        this.setValue(this.state.mu, this.state.sgm);
         break;
       default:
     }
   };
 
   stepsSgm = (pressed) => {
-    if (pressed < 10 || this.state.sgm <= 21) {
+    if (pressed < 10) {
       return 1;
     } else if (pressed >= 10 && pressed < 30) {
       return 10;
@@ -237,9 +225,9 @@ class Slider extends React.Component {
   };
 
   stepsMu = (pressed) => {
-    if (pressed < 10 || this.state.mu <= 11 || this.state.mu >= 89) {
+    if (pressed < 10) {
       return 1;
-    } else if (pressed >= 10 ) {
+    } else if (pressed >= 10) {
       return 2;
     }
   };
@@ -263,12 +251,18 @@ class Slider extends React.Component {
   };
 
   setValue = (mu, sgm) => {
-    if (mu>100){
-      mu=100;
+    if (mu > 100) {
+      mu = 100;
     }
-    if (mu<0){
-      mu=0;
+    if (mu < 0) {
+      mu = 0;
     }
+    // if (sgm < 16) {
+    //   sgm = 12;
+    // }
+    // if (sgm > 600) {
+    //   sgm = 600;
+    // }
 
     const xValues = range(0, 100.5, 0.5);
     const yValues = xValues.map((x) => normalPdf(x, mu, sgm));
@@ -277,28 +271,26 @@ class Slider extends React.Component {
     });
 
     var distheight_tmp = Math.max.apply(null, yValuesAdapt_tmp) * 5;
-    var annot = mu*7.5;
+    var annot = mu * 7.5;
     this.setState({
       series: [{ data: yValuesAdapt_tmp }],
       sgm: sgm,
       mu: mu,
-      distHeight: distheight_tmp
+      distHeight: distheight_tmp,
     });
   };
 
   render() {
     return (
       <div className={styles.main}>
-        <View className={styles.main}>
-          <ReactApexChart
-            options={this.state.options}
-            series={this.state.series}
-            type="line"
-            height={this.state.distHeight}
-            width="800px"
-            align="center"
-          />
-        </View>
+        <ReactApexChart
+          options={this.state.options}
+          series={this.state.series}
+          type="line"
+          height={this.state.distHeight}
+          width="1000%"
+          align="center"
+        />
       </div>
     );
   }
