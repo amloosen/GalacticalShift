@@ -8,7 +8,7 @@ import img_intro1 from "./intro/ExamplePicture1.jpg";
 import img_left from "./intro/left.jpg";
 import img_right from "./intro/right.jpg";
 import gif from "./intro/mouse.gif";
-import Blue from "./img/stimuli3_blue.jpg";
+import Cover from "./img/cover.jpg";
 /////////////////////////////////////////////////////////////////////////////////t.Component {
 class TrainingIntroA extends React.Component {
   constructor(props) {
@@ -257,7 +257,7 @@ class TrainingIntroA extends React.Component {
               Click 'play' to see how.
               <br /> <br />
               <span className={styles.center}>
-                <GifPlayer gif={gif} still={Blue} />
+                <GifPlayer gif={gif} still={Cover} />
               </span>
               <br />
               <span className={styles.center}>
