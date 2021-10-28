@@ -52,13 +52,13 @@ class DisplaySlider extends React.Component {
               <div>{text}</div>
             </span>
           </View>
-          <span className={styles.slider}>
+          <div className={styles.slider}>
             <Slider
               mu={this.props.startMu}
               sgm={this.props.startSgm}
               onSpacebarHit={this.logData}
             />
-          </span>
+          </div>
       </div>
     );
   }
