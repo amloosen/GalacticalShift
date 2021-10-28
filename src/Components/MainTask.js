@@ -147,7 +147,8 @@ class MainTask extends React.Component {
       .map(() => Array(3).fill(0));
 
     var outcomeHeight_tmp = Array(nr_trial).fill(0);
-
+    var blockTotal_tmp = 5;
+    var bonusPerBlock_tmp = Array(blockTotal_tmp).fill(0);
     var element_colours = [1, 2, 3];
     shuffle(element_colours);
 
@@ -157,7 +158,8 @@ class MainTask extends React.Component {
     this.state = {
       userID: this.props.location.state.userID,
       date: this.props.location.state.date,
-      startTime: this.props.location.state.startTime,
+      startTime: this.props.location.state.startTime,//debugger
+
       sectionStartTime: mainStartTime,
       taskSession: "MainTask",
       trialTotal: nr_trial, //debugger
@@ -165,11 +167,12 @@ class MainTask extends React.Component {
       trialNum: 1,
       showBreak: 0,
       trialBlockNum: 1,
-      blockTotal: 5,
+      blockTotal: blockTotal_tmp,
       blockNum: 1,
       indicReq: indicReq_tmp,
       indicKey: indicKey_tmp,
       trialRT: trialRT,
+      bonusPerBlock: bonusPerBlock_tmp,
       choiceTime0: 0,
       element1Col: element_colours[0],
       element2Col: element_colours[1],
@@ -213,7 +216,25 @@ class MainTask extends React.Component {
   /////////////////////////////////////////////////////////////////////////////////
   sendBlock(height) {
     var start = (this.state.blockNum - 1) * (this.state.trialPerBlock + 1);
-    // let height_tmp = slice(height, this.state.trialNum-200, this.state.trialNum+ 1);
+    //
+    height = height.filter(function (element) {
+      return element !== undefined;
+    });
+    ///
+    var bonisum = height.reduce(
+      (result, number) => result + number
+    );
+    var bonus = (bonisum / (89 * this.state.trialPerBlock)) * 1;
+    if (bonus < 0) {
+      bonus = 0;
+    } else if (bonus > 1) {
+      bonus = 1;
+    } else {
+      bonus = roundTo(bonus, 2); //2 dec pl
+    }
+    var bonusPerBlock_tmp = this.state.bonusPerBlock;
+    bonusPerBlock_tmp[this.state.blockNum-1] = bonus;
+    ///
     var height_tmp = height.slice(start, this.state.trialNum);
     var times1_tmp = this.state.times_element1.slice(
       start,
@@ -262,6 +283,7 @@ class MainTask extends React.Component {
       indicReq: this.state.indicReq,
       trialPerBlock: this.state.trialPerBlock,
       blockNum: this.state.blockNum,
+      bonusPerBlock: bonusPerBlock_tmp
     };
 
     fetch(
