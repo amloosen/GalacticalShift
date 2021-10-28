@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import styles from "./style/taskStyle.module.css";
-import { StyleSheet, View, Text } from "react-native-web";
+import { StyleSheet, View} from "react-native-web";
 import OutcomeSliderBar from "./SliderOutcomeBar";
 
 class DispFeedback extends React.Component {
@@ -16,37 +16,23 @@ class DispFeedback extends React.Component {
   render() {
     let text2 = (
       <div className={styles.questions}>
-        <Text
-          style={{
-            color: "white",
-            fontSize: 25,
-            fontFamily: "Arial",
-            fontWeight: "bold",
-          }}
-        >
-          <Text>The true population on the planet was</Text>
-          <Text style={{ color: "#b3e49d",fontSize: 35, }}>
-            {" "}
+        <p>
+          The true population on the planet was{" "}
+          <span className={styles.bigger}>
             {this.props.all_true_pop_size[this.props.trialNum - 1]}
-          </Text>
-          <Text> million.</Text>
-        </Text>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+          </span>{" "}
+          million.
+        </p>
       </div>
     );
 
     return (
       <div className={styles.cockpitslider}>
-        <View style={stylesSliderRep.header}>
+      <View style={stylesSliderRep.header}>
           <span className={styles.slidertext}>
             <div>{text2}</div>
           </span>
         </View>
-
         <span className={styles.slider}>
           <OutcomeSliderBar
             mu={this.props.trialSgmMu[this.props.trialNum - 1][2]}

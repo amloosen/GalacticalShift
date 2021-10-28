@@ -3,7 +3,6 @@
   justify-content: center;
   align-items: center;
   height: auto;
-  margin: 0px;
   color: white;
   font-size: 2.5vh;
   font-family: "Arial", "Arial";
@@ -18,9 +17,14 @@
   height: auto;
   color: white;
   font-size: 3vh;
+  /* padding-bottom: 1vh; */
   font-family: "Arial";
   font-weight: bold;
 }
+
+.bigger {
+  font-size:200%;
+  color: rgba(179, 228,157);}
 
 .quizend {
   display: flex;
@@ -39,8 +43,8 @@
   /* The image used */
   background-image: url(../img/CockpitBlank.jpg);
 
-  min-height: 100%;
-  min-width: 1024px;
+  min-height: 100vh;
+  min-width: 10vw;
 
   /* Full height */
   height: auto;
@@ -152,8 +156,8 @@ span.center {
   display: table;
   margin: 0 auto;
   font-weight: bold;
-  font-size: 25px;
-  padding-bottom: 20px;
+  font-size: 4vh;
+  padding-bottom: 0.4vh;
   position: relative;
 }
 
@@ -202,29 +206,25 @@ span.centerThreeIndic {
 }
 
 img.introImg {
-  width: 400px;
+  width: 40vw;
   height: auto;
-  border: 10px solid white;
+  border: 1vh solid white;
 }
 
 img.introImg2 {
-  width: 200px;
+  width: 30vw;
   height: auto;
-  border: 5px solid white;
+  border: 1vh solid white;
 }
 
 img.introImgTwo {
-  width: 300px;
+  width: 30vw;
   height: auto;
-  border: 10px solid white;
+  border: 1vh solid white;
 }
 
-img.introImgTwo2 {
-  width: 50px;
-  height: auto;
-}
 img.introImgTwo3 {
-  width: 200px;
+  width: 20vw;
   height: auto;
 }
 
@@ -263,30 +263,28 @@ img.introImgTwo3 {
   position: absolute;
 }
 
-.overlaybarsecond{
+/* .overlaybarsecond{
   height: 100%;
   width: 1024px;
-  /* Full height */
   width: 100vw;
-  /* Center and scale the image nicely */
   position: absolute;
-}
+} */
 
 .container_1 {
-        width: 300px;
-        height: 100px;
+        width: 30vw;
+        height: 10vh;
+        padding-top:1vh;
       }
 
 .right {  float: right;
   width: 9vw;
   border-style: solid;
   border-color: white;
-  margin: 0px;
   color: white;
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: 50px;
+  font-size: 5vw;
   font-family: "Arial", "Arial";
 }
 
@@ -295,18 +293,17 @@ img.introImgTwo3 {
   height: auto;
   border-style: solid;
   border-color: white;
-  margin: 0px;
   color: white;
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: 50px;
+  font-size: 5vw;
   font-family: "Arial", "Arial";
 }
-
+/*
 span.likeP {
   padding: 20px;
-}
+} */
 
 
 .indicatortext {
@@ -334,18 +331,17 @@ span.likeP {
   cursor: pointer;
 }
 
-.counter {
+/* .counter {
   position: absolute;
   right: 20vw;
   padding-top: 10vh;
-  top: 0px;
   font-size: 30px;
   font-family: "Arial", "Arial";
   color: white;
-}
+} */
 
 .quiztext {
-  margin-bottom: 12px;
+  margin-bottom: 0.1vh;
   align-items: flex-start;
   justify-content: flex-start;
   color: white;
