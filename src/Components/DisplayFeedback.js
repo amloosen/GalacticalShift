@@ -33,7 +33,7 @@ class DispFeedback extends React.Component {
             <div>{text2}</div>
           </span>
         </View>
-        <span className={styles.slider}>
+        <div className={styles.slider}>
           <OutcomeSliderBar
             mu={this.props.trialSgmMu[this.props.trialNum - 1][2]}
             sgm={this.props.trialSgmMu[this.props.trialNum - 1][1]}
@@ -41,7 +41,7 @@ class DispFeedback extends React.Component {
             distHeight={this.props.distHeight}
             getBarHeight={this.handleHeight}
           />
-        </span>
+        </div>
       </div>
     );
   }

@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import { range } from "lodash";
 import normalPdf from "normal-pdf";
 import ReactApexChart from "react-apexcharts";
+import styles from "./style/taskStyle.module.css";
 
 class OutcomeSlider extends React.Component {
   constructor(props) {
@@ -83,22 +84,31 @@ class OutcomeSlider extends React.Component {
         },
         grid: { show: false },
         tooltip: { enabled: false },
+        events: [],
+        grid: { show: false },
+        tooltips: { enabled: false },
+        hover: { mode: null },
+        responsive: [
+          {
+            breakpoint: 100,
+          },
+        ],
       },
     };
   }
 
   render() {
     return (
-      <div>
+      <div className={styles.main}>
         <ReactApexChart
           options={this.state.options}
           series={this.state.series}
           type="line"
           height={this.props.height}
-          width="800px"
+          width="1000%"
           align="center"
         />
-      </div>
+        </div>
     );
   }
 }

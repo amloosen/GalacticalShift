@@ -154,6 +154,15 @@ class OutcomeSliderBar extends React.Component {
   },
         tooltip: { enabled: false },
         legend: { show: false },
+        events: [],
+        grid: { show: false },
+        tooltips: { enabled: false },
+        hover: { mode: null },
+        responsive: [
+          {
+            breakpoint: 100,
+          },
+        ],
       },
     };
   }
@@ -161,7 +170,7 @@ class OutcomeSliderBar extends React.Component {
   componentDidMount() {
     setTimeout(() => {
       this.props.getBarHeight(this.state.height_bar);
-    }, 3000);
+    }, 100);
   }
 
   componentWillUnmount() {
@@ -172,6 +181,7 @@ class OutcomeSliderBar extends React.Component {
     const { options, series } = this.state;
 
     return (
+
       <View style={stylesSliderRep.container}>
         <View style={stylesSliderRep.header}>
           <OutcomeSlider
@@ -181,16 +191,19 @@ class OutcomeSliderBar extends React.Component {
           />
         </View>
         <View style={stylesSliderRep.layer}>
+          <div className={styles.main}>
           <ReactApexChart
             options={this.state.options}
             series={this.state.series}
             type="line"
             height={this.props.distHeight}
-            width="800px"
+            width="1000%"
             align="center"
           />
+          </div>
         </View>
       </View>
+
     );
   }
 }
