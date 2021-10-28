@@ -207,24 +207,16 @@ class Slider extends React.Component {
         }
         break;
       case 39:
-        if (this.state.mu === 100 || this.state.mu === 0 ) {
-          return null;
-        } else {
           this.setState((prevState) => ({
             mu: prevState.mu + this.stepsMu(prevState.timesKeyDown),
           }));
           this.setValue(this.state.mu, this.state.sgm);
-        }
         break;
       case 37:
-        if (this.state.mu === 100 || this.state.mu === 0 ) {
-          return null;
-        } else {
           this.setState((prevState) => ({
             mu: prevState.mu - this.stepsMu(prevState.timesKeyDown),
           }));
           this.setValue(this.state.mu, this.state.sgm);
-        }
         break;
       default:
     }
@@ -271,6 +263,13 @@ class Slider extends React.Component {
   };
 
   setValue = (mu, sgm) => {
+    if (mu>100){
+      mu=100;
+    }
+    if (mu<0){
+      mu=0;
+    }
+
     const xValues = range(0, 100.5, 0.5);
     const yValues = xValues.map((x) => normalPdf(x, mu, sgm));
     const yValuesAdapt_tmp = yValues.map(function (element) {
