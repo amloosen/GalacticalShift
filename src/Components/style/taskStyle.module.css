@@ -113,17 +113,17 @@
   position: absolute;
   top: 0;
   right: 0;
-  bottom: 0;
+  bottom: 10vh;
   left: 0;
   margin: auto;
-  width: 55vw;
+  width: 65vw;
   height: 60vh;
 }
 
 textarea {
   background-color: rgba(0, 0, 0, 0.5);
-  font-size: 18px;
-  padding: 10px;
+  font-size: 2vh;
+  padding: 1vh;
   color: white;
   box-sizing: border-box;
 }
