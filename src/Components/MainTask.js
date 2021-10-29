@@ -159,7 +159,6 @@ class MainTask extends React.Component {
       userID: this.props.location.state.userID,
       date: this.props.location.state.date,
       startTime: this.props.location.state.startTime,//debugger
-
       sectionStartTime: mainStartTime,
       taskSession: "MainTask",
       trialTotal: nr_trial, //debugger

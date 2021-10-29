@@ -1,263 +1,489 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import styles from "./style/taskStyle.module.css";
-import { View } from "react-native-web";
-import ElementBar from "./ElementBar";
-import Cover from "./img/cover.jpg";
-import Blue from "./img/stimuli3_blue.jpg";
-import Red from "./img/stimuli3_red.jpg";
-// import Green from "./img/stimuli3_green.jpg";
-import Yellow from "./img/stimuli3_yellow.jpg";
-import "./style/barstyles.css";
-//
+import img_intro1 from "./intro/ExamplePicture1.jpg";
+import img_bar from "./intro/bar.jpg";
+import img_slider2 from "./intro/SliderExamplePoint.jpg";
+import img_slider3 from "./intro/SliderExampleLine.jpg";
+import img_correctcert from "./intro/correctcert.jpg";
+import img_correctunc from "./intro/correctunc.jpg";
+import img_sliderwrongunc from "./intro/sliderwrongunc.jpg";
+import img_sliderwrongcert from "./intro/sliderwrongcert.jpg";
 
-class ElementsFullDisplay extends React.Component {
+/////////////////////////////////////////////////////////////////////////////////
+// REACT COMPONENT START
+class TrainingIntroC extends React.Component {
   constructor(props) {
     super(props);
-    /* data to be saved .*/
-    var times_element1 = Array(1) //trialNum, starttimeview, endtimeview, totalviewtime
-      .fill()
-      .map(() => Array(4).fill(0));
-    var times_element2 = Array(1)
-      .fill()
-      .map(() => Array(4).fill(0));
-    var times_element3 = Array(1)
-      .fill()
-      .map(() => Array(4).fill(0));
 
-    if (this.props.img1 === 1) {
-      var img1 = Blue;
-    } else if (this.props.img1 === 2) {
-      var img1 = Yellow;
-    } else if (this.props.img1 === 3) {
-      var img1 = Red;
-    }
+    var currentDate = new Date();
+    var introTrainingStartTime = currentDate.toTimeString();
 
-    if (this.props.img2 === 1) {
-      var img2 = Blue;
-    } else if (this.props.img2 === 2) {
-      var img2 = Yellow;
-    } else if (this.props.img2 === 3) {
-      var img2 = Red;
-    }
-
-    if (this.props.img3 === 1) {
-      var img3 = Blue;
-    } else if (this.props.img3 === 2) {
-      var img3 = Yellow;
-    } else if (this.props.img3 === 3) {
-      var img3 = Red;
-    }
-
+    /////////////////////////////////////////////////////////////////////////////////
+    // SET COMPONENT STATES
     this.state = {
-      img1: Cover,
-      img2: Cover,
-      img3: Cover,
-      show1: null,
-      show2: null,
-      show3: null,
-      shownImg1: img1,
-      shownImg2: img2,
-      shownImg3: img3,
-      times_element1: times_element1,
-      times_element2: times_element2,
-      times_element3: times_element3,
+      userID: this.props.location.state.userID,
+      date: this.props.location.state.date,
+      startTime: this.props.location.state.startTime,
+      sectionStartTime: introTrainingStartTime,
+      taskSessionTry: 1,
+      taskSession: "TrainingIntroC",
+      instructScreenText: 1,
+      instructScreen: true,
     };
 
-    this.mouseOver = this.mouseOver.bind(this);
-    this.mouseOut = this.mouseOut.bind(this);
+    this.handleInstructLocal = this.handleInstructLocal.bind(this);
 
     /* prevents page from going down when space bar is hit .*/
     window.addEventListener("keydown", function (e) {
       if (e.keyCode === 32 && e.target === document.body) {
         e.preventDefault();
       }
+      if (e.keyCode === 39 && e.target === document.body) {
+        e.preventDefault();
+      }
+      if (e.keyCode === 37 && e.target === document.body) {
+        e.preventDefault();
+      }
     });
   }
+  /////////////////////////////////////////////////////////////////////////////////
+  // END COMPONENT STATE
 
-  componentDidMount() {
-    this.timerkeyHandle = setTimeout(() => {
-      document.addEventListener("keydown", this.handleKeyDown);
-      this.timerkeyHandle = 0;
-    }, 1000);
+  // This handles instruction screen within the component USING KEYBOARD
+  handleInstructLocal(key_pressed) {
+    var curText = this.state.instructScreenText;
+    var whichButton = key_pressed;
 
-    this.timerHandle = setTimeout(() => {
-      this.props.onViewEnd(
-        this.state.times_element1,
-        this.state.times_element2,
-        this.state.times_element3
-      );
-      this.timerHandle = 0;
-    }, 20000);
-  }
-
-  componentWillUnmount() {
-    if (this.timerkeyHandle) {
-      // Yes, clear it
-      clearTimeout(this.timerkeyHandle);
-      this.timerkeyHandle = 0;
+    if (whichButton === 4 && curText > 1) {
+      this.setState({ instructScreenText: curText - 1 });
+    } else if (whichButton === 5 && curText < 10) {
+      this.setState({ instructScreenText: curText + 1 });
+    } else if (curText === 10 && whichButton === 10) {
+      this.redirectToNextStage();
     }
-    if (this.timerHandle) {
-      // Yes, clear it
-      clearTimeout(this.timerHandle);
-      this.timerHandle = 0;
-    }
-    document.removeEventListener("keydown", this.handleKeyDown);
   }
+  // handle key key_pressed
+  _handleInstructKey = (event) => {
+    var key_pressed;
 
-  handleKeyDown = (e) => {
-    if (e.keyCode === 32) {
-      this.props.onViewEnd(
-        this.state.times_element1,
-        this.state.times_element2,
-        this.state.times_element3
-      );
+    switch (event.keyCode) {
+      case 37:
+        //    this is left arrow
+        key_pressed = 4;
+        this.handleInstructLocal(key_pressed);
+        break;
+      case 39:
+        //    this is right arrow
+        key_pressed = 5;
+        this.handleInstructLocal(key_pressed);
+        break;
+      case 32:
+        //    this is SPACEBAR
+        key_pressed = 10;
+        this.handleInstructLocal(key_pressed);
+        break;
+      default:
     }
   };
+  /////////////////////////////////////////////////////////////////////////////////
+  redirectToNextStage = () => {
+    document.removeEventListener("keyup", this._handleInstructKey);
+    document.removeEventListener("keyup", this._handleDebugKey);
+    this.props.history.push({
+      pathname: `/TrainingTaskC`,
+      state: {
+        userID: this.state.userID,
+        date: this.state.date,
+        startTime: this.state.startTime,
+      },
+    });
+  };
 
-  mouseOver(elNr) {
-    if (elNr === 1) {
-      this.state.times_element1.push([
-        this.props.trialNum,
-        Math.round(performance.now()),
-        0,
-        0,
-      ]);
-      this.setState({
-        img1: this.state.shownImg1,
-        show1: 1,
-      });
-    } else if (elNr === 2) {
-      this.state.times_element2.push([
-        this.props.trialNum,
-        Math.round(performance.now()),
-        0,
-        0,
-      ]);
-      this.setState({
-        img2: this.state.shownImg2,
-        show2: 1,
-      });
-    } else if (elNr === 3) {
-      this.state.times_element3.push([
-        this.props.trialNum,
-        Math.round(performance.now()),
-        0,
-        0,
-      ]);
-      this.setState({
-        img3: this.state.shownImg3,
-        show3: 1,
-      });
-    }
+  componentDidMount() {
+    window.scrollTo(0, 0);
   }
 
-  mouseOut(elNr) {
-    if (elNr === 1) {
-      var times_element1 = this.state.times_element1;
-      times_element1[times_element1.length - 1][2] = Math.round(
-        performance.now()
-      );
-      times_element1[times_element1.length - 1][3] =
-        times_element1[times_element1.length - 1][2] -
-        times_element1[times_element1.length - 1][1];
-      this.setState({
-        img1: Cover,
-        show1: null,
-        style1: styles.elementsize,
-        times_element1: times_element1,
-      });
-    } else if (elNr === 2) {
-      var times_element2 = this.state.times_element2;
-      times_element2[times_element2.length - 1][2] = Math.round(
-        performance.now()
-      );
-      times_element2[times_element2.length - 1][3] =
-        times_element2[times_element2.length - 1][2] -
-        times_element2[times_element2.length - 1][1];
-      this.setState({
-        img2: Cover,
-        show2: null,
-        style2: styles.elementsize,
-        times_element2: times_element2,
-      });
-    } else if (elNr === 3) {
-      var times_element3 = this.state.times_element3;
-      times_element3[times_element3.length - 1][2] = Math.round(
-        performance.now()
-      );
-      times_element3[times_element3.length - 1][3] =
-        times_element3[times_element3.length - 1][2] -
-        times_element3[times_element3.length - 1][1];
-      this.setState({
-        img3: Cover,
-        show3: null,
-        style3: styles.elementsize,
-        times_element3: times_element3,
-      });
-    }
-  }
-
+  //////////////////////////////////////////////////////////////////////////////////////////////
   render() {
+    let text;
+    if (this.state.instructScreen === true) {
+      if (this.state.instructScreenText === 1) {
+        document.addEventListener("keyup", this._handleInstructKey);
+        text = (
+          <div className={styles.main}>
+            <p>
+              <span className={styles.center}>TRAINING IV</span>
+              <br />
+              Great job!
+              <br />
+              <br />
+              You have now learned about the main challenges of our game.
+              <br />
+              <br />
+              Lets recap:
+              <br />- You learned that <strong>only one</strong> instrument at a
+              time is associated with the population size.
+              <br />
+              - You also learned that this might switch and suddenly a new
+              instrument is important.
+              <br />- You learned that you first have to <strong>
+                how
+              </strong>{" "}
+              the instrument is associated with the population size.
+              <br />
+              - Finally, you learned that this association can change. The same
+              instrument might still be important <br />
+              but in a different way.
+              <br />
+              <br />
+              All these challenges are like a puzzle and you can solve it by
+              looking at the values on the instruments <br />
+              and the feedback you get after each planet where we tell you the
+              true population size.
+              <br />
+              <br />
+              All elements you learned about will now be put together.
+              <br />
+              <br />
+              <span className={styles.center}>
+                [<strong>NEXT →</strong>]
+              </span>
+            </p>
+          </div>
+        );
+      } else if (this.state.instructScreenText === 2) {
+        text = (
+          <div className={styles.main}>
+            <p>
+              <span className={styles.center}>TRAINING IV</span>
+              <br />
+              <br />
+              To make this more challenging, we will show you three instead of
+              two instruments.
+              <br />
+              <br />
+              Again, you have to find out <br />
+              <br />
+              <strong>(1)</strong> which instrument is important and <br />
+              <strong>(2)</strong> how it is associated with the population
+              size. <br />
+              <br />
+              This association as well as the instrument of importance will
+              <br /> <strong>(3)</strong> change over time. <br />
+              <br />
+              Detect these changes and adapt the number you estimate
+              accordingly.
+              <br />
+              <br />
+              <span className={styles.center}>
+                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
+              </span>
+            </p>
+          </div>
+        );
+      } else if (this.state.instructScreenText === 3) {
+        text = (
+          <div className={styles.main}>
+            <p>
+              <span className={styles.center}>TRAINING IV</span>
+              <br />
+              <br />
+              In addition, the associations between the instruments and the
+              population size <br />
+              will be <strong>more complex</strong> from now on.
+              <br />
+              <br />
+              To slowly introduce you to this level of difficulty, we will help
+              you a little during this final training. <br />
+              We will show you which of the three instruments is important by
+              highlighting it with a green frame like this:
+              <br />
+              <br />
+              <span className={styles.center}>
+                <img
+                  className={styles.relevInd}
+                  src={img_intro1}
+                  alt="example1"
+                />
+              </span>
+              <br />
+              Make sure to notice the change. At some point, a new instrument
+              will be important and you should adapt your answer. <br />
+              <br />
+              <span className={styles.center}>
+                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
+              </span>
+            </p>
+          </div>
+        );
+      } else if (this.state.instructScreenText === 4) {
+        text = (
+          <div className={styles.main}>
+            <p>
+              <span className={styles.center}>TRAINING IV</span>
+              <br />
+              <br />
+              <strong>An additional hint:</strong>
+              <br />
+              <br />
+              As you might have noticed in the trainig session, planets (trials)
+              that you encounter after each other, <br />
+              are more similar to each other than planets that are further
+              apart.
+              <br /> <br />
+              This means, their population size depends on the same instrument
+              in the same way.
+              <br />
+              After a while, when you enter new galaxies, this changes and the
+              association between the instrument <br />
+              and the population size changes or a completely new instrument{" "}
+              <br />
+              is important.
+              <br /> <br />
+              Keep this in mind when indicating your answers.
+              <br /> <br />
+              <span className={styles.center}>
+                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
+              </span>
+            </p>
+          </div>
+        );
+      } else if (this.state.instructScreenText === 5) {
+        text = (
+          <div className={styles.main}>
+            <p>
+              <span className={styles.center}>TRAINING IV</span>
+              From now on, you will be asked to use the slider.
+              <br />
+              Remember, with the slider you can indicate{" "}
+              <strong>the number you estimate</strong>, by changing the peak of
+              the slider
+              <br /> <br />
+              <span className={styles.center}>
+                <img
+                  className={styles.introImgTwo}
+                  src={img_slider2}
+                  alt="example1"
+                />
+              </span>
+              and your <strong> certainty</strong> in this number by changing
+              the shape of the slider.
+              <br /> <br />
+              <span className={styles.center}>
+                <img
+                  className={styles.introImgTwo}
+                  src={img_slider3}
+                  alt="example1"
+                />
+              </span>
+              <br />
+              <span className={styles.center}>
+                [<strong>NEXT →</strong>]
+              </span>
+            </p>
+          </div>
+        );
+      } else if (this.state.instructScreenText === 6) {
+        text = (
+          <div className={styles.main}>
+            <p>
+              <span className={styles.center}>TRAINING IV</span>
+              <br />
+              <br />
+              So keep in mind: not only your the number you estimate is
+              important, but also your certainty in this number <br />
+              that you indicate. <br />
+              <br />
+              After each trial you will be rewarded for the accuracy of your
+              answer and your certainty in it.
+              <br />
+              This reward will be indicated by a bar that looks like this:{" "}
+              <br />
+              <br />
+              <span className={styles.center}>
+                <img src={img_bar} alt="bar" />
+              </span>
+              During this training stage the collected reward is for
+              demonstration purposes only and will <br />
+              be deleted after the training. <br />
+              <br />
+              In the main task, this reward will determine your bonus payment,
+              so try to indicate your estimated number and <br />
+              certainty as precisely as possible. Press 'NEXT' to learn how to
+              optimize it.
+              <br /> <br />
+              <span className={styles.center}>
+                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
+              </span>
+            </p>
+          </div>
+        );
+      } else if (this.state.instructScreenText === 7) {
+        text = (
+          <div className={styles.main}>
+            <p>
+              <span className={styles.introImgTwo} className={styles.center}>
+                TRAINING IV
+              </span>
+              The bar will rise at the position where the true population size{" "}
+              would have been indicated up to the height <br />
+              of the slider.
+              <br />
+              To clarify, look what happens if the true population size is 50
+              million and you indicated this with high certainty: <br />
+              The bar reaches its maximum height.
+              <br />
+              <br />
+              <span className={styles.center}>
+                <img
+                  className={styles.introImgTwo}
+                  src={img_correctcert}
+                  alt="bar"
+                />
+              </span>
+              In contrast, look what happens if the true population size is 50
+              million and you indicated this with low certainty:
+              <br />
+              The bar reaches a way lower height.
+              <br />
+              <span className={styles.center}>
+                <img
+                  className={styles.introImgTwo}
+                  src={img_correctunc}
+                  alt="bar"
+                />
+              </span>
+              <br />
+              <span className={styles.center}>
+                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
+              </span>
+            </p>
+          </div>
+        );
+      } else if (this.state.instructScreenText === 8) {
+        text = (
+          <div className={styles.main}>
+            <p>
+              <span className={styles.introImgTwo} className={styles.center}>
+                TRAINING IV
+              </span>
+              However, look what happens if you indicated a wrong value with
+              high certainty <br />
+              and slider did not cover 50 at all: The bar does not rise.
+              <br />
+              <br />
+              <span className={styles.center}>
+                <img
+                  className={styles.introImgTwo}
+                  src={img_sliderwrongcert}
+                  alt="bar"
+                />
+              </span>
+              <br />
+              And finally, look what happens if you indicated a wrong value with
+              low certainty <br />
+              and slider still covers the correct value of 50: The bar rises a
+              little bit
+              <br />
+              <br />
+              <span className={styles.center}>
+                <img
+                  className={styles.introImgTwo}
+                  src={img_sliderwrongunc}
+                  alt="bar"
+                />
+              </span>
+              <br />
+              <span className={styles.center}>
+                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
+              </span>
+            </p>
+          </div>
+        );
+      } else if (this.state.instructScreenText === 9) {
+        text = (
+          <div className={styles.main}>
+            <p>
+              <span className={styles.introImgTwo} className={styles.center}>
+                TRAINING IV
+              </span>
+              <br />
+              <br />
+              To summarize, in order to maximize your reward you should:
+              <br /> <br />
+              - Make the slider narrow when you are certain about your answer to
+              reach the maximum height of the bar
+              <br />
+              <br />
+              <span className={styles.center}>
+                <img
+                  className={styles.introImgTwo}
+                  src={img_correctcert}
+                  alt="bar"
+                />
+              </span>
+              - Make the slider wider when you are uncertain to cover a number
+              of values
+              <br />
+              <br />
+              <span className={styles.center}>
+                <img
+                  className={styles.introImgTwo}
+                  src={img_sliderwrongunc}
+                  alt="bar"
+                />
+              </span>
+              <span className={styles.center}>
+                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
+              </span>
+            </p>
+          </div>
+        );
+      } else if (this.state.instructScreenText === 10) {
+        text = (
+          <div className={styles.main}>
+            <p>
+              <span className={styles.center}>TRAINING IV</span>
+              <br />
+              <br />
+              So your task is it to use the slider optimally to maximise your
+              reward and master the three challenges.
+              <br />
+              <br />
+              <strong>(1)</strong> Find out which instrument is important and{" "}
+              <br />
+              <strong>(2)</strong> how it is associated with the population
+              size.
+              <br /> <strong>(3)</strong> Spot and react to changes in (1) or
+              (2). <br />
+              <br />
+              Again, the true population size shown after each planet will make
+              it possible for you to learn <br />
+              and master the challenges.
+              <br />
+              <br />
+              Click the [<strong>SPACEBAR</strong>] once you have seen the
+              instruments or feedback for long enough.
+              <br />
+              Otherwise they will disappear after a couple of seconds.
+              <br /> <br />
+              Press the [<strong>SPACEBAR</strong>] to start the final training.
+              <span className={styles.center}>
+                [<strong>← BACK</strong>]
+              </span>
+            </p>
+          </div>
+        );
+      }
+    }
+
     return (
       <div className={styles.cockpit}>
-        <div className={styles.main}>
-          <View style={styles.container}>
-            <img
-              className={styles.elementsize}
-              src={this.state.img1}
-              alt="element1"
-              onMouseOver={(elNr) => this.mouseOver(1)}
-              onMouseOut={(elNr) => this.mouseOut(1)}
-            />
-            {this.state.show1 ? (
-              <div className={styles.overlay}>
-                <ElementBar progress={this.props.value1} />
-              </div>
-            ) : null}
-            {this.state.show1 ? (
-              <div className={styles.overlaytext}>{this.props.value1}%</div>
-            ) : null}
-          </View>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <View style={styles.container}>
-            <img
-              className={styles.elementsize}
-              src={this.state.img2}
-              alt="element2"
-              onMouseOver={(elNr) => this.mouseOver(2)}
-              onMouseOut={(elNr) => this.mouseOut(2)}
-            />
-            {this.state.show2 ? (
-              <div className={styles.overlay}>
-                <ElementBar progress={this.props.value2} />
-              </div>
-            ) : null}
-            {this.state.show2 ? (
-              <div className={styles.overlaytext}>{this.props.value2}%</div>
-            ) : null}
-          </View>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <View style={styles.container}>
-            <img
-              className={styles.elementsize}
-              src={this.state.img3}
-              alt="element3"
-              onMouseOver={(elNr) => this.mouseOver(3)}
-              onMouseOut={(elNr) => this.mouseOut(3)}
-            />
-            {this.state.show3 ? (
-              <div className={styles.overlay}>
-                <ElementBar progress={this.props.value3} />
-              </div>
-            ) : null}
-            {this.state.show3 ? (
-              <div className={styles.overlaytext}>{this.props.value3}%</div>
-            ) : null}
-          </View>
-        </div>
+        <div className={styles.textblock}>{text}</div>
       </div>
     );
   }
 }
 
-export default ElementsFullDisplay;
+export default withRouter(TrainingIntroC);
