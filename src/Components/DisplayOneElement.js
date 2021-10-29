@@ -9,13 +9,29 @@ class DisplayTrainElement extends React.Component {
   }
 
   componentDidMount() {
-    setTimeout(() => {
-      this.props.handleElement(1);
-    },2000);
+    this.timerkeyHandle = setTimeout(() => {
+     document.addEventListener("keydown", this.handleKeyDown);
+     this.timerkeyHandle = 0;
+   }, 1000);
+   this.timerHandle= setTimeout(() => {
+       this.props.handleElement(1);
+         this.timerHandle = 0;
+     }, 2000);
+
   }
 
   componentWillUnmount() {
-    clearTimeout();
+    if (this.timerkeyHandle) {
+      // Yes, clear it
+      clearTimeout(this.timerkeyHandle);
+      this.timerkeyHandle = 0;
+    }
+    if (this.timerHandle) {
+      // Yes, clear it
+      clearTimeout(this.timerHandle);
+      this.timerHandle = 0;
+    }
+    document.removeEventListener("keydown", this.handleKeyDown);
   }
 
 

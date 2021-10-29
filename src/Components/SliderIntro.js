@@ -166,7 +166,6 @@ class SliderIntro extends React.Component {
             <p>
               <span className={styles.center}>TRAINING I</span>
               <br />
-              <br />
               In the following game, you will use a special response slider.
               <br />
               With this slider you can indicate both <br />
@@ -195,7 +194,6 @@ class SliderIntro extends React.Component {
             <p>
               <span className={styles.center}>TRAINING I</span>
               <br />
-              <br />
               When you make an estimate, such as how expensive something is,{" "}
               <br />
               you might be more or less certain about this estimate's accuracy.
@@ -218,7 +216,6 @@ class SliderIntro extends React.Component {
           <div className={styles.main}>
             <p>
               <span className={styles.center}>TRAINING I</span>
-              <br />
               <br />
               For instance a scenario might be:
               <br />
@@ -275,6 +272,7 @@ class SliderIntro extends React.Component {
           <div className={styles.main}>
             <p>
               <span className={styles.center}>TRAINING I</span>
+
               The peak of this curve indicates your estimate:
               <br />
               <br />
@@ -295,7 +293,6 @@ class SliderIntro extends React.Component {
                   alt="example1"
                 />
               </span>
-              <br />
               <span className={styles.center}>
                 [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
               </span>
@@ -346,9 +343,9 @@ class SliderIntro extends React.Component {
           <div className={styles.main}>
             <p>
               <span className={styles.center}>TRAINING I</span>
+              <br />
               You can change the width as well.
-              <br />
-              <br />
+              <br /><br />
               <span className={styles.center}>
                 <img
                   className={styles.introImg2}
@@ -370,9 +367,7 @@ class SliderIntro extends React.Component {
                 src={this.state.pics[2]}
                 alt="example1"
               />
-              <br />
-              <br />
-              <br />
+              <br />  <br />
               <span className={styles.center}>
                 [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
               </span>
@@ -384,6 +379,7 @@ class SliderIntro extends React.Component {
           <div className={styles.main}>
             <p>
               <span className={styles.center}>TRAINING I</span>
+              <br />
               Here you see how it looks like when the estimate is 50
               <br />
               <br />
@@ -450,7 +446,6 @@ class SliderIntro extends React.Component {
           <div className={styles.main}>
             <p>
               <span className={styles.center}>TRAINING I</span>
-              <br />
               <br />
               To familiarize you with the slider, we will now ask you several
               questions.

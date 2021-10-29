@@ -108,7 +108,7 @@
   font-size: 5vh;
   font-family: "Arial", "Arial";
 }
-/* .textblock {
+.textblock {
   display: inline-block;
   position: absolute;
   top: 0;
@@ -116,9 +116,9 @@
   bottom: 0;
   left: 0;
   margin: auto;
-  width: 500px;
-  height: 600px;
-} */
+  width: 55vw;
+  height: 60vh;
+}
 
 textarea {
   background-color: rgba(0, 0, 0, 0.5);
@@ -209,21 +209,29 @@ span.centerThreeIndic {
 }
 
 img.introImg {
-  width: 40vw;
+  max-height: 20vh;
   height: auto;
   border: 1vh solid white;
 }
 
+
 img.introImg2 {
-  width: 30vw;
+  max-height: 25vh;
   height: auto;
   border: 1vh solid white;
 }
 
 img.introImgTwo {
-  width: 30vw;
+  /* width: 30vw; */
+  max-height: 16vh;
   height: auto;
   border: 1vh solid white;
+}
+
+img.introImgTwo2 {
+  /* width: 30vw; */
+  max-height: 20vh;
+  height: auto;
 }
 
 img.introImgTwo3 {

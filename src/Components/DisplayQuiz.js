@@ -142,7 +142,6 @@ class DisplayQuiz extends React.Component {
             <br />
             To make sure you understood the game and its challenges, you will
             now complete a short quiz.
-            <br />
             Answer all questions correctly in order to proceed to the main game.
             <br />
             <br />

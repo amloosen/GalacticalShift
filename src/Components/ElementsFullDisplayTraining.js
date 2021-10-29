@@ -220,8 +220,18 @@ class ElementsFullDisplayTraining extends React.Component {
   };
 
   render() {
+    let text = (
+      <div className={styles.main}>
+        <p>
+          <br />
+          Click the [<strong>SPACEBAR</strong>] if you have seen the elements or feedback long enough.
+          <br /> <br />
+        </p>
+      </div>
+    );
     return (
       <div className={styles.cockpit}>
+      <div className={styles.textblock}>{text}</div>
         <div className={styles.main}>
           <View style={styles.container}>
             <img
@@ -278,6 +288,8 @@ class ElementsFullDisplayTraining extends React.Component {
           </View>
         </div>
       </div>
+
+
     );
   }
 }

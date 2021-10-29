@@ -129,7 +129,6 @@ class MainTaskIntro extends React.Component {
               <br />
               The main game will be very similar to the last training stage,
               with one crucial difference:
-              <br />
               Now, you have to find out which instrument is important at a given
               time <br />
               and it will not be highlighted anymore.
@@ -147,7 +146,6 @@ class MainTaskIntro extends React.Component {
             <p>
               <span className={styles.center}>MAIN GAME</span>
               <br />
-              <br />
               You again have to master the three challenges: <br />
               <br />
               <strong>1.</strong> Find out which instrument is important.
@@ -160,7 +158,6 @@ class MainTaskIntro extends React.Component {
               <br />
               In addition, make sure to use the slider properly to maximize your
               reward.
-              <br />
               Change the peak to your estimated population size and the width to
               your certainty in it.
               <br />
@@ -181,9 +178,9 @@ class MainTaskIntro extends React.Component {
               <br />
               <br />
               Planets (trials) that you encounter after each other, are more
-              similar to each other <br />
+              similar to each other
               than planets that are further apart. This means, their population
-              size <br />
+              size
               depends on the same instrument.
               <br /> <br />
               Keep this in mind when indicating your answers.
@@ -201,9 +198,8 @@ class MainTaskIntro extends React.Component {
             <p>
               <span className={styles.center}>MAIN GAME</span>
               <br />
-              <br />
               As in the training, not only your estimate is important, but also
-              your certainty in your estimate. <br />
+              your certainty in your estimate.
               After each trial you will be rewarded for the accuracy of your
               estimate and your certainty in it.
               <br />
@@ -214,7 +210,6 @@ class MainTaskIntro extends React.Component {
               <br />
               From now on, your collected reward will count towards your bonus
               payment at the end
-              <br />
               of the experiment.
               <br /> <br />
               <span className={styles.center}>
@@ -229,19 +224,16 @@ class MainTaskIntro extends React.Component {
             <p>
               <span className={styles.center}>MAIN GAME</span>
               <br />
-              <br />
               As you have learned in the training, only one instrument
-              determines the population size <br /> at a given moment. <br />
+              determines the population size  at a given moment. <br />
               <br />
               To probe your understanding of the task we will sometimes,
-              randomly ask you to indicate <br />
-              which colour/instrument is the important one at a given <br />
+              randomly ask you to indicate
+              which colour/instrument is the important one at a given
               stage of the task. You can indicate this by pressing the number
-              key indicated on the <br />
+              key indicated on the
               corresponding instrument (see example below).
-              <br />
-              <br />
-              <br />
+
               Please answer the question as accurately as possible.
               <br /> <br />
               <span className={styles.centerThree_intro}>
@@ -263,7 +255,6 @@ class MainTaskIntro extends React.Component {
                   alt="example1"
                 />
               </span>
-              <br />
               <span className={styles.center}>
                 [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
               </span>
@@ -275,7 +266,6 @@ class MainTaskIntro extends React.Component {
           <div className={styles.main}>
             <p>
               <span className={styles.center}>MAIN GAME</span>
-              <br />
               <br />
               It is important, that you complete the game in one go. <br />
               However, there will be short breaks in between, that you can
