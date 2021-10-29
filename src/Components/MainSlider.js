@@ -173,7 +173,6 @@ class Slider extends React.Component {
         if (this._isMounted) {
           this.resetSlider(50, 30);
         }
-
         break;
       case 40:
         this.setState((prevState) => ({
@@ -182,17 +181,17 @@ class Slider extends React.Component {
         this.setValue(this.state.mu, this.state.sgm);
         break;
       case 38:
-        if (this.state.sgm <= 6) {
-          return null;
-        } else {
-        if (this.state.sgm >= 16) {
+        // if (this.state.sgm <= 6) {
+        //   return null;
+        // } else {
+        // if (this.state.sgm >= 10) {
         this.setState((prevState) => ({
           sgm: prevState.sgm - this.stepsSgm(prevState.timesKeyDown),
         }));
 
         this.setValue(this.state.mu, this.state.sgm);
-        }
-        }
+        // }
+        // }
         break;
       case 39:
         this.setState((prevState) => ({
@@ -213,14 +212,14 @@ class Slider extends React.Component {
   stepsSgm = (pressed) => {
     if (pressed < 10) {
       return 1;
-    } else if (pressed >= 10 && pressed < 30) {
+    } else if (pressed >= 10 && pressed < 40) {
+      return 5;
+    } else {
       return 10;
-    } else if (pressed >= 30 && pressed < 60) {
-      return 30;
-    } else if (pressed >= 60 && pressed < 100) {
-      return 40;
-    } else if (pressed >= 100) {
-      return 50;
+      // } else if (pressed >= 60 && pressed < 100) {
+      //   return 30;
+      // } else if (pressed >= 100) {
+      //   return 50;
     }
   };
 
@@ -257,12 +256,13 @@ class Slider extends React.Component {
     if (mu < 0) {
       mu = 0;
     }
-    // if (sgm < 16) {
-    //   sgm = 12;
-    // }
-    // if (sgm > 600) {
-    //   sgm = 600;
-    // }
+
+    if (sgm < 1) {
+      sgm = 1;
+    }
+    if (sgm > 700) {
+      sgm = 700;
+    }
 
     const xValues = range(0, 100.5, 0.5);
     const yValues = xValues.map((x) => normalPdf(x, mu, sgm));
@@ -270,8 +270,15 @@ class Slider extends React.Component {
       return element * 1000;
     });
 
-    var distheight_tmp = Math.max.apply(null, yValuesAdapt_tmp) * 5;
-    var annot = mu * 7.5;
+    if (Math.max.apply(null, yValuesAdapt_tmp) >= 100) {
+      var distheight_tmp = 500;
+    } else {
+      var distheight_tmp = Math.max.apply(null, yValuesAdapt_tmp) * 5;
+    }
+    // var annot = mu * 7.5;
+    // console.log(distheight_tmp);
+    console.log(sgm);
+
     this.setState({
       series: [{ data: yValuesAdapt_tmp }],
       sgm: sgm,
