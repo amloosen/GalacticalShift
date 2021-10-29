@@ -48,7 +48,7 @@ class SliderIntro extends React.Component {
       taskSession: "SliderIntro",
       instructScreenText: 1,
       instructScreen: true,
-      pics: sliderTraining ,
+      pics: sliderTraining,
     };
 
     this.handleInstructLocal = this.handleInstructLocal.bind(this);
@@ -79,12 +79,7 @@ class SliderIntro extends React.Component {
     } else if (whichButton === 5 && curText < 13) {
       this.setState({ instructScreenText: curText + 1 });
     } else if (curText === 13 && whichButton === 10) {
-      setTimeout(
-        function () {
-          this.nextPart();
-        }.bind(this),
-        0
-      );
+      this.nextPart();
     }
   }
 
@@ -115,7 +110,7 @@ class SliderIntro extends React.Component {
   /////////////////////////////////////////////////////////////////////////////////
   // END COMPONENT PROPS
 
-  nextPart() {
+  nextPart = () => {
     document.removeEventListener("keyup", this._handleInstructKey);
     document.removeEventListener("keyup", this._handleDebugKey);
     this.props.history.push({
@@ -126,7 +121,7 @@ class SliderIntro extends React.Component {
         startTime: this.state.startTime,
       },
     });
-  }
+  };
   //////////////////////////////////////////////////////////////////////////////////////////////
   render() {
     let text;
@@ -139,14 +134,17 @@ class SliderIntro extends React.Component {
               <br />
               <span className={styles.center}>Welcome to our study!</span>
               <br />
-              Step by step, we will now introduce our online game and all its components.
+              Step by step, we will now introduce our online game and all its
+              components.
               <br />
-              Please make sure to pay full attention. <br /><br />There will be a quiz after the training session
-
-              that will ensure that you fully understood the game.
+              Please make sure to pay full attention. <br />
+              <br />
+              There will be a quiz after the training session that will ensure
+              that you fully understood the game.
               <br />
               <br />
-              You will not be able to start the main game if you do not answer all questions correctly.
+              You will not be able to start the main game if you do not answer
+              all questions correctly.
               <br />
               <br />
               Good luck and have fun!
@@ -171,12 +169,14 @@ class SliderIntro extends React.Component {
               <br />
               In the following game, you will use a special response slider.
               <br />
-              With this slider you can indicate both <br /><br />
+              With this slider you can indicate both <br />
+              <br />
               <br />
               (1) a <strong>number</strong> you have to indicate and <br />
               (2) how <strong>certain</strong> you are about this number.
               <br />
-              <br /><br />
+              <br />
+              <br />
               <br />
               We will now show you how this slider works and give you a chance
               to get used to it.
@@ -189,7 +189,7 @@ class SliderIntro extends React.Component {
             </p>
           </div>
         );
-      }  else if (this.state.instructScreenText === 3) {
+      } else if (this.state.instructScreenText === 3) {
         text = (
           <div className={styles.main}>
             <p>
@@ -201,7 +201,8 @@ class SliderIntro extends React.Component {
               you might be more or less certain about this estimate's accuracy.
               <br />
               <br />
-              This means, sometimes your certainty in this estimate might be high (sure) and <br />
+              This means, sometimes your certainty in this estimate might be
+              high (sure) and <br />
               other times your certainty in your estimate might be low (unsure).
               <br />
               <br />
@@ -227,7 +228,8 @@ class SliderIntro extends React.Component {
               <br />
               <br />
               <li>Your certainty in your estimate:</li>
-              “My certainty that the ice-cream will cost £2 is very high<br />
+              “My certainty that the ice-cream will cost £2 is very high
+              <br />
               because this is what I paid last time I went to this shop”
               <br /> <br />
               or <br />
@@ -249,7 +251,8 @@ class SliderIntro extends React.Component {
             <p>
               <span className={styles.center}>TRAINING I</span>
               <br />
-              This is the slider you will use to tell us your estimate and your certainty in it:
+              This is the slider you will use to tell us your estimate and your
+              certainty in it:
               <br />
               <br />
               <span className={styles.center}>
@@ -273,7 +276,8 @@ class SliderIntro extends React.Component {
             <p>
               <span className={styles.center}>TRAINING I</span>
               The peak of this curve indicates your estimate:
-              <br /><br />
+              <br />
+              <br />
               <span className={styles.center}>
                 <img
                   className={styles.introImgTwo}
@@ -303,6 +307,7 @@ class SliderIntro extends React.Component {
           <div className={styles.main}>
             <p>
               <span className={styles.center}>TRAINING I</span>
+              <br />
               You can move the position of the peak
               <br />
               <br />
@@ -379,7 +384,6 @@ class SliderIntro extends React.Component {
           <div className={styles.main}>
             <p>
               <span className={styles.center}>TRAINING I</span>
-              <br />
               Here you see how it looks like when the estimate is 50
               <br />
               <br />
@@ -390,8 +394,9 @@ class SliderIntro extends React.Component {
                   alt="example1"
                 />
               </span>
-              and here you see how it looks like when it is 65
-              <br /><br />
+              and here you see how it looks like when it is 75
+              <br />
+              <br />
               <span className={styles.center}>
                 <img
                   className={styles.introImgTwo}
@@ -454,8 +459,8 @@ class SliderIntro extends React.Component {
               Some questions are related to yourself and some are not.
               <br />
               <br />
-              Please indicate your answer to the question and your
-              certainty in your answer using the slider.
+              Please indicate your answer to the question and your certainty in
+              your answer using the slider.
               <br />
               <br />
               <br /> <br />
@@ -480,7 +485,8 @@ class SliderIntro extends React.Component {
               <br />
               If you think it is approximately 65 million and you are relatively
               certain,your answer could be:
-              <br /><br />
+              <br />
+              <br />
               <span className={styles.center}>
                 <img
                   className={styles.introImg}
@@ -502,8 +508,8 @@ class SliderIntro extends React.Component {
             <p>
               <span className={styles.center}>TRAINING I</span>
               <br />
-              When indicating your estimate and certainty, please try to be
-              as precise as possible.
+              When indicating your estimate and certainty, please try to be as
+              precise as possible.
               <br />
               <br />
               To submit your answer, please press the space bar.

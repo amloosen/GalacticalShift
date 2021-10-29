@@ -24,29 +24,29 @@ class ElementsFullDisplay extends React.Component {
       .fill()
       .map(() => Array(4).fill(0));
 
-      if (this.props.img1 === 1) {
-        var img1 = Blue;
-      } else if (this.props.img1 === 2) {
-        var img1 = Yellow;
-      } else if (this.props.img1 === 3) {
-        var img1 = Red;
-      }
+    if (this.props.img1 === 1) {
+      var img1 = Blue;
+    } else if (this.props.img1 === 2) {
+      var img1 = Yellow;
+    } else if (this.props.img1 === 3) {
+      var img1 = Red;
+    }
 
-      if (this.props.img2 === 1) {
-        var img2 = Blue;
-      } else if (this.props.img2 === 2) {
-        var img2 = Yellow;
-      } else if (this.props.img2 === 3) {
-        var img2 = Red;
-      }
+    if (this.props.img2 === 1) {
+      var img2 = Blue;
+    } else if (this.props.img2 === 2) {
+      var img2 = Yellow;
+    } else if (this.props.img2 === 3) {
+      var img2 = Red;
+    }
 
-      if (this.props.img3 === 1) {
-        var img3 = Blue;
-      } else if (this.props.img3 === 2) {
-        var img3 = Yellow;
-      } else if (this.props.img3 === 3) {
-        var img3 = Red;
-      }
+    if (this.props.img3 === 1) {
+      var img3 = Blue;
+    } else if (this.props.img3 === 2) {
+      var img3 = Yellow;
+    } else if (this.props.img3 === 3) {
+      var img3 = Red;
+    }
 
     this.state = {
       img1: Cover,
@@ -75,148 +75,187 @@ class ElementsFullDisplay extends React.Component {
   }
 
   componentDidMount() {
-    setTimeout(() => {
+    this.timerkeyHandle = setTimeout(() => {
+      document.addEventListener("keydown", this.handleKeyDown);
+      this.timerkeyHandle = 0;
+    }, 1000);
+
+    this.timerHandle = setTimeout(() => {
       this.props.onViewEnd(
         this.state.times_element1,
         this.state.times_element2,
         this.state.times_element3
       );
-    }, 5000);
+      this.timerHandle = 0;
+    }, 20000);
   }
 
   componentWillUnmount() {
-    clearTimeout();
+    if (this.timerkeyHandle) {
+      // Yes, clear it
+      clearTimeout(this.timerkeyHandle);
+      this.timerkeyHandle = 0;
+    }
+    if (this.timerHandle) {
+      // Yes, clear it
+      clearTimeout(this.timerHandle);
+      this.timerHandle = 0;
+    }
+    document.removeEventListener("keydown", this.handleKeyDown);
   }
 
-
-    mouseOver(elNr) {
-      if (elNr === 1) {
-        this.state.times_element1.push([this.props.trialNum,Math.round(performance.now()), 0, 0]);
-        this.setState({
-          img1: this.state.shownImg1,
-          show1: 1,
-        });
-      } else if (elNr === 2) {
-        this.state.times_element2.push([this.props.trialNum ,Math.round(performance.now()), 0, 0]);
-        this.setState({
-          img2: this.state.shownImg2,
-          show2: 1,
-        });
-      } else if (elNr === 3) {
-        this.state.times_element3.push([this.props.trialNum,Math.round(performance.now()), 0, 0]);
-        this.setState({
-          img3: this.state.shownImg3,
-          show3: 1,
-        });
-      }
+  handleKeyDown = (e) => {
+    if (e.keyCode === 32) {
+      this.props.onViewEnd(
+        this.state.times_element1,
+        this.state.times_element2,
+        this.state.times_element3
+      );
     }
+  };
 
-    mouseOut(elNr) {
-      if (elNr === 1) {
-        var times_element1 = this.state.times_element1;
-        times_element1[times_element1.length - 1][2] = Math.round(
-          performance.now()
-        );
-        times_element1[times_element1.length - 1][3] =
-          times_element1[times_element1.length - 1][2] -
-          times_element1[times_element1.length - 1][1];
-        this.setState({
-          img1: Cover,
-          show1: null,
-          style1: styles.elementsize,
-          times_element1: times_element1,
-        });
-      } else if (elNr === 2) {
-        var times_element2 = this.state.times_element2;
-        times_element2[times_element2.length - 1][2] = Math.round(
-          performance.now()
-        );
-        times_element2[times_element2.length - 1][3] =
-          times_element2[times_element2.length - 1][2] -
-          times_element2[times_element2.length - 1][1];
-        this.setState({
-          img2: Cover,
-          show2: null,
-          style2: styles.elementsize,
-          times_element2: times_element2,
-        });
-      } else if (elNr === 3) {
-        var times_element3 = this.state.times_element3;
-        times_element3[times_element3.length - 1][2] = Math.round(
-          performance.now()
-        );
-        times_element3[times_element3.length - 1][3] =
-          times_element3[times_element3.length - 1][2] -
-          times_element3[times_element3.length - 1][1];
-        this.setState({
-          img3: Cover,
-          show3: null,
-          style3: styles.elementsize,
-          times_element3: times_element3,
-        });
-      }
+  mouseOver(elNr) {
+    if (elNr === 1) {
+      this.state.times_element1.push([
+        this.props.trialNum,
+        Math.round(performance.now()),
+        0,
+        0,
+      ]);
+      this.setState({
+        img1: this.state.shownImg1,
+        show1: 1,
+      });
+    } else if (elNr === 2) {
+      this.state.times_element2.push([
+        this.props.trialNum,
+        Math.round(performance.now()),
+        0,
+        0,
+      ]);
+      this.setState({
+        img2: this.state.shownImg2,
+        show2: 1,
+      });
+    } else if (elNr === 3) {
+      this.state.times_element3.push([
+        this.props.trialNum,
+        Math.round(performance.now()),
+        0,
+        0,
+      ]);
+      this.setState({
+        img3: this.state.shownImg3,
+        show3: 1,
+      });
     }
+  }
+
+  mouseOut(elNr) {
+    if (elNr === 1) {
+      var times_element1 = this.state.times_element1;
+      times_element1[times_element1.length - 1][2] = Math.round(
+        performance.now()
+      );
+      times_element1[times_element1.length - 1][3] =
+        times_element1[times_element1.length - 1][2] -
+        times_element1[times_element1.length - 1][1];
+      this.setState({
+        img1: Cover,
+        show1: null,
+        style1: styles.elementsize,
+        times_element1: times_element1,
+      });
+    } else if (elNr === 2) {
+      var times_element2 = this.state.times_element2;
+      times_element2[times_element2.length - 1][2] = Math.round(
+        performance.now()
+      );
+      times_element2[times_element2.length - 1][3] =
+        times_element2[times_element2.length - 1][2] -
+        times_element2[times_element2.length - 1][1];
+      this.setState({
+        img2: Cover,
+        show2: null,
+        style2: styles.elementsize,
+        times_element2: times_element2,
+      });
+    } else if (elNr === 3) {
+      var times_element3 = this.state.times_element3;
+      times_element3[times_element3.length - 1][2] = Math.round(
+        performance.now()
+      );
+      times_element3[times_element3.length - 1][3] =
+        times_element3[times_element3.length - 1][2] -
+        times_element3[times_element3.length - 1][1];
+      this.setState({
+        img3: Cover,
+        show3: null,
+        style3: styles.elementsize,
+        times_element3: times_element3,
+      });
+    }
+  }
 
   render() {
     return (
       <div className={styles.cockpit}>
-    <div className={styles.main}>
-        <View style={styles.container}>
-          <img
-            className={styles.elementsize}
-            src={this.state.img1}
-            alt="element1"
-            onMouseOver={(elNr) => this.mouseOver(1)}
-            onMouseOut={(elNr) => this.mouseOut(1)}
-          />
-          {this.state.show1 ? (
-            <div className={styles.overlay}>
-              <ElementBar progress={this.props.value1} />
-            </div>
-          ) : null}
-          {this.state.show1 ? (
-            <div className={styles.overlaytext}>{this.props.value1}%</div>
-          ) : null}
-        </View>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <View style={styles.container}>
-          <img
-            className={styles.elementsize}
-            src={this.state.img2}
-            alt="element2"
-            onMouseOver={(elNr) => this.mouseOver(2)}
-            onMouseOut={(elNr) => this.mouseOut(2)}
-          />
-          {this.state.show2 ? (
-            <div className={styles.overlay}>
-              <ElementBar progress={this.props.value2} />
-            </div>
-          ) : null}
-          {this.state.show2 ? (
-            <div className={styles.overlaytext}>{this.props.value2}%</div>
-          ) : null}
-        </View>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <View style={styles.container}>
-          <img
-            className={styles.elementsize}
-            src={this.state.img3}
-            alt="element3"
-            onMouseOver={(elNr) => this.mouseOver(3)}
-            onMouseOut={(elNr) => this.mouseOut(3)}
-          />
-          {this.state.show3 ? (
-            <div className={styles.overlay}>
-              <ElementBar progress={this.props.value3} />
-            </div>
-          ) : null}
-          {this.state.show3 ? (
-            <div className={styles.overlaytext}>{this.props.value3}%</div>
-          ) : null}
-        </View>
-    </div>
-  </div>
-
+        <div className={styles.main}>
+          <View style={styles.container}>
+            <img
+              className={styles.elementsize}
+              src={this.state.img1}
+              alt="element1"
+              onMouseOver={(elNr) => this.mouseOver(1)}
+              onMouseOut={(elNr) => this.mouseOut(1)}
+            />
+            {this.state.show1 ? (
+              <div className={styles.overlay}>
+                <ElementBar progress={this.props.value1} />
+              </div>
+            ) : null}
+            {this.state.show1 ? (
+              <div className={styles.overlaytext}>{this.props.value1}%</div>
+            ) : null}
+          </View>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <View style={styles.container}>
+            <img
+              className={styles.elementsize}
+              src={this.state.img2}
+              alt="element2"
+              onMouseOver={(elNr) => this.mouseOver(2)}
+              onMouseOut={(elNr) => this.mouseOut(2)}
+            />
+            {this.state.show2 ? (
+              <div className={styles.overlay}>
+                <ElementBar progress={this.props.value2} />
+              </div>
+            ) : null}
+            {this.state.show2 ? (
+              <div className={styles.overlaytext}>{this.props.value2}%</div>
+            ) : null}
+          </View>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <View style={styles.container}>
+            <img
+              className={styles.elementsize}
+              src={this.state.img3}
+              alt="element3"
+              onMouseOver={(elNr) => this.mouseOver(3)}
+              onMouseOut={(elNr) => this.mouseOut(3)}
+            />
+            {this.state.show3 ? (
+              <div className={styles.overlay}>
+                <ElementBar progress={this.props.value3} />
+              </div>
+            ) : null}
+            {this.state.show3 ? (
+              <div className={styles.overlaytext}>{this.props.value3}%</div>
+            ) : null}
+          </View>
+        </div>
+      </div>
     );
   }
 }

@@ -106,7 +106,6 @@ class ElementsFullDisplayTraining extends React.Component {
     });
   }
 
-
   mouseOver(elNr) {
     if (elNr === 1) {
       this.state.times_element1.push([Math.round(performance.now()), 0, 0]);
@@ -181,76 +180,102 @@ class ElementsFullDisplayTraining extends React.Component {
   }
 
   componentDidMount() {
-    setTimeout(() => {
+    this.timerkeyHandle = setTimeout(() => {
+      document.addEventListener("keydown", this.handleKeyDown);
+      this.timerkeyHandle = 0;
+    }, 3000);
+
+    this.timerHandle = setTimeout(() => {
       this.props.onViewEnd(
         this.state.times_element1,
         this.state.times_element2,
         this.state.times_element3
       );
-    }, 5000);
+      this.timerHandle = 0;
+    }, 10000);
   }
 
   componentWillUnmount() {
-    clearTimeout();
+    if (this.timerkeyHandle) {
+      // Yes, clear it
+      clearTimeout(this.timerkeyHandle);
+      this.timerkeyHandle = 0;
+    }
+    if (this.timerHandle) {
+      // Yes, clear it
+      clearTimeout(this.timerHandle);
+      this.timerHandle = 0;
+    }
+    document.removeEventListener("keydown", this.handleKeyDown);
   }
+
+  handleKeyDown = (e) => {
+    if (e.keyCode === 32) {
+      this.props.onViewEnd(
+        this.state.times_element1,
+        this.state.times_element2,
+        this.state.times_element3
+      );
+    }
+  };
 
   render() {
     return (
-        <div className={styles.cockpit}>
+      <div className={styles.cockpit}>
         <div className={styles.main}>
-            <View style={styles.container}>
-              <img
-                className={this.state.style1}
-                src={this.state.img1}
-                alt="trainelement1"
-                onMouseOver={(elNr) => this.mouseOver(1)}
-                onMouseOut={(elNr) => this.mouseOut(1)}
-              />
-              {this.state.show1 ? (
-                <div className={styles.overlay}>
-                  <ElementBar progress={this.props.value1} />
-                </div>
-              ) : null}
-              {this.state.show1 ? (
-                <div className={styles.overlaytext}>{this.props.value1}%</div>
-              ) : null}
-            </View>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <View style={styles.container}>
-              <img
-                className={this.state.style2}
-                src={this.state.img2}
-                alt="trainelement2"
-                onMouseOver={(elNr) => this.mouseOver(2)}
-                onMouseOut={(elNr) => this.mouseOut(2)}
-              />
-              {this.state.show2 ? (
-                <div className={styles.overlay}>
-                  <ElementBar progress={this.props.value2} />
-                </div>
-              ) : null}
-              {this.state.show2 ? (
-                <div className={styles.overlaytext}>{this.props.value2}%</div>
-              ) : null}
-            </View>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <View style={styles.container}>
-              <img
-                className={this.state.style3}
-                src={this.state.img3}
-                alt="trainelement3"
-                onMouseOver={(elNr) => this.mouseOver(3)}
-                onMouseOut={(elNr) => this.mouseOut(3)}
-              />
-              {this.state.show3 ? (
-                <div className={styles.overlay}>
-                  <ElementBar progress={this.props.value3} />
-                </div>
-              ) : null}
-              {this.state.show3 ? (
-                <div className={styles.overlaytext}>{this.props.value3}%</div>
-              ) : null}
-            </View>
+          <View style={styles.container}>
+            <img
+              className={this.state.style1}
+              src={this.state.img1}
+              alt="trainelement1"
+              onMouseOver={(elNr) => this.mouseOver(1)}
+              onMouseOut={(elNr) => this.mouseOut(1)}
+            />
+            {this.state.show1 ? (
+              <div className={styles.overlay}>
+                <ElementBar progress={this.props.value1} />
+              </div>
+            ) : null}
+            {this.state.show1 ? (
+              <div className={styles.overlaytext}>{this.props.value1}%</div>
+            ) : null}
+          </View>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <View style={styles.container}>
+            <img
+              className={this.state.style2}
+              src={this.state.img2}
+              alt="trainelement2"
+              onMouseOver={(elNr) => this.mouseOver(2)}
+              onMouseOut={(elNr) => this.mouseOut(2)}
+            />
+            {this.state.show2 ? (
+              <div className={styles.overlay}>
+                <ElementBar progress={this.props.value2} />
+              </div>
+            ) : null}
+            {this.state.show2 ? (
+              <div className={styles.overlaytext}>{this.props.value2}%</div>
+            ) : null}
+          </View>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <View style={styles.container}>
+            <img
+              className={this.state.style3}
+              src={this.state.img3}
+              alt="trainelement3"
+              onMouseOver={(elNr) => this.mouseOver(3)}
+              onMouseOut={(elNr) => this.mouseOut(3)}
+            />
+            {this.state.show3 ? (
+              <div className={styles.overlay}>
+                <ElementBar progress={this.props.value3} />
+              </div>
+            ) : null}
+            {this.state.show3 ? (
+              <div className={styles.overlaytext}>{this.props.value3}%</div>
+            ) : null}
+          </View>
         </div>
       </div>
     );

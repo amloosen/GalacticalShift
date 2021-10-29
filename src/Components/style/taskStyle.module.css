@@ -83,12 +83,10 @@
   position: absolute;
 }
 
-
 .slider {
   max-width: 7vw;
   min-width: 7vw;
   padding-bottom: 15vh;
-  table-layout: fixed;
   pointer-events: none;
 }
 

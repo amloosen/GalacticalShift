@@ -54,12 +54,7 @@ class MainTaskIntro extends React.Component {
     } else if (whichButton === 5 && curText < 6) {
       this.setState({ instructScreenText: curText + 1 });
     } else if (curText === 6 && whichButton === 10) {
-      setTimeout(
-        function () {
-          this.redirectToNextStage();
-        }.bind(this),
-        0
-      );
+      this.redirectToNextStage();
     }
   }
 
@@ -87,7 +82,7 @@ class MainTaskIntro extends React.Component {
     }
   };
   /////////////////////////////////////////////////////////////////////////////////
-  redirectToNextStage() {
+  redirectToNextStage = () => {
     document.removeEventListener("keyup", this._handleInstructKey);
     this.props.history.push({
       pathname: `/MainTask`,
@@ -97,7 +92,7 @@ class MainTaskIntro extends React.Component {
         startTime: this.state.startTime,
       },
     });
-  }
+  };
 
   componentDidMount() {
     window.scrollTo(0, 0);
@@ -185,8 +180,10 @@ class MainTaskIntro extends React.Component {
               <strong>Remember:</strong>
               <br />
               <br />
-              Planets (trials) that you encounter after each other, are more similar to each other <br />
-              than planets that are further apart. This means, their population size <br />
+              Planets (trials) that you encounter after each other, are more
+              similar to each other <br />
+              than planets that are further apart. This means, their population
+              size <br />
               depends on the same instrument.
               <br /> <br />
               Keep this in mind when indicating your answers.
@@ -207,8 +204,8 @@ class MainTaskIntro extends React.Component {
               <br />
               As in the training, not only your estimate is important, but also
               your certainty in your estimate. <br />
-              After each trial you will be rewarded for the accuracy of your estimate 
-              and your certainty in it.
+              After each trial you will be rewarded for the accuracy of your
+              estimate and your certainty in it.
               <br />
               <br />
               Try to indicate your estimate and certainty as precisely as
@@ -234,11 +231,15 @@ class MainTaskIntro extends React.Component {
               <br />
               <br />
               As you have learned in the training, only one instrument
-              determines the population size <br /> at a given moment. <br /><br />
-              To probe your understanding of the task we will sometimes, randomly ask
-              you to indicate <br />which colour/instrument is the important one at a given <br />
-              stage of the task. You can indicate this by pressing the number key indicated
-              on the <br />corresponding instrument (see example below).<br />
+              determines the population size <br /> at a given moment. <br />
+              <br />
+              To probe your understanding of the task we will sometimes,
+              randomly ask you to indicate <br />
+              which colour/instrument is the important one at a given <br />
+              stage of the task. You can indicate this by pressing the number
+              key indicated on the <br />
+              corresponding instrument (see example below).
+              <br />
               <br />
               <br />
               Please answer the question as accurately as possible.
@@ -282,12 +283,15 @@ class MainTaskIntro extends React.Component {
               by pressing the space bar.
               <br />
               <br />
+              Remember: You can click the [<strong>SPACEBAR</strong>] once you
+              have seen the instruments or feedback for long enough.
+              <br />
+              Otherwise they will disappear after a couple of seconds.
+              <br />
+              <br />
               Good luck with the main game!
               <br /> <br />
-              <span className={styles.center}>
-                Press the [<strong>SPACEBAR</strong>] when you are ready to
-                start.
-              </span>
+              Press the [<strong>SPACEBAR</strong>] when you are ready to start.
               <br /> <br />
               <span className={styles.center}>
                 [<strong>← BACK</strong>]

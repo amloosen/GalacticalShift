@@ -22,7 +22,6 @@ class OutcomeSliderBar extends React.Component {
     var height_tmp = yValuesAdaptNew[trueValue * 2];
     xValuesOutcome[trueValue * 2] = height_tmp;
 
-
     this.state = {
       height_bar: height_tmp,
       mu: this.props.mu,
@@ -136,22 +135,21 @@ class OutcomeSliderBar extends React.Component {
         },
         grid: { show: false },
         annotations: {
-          points:
-      [
-        {
-          x: trueValue * 2,
-          y:-0,
-          marker: {
-            shape: "circle",
-          size: 10,
-          fillColor: "#1C00ff00",
-          strokeColor: "#b3e49d",
-          radius: 4,
-          cssClass: 'apexcharts-custom-class'
-          },
-
-      }]
-  },
+          points: [
+            {
+              x: trueValue * 2,
+              y: -0,
+              marker: {
+                shape: "circle",
+                size: 10,
+                fillColor: "#1C00ff00",
+                strokeColor: "#b3e49d",
+                radius: 4,
+                cssClass: "apexcharts-custom-class",
+              },
+            },
+          ],
+        },
         tooltip: { enabled: false },
         legend: { show: false },
         events: [],
@@ -168,20 +166,42 @@ class OutcomeSliderBar extends React.Component {
   }
 
   componentDidMount() {
-    setTimeout(() => {
+    // this.timerkeyHandle = setTimeout(() => {
+    document.addEventListener("keydown", this.handleKeyDown);
+    // this.timerkeyHandle = 0;
+    // }, 0);
+
+    this.timerHandle = setTimeout(() => {
       this.props.getBarHeight(this.state.height_bar);
+      this.timerHandle = 0;
     }, 100);
   }
-
+  //
   componentWillUnmount() {
-    clearTimeout();
+    if (this.timerkeyHandle) {
+      debugger;
+      // Yes, clear it
+      clearTimeout(this.timerkeyHandle);
+      this.timerkeyHandle = 0;
+    }
+    if (this.timerHandle) {
+      // Yes, clear it
+      clearTimeout(this.timerHandle);
+      this.timerHandle = 0;
+    }
+    document.removeEventListener("keydown", this.handleKeyDown);
   }
+
+  handleKeyDown = (e) => {
+    if (e.keyCode === 32) {
+      this.props.getBarHeight(this.state.height_bar);
+    }
+  };
 
   render() {
     const { options, series } = this.state;
 
     return (
-
       <View style={stylesSliderRep.container}>
         <View style={stylesSliderRep.header}>
           <OutcomeSlider
@@ -192,18 +212,17 @@ class OutcomeSliderBar extends React.Component {
         </View>
         <View style={stylesSliderRep.layer}>
           <div className={styles.main}>
-          <ReactApexChart
-            options={this.state.options}
-            series={this.state.series}
-            type="line"
-            height={this.props.distHeight}
-            width="1000%"
-            align="center"
-          />
+            <ReactApexChart
+              options={this.state.options}
+              series={this.state.series}
+              type="line"
+              height={this.props.distHeight}
+              width="1000%"
+              align="center"
+            />
           </div>
         </View>
       </View>
-
     );
   }
 }

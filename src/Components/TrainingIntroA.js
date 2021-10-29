@@ -57,12 +57,7 @@ class TrainingIntroA extends React.Component {
     } else if (whichButton === 5 && curText < 7) {
       this.setState({ instructScreenText: curText + 1 });
     } else if (curText === 7 && whichButton === 10) {
-      setTimeout(
-        function () {
-          this.redirectToNextStage();
-        }.bind(this),
-        0
-      );
+      this.redirectToNextStage();
     }
   }
 
@@ -89,7 +84,7 @@ class TrainingIntroA extends React.Component {
     }
   };
 
-  redirectToNextStage() {
+  redirectToNextStage = () => {
     document.removeEventListener("keyup", this._handleInstructKey);
     document.removeEventListener("keyup", this._handleDebugKey);
     this.props.history.push({
@@ -100,7 +95,7 @@ class TrainingIntroA extends React.Component {
         startTime: this.state.startTime,
       },
     });
-  }
+  };
 
   componentDidMount() {
     window.scrollTo(0, 0);
@@ -313,9 +308,7 @@ class TrainingIntroA extends React.Component {
               <br />
               Let's practice this!
               <br /> <br />
-              <span className={styles.center}>
-                Press the [<strong>SPACEBAR</strong>] to start the training.
-              </span>
+              Press the [<strong>SPACEBAR</strong>] to start the training.
               <span className={styles.center}>
                 [<strong>← BACK</strong>]
               </span>

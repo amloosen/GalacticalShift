@@ -20,7 +20,7 @@ class DisplaySlider extends React.Component {
     });
   }
 
-  logData = (result, distHeight,time) => {
+  logData = (result, distHeight, time) => {
     let trialSgmMu = this.props.trialSgmMu;
     let trialRT = this.props.trialRT;
     let trialNum = this.props.trialNum;
@@ -37,28 +37,24 @@ class DisplaySlider extends React.Component {
   render() {
     let text = (
       <div className={styles.questions}>
-        How large is the alien population?
-        <br />
-        <br />
-        <br />
+        <p>How large is the alien population?</p>
       </div>
     );
-
 
     return (
       <div className={styles.cockpitslider}>
         <View style={stylesSliderRep.header}>
-            <span className={styles.slidertext}>
-              <div>{text}</div>
-            </span>
-          </View>
-          <div className={styles.slider}>
-            <Slider
-              mu={this.props.startMu}
-              sgm={this.props.startSgm}
-              onSpacebarHit={this.logData}
-            />
-          </div>
+          <span className={styles.slidertext}>
+            <div>{text}</div>
+          </span>
+        </View>
+        <div className={styles.slider}>
+          <Slider
+            mu={this.props.startMu}
+            sgm={this.props.startSgm}
+            onSpacebarHit={this.logData}
+          />
+        </div>
       </div>
     );
   }
@@ -66,12 +62,12 @@ class DisplaySlider extends React.Component {
 
 export default withRouter(DisplaySlider);
 
-const stylesSliderRep= StyleSheet.create({
+const stylesSliderRep = StyleSheet.create({
   container: {
     flex: 1,
   },
   header: {
     width: "100%",
     position: "absolute",
-  }
+  },
 });

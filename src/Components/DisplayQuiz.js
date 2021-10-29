@@ -4,7 +4,6 @@ import styles from "./style/taskStyle.module.css";
 import Quiz from "./Quiz";
 import "./style/quizStylesAdapt.css";
 
-
 class DisplayQuiz extends React.Component {
   constructor(props) {
     super(props);
@@ -25,9 +24,9 @@ class DisplayQuiz extends React.Component {
       case 32:
         //    this is SPACEBAR
         key_pressed = 10;
-          if (this.state.allCorrect === 0){
-        this.setState({ showIntro: 0, showQuiz: 1 });}
-        else {
+        if (this.state.allCorrect === 0) {
+          this.setState({ showIntro: 0, showQuiz: 1 });
+        } else {
           this.redirectToNextStage();
         }
         break;
@@ -35,27 +34,22 @@ class DisplayQuiz extends React.Component {
     }
   };
   componentDidMount() {
-    document.addEventListener("keyup", this.handleStartKey)
-    // if (this.state.showIntro === 1) {
-    //   setTimeout(() => {
-    //     this.setState({ showIntro: 0, showQuiz: 1 });
-    //   }, 5000);
-    // }
+    document.addEventListener("keyup", this.handleStartKey);
   }
 
   componentWillUnmount() {
-    document.removeEventListener("keyup", this.handleStartKey)
-    clearTimeout();
+    clearTimeout(this.timerRound);
+    document.removeEventListener("keyup", this.handleStartKey);
   }
 
   componentDidUpdate() {
     if (this.state.nextRound == 1) {
-      setTimeout(() => {
+      this.timerRound = setTimeout(() => {
         this.nextRound();
       }, 3000);
     }
     if (this.state.allCorrect === 1) {
-        document.addEventListener("keyup", this.handleStartKey)
+      document.addEventListener("keyup", this.handleStartKey);
     }
   }
 
@@ -88,11 +82,11 @@ class DisplayQuiz extends React.Component {
     if (this.state.showQuiz) {
       return (
         <div className={styles.cockpit}>
-        <div className={styles.quiztext}>
+          <div className={styles.quiztext}>
             <br />
             Please use your mouse to click on the correct answer.
             <br /> <br />
-        </div>
+          </div>
           <Quiz onQuizEnd={this.quizCompleted} />
         </div>
       );
@@ -119,13 +113,13 @@ class DisplayQuiz extends React.Component {
         <div className={styles.main}>
           <p>
             <br />
-            Congratulations, you succesfully passed the quiz and will now
-
-            start the main game.
+            Congratulations, you succesfully passed the quiz and will now start
+            the main game.
             <br />
             <br />
             Good luck!
-            <br /><br />
+            <br />
+            <br />
             <span className={styles.center}>
               Press the [<strong>SPACEBAR</strong>] to continue.
             </span>
@@ -146,14 +140,15 @@ class DisplayQuiz extends React.Component {
             Good job, you are done with all the trainings.
             <br />
             <br />
-            To make sure you understood the game and its challenges,
-            you will now complete a short quiz.
+            To make sure you understood the game and its challenges, you will
+            now complete a short quiz.
             <br />
             Answer all questions correctly in order to proceed to the main game.
             <br />
             <br />
             Good luck!
-            <br /><br />
+            <br />
+            <br />
             <span className={styles.center}>
               Press the [<strong>SPACEBAR</strong>] to start.
             </span>
