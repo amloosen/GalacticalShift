@@ -13,14 +13,38 @@ class DisplayBreak extends React.Component {
     }
   };
 
-  componentDidMount() {
-    document.addEventListener("keyup", this.handleBreakKey);
-  }
 
+  componentDidMount() {
+    this.timerkeyHandle = setTimeout(() => {
+    document.removeEventListener("keyup", this.handleBreakKey);
+    this.timerkeyHandle = 0;
+  }, 0);
+
+    this.timerHandle = setTimeout(() => {
+      this.props.onBreakEnd(1);
+      this.timerHandle = 0;
+    }, 60000);
+  }
+  //
   componentWillUnmount() {
-    clearTimeout();
+    if (this.timerkeyHandle) {
+      // Yes, clear it
+      clearTimeout(this.timerkeyHandle);
+      this.timerkeyHandle = 0;
+    }
+    if (this.timerHandle) {
+      // Yes, clear it
+      clearTimeout(this.timerHandle);
+      this.timerHandle = 0;
+    }
     document.removeEventListener("keyup", this.handleBreakKey);
   }
+
+  handleKeyDown = (e) => {
+    if (e.keyCode === 32) {
+      this.props.onBreakEnd(1);
+    }
+  };
   render() {
     let text = (
       <div className={styles.main}>
