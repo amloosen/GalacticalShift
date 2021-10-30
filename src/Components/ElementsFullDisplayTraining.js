@@ -224,7 +224,7 @@ class ElementsFullDisplayTraining extends React.Component {
       <div className={styles.main}>
         <p>
           <br />
-          Click the [<strong>SPACEBAR</strong>] if you have seen the elements or feedback long enough.
+          Click the [<strong>SPACEBAR</strong>] if you have seen the elements long enough.
           <br /> <br />
         </p>
       </div>

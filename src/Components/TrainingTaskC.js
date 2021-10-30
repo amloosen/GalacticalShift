@@ -221,6 +221,7 @@ class TrainingTaskC extends React.Component {
           indicReq={this.state.indicReq}
           trialNum={this.state.traintrialNum}
           onFeedbackEnd={this.handleOutcomeData}
+          instructions={1}
         />
       );
     } else if (
