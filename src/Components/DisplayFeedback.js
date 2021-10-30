@@ -25,11 +25,11 @@ class DispFeedback extends React.Component {
             </span>{" "}
             million.<br />
             <span className={styles.main}>
-            Click the [<strong>SPACEBAR</strong>] if you have seen the elements long enough.</span>
+            Click the [<strong>SPACEBAR</strong>] if you have seen the feedback long enough.</span>
           </p>
         </div>
       );
-    } else if (this.props.instructions===0){
+    } else {
     text2 = (
       <div className={styles.questions}>
         <p>
