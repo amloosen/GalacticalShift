@@ -35,7 +35,7 @@ class EndPage extends React.Component {
       this.setState({ instructScreenText: curText + 1 });
     } else if (whichButton === 10 && curText === 3) {
       this.handleSubmit();
-      this.redirectToEnd();
+
     }
   }
 
@@ -106,6 +106,7 @@ class EndPage extends React.Component {
     event.preventDefault();
 
     this.clearFb();
+    this.redirectToEnd();
   };
 
   clearFb = () => {
