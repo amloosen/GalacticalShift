@@ -43,7 +43,7 @@ class TrainingTaskB extends React.Component {
     var currentDate = new Date(); // maybe change to local
     var timeString = currentDate.toTimeString();
 
-    var nr_traintrial = 12;
+    var nr_traintrial = 10;
     var val_options = range(0, 110, 10);
     val_options.splice(val_options.indexOf(50), 1); //remove the 50 to make it clearer which element is correct
     var random_val = [];
@@ -55,8 +55,8 @@ class TrainingTaskB extends React.Component {
       random_val[i] = val_tmp;
     }
 
-    var corr_values = random_val.slice(0, 6);
-    var inverse_tmp = random_val.slice(6, 12);
+    var corr_values = random_val.slice(0, 5);
+    var inverse_tmp = random_val.slice(5, 10);
     var inverse = inverse_tmp.map(function (value) {
       return 100 - value;
     });
@@ -238,6 +238,7 @@ onElementsEnd = (event) => {
       this.redirectToNextStage();
     } else {
       var traintrialNum_tmp = this.state.traintrialNum + 1;
+
       var all_corr_values = this.state.all_corr_values;
       var corr_pos = this.state.corr_pos;
       if (corr_pos[traintrialNum_tmp - 1] === 4) {
@@ -259,7 +260,7 @@ onElementsEnd = (event) => {
   };
 
   redirectToNextStage() {
-    debugger;
+
     let body = {
       sectionStartTime: this.state.sectionTime,
       startTime: this.state.startTime,

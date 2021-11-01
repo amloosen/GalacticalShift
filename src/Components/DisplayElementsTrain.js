@@ -26,12 +26,12 @@ class DisplayElementsTrain extends React.Component {
     this.timerkeyHandle = setTimeout(() => {
       document.addEventListener("keydown", this.handleKeyDown);
       this.timerkeyHandle = 0;
-    }, 3000);
+    }, 1000);
 
     this.timerHandle = setTimeout(() => {
       this.props.onElementsEnd(1);
       this.timerHandle = 0;
-    }, 2000);
+    }, 4000);
   }
 
   componentWillUnmount() {
