@@ -16,7 +16,7 @@ class DisplayTrainElement extends React.Component {
    this.timerHandle= setTimeout(() => {
        this.props.handleElement(1);
          this.timerHandle = 0;
-     }, 2000);
+     }, 1800);
 
   }
 
