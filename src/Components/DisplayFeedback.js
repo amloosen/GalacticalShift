@@ -15,21 +15,7 @@ class DispFeedback extends React.Component {
 
   render() {
     let text2;
-    if(this.props.instructions===1){
-      text2 = (
-        <div className={styles.questions}>
-          <p>
-            The true population on the planet was{" "}
-            <span className={styles.bigger}>
-              {this.props.all_true_pop_size[this.props.trialNum - 1]}
-            </span>{" "}
-            million.<br />
-            <span className={styles.main}>
-            Click the [<strong>SPACEBAR</strong>] if you have seen the feedback long enough.</span>
-          </p>
-        </div>
-      );
-    } else {
+
     text2 = (
       <div className={styles.questions}>
         <p>
@@ -41,7 +27,7 @@ class DispFeedback extends React.Component {
         </p>
       </div>
     );
-  }
+  
 
     return (
       <div className={styles.cockpitslider}>

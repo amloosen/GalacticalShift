@@ -212,9 +212,11 @@ class MainTask extends React.Component {
       }
     });
   }
-  /////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////
   sendBlock(height) {
-    var start = (this.state.blockNum - 1) * (this.state.trialPerBlock + 1);
+    // var start = ((this.state.blockNum - 1) * this.state.trialPerBlock)+ 1;
+    var start = this.state.trialNum - this.state.trialPerBlock;
+    debugger;
     //
     height = height.filter(function (element) {
       return element !== undefined;
@@ -500,7 +502,7 @@ class MainTask extends React.Component {
 
   nextTrial = (height) => {
     var trialNum_tmp = this.state.trialNum + 1;
-
+console.log(trialNum_tmp);
     if (this.state.trialBlockNum === this.state.trialPerBlock) {
       this.sendBlock(height);
     } else {

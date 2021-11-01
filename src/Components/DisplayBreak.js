@@ -16,9 +16,9 @@ class DisplayBreak extends React.Component {
 
   componentDidMount() {
     this.timerkeyHandle = setTimeout(() => {
-    document.removeEventListener("keyup", this.handleBreakKey);
+    document.addEventListener("keyup", this.handleBreakKey);
     this.timerkeyHandle = 0;
-  }, 0);
+  }, 50);
 
     this.timerHandle = setTimeout(() => {
       this.props.onBreakEnd(1);
@@ -40,11 +40,12 @@ class DisplayBreak extends React.Component {
     document.removeEventListener("keyup", this.handleBreakKey);
   }
 
-  handleKeyDown = (e) => {
+  handleBreakKey = (e) => {
     if (e.keyCode === 32) {
       this.props.onBreakEnd(1);
     }
   };
+
   render() {
     let text = (
       <div className={styles.main}>
