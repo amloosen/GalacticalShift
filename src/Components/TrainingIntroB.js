@@ -207,6 +207,8 @@ class TrainingIntroB extends React.Component {
               Indicate your estimated by pressing the corresponding left and
               right arrow key.
               <br />
+              Click the [<strong>SPACEBAR</strong>] once you have seen the
+              instruments for long enough.
               <br />
               Let's practice this!
               <br /> <br />
