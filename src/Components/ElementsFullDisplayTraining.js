@@ -183,7 +183,7 @@ class ElementsFullDisplayTraining extends React.Component {
     this.timerkeyHandle = setTimeout(() => {
       document.addEventListener("keydown", this.handleKeyDown);
       this.timerkeyHandle = 0;
-    }, 3000);
+    }, 1000);
 
     this.timerHandle = setTimeout(() => {
       this.props.onViewEnd(

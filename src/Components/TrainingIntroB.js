@@ -199,7 +199,7 @@ class TrainingIntroB extends React.Component {
               and how it is associated with the population size.
               <br />
               <br />
-              For now, you will encounter two planets. Find out which one is
+              For now, you will encounter two instruments. Find out which one is
               important <br />
               and how it is assocated with the population size.
               <br />
@@ -209,7 +209,7 @@ class TrainingIntroB extends React.Component {
               <br />
               Click the [<strong>SPACEBAR</strong>] once you have seen the
               instruments for long enough.
-              <br />
+              <br /><br />
               Let's practice this!
               <br /> <br />
               Press the [<strong>SPACEBAR</strong>] to start the training.
