@@ -34,6 +34,7 @@ class EndPage extends React.Component {
     } else if (whichButton === 5 && curText < 3) {
       this.setState({ instructScreenText: curText + 1 });
     } else if (whichButton === 10 && curText === 3) {
+      this.handleSubmit();
       this.redirectToEnd();
     }
   }
