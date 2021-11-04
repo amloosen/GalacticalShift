@@ -130,7 +130,9 @@ class MainTask extends React.Component {
     for (var k = 9; k <= nr_trial - 1; k += 27) {
       indicReq_tmp[k] = 1;
     }
-    var trialPerBlock = nr_trial / 5;
+
+    var blockTotal_tmp = 4;
+    var trialPerBlock = nr_trial / blockTotal_tmp;
 
     for (var l = 1; l <= nr_trial - 1; l += trialPerBlock) {
       indicReq_tmp[l] = 0; //make sure the element indicator is never on the last trial of a block to not prevent sending the data
@@ -147,7 +149,7 @@ class MainTask extends React.Component {
       .map(() => Array(3).fill(0));
 
     var outcomeHeight_tmp = Array(nr_trial).fill(0);
-    var blockTotal_tmp = 5;
+
     var bonusPerBlock_tmp = Array(blockTotal_tmp).fill(0);
     var element_colours = [1, 2, 3];
     shuffle(element_colours);
@@ -216,7 +218,7 @@ class MainTask extends React.Component {
   sendBlock(height) {
     // var start = ((this.state.blockNum - 1) * this.state.trialPerBlock)+ 1;
     var start = this.state.trialNum - this.state.trialPerBlock;
-    debugger;
+
     //
     height = height.filter(function (element) {
       return element !== undefined;
