@@ -87,7 +87,7 @@ class ElementsFullDisplay extends React.Component {
         this.state.times_element3
       );
       this.timerHandle = 0;
-    }, 20000);
+    }, 30000);
   }
 
   componentWillUnmount() {
@@ -105,6 +105,8 @@ class ElementsFullDisplay extends React.Component {
   }
 
   handleKeyDown = (e) => {
+    debugger;
+    this.mouseOut(this.state.hover)
     if (e.keyCode === 32) {
       this.props.onViewEnd(
         this.state.times_element1,
@@ -125,6 +127,7 @@ class ElementsFullDisplay extends React.Component {
       this.setState({
         img1: this.state.shownImg1,
         show1: 1,
+        hover:1
       });
     } else if (elNr === 2) {
       this.state.times_element2.push([
@@ -136,6 +139,7 @@ class ElementsFullDisplay extends React.Component {
       this.setState({
         img2: this.state.shownImg2,
         show2: 1,
+        hover:2
       });
     } else if (elNr === 3) {
       this.state.times_element3.push([
@@ -147,6 +151,7 @@ class ElementsFullDisplay extends React.Component {
       this.setState({
         img3: this.state.shownImg3,
         show3: 1,
+        hover:3
       });
     }
   }
@@ -165,6 +170,7 @@ class ElementsFullDisplay extends React.Component {
         show1: null,
         style1: styles.elementsize,
         times_element1: times_element1,
+        hover:0
       });
     } else if (elNr === 2) {
       var times_element2 = this.state.times_element2;
@@ -179,6 +185,7 @@ class ElementsFullDisplay extends React.Component {
         show2: null,
         style2: styles.elementsize,
         times_element2: times_element2,
+        hover:0
       });
     } else if (elNr === 3) {
       var times_element3 = this.state.times_element3;
@@ -193,6 +200,7 @@ class ElementsFullDisplay extends React.Component {
         show3: null,
         style3: styles.elementsize,
         times_element3: times_element3,
+        hover:0
       });
     }
   }
