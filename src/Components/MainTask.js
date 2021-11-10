@@ -70,33 +70,13 @@ class MainTask extends React.Component {
     var true_pop_size = true_pop_size_tmp.map(function (each_element) {
       return Number(each_element.toFixed(0));
     });
+    var check_al1 = StructToRender[7];
+    var check_al2 = StructToRender[8];
 
     var nr_trial = w0.length; //debugger
 
     //pregenerate the values of the remaining elements
-    var check_al2 = [];
-    var check_al1 = [];
 
-    for (var i = 0; i <= nr_trial - 1; i++) {
-      var restricted = [val_corr_elem[i], 100 - val_corr_elem[i]];
-      if (i < nr_trial / 2) {
-        check_al1[i] = getRand(restricted);
-        var restrictedsecond = [
-          val_corr_elem[i],
-          100 - val_corr_elem[i],
-          check_al1[i],
-        ];
-        check_al2[i] = getRand(restrictedsecond);
-      } else {
-        var restrictedsecond = [
-          val_corr_elem[i],
-          100 - val_corr_elem[i],
-          check_al1[i],
-        ];
-        check_al2[i] = getRand(restricted);
-        check_al1[i] = getRand(restrictedsecond);
-      }
-    }
     var all_element_values = Array(nr_trial)
       .fill()
       .map(() => Array(3).fill(0));
