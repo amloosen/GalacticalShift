@@ -111,7 +111,7 @@ class MainTask extends React.Component {
       indicReq_tmp[k] = 1;
     }
 
-    var blockTotal_tmp = 4;
+    var blockTotal_tmp = 5;
     var trialPerBlock = nr_trial / blockTotal_tmp;
 
     for (var l = 1; l <= nr_trial - 1; l += trialPerBlock) {
@@ -133,7 +133,6 @@ class MainTask extends React.Component {
     var bonusPerBlock_tmp = Array(blockTotal_tmp).fill(0);
     var element_colours = [1, 2, 3];
     shuffle(element_colours);
-
     var currentDate = new Date();
     var mainStartTime = currentDate.toTimeString();
 
