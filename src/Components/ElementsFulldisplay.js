@@ -61,6 +61,8 @@ class ElementsFullDisplay extends React.Component {
       times_element1: times_element1,
       times_element2: times_element2,
       times_element3: times_element3,
+      first_hover: 0,
+      hover: 0,
     };
 
     this.mouseOver = this.mouseOver.bind(this);
@@ -75,11 +77,6 @@ class ElementsFullDisplay extends React.Component {
   }
 
   componentDidMount() {
-    this.timerkeyHandle = setTimeout(() => {
-      document.addEventListener("keydown", this.handleKeyDown);
-      this.timerkeyHandle = 0;
-    }, 1000);
-
     this.timerHandle = setTimeout(() => {
       this.props.onViewEnd(
         this.state.times_element1,
@@ -90,6 +87,14 @@ class ElementsFullDisplay extends React.Component {
     }, 30000);
   }
 
+  componentDidUpdate() {
+    if (this.state.first_hover == 1) {
+      this.timerkeyHandle = setTimeout(() => {
+        document.addEventListener("keydown", this.handleKeyDown);
+        this.timerkeyHandle = 0;
+      }, 1000);
+    }
+  }
   componentWillUnmount() {
     if (this.timerkeyHandle) {
       // Yes, clear it
@@ -105,8 +110,7 @@ class ElementsFullDisplay extends React.Component {
   }
 
   handleKeyDown = (e) => {
-    debugger;
-    this.mouseOut(this.state.hover)
+    this.mouseOut(this.state.hover);
     if (e.keyCode === 32) {
       this.props.onViewEnd(
         this.state.times_element1,
@@ -127,7 +131,8 @@ class ElementsFullDisplay extends React.Component {
       this.setState({
         img1: this.state.shownImg1,
         show1: 1,
-        hover:1
+        hover: 1,
+        first_hover: 1,
       });
     } else if (elNr === 2) {
       this.state.times_element2.push([
@@ -139,7 +144,8 @@ class ElementsFullDisplay extends React.Component {
       this.setState({
         img2: this.state.shownImg2,
         show2: 1,
-        hover:2
+        hover: 2,
+        first_hover: 1,
       });
     } else if (elNr === 3) {
       this.state.times_element3.push([
@@ -151,7 +157,8 @@ class ElementsFullDisplay extends React.Component {
       this.setState({
         img3: this.state.shownImg3,
         show3: 1,
-        hover:3
+        hover: 3,
+        first_hover: 1,
       });
     }
   }
@@ -170,7 +177,7 @@ class ElementsFullDisplay extends React.Component {
         show1: null,
         style1: styles.elementsize,
         times_element1: times_element1,
-        hover:0
+        hover: 0,
       });
     } else if (elNr === 2) {
       var times_element2 = this.state.times_element2;
@@ -185,7 +192,7 @@ class ElementsFullDisplay extends React.Component {
         show2: null,
         style2: styles.elementsize,
         times_element2: times_element2,
-        hover:0
+        hover: 0,
       });
     } else if (elNr === 3) {
       var times_element3 = this.state.times_element3;
@@ -200,7 +207,7 @@ class ElementsFullDisplay extends React.Component {
         show3: null,
         style3: styles.elementsize,
         times_element3: times_element3,
-        hover:0
+        hover: 0,
       });
     }
   }
@@ -210,14 +217,15 @@ class ElementsFullDisplay extends React.Component {
       <div className={styles.main}>
         <p>
           <br />
-          Click the [<strong>SPACEBAR</strong>] if you have seen the elements long enough.
+          Click the [<strong>SPACEBAR</strong>] if you have seen the elements
+          long enough.
           <br /> <br />
         </p>
       </div>
     );
     return (
       <div className={styles.cockpit}>
-      <div className={styles.textblock}>{text}</div>
+        <div className={styles.textblock}>{text}</div>
         <div className={styles.main}>
           <View style={styles.container}>
             <img
