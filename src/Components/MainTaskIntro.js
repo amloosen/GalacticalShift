@@ -273,10 +273,14 @@ class MainTaskIntro extends React.Component {
               by pressing the space bar.
               <br />
               <br />
-              Remember: You can click the [<strong>SPACEBAR</strong>] once you
+              Remember: You can also click the spacebar once you
               have seen the instruments or feedback for long enough.
               <br />
               Otherwise they will disappear after a couple of seconds.
+              <br />
+              <br />
+              It is essential that you <strong>always adapt your certainty (width of the slider)</strong> to maximize your reward.
+              We will also check the adaptation of the slider width in your data.
               <br />
               <br />
               Good luck with the main game!

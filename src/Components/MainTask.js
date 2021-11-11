@@ -170,6 +170,7 @@ class MainTask extends React.Component {
       startMu: 50,
       startSgm: 30,
       study_part: 5,
+      // alert_count: 0,
       //task data
       corPos_sq: corPos_sq,
       w0: w0,
@@ -485,21 +486,21 @@ class MainTask extends React.Component {
   };
 
   nextTrial = (height) => {
-    if (
-      this.state.trialSgmMu[this.state.trialNum - 1][1] === this.state.startSgm
-    ) {
-      var alert_count = this.state.alert_count + 1;
-    } else {
-      var alert_count = this.state.alert_count;
-    }
-
-    if (alert_count >= 8) {
-      debugger;
-      alert(
-        "It seems like you are not adapting your certainty. Make sure to indicate your true certainty to maximize your reward!"
-      );
-      var alert_count = 0;
-    }
+    // if (
+    //   this.state.trialSgmMu[this.state.trialNum - 1][1] === this.state.startSgm
+    // ) {
+    //   var alert_count = this.state.alert_count + 1;
+    // } else {
+    //   var alert_count = this.state.alert_count;
+    // }
+    //
+    // if (alert_count >= 8) {
+    //   debugger;
+    //   alert(
+    //     "It seems like you are not adapting your certainty. Make sure to indicate your true certainty to maximize your reward!"
+    //   );
+    //   var alert_count = 0;
+    // }
 
     var trialNum_tmp = this.state.trialNum + 1;
 
@@ -515,7 +516,7 @@ class MainTask extends React.Component {
         disp_feedback: 0,
         showBreak: 0,
         disp_el: 1,
-        alert_count: alert_count,
+        // alert_count: alert_count,
       });
     }
   };
