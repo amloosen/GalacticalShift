@@ -211,15 +211,27 @@ class Slider extends React.Component {
 
   stepsSgm = (pressed) => {
     if (pressed < 10) {
-      return 1;
-    } else if (pressed >= 10 && pressed < 40) {
-      return 5;
-    } else {
       return 10;
-      // } else if (pressed >= 60 && pressed < 100) {
-      //   return 30;
-      // } else if (pressed >= 100) {
-      //   return 50;
+    } else if (pressed >= 10 && pressed < 20) {
+      return 20;
+    } else if (pressed >= 20 && pressed < 30) {
+      return 30;
+    } else if (pressed >= 30 && pressed < 40) {
+      return 40;
+    } else if (pressed >= 40 && pressed < 50) {
+      return 50;
+    } else if (pressed >= 50 && pressed < 60) {
+      return 60;
+    }  else if (pressed >= 60 && pressed < 70) {
+        return 70;
+    }  else if (pressed >= 70 && pressed < 80) {
+        return 80;
+    }  else if (pressed >= 80 && pressed < 90) {
+          return 90;
+    }  else if (pressed >= 90 && pressed < 100) {
+            return 100;
+    } else if (pressed >= 100) {
+         return 110;
     }
   };
 
