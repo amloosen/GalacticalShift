@@ -167,76 +167,11 @@ class EndPage extends React.Component {
             <span className={styles.likeP}>
               <span className={styles.center}>THANK YOU</span>
               <br />
-              If you feel that completing the questionnaires on any of the
-              psychopathologies caused <br />
-              you any distress, please use the following contact details for
-              help and support.
-              <br />
-              <br />
-              <i>Web page links (click to open in new tab):</i>
-              <ul>
-                <li>
-                  <span
-                    onClick={() => {
-                      this.openInNewTab(
-                        "https://www.nhs.uk/conditions/stress-anxiety-depression/mental-health-helplines/"
-                      );
-                    }}
-                  >
-                    <u>NHS Mental Health Helplines</u>
-                  </span>
-                </li>
-                <br />
-                <li>
-                  <span
-                    onClick={() => {
-                      this.openInNewTab("https://www.anxietyuk.org.uk");
-                    }}
-                  >
-                    <u>Anxiety UK</u>
-                  </span>
-                  &nbsp; (Helpline: 03444 775 774)
-                </li>
-                <br />
-                <li>
-                  <span
-                    onClick={() => {
-                      this.openInNewTab("https://www.ocduk.org/");
-                    }}
-                  >
-                    <u>OCD UK</u>
-                  </span>
-                  &nbsp; (Helpline: 0333 212 7890)
-                </li>
-                <br />
-                <li>
-                  <span
-                    onClick={() => {
-                      this.openInNewTab("https://www.samaritans.org/");
-                    }}
-                  >
-                    <u>Samaritans</u>
-                  </span>
-                  &nbsp; (Helpline: 116 123)
-                </li>
-              </ul>
-              <span className={styles.centerTwo}>
-                [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
-              </span>
-            </span>
-          </div>
-        );
-      } else if (this.state.instructScreenText === 3) {
-        text = (
-          <div className={styles.main}>
-            <span className={styles.likeP}>
-              <span className={styles.center}>THANK YOU</span>
-              <br />
               We would love to hear any comments you have about the tasks you
               have completed.
               <br /> <br />
               If you have any, please fill in the box below and click submit.
-              <span className={styles.centerThree}>
+
                 <form onSubmit={this.handleSubmit}>
                   <label>
                     <textarea
@@ -250,13 +185,14 @@ class EndPage extends React.Component {
                   <br />
                   <input type="submit" value="Submit" />
                 </form>
-              </span>
               <span className={styles.centerTwo}>
                 If you are ready to return to Prolific, press [
                 <strong>SPACEBAR</strong>] <br />
                 <br />
                 and follow the pop-up to complete the session.
-              </span>
+                <br />
+                Or fill in the completion code: <strong>67D0ACA0</strong><br />
+              </span><br /><br />
               &nbsp;
               <span className={styles.centerTwo}>
                 [← <strong>BACK</strong>]

@@ -134,7 +134,7 @@ class MainTask extends React.Component {
     var element_colours = [1, 2, 3];
     shuffle(element_colours);
     var currentDate = new Date();
-    var mainStartTime = currentDate.toTimeString();
+    var mainStartTime = currentDate.toString();
 
     this.state = {
       userID: this.props.location.state.userID,
@@ -470,10 +470,13 @@ class MainTask extends React.Component {
     var trialBlockNum_tmp = 1;
 
     var blockNum_tmp = this.state.blockNum + 1;
+    var currentDate = new Date();
+    var mainStartTime = currentDate.toString();
 
     this.setState({
       trialNum: trialNum_tmp,
       trialBlockNum: trialBlockNum_tmp,
+      sectionStartTime: mainStartTime,
       disp_feedback: 0,
       disp_el: 1,
       showBreak: 0,
