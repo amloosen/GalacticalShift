@@ -28,7 +28,7 @@ class SliderTraining extends React.Component {
       practRT: practRT,
       practSgmMu: practSgmMu,
       timerCountDur: 10,
-      startSgm: 30,
+      startSgm: 50,
       startMu: 50,
       study_part:1
     };

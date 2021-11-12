@@ -181,7 +181,7 @@ class Slider extends React.Component {
         let choiceTime0 = Math.round(performance.now());
         this.props.onSpacebarHit({ mu, sgm }, distHeight, choiceTime0);
         if (this.props.training===1 && this._isMounted) {
-          this.resetSlider(50, 30);
+          this.resetSlider(50, 50);
         }
         break;
       case 40:

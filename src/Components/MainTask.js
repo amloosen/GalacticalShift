@@ -173,7 +173,7 @@ class MainTask extends React.Component {
       disp_el: 1,
       disp_slider: 0,
       startMu: 50,
-      startSgm: 30,
+      startSgm: 50,
       study_part: 5,
       // alert_count: 0,
       //task data
