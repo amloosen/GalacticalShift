@@ -1,10 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import styles from "./style/taskStyle.module.css";
 import ElementsFullDisplayTwo from "./ElementsFullDisplayTwo";
 
-const WAIT_INTERVAL = 1000;
-const ENTER_KEY = 32;
 
 class DisplayElementsTrain extends React.Component {
   constructor(props) {

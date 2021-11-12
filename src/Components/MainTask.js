@@ -6,6 +6,7 @@ import DisplayElements from "./DisplayElements";
 import DisplayFeedback from "./DisplayFeedback";
 import DisplayBreak from "./DisplayBreak";
 import { range } from "lodash";
+
 ////////////////////////////////////////////////////////////////////////////////
 function shuffle(array) {
   let currentIndex = array.length,
@@ -32,15 +33,17 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
 }
 
-function getRand(array) {
-  var val_options = range(0, 110, 10);
-  var rand = val_options[~~(Math.random() * val_options.length)];
-  // var rand = Math.floor(Math.random() * 10);
-  if (array.indexOf(rand) === -1) {
-    return rand;
+
+function getBonus(bonisum){
+var bonus = (bonisum / (89 * this.state.trialPerBlock)) * 1;
+  if (bonus < 0) {
+    bonus = 0;
+  } else if (bonus > 1) {
+    bonus = 1;
   } else {
-    return getRand(array);
+    bonus = roundTo(bonus, 2); //2 dec pl
   }
+  return bonus;
 }
 
 function roundTo(n, digits) {
@@ -131,8 +134,10 @@ class MainTask extends React.Component {
     var outcomeHeight_tmp = Array(nr_trial).fill(0);
 
     var bonusPerBlock_tmp = Array(blockTotal_tmp).fill(0);
+
     var element_colours = [1, 2, 3];
     shuffle(element_colours);
+
     var currentDate = new Date();
     var mainStartTime = currentDate.toString();
 
@@ -194,7 +199,7 @@ class MainTask extends React.Component {
       }
     });
   }
-  ////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////
   sendBlock(height) {
     // var start = ((this.state.blockNum - 1) * this.state.trialPerBlock)+ 1;
     var start = this.state.trialNum - this.state.trialPerBlock;
@@ -203,20 +208,12 @@ class MainTask extends React.Component {
     height = height.filter(function (element) {
       return element !== undefined;
     });
-    ///
-    var bonisum = height.reduce(
-      (result, number) => result + number
-    );
-    var bonus = (bonisum / (89 * this.state.trialPerBlock)) * 1;
-    if (bonus < 0) {
-      bonus = 0;
-    } else if (bonus > 1) {
-      bonus = 1;
-    } else {
-      bonus = roundTo(bonus, 2); //2 dec pl
-    }
+
+    var bonisum = height.reduce((result, number) => result + number);
+    var bonus = getBonus(bonisum);
+    debugger;
     var bonusPerBlock_tmp = this.state.bonusPerBlock;
-    bonusPerBlock_tmp[this.state.blockNum-1] = bonus;
+    bonusPerBlock_tmp[this.state.blockNum - 1] = bonus;
     ///
     var height_tmp = height.slice(start, this.state.trialNum);
     var times1_tmp = this.state.times_element1.slice(
@@ -266,7 +263,7 @@ class MainTask extends React.Component {
       indicReq: this.state.indicReq,
       trialPerBlock: this.state.trialPerBlock,
       blockNum: this.state.blockNum,
-      bonusPerBlock: bonusPerBlock_tmp
+      bonusPerBlock: bonusPerBlock_tmp,
     };
 
     fetch(
@@ -315,19 +312,9 @@ class MainTask extends React.Component {
         return element !== undefined;
       });
       ///
-      var bonisum = height_check.reduce(
-        (result, number) => result + number
-      );
-
-      var bonus = (bonisum / (89 * this.state.trialTotal)) * 1;
-      if (bonus < 0) {
-        bonus = 0;
-      } else if (bonus > 1) {
-        bonus = 1;
-      } else {
-        bonus = roundTo(bonus, 2); //2 dec pl
-      }
-
+      var bonisum = height_check.reduce((result, number) => result + number);
+      var bonus = getBonus(bonisum);
+      debugger;
 
       let backup = {
         times_element1_backup: this.state.times_element1,
@@ -503,7 +490,6 @@ class MainTask extends React.Component {
     // }
 
     var trialNum_tmp = this.state.trialNum + 1;
-
     if (this.state.trialBlockNum === this.state.trialPerBlock) {
       this.sendBlock(height);
     } else {

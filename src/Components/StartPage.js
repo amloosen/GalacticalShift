@@ -2,7 +2,6 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import * as Consent from "survey-react";
 import { API_URL } from "../config";
-import { handleResponse } from "./helpers";
 import "../../node_modules/survey-react/survey.css";
 import queryString from "query-string"; // I need this for prolific
 import "./style/startStyle.css";

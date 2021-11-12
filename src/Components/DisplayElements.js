@@ -1,6 +1,5 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import styles from "./style/taskStyle.module.css";
 import ElementsFullDisplay from "./ElementsFulldisplay";
 import ElementsIndicator from "./ElementsIndicator";
 
@@ -24,7 +23,7 @@ class DisplayElements extends React.Component {
         pressed = 3;
         this.props.onElementsIndic(pressed);
         break;
-      default:
+        default:
     }
   };
 
@@ -38,10 +37,8 @@ class DisplayElements extends React.Component {
     }
   }
 
-  componentWillUnmount() {
-    if (this.props.indicReq[this.props.trialNum - 1] === 1) {
+  componentWillUpdate() {
       document.removeEventListener("keyup", this.handleIndicKey);
-    }
   }
 
   render() {

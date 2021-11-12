@@ -2,7 +2,6 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 // import { API_URL } from "./config";
 import styles from "./style/taskStyle.module.css";
-import { range } from "lodash";
 
 class TrainOptions extends React.Component {
   constructor(props) {

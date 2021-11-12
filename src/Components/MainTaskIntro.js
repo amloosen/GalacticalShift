@@ -11,10 +11,6 @@ class MainTaskIntro extends React.Component {
     super(props);
 
     // var user_info = this.props.location.state.user_info;
-    var currentDate = new Date();
-    var introTrainingStartTime = currentDate.toTimeString();
-
-    /////////////////////////////////////////////////////////////////////////////////
     // SET COMPONENT STATES
     this.state = {
       userID: this.props.location.state.userID,

@@ -2,7 +2,6 @@ import { range } from "lodash";
 import normalPdf from "normal-pdf";
 import styles from "./style/taskStyle.module.css";
 import React from "react";
-import { View } from "react-native-web";
 import ReactApexChart from "react-apexcharts";
 
 class Slider extends React.Component {
@@ -143,15 +142,26 @@ class Slider extends React.Component {
   ////////////////////////////////////////////////////////////////////////////////
   componentDidMount() {
     this._isMounted = true;
-    document.addEventListener("keydown", this.handleKeyDown);
-    document.addEventListener("keyup", this.handleKeyUp);
-    this.resetSlider(50, 30);
+    this.timerHandle = setTimeout(() => {
+      debugger;
+      document.addEventListener("keydown", this.handleKeyDown);
+      document.addEventListener("keyup", this.handleKeyUp)
+      this.timerHandle = 0;
+    }, 500);
+  }
+  componentDidUpdate(){
+
   }
 
   componentWillUnmount() {
     this._isMounted = false;
     document.removeEventListener("keydown", this.handleKeyDown);
     document.removeEventListener("keyup", this.handleKeyUp);
+    if (this.timerHandle) {
+      // Yes, clear it
+      clearTimeout(this.timerHandle);
+      this.timerHandle = 0;
+    }
   }
 
   handleKeyUp = () => {
@@ -170,7 +180,7 @@ class Slider extends React.Component {
       case 32:
         let choiceTime0 = Math.round(performance.now());
         this.props.onSpacebarHit({ mu, sgm }, distHeight, choiceTime0);
-        if (this._isMounted) {
+        if (this.props.training===1 && this._isMounted) {
           this.resetSlider(50, 30);
         }
         break;
@@ -181,17 +191,12 @@ class Slider extends React.Component {
         this.setValue(this.state.mu, this.state.sgm);
         break;
       case 38:
-        // if (this.state.sgm <= 6) {
-        //   return null;
-        // } else {
-        // if (this.state.sgm >= 10) {
         this.setState((prevState) => ({
           sgm: prevState.sgm - this.stepsSgm(prevState.timesKeyDown),
         }));
 
         this.setValue(this.state.mu, this.state.sgm);
-        // }
-        // }
+
         break;
       case 39:
         this.setState((prevState) => ({
@@ -287,9 +292,6 @@ class Slider extends React.Component {
     } else {
       var distheight_tmp = Math.max.apply(null, yValuesAdapt_tmp) * 5;
     }
-    // var annot = mu * 7.5;
-    // console.log(distheight_tmp);
-    console.log(sgm);
 
     this.setState({
       series: [{ data: yValuesAdapt_tmp }],

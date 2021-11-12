@@ -88,12 +88,13 @@ class ElementsFullDisplay extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.state.first_hover == 1) {
       this.timerkeyHandle = setTimeout(() => {
-        document.addEventListener("keydown", this.handleKeyDown);
+        if (this.state.first_hover == 1) {
+        document.addEventListener("keydown", this.handleKeyDownElem);
+      }
         this.timerkeyHandle = 0;
       }, 1000);
-    }
+
   }
   componentWillUnmount() {
     if (this.timerkeyHandle) {
@@ -106,12 +107,13 @@ class ElementsFullDisplay extends React.Component {
       clearTimeout(this.timerHandle);
       this.timerHandle = 0;
     }
-    document.removeEventListener("keydown", this.handleKeyDown);
+    document.removeEventListener("keydown", this.handleKeyDownElem);
   }
 
-  handleKeyDown = (e) => {
+  handleKeyDownElem = (e) => {
     this.mouseOut(this.state.hover);
     if (e.keyCode === 32) {
+      document.removeEventListener("keydown", this.handleKeyDownElem);
       this.props.onViewEnd(
         this.state.times_element1,
         this.state.times_element2,

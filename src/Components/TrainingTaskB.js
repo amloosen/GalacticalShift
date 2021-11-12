@@ -1,7 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { API_URL } from "../config";
-import styles from "./style/taskStyle.module.css";
 import { range } from "lodash";
 import DisplayElementsTrain from "./DisplayElementsTrain";
 import DisplayTrainOptions from "./DisplayTrainOptions";

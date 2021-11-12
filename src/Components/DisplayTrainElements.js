@@ -1,6 +1,5 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import styles from "./style/taskStyle.module.css";
 import ElementsFullDisplayTraining from "./ElementsFullDisplayTraining";
 
 class DisplayTrainElements extends React.Component {

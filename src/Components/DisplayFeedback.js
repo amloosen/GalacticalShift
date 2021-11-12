@@ -15,19 +15,19 @@ class DispFeedback extends React.Component {
 
   render() {
     let text2;
-
-    text2 = (
-      <div className={styles.questions}>
-        <p>
-          The true population on the planet was{" "}
-          <span className={styles.bigger}>
-            {this.props.all_true_pop_size[this.props.trialNum - 1]}
-          </span>{" "}
-          million.
-        </p>
-      </div>
-    );
-  
+      text2 = (
+        <div className={styles.questions}>
+          <p>
+            The true population on the planet was{" "}
+            <span className={styles.bigger}>
+              {this.props.all_true_pop_size[this.props.trialNum - 1]}
+            </span>{" "}
+            million.<br />
+            <span className={styles.main}>
+            Click the [<strong>SPACEBAR</strong>] if you have seen the feedback long enough.</span>
+          </p>
+        </div>
+      );
 
     return (
       <div className={styles.cockpitslider}>

@@ -1,6 +1,5 @@
 import React from "react";
 import { Spring } from "react-spring";
-import barstyles from "./style/barstyles.css";
 
 const ElementBar = ({ progress }) => {
   return (

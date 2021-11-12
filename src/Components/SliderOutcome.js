@@ -113,5 +113,3 @@ class OutcomeSlider extends React.Component {
   }
 }
 export default withRouter(OutcomeSlider);
-
-// export default OutcomeSlider;

@@ -170,7 +170,7 @@ class OutcomeSliderBar extends React.Component {
     this.timerkeyHandle = setTimeout(() => {
     document.addEventListener("keydown", this.handleKeyDown);
     this.timerkeyHandle = 0;
-  }, 0);
+  }, 50);
 
     this.timerHandle = setTimeout(() => {
       this.props.getBarHeight(this.state.height_bar);
@@ -180,7 +180,6 @@ class OutcomeSliderBar extends React.Component {
   //
   componentWillUnmount() {
     if (this.timerkeyHandle) {
-      // Yes, clear it
       clearTimeout(this.timerkeyHandle);
       this.timerkeyHandle = 0;
     }

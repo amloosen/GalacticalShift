@@ -14,10 +14,6 @@ class TrainingIntroA extends React.Component {
   constructor(props) {
     super(props);
 
-    // var user_info = this.props.location.state.user_info;
-    var currentDate = new Date();
-    var introTrainingStartTime = currentDate.toTimeString();
-
     /////////////////////////////////////////////////////////////////////////////////
     // SET COMPONENT STATES
     this.state = {

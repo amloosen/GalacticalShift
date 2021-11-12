@@ -97,6 +97,7 @@ class DisplaySliderTrainer extends React.Component {
             mu={this.props.startMu}
             sgm={this.props.startSgm}
             onSpacebarHit={this.logData}
+            training={1}
           />
         </span>
       </div>

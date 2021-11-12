@@ -1,7 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { API_URL } from "../config";
-import styles from "./style/taskStyle.module.css";
 import DisplaySlider from "./DisplaySlider";
 import DisplayTrainElements from "./DisplayTrainElements";
 import DisplayFeedback from "./DisplayFeedback";

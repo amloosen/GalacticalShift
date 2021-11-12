@@ -53,6 +53,7 @@ class DisplaySlider extends React.Component {
             mu={this.props.startMu}
             sgm={this.props.startSgm}
             onSpacebarHit={this.logData}
+            training={0}
           />
         </div>
       </div>
