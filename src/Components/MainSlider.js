@@ -143,7 +143,6 @@ class Slider extends React.Component {
   componentDidMount() {
     this._isMounted = true;
     this.timerHandle = setTimeout(() => {
-      debugger;
       document.addEventListener("keydown", this.handleKeyDown);
       document.addEventListener("keyup", this.handleKeyUp)
       this.timerHandle = 0;

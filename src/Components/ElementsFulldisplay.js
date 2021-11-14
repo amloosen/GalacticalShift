@@ -77,6 +77,7 @@ class ElementsFullDisplay extends React.Component {
   }
 
   componentDidMount() {
+    this._isMounted = true;
     this.timerHandle = setTimeout(() => {
       this.props.onViewEnd(
         this.state.times_element1,
@@ -97,6 +98,7 @@ class ElementsFullDisplay extends React.Component {
 
   }
   componentWillUnmount() {
+     this._isMounted = false;
     if (this.timerkeyHandle) {
       // Yes, clear it
       clearTimeout(this.timerkeyHandle);

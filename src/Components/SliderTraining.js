@@ -114,6 +114,8 @@ class SliderTraining extends React.Component {
         startTime: this.state.startTime
       },
     });
+
+    // console.log("UserID is: " + this.state.userID);
   }
 }
 

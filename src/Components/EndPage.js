@@ -31,9 +31,9 @@ class EndPage extends React.Component {
 
     if (whichButton === 4 && curText > 1 && curText <= 3) {
       this.setState({ instructScreenText: curText - 1 });
-    } else if (whichButton === 5 && curText < 3) {
+    } else if (whichButton === 5 && curText < 2) {
       this.setState({ instructScreenText: curText + 1 });
-    } else if (whichButton === 10 && curText === 3) {
+    } else if (whichButton === 10 && curText === 2) {
       this.handleSubmit();
 
     }
@@ -82,6 +82,7 @@ class EndPage extends React.Component {
       feedback: this.state.feedback,
       bonus: this.state.bonus,
     };
+    debugger;
     try {
       fetch(
         `${API_URL}/end_info/create/` +
@@ -103,7 +104,7 @@ class EndPage extends React.Component {
     }
 
     alert("Thanks for your feedback!");
-    event.preventDefault();
+
 
     this.clearFb();
     this.redirectToEnd();
@@ -187,7 +188,7 @@ class EndPage extends React.Component {
                 </form>
               <span className={styles.centerTwo}>
                 If you are ready to return to Prolific, press [
-                <strong>SPACEBAR</strong>] <br />
+                <strong>SUBMIT</strong>] <br />
                 <br />
                 and follow the pop-up to complete the session.
                 <br />
