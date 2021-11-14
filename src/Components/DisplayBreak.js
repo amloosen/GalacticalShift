@@ -7,18 +7,11 @@ class DisplayBreak extends React.Component {
     super(props);
   }
 
-  handleBreakKey = (event) => {
-    if (event.keyCode === 32) {
-      this.props.onBreakEnd(1);
-    }
-  };
-
-
   componentDidMount() {
     this.timerkeyHandle = setTimeout(() => {
     document.addEventListener("keyup", this.handleBreakKey);
     this.timerkeyHandle = 0;
-  }, 50);
+  }, 100);
 
     this.timerHandle = setTimeout(() => {
       this.props.onBreakEnd(1);
@@ -63,7 +56,8 @@ class DisplayBreak extends React.Component {
           You should take the opportunity to look away from the screen and <br />
           <br />focus on something in the distance for a few seconds.
           <br />
-          <br />
+          Remember to adapt your certainty (width of the slider)! This will maximize your reward.
+          <br /><br />
           <span className={styles.centerTwo}>
             If you are ready to continue, please press the [
             <strong>SPACEBAR</strong>].
