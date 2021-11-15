@@ -89,6 +89,7 @@ class ElementsFullDisplay extends React.Component {
   }
 
   componentDidUpdate() {
+    this._isMounted = true;
       this.timerkeyHandle = setTimeout(() => {
         if (this.state.first_hover == 1) {
         document.addEventListener("keydown", this.handleKeyDownElem);
