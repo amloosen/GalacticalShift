@@ -144,6 +144,10 @@ class TrainingTaskB extends React.Component {
       userID: this.props.location.state.userID,
       date: this.props.location.state.date,
       startTime: this.props.location.state.startTime,
+
+      // userID: 12,
+      // date: 12,
+      // startTime: 12,
       taskSession: "TrainingTaskB",
       traintrialNum: 1,
       traintrialTotal: nr_traintrial,
@@ -292,6 +296,7 @@ onElementsEnd = (event) => {
         userID: this.state.userID,
         date: this.state.date,
         startTime: this.state.startTime,
+        reStart: 0,
       },
     });
   }

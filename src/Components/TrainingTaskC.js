@@ -161,9 +161,10 @@ class TrainingTaskC extends React.Component {
       disp_el: 1,
       disp_slider: 0,
       startMu: 50,
-      startSgm: 50,
+      startSgm: 30,
       corr_elements: corPos_sq,
       study_part: 4,
+      reStart: this.props.location.state.reStart
     };
 
     //* prevents page from going to the right/left when arrows are pressed .*/
@@ -352,6 +353,7 @@ class TrainingTaskC extends React.Component {
         userID: this.state.userID,
         date: this.state.date,
         startTime: this.state.startTime,
+        reStart: this.state.reStart
       },
     });
   }

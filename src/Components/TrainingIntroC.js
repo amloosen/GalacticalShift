@@ -30,6 +30,7 @@ class TrainingIntroC extends React.Component {
       taskSession: "TrainingIntroC",
       instructScreenText: 1,
       instructScreen: true,
+      reStart: this.props.location.state.reStart
     };
 
     this.handleInstructLocal = this.handleInstructLocal.bind(this);
@@ -96,6 +97,7 @@ class TrainingIntroC extends React.Component {
         userID: this.state.userID,
         date: this.state.date,
         startTime: this.state.startTime,
+        reStart: this.state.reStart
       },
     });
   };
@@ -115,7 +117,7 @@ class TrainingIntroC extends React.Component {
             <p>
               <span className={styles.center}>TRAINING IV</span>
               <br />
-              Great job!
+              Welcome to the last training stage!
               <br />
               <br />
               You have now learned about the main challenges of our game.

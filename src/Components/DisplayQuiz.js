@@ -1,5 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+import { API_URL } from "../config";
 import styles from "./style/taskStyle.module.css";
 import Quiz from "./Quiz";
 import "./style/quizStylesAdapt.css";
@@ -7,14 +8,24 @@ import "./style/quizStylesAdapt.css";
 class DisplayQuiz extends React.Component {
   constructor(props) {
     super(props);
+    var currentDate = new Date(); // maybe change to local
+    var timeString = currentDate.toTimeString();
+
     this.state = {
       userID: this.props.location.state.userID,
       date: this.props.location.state.date,
       startTime: this.props.location.state.startTime,
+      // userID: 12,
+      // date: 12,
+      // startTime: 12, //debugger
+      sectionTime: timeString,
       showIntro: 1,
       showQuiz: 0,
       nextRound: 0,
       allCorrect: 0,
+      repeatNum: 0,
+      reStart: this.props.location.state.reStart,
+      study_part: 100,
     };
   }
   handleStartKey = (event) => {
@@ -27,7 +38,7 @@ class DisplayQuiz extends React.Component {
         if (this.state.allCorrect === 0) {
           this.setState({ showIntro: 0, showQuiz: 1 });
         } else {
-          this.redirectToNextStage();
+          this.redirectToNextStage(0);
         }
         break;
       default:
@@ -43,14 +54,7 @@ class DisplayQuiz extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.state.nextRound == 1) {
-      this.timerRound = setTimeout(() => {
-        this.nextRound();
-      }, 3000);
-    }
-    if (this.state.allCorrect === 1) {
-      document.addEventListener("keyup", this.handleStartKey);
-    }
+    document.addEventListener("keyup", this.handleStartKey);
   }
 
   nextRound = () => {
@@ -67,12 +71,18 @@ class DisplayQuiz extends React.Component {
         nextRound: 0,
         allCorrect: 1,
       });
-      // this.redirectToNextStage();
     } else if (score < 5) {
-      this.setState({
-        showQuiz: 0,
-        nextRound: 1,
-      });
+      var repeat = this.state.repeatNum;
+      repeat = repeat + 1;
+      if (repeat > 1) {
+        this.redirectToNextStage(1);
+      } else {
+        this.setState({
+          showQuiz: 0,
+          nextRound: 1,
+          repeatNum: repeat
+        });
+      }
     }
   };
 
@@ -90,7 +100,7 @@ class DisplayQuiz extends React.Component {
           <Quiz onQuizEnd={this.quizCompleted} />
         </div>
       );
-    } else if (this.state.nextRound === 1) {
+    } else if (this.state.nextRound === 1 && this.state.repeatNum === 1) {
       let text = (
         <div className={styles.main}>
           <p>
@@ -98,8 +108,19 @@ class DisplayQuiz extends React.Component {
             You unfortunately, made some mistakes.
             <br />
             <br />
-            Try again!
+            You will get a second chance to complete the quiz. Please answer the
+            questions carefully. <br />
+            If you are unable to complete your second attempt without mistakes,
+            you will automatically be sent back to the last training stage. This
+            is to ensure you fully understood the game before you start it.
             <br />
+            <br />
+            Good luck!
+            <br />
+            <br />
+            <span className={styles.center}>
+              Press the [<strong>SPACEBAR</strong>] to start the second time.
+            </span>
           </p>
         </div>
       );
@@ -141,8 +162,13 @@ class DisplayQuiz extends React.Component {
             <br />
             <br />
             To make sure you understood the game and its challenges, you will
-            now complete a short quiz.
-            Answer all questions correctly in order to proceed to the main game.
+            now complete a short quiz. Answer all questions correctly in order
+            to proceed to the main game.
+            <br />
+            <br />
+            You will get two attempts to complete the quiz. After that, you will
+            be sent back to the last training stage. This is to ensure you fully
+            understood the game.
             <br />
             <br />
             Good luck!
@@ -162,15 +188,70 @@ class DisplayQuiz extends React.Component {
       );
     }
   }
-  redirectToNextStage(h) {
-    this.props.history.push({
-      pathname: `/MainTaskIntro`,
-      state: {
-        userID: this.state.userID,
-        date: this.state.date,
-        startTime: this.state.startTime,
-      },
-    });
+  redirectToNextStage(r) {
+    var currentDate = new Date(); // maybe change to local
+    var endTime = currentDate.toTimeString();
+
+    let body = {
+      sectionStartTime: this.state.sectionTime,
+      startTime: this.state.startTime,
+      sectionEndTime: endTime,
+      timesRepeated: this.state.repeatNum,
+      timesRestarted: this.state.reStart,
+    };
+
+    fetch(
+      `${API_URL}/quiz/create/` +
+        this.state.userID +
+        `/` +
+        this.state.study_part,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }
+    );
+    ////////////////////////
+    debugger;
+    if (r===1) {
+      var reStart = this.state.reStart;
+      reStart = reStart + 1;
+      this.props.history.push({
+        pathname: `/TrainingIntroC`,
+        state: {
+          userID: this.state.userID,
+          date: this.state.date,
+          startTime: this.state.startTime,
+          reStart: reStart,
+        },
+      });
+    } else {
+      this.props.history.push({
+        pathname: `/MainTaskIntro`,
+        state: {
+          userID: this.state.userID,
+          date: this.state.date,
+          startTime: this.state.startTime,
+        },
+      });
+    }
   }
+
+  // redirectToRepeatStage() {
+  //   var reStart = this.state.reStart;
+  //   reStart = reStart + 1;
+  //   this.props.history.push({
+  //     pathname: `/TrainingIntroC`,
+  //     state: {
+  //       userID: this.state.userID,
+  //       date: this.state.date,
+  //       startTime: this.state.startTime,
+  //       reStart: reStart,
+  //     },
+  //   });
+  // }
 }
 export default withRouter(DisplayQuiz);
