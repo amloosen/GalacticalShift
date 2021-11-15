@@ -108,18 +108,21 @@ class MainTask extends React.Component {
       .fill()
       .map(() => Array(2).fill(0));
 
-    let indicReq_tmp = Array(nr_trial).fill(0);
+      let indicReq_tmp = Array(nr_trial).fill(0);
+      var ind_indic = [4, 24, 38, 58, 72, 92, 106, 126, 120, 140, 154];
 
-    for (var k = 9; k <= nr_trial - 1; k += 27) {
-      indicReq_tmp[k] = 1;
-    }
+      for (var k = 4; k <= nr_trial - 1; k++) {
+        if (ind_indic.indexOf(k) > -1) {
+          indicReq_tmp[k] = 1;
+        }
+      }
 
-    var blockTotal_tmp = 5;
-    var trialPerBlock = nr_trial / blockTotal_tmp;
+      var blockTotal_tmp = 5;
+      var trialPerBlock = nr_trial / blockTotal_tmp;
 
-    for (var l = 1; l <= nr_trial - 1; l += trialPerBlock) {
-      indicReq_tmp[l] = 0; //make sure the element indicator is never on the last trial of a block to not prevent sending the data
-    }
+      for (var l = 1; l <= nr_trial - 1; l += trialPerBlock) {
+        indicReq_tmp[l] = 0; //make sure the element indicator is never on the last trial of a block to not prevent sending the data
+      }
 
     var times_element1 = Array(nr_trial)
       .fill()
@@ -319,7 +322,6 @@ class MainTask extends React.Component {
       ///
       var bonisum = height_check.reduce((result, number) => result + number);
       var bonus = getBonus(bonisum,this.state.trialPerBlock);
-      debugger;
 
       let backup = {
         times_element1_backup: this.state.times_element1,
@@ -487,7 +489,6 @@ class MainTask extends React.Component {
     }
 
     if (alert_count >= 8) {
-      debugger;
       alert(
         "It seems like you are not adapting your certainty. Make sure to indicate your true certainty to maximize your reward!"
       );
