@@ -109,7 +109,7 @@ class MainTask extends React.Component {
       .map(() => Array(2).fill(0));
 
       let indicReq_tmp = Array(nr_trial).fill(0);
-      var ind_indic = [4, 24, 38, 58, 72, 92, 106, 126, 120, 140, 154];
+      var ind_indic = [4, 24, 38, 58, 72, 92, 106, 126, 140, 154];
 
       for (var k = 4; k <= nr_trial - 1; k++) {
         if (ind_indic.indexOf(k) > -1) {
@@ -321,7 +321,8 @@ class MainTask extends React.Component {
       });
       ///
       var bonisum = height_check.reduce((result, number) => result + number);
-      var bonus = getBonus(bonisum,this.state.trialPerBlock);
+      var bonus = getBonus(bonisum, this.state.trialPerBlock);
+
 
       let backup = {
         times_element1_backup: this.state.times_element1,
@@ -480,6 +481,7 @@ class MainTask extends React.Component {
   };
 
   nextTrial = (height) => {
+
     if (
       this.state.trialSgmMu[this.state.trialNum - 1][1] === this.state.startSgm
     ) {
@@ -501,7 +503,7 @@ class MainTask extends React.Component {
       this.sendBlock(height);
     } else {
       var trialBlockNum_tmp = this.state.trialBlockNum + 1;
-console.log(trialNum_tmp)
+      
       this.setState({
         trialNum: trialNum_tmp,
         trialBlockNum: trialBlockNum_tmp,

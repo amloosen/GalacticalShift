@@ -161,7 +161,7 @@ class TrainingTaskC extends React.Component {
       disp_el: 1,
       disp_slider: 0,
       startMu: 50,
-      startSgm: 30,
+      startSgm: 50,
       corr_elements: corPos_sq,
       study_part: 4,
       reStart: this.props.location.state.reStart
