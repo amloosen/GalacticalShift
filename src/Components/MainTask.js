@@ -33,8 +33,8 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
 }
 
-function getBonus(bonisum, trialPerBlock) {
-  var bonus = (bonisum / (89 * trialPerBlock)) * 1;
+function getBonus(bonisum, currTrialNum) {
+  var bonus = (bonisum / (89 * currTrialNum)) * 1; // adapt the *1 later for patient study
   if (bonus < 0) {
     bonus = 0;
   } else if (bonus > 1) {
@@ -149,7 +149,7 @@ class MainTask extends React.Component {
       userID: this.props.location.state.userID,
       date: this.props.location.state.date,
       startTime: this.props.location.state.startTime, //debugger
-
+      //
       // userID: 12,
       // date: 12,
       // startTime: 12, //debugger
@@ -220,7 +220,7 @@ class MainTask extends React.Component {
     });
 
     var bonisum = height.reduce((result, number) => result + number);
-    var bonus = getBonus(bonisum, this.state.trialPerBlock);
+    var bonus = getBonus(bonisum, this.state.trialNum);
 
     var bonusPerBlock_tmp = this.state.bonusPerBlock;
     bonusPerBlock_tmp[this.state.blockNum - 1] = bonus;
@@ -324,7 +324,7 @@ class MainTask extends React.Component {
       });
       ///
       var bonisum = height_check.reduce((result, number) => result + number);
-      var bonus = getBonus(bonisum, this.state.trialPerBlock);
+      var bonus = getBonus(bonisum, this.state.trialNum);
 
       let backup = {
         times_element1_backup: this.state.times_element1,
@@ -506,6 +506,7 @@ class MainTask extends React.Component {
       this.sendBlock(height);
     } else {
       var trialBlockNum_tmp = this.state.trialBlockNum + 1;
+      console.log(trialNum_tmp);
       this.setState({
         trialNum: trialNum_tmp,
         trialBlockNum: trialBlockNum_tmp,
