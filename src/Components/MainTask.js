@@ -33,9 +33,8 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
 }
 
-
-function getBonus(bonisum,trialPerBlock){
-var bonus = (bonisum / (89 * trialPerBlock)) * 1;
+function getBonus(bonisum, trialPerBlock) {
+  var bonus = (bonisum / (89 * trialPerBlock)) * 1;
   if (bonus < 0) {
     bonus = 0;
   } else if (bonus > 1) {
@@ -108,21 +107,21 @@ class MainTask extends React.Component {
       .fill()
       .map(() => Array(2).fill(0));
 
-      let indicReq_tmp = Array(nr_trial).fill(0);
-      var ind_indic = [4, 24, 38, 58, 72, 92, 106, 126, 140, 154];
+    let indicReq_tmp = Array(nr_trial).fill(0);
+    var ind_indic = [4, 24, 38, 58, 72, 92, 106, 126, 140, 154];
 
-      for (var k = 4; k <= nr_trial - 1; k++) {
-        if (ind_indic.indexOf(k) > -1) {
-          indicReq_tmp[k] = 1;
-        }
+    for (var k = 4; k <= nr_trial - 1; k++) {
+      if (ind_indic.indexOf(k) > -1) {
+        indicReq_tmp[k] = 1;
       }
+    }
 
-      var blockTotal_tmp = 5;
-      var trialPerBlock = nr_trial / blockTotal_tmp;
+    var blockTotal_tmp = 5;
+    var trialPerBlock = nr_trial / blockTotal_tmp;
 
-      for (var l = 1; l <= nr_trial - 1; l += trialPerBlock) {
-        indicReq_tmp[l] = 0; //make sure the element indicator is never on the last trial of a block to not prevent sending the data
-      }
+    for (var l = 1; l <= nr_trial - 1; l += trialPerBlock) {
+      indicReq_tmp[l] = 0; //make sure the element indicator is never on the last trial of a block to not prevent sending the data
+    }
 
     var times_element1 = Array(nr_trial)
       .fill()
@@ -144,10 +143,12 @@ class MainTask extends React.Component {
     var currentDate = new Date();
     var mainStartTime = currentDate.toString();
 
+    var sgmPrompt_tmp = Array(nr_trial).fill(0);
+
     this.state = {
       userID: this.props.location.state.userID,
       date: this.props.location.state.date,
-      startTime: this.props.location.state.startTime,//debugger
+      startTime: this.props.location.state.startTime, //debugger
 
       // userID: 12,
       // date: 12,
@@ -192,6 +193,7 @@ class MainTask extends React.Component {
       epsilon: epsilon,
       precededShift: precededShift,
       epsilon: epsilon,
+      sgmPrompt: sgmPrompt_tmp,
     };
 
     //* prevents page from going to the right/left when arrows are pressed .*/
@@ -272,6 +274,7 @@ class MainTask extends React.Component {
       trialPerBlock: this.state.trialPerBlock,
       blockNum: this.state.blockNum,
       bonusPerBlock: bonusPerBlock_tmp,
+      sgmPrompt: this.state.sgmPrompt,
     };
 
     fetch(
@@ -322,7 +325,6 @@ class MainTask extends React.Component {
       ///
       var bonisum = height_check.reduce((result, number) => result + number);
       var bonus = getBonus(bonisum, this.state.trialPerBlock);
-
 
       let backup = {
         times_element1_backup: this.state.times_element1,
@@ -481,7 +483,6 @@ class MainTask extends React.Component {
   };
 
   nextTrial = (height) => {
-
     if (
       this.state.trialSgmMu[this.state.trialNum - 1][1] === this.state.startSgm
     ) {
@@ -490,11 +491,13 @@ class MainTask extends React.Component {
       var alert_count = this.state.alert_count;
     }
 
+    var sgmPrompt_tmp = this.state.sgmPrompt;
     if (alert_count >= 8) {
       alert(
         "It seems like you are not adapting your certainty. Make sure to indicate your true certainty to maximize your reward!"
       );
       var alert_count = 0;
+      sgmPrompt_tmp[this.state.trialNum - 1] = 1;
     }
 
     var trialNum_tmp = this.state.trialNum + 1;
@@ -503,7 +506,6 @@ class MainTask extends React.Component {
       this.sendBlock(height);
     } else {
       var trialBlockNum_tmp = this.state.trialBlockNum + 1;
-      
       this.setState({
         trialNum: trialNum_tmp,
         trialBlockNum: trialBlockNum_tmp,
@@ -512,6 +514,7 @@ class MainTask extends React.Component {
         showBreak: 0,
         disp_el: 1,
         alert_count: alert_count,
+        sgmPrompt: sgmPrompt_tmp,
       });
     }
   };
