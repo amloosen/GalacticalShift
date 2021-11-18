@@ -110,13 +110,14 @@ class ElementsFullDisplay extends React.Component {
       clearTimeout(this.timerHandle);
       this.timerHandle = 0;
     }
-    document.removeEventListener("keydown", this.handleKeyDownElem);
+    window.removeEventListener("keydown", this.handleKeyDownElem);
   }
 
   handleKeyDownElem = (e) => {
+    window.removeEventListener("keydown", this.handleKeyDownElem);
     this.mouseOut(this.state.hover);
     if (e.keyCode === 32) {
-      document.removeEventListener("keydown", this.handleKeyDownElem);
+
       this.props.onViewEnd(
         this.state.times_element1,
         this.state.times_element2,
