@@ -81,12 +81,9 @@ class TrainingTaskA extends React.Component {
 
     this.state = {
       sectionTime: timeString,
-      // userID: this.props.location.state.userID,
-      // date: this.props.location.state.date,
-      // startTime: this.props.location.state.startTime,
-      userID: 12,
-      date: 12,
-      startTime:12,
+      userID: this.props.location.state.userID,
+      date: this.props.location.state.date,
+      startTime: this.props.location.state.startTime,
       taskSession: "TrainingTaskA",
       trialKeypress: array_tmp,
       valueOnElement: random_val,
