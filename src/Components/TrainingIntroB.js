@@ -107,13 +107,22 @@ class TrainingIntroB extends React.Component {
               <span className={styles.center}>TRAINING III</span>
               <br />
               You might have noticed that the percent on the instrument first
-              mapped one-to-one <br />
-              onto the population size (40% → 40 million) but then after a while
-              it switched to an
+              mapped one-to-one onto the population size (40% → 40 million).
               <br />
-              inverse (40% → 60 million), meaning you had to calculate '100 -
-              the instrument <br />
-              measure' to get the population size.
+              <br />
+              After a while it switched to an inverse (40% → 60 million),
+              meaning you had to calculate '100 - instrument value' to get the
+              population size.
+              <br />
+              <br />
+              Finally, the population size corresponded to half of the value
+              instrument value <br />
+              (40% → 20 million).
+              <br />
+              <br />
+              In the main game, these associations will become even more
+              complex. You have to learn them and spot when they change to adapt
+              your answer. This poses the first challenge of the game.
               <br />
               <br />
               Click next to learn about another challenge.
@@ -209,7 +218,8 @@ class TrainingIntroB extends React.Component {
               <br />
               Click the [<strong>SPACEBAR</strong>] once you have seen the
               instruments for long enough.
-              <br /><br />
+              <br />
+              <br />
               Let's practice this!
               <br /> <br />
               Press the [<strong>SPACEBAR</strong>] to start the training.

@@ -35,7 +35,7 @@ class TrainingTaskA extends React.Component {
     var currentDate = new Date(); // maybe change to local
     var timeString = currentDate.toTimeString();
 
-    var nr_traintrial = 10;
+    var nr_traintrial = 12;
     var val_options = range(0, 110, 10);
     val_options.splice(val_options.indexOf(50), 1); //remove the 50 to make it clearer which element is correct
     var random_val = [];
@@ -47,21 +47,28 @@ class TrainingTaskA extends React.Component {
       random_val[i] = val_tmp;
     }
 
-    var corr_values = random_val.slice(0, 5);
-    var inverse_tmp = random_val.slice(5, 10);
+    var corr_values = random_val.slice(0, 4);
+    var inverse_tmp = random_val.slice(4, 8);
+    var half_tmp = random_val.slice(8, 12);
     var inverse = inverse_tmp.map(function (value) {
       return 100 - value;
+    });
+    var half = half_tmp.map(function (value) {
+      return value/2;
     });
     corr_values.push(
       inverse[0],
       inverse[1],
       inverse[2],
       inverse[3],
-      inverse[4]
+      half[0],
+      half[1],
+      half[2],
+      half[3]
     );
     let array_tmp = Array(nr_traintrial).fill(0);
 
-    var corr_pos = [4, 4, 4, 4, 4, 5, 5, 5, 5]; //1 is left and 2 is right; determine where the correct value is displayed
+    var corr_pos = [4, 4, 5, 5, 4, 4, 5, 5, 4, 4, 5, 5]; //1 is left and 2 is right; determine where the correct value is displayed
     shuffle(corr_pos);
     // initialize options for the first trial
     if (corr_pos[0] === 4) {
@@ -74,19 +81,21 @@ class TrainingTaskA extends React.Component {
 
     this.state = {
       sectionTime: timeString,
-      userID: this.props.location.state.userID,
-      date: this.props.location.state.date,
-      startTime: this.props.location.state.startTime,
+      // userID: this.props.location.state.userID,
+      // date: this.props.location.state.date,
+      // startTime: this.props.location.state.startTime,
+      userID: 12,
+      date: 12,
+      startTime:12,
       taskSession: "TrainingTaskA",
       trialKeypress: array_tmp,
-      valueOnElement: array_tmp,
+      valueOnElement: random_val,
       elements: 1,
       disp_opt: 0,
       traintrialNum: 1,
       traintrialTotal: nr_traintrial,
       feedback: 0,
       all_corr_values: corr_values,
-      valTrainElem: corr_values[0],
       corr_value: corr_values[0],
       trainAcc: array_tmp,
       ansOne: ansOne,
@@ -117,7 +126,7 @@ class TrainingTaskA extends React.Component {
     if (this.state.elements === 1) {
       return (
         <DisplayTrainElement
-          valTrainElem={this.state.valTrainElem}
+          valTrainElem={this.state.valueOnElement[this.state.traintrialNum-1]}
           traintrialTotal={this.state.traintrialTotal}
           traintrialNum={this.state.traintrialNum}
           handleElement={this.elementsShown}
@@ -135,7 +144,7 @@ class TrainingTaskA extends React.Component {
     } else if (this.state.feedback === 1) {
       return (
         <DisplayTrainFeedback
-          corr_value={this.state.corr_value}
+          corr_value={this.state.all_corr_values[this.state.traintrialNum-1]}
           handleFeedback={this.feedbackShown}
         />
       );
@@ -173,15 +182,7 @@ class TrainingTaskA extends React.Component {
       this.redirectToNextStage();
     } else {
       var traintrialNum_tmp = this.state.traintrialNum + 1;
-      var all_corr_values = this.state.all_corr_values;
-
-      if (traintrialNum_tmp <= this.state.traintrialTotal / 2) {
-        var valTrainElem = all_corr_values[traintrialNum_tmp - 1];
-      } else {
-        var valTrainElem = 100 - all_corr_values[traintrialNum_tmp - 1];
-      }
-      let valueOnElement = this.state.valueOnElement;
-      valueOnElement[traintrialNum_tmp - 1] = valTrainElem;
+       var all_corr_values = this.state.all_corr_values;
       var corr_pos = this.state.corr_pos;
       if (corr_pos[traintrialNum_tmp - 1] === 4) {
         var ansTwo = 100 - all_corr_values[traintrialNum_tmp - 1];
@@ -196,9 +197,6 @@ class TrainingTaskA extends React.Component {
         elements: 1,
         disp_opt: 0,
         feedback: 0,
-        valueOnElement: valueOnElement,
-        valTrainElem: valTrainElem,
-        corr_value: this.state.all_corr_values[traintrialNum_tmp - 1],
         ansTwo: ansTwo,
         ansOne: ansOne,
       });
