@@ -54,90 +54,78 @@ class TrainingTaskB extends React.Component {
       random_val[i] = val_tmp;
     }
 
-    var corr_values = random_val.slice(0, 5);
-    var inverse_tmp = random_val.slice(5, 10);
+    var corr_values = random_val.slice(0, 2);
+    var inverse_tmp = random_val.slice(2, 4);
+    var regular_tmp = random_val.slice(4, 6);
+    inverse_tmp.push(random_val.slice(6, 7),
+    random_val.slice(7, 8),
+  );
+    var half_tmp = random_val.slice(8, 10);
     var inverse = inverse_tmp.map(function (value) {
       return 100 - value;
     });
+    var half = half_tmp.map(function (value) {
+      return value/2;
+    });
+
     corr_values.push(
       inverse[0],
       inverse[1],
+      regular_tmp[0],
+      regular_tmp[1],
       inverse[2],
       inverse[3],
-      inverse[4],
-      inverse[5]
+      half[0],
+      half[1]
     );
+
     let array_tmp = Array(nr_traintrial).fill(0);
 
-    var corr_pos = [4, 4, 4, 4, 4, 5, 5, 5, 5, 5]; //1 is left and 2 is right; determine where the correct value is displayed
+    var corr_pos = [5, 4, 4, 5, 5, 5, 4, 4, 4, 5]; //1 is left and 2 is right; determine where the correct value is displayed
     shuffle(corr_pos);
     // initialize options for the first trial
+    var restricted = [corr_values[0], 100 - corr_values[0]];
     if (corr_pos[0] === 4) {
+      var ansTwo = getRand(restricted);
       var ansOne = corr_values[0];
     } else {
+      var ansOne = getRand(restricted);
       var ansTwo = corr_values[0];
     }
 
     var corr_elem_tmp = [1, 2]; //1 is left and 2 is right
     shuffle(corr_elem_tmp);
-    var corr_elem = Array(nr_traintrial).fill(0);
 
+    var corr_elem = Array(nr_traintrial).fill(0);
     for (var i = 0; i <= nr_traintrial - 1; i++) {
-      if (i < nr_traintrial / 2) {
+      if (i < 4) {
         corr_elem[i] = corr_elem_tmp[0];
       } else {
         corr_elem[i] = corr_elem_tmp[1];
       }
-      }
-    //pregenerate the values for all elements
-    var check_al2 = [];
-    var check_al1 = [];
+    }
 
+    //pregenerate the values for the alternative instrument
+    var check_al1 = [];
     for (var i = 0; i <= nr_traintrial - 1; i++) {
       var restricted = [corr_values[i], 100 - corr_values[i]];
-      if (i < nr_traintrial / 2) {
         check_al1[i] = getRand(restricted);
-        var restrictedsecond = [
-          corr_values[i],
-          100 - corr_values[i],
-          check_al1[i],
-        ];
-        check_al2[i] = getRand(restrictedsecond);
-      } else {
-        var restrictedsecond = [
-          corr_values[i],
-          100 - corr_values[i],
-          check_al1[i],
-        ];
-        check_al2[i] = getRand(restricted);
-        check_al1[i] = getRand(restrictedsecond);
-      }
     }
 
     var all_element_values = Array(nr_traintrial)
       .fill()
-      .map(() => Array(3).fill(0));
+      .map(() => Array(2).fill(0));
 
     for (var i = 0; i <= nr_traintrial - 1; i++) {
       all_element_values[i][corr_elem[i] - 1] = corr_values[i];
       if (corr_elem[i] === 1) {
+        all_element_values[i][0] = random_val[i];
         all_element_values[i][1] = check_al1[i];
-        all_element_values[i][2] = check_al2[i];
       } else if (corr_elem[i] === 2) {
         all_element_values[i][0] = check_al1[i];
-        all_element_values[i][2] = check_al2[i];
+        all_element_values[i][1] = random_val[i];
       }
     }
-
-    // initialize options for the first trial
-    if (corr_pos[0] === 4) {
-      var ansTwo = 100 - corr_values[0];
-      var ansOne = corr_values[0];
-    } else {
-      var ansOne = 100 - corr_values[0];
-      var ansTwo = corr_values[0];
-    }
-
 
     this.state = {
       sectionTime: timeString,
@@ -210,18 +198,16 @@ class TrainingTaskB extends React.Component {
     }
   }
 
-onElementsEnd = (event) => {
-
+  onElementsEnd = (event) => {
     this.setState({
       disp_opt: 1,
       feedback: 0,
-      disp_el:0
+      disp_el: 0,
     });
   };
 
   trainIndic = (pressed) => {
     var trainAcc_tmp = this.state.trainAcc;
-
     if (pressed === this.state.corr_pos[this.state.traintrialNum - 1]) {
       trainAcc_tmp[this.state.traintrialNum - 1] = 1;
     } else {
@@ -235,7 +221,6 @@ onElementsEnd = (event) => {
     });
   };
 
-
   feedbackShown = () => {
     if (this.state.traintrialNum === this.state.traintrialTotal) {
       this.redirectToNextStage();
@@ -243,12 +228,18 @@ onElementsEnd = (event) => {
       var traintrialNum_tmp = this.state.traintrialNum + 1;
 
       var all_corr_values = this.state.all_corr_values;
+      var restricted = [
+        all_corr_values[traintrialNum_tmp - 1],
+        100 - all_corr_values[traintrialNum_tmp - 1]
+      ];
+
       var corr_pos = this.state.corr_pos;
+
       if (corr_pos[traintrialNum_tmp - 1] === 4) {
-        var ansTwo = 100 - all_corr_values[traintrialNum_tmp - 1];
+        var ansTwo = getRand(restricted);
         var ansOne = all_corr_values[traintrialNum_tmp - 1];
       } else {
-        var ansOne = 100 - all_corr_values[traintrialNum_tmp - 1];
+        var ansOne = getRand(restricted);
         var ansTwo = all_corr_values[traintrialNum_tmp - 1];
       }
 
@@ -263,7 +254,6 @@ onElementsEnd = (event) => {
   };
 
   redirectToNextStage() {
-
     let body = {
       sectionStartTime: this.state.sectionTime,
       startTime: this.state.startTime,

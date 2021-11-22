@@ -15,6 +15,10 @@ class TrainingIntroB extends React.Component {
       userID: this.props.location.state.userID,
       date: this.props.location.state.date,
       startTime: this.props.location.state.startTime,
+
+        // userID: 12,
+        // date: 12,
+        // startTime: 12,
       sectionStartTime: introTrainingStartTime,
       taskSessionTry: 1,
       taskSession: "TrainingIntroB",
@@ -110,7 +114,7 @@ class TrainingIntroB extends React.Component {
               mapped one-to-one onto the population size (40% → 40 million).
               <br />
               <br />
-              After a while it switched to an inverse (40% → 60 million),
+              After a while it switched to an inverse relationship (40% → 60 million),
               meaning you had to calculate '100 - instrument value' to get the
               population size.
               <br />
@@ -121,7 +125,7 @@ class TrainingIntroB extends React.Component {
               <br />
               <br />
               In the main game, these associations will become even more
-              complex. You have to learn them and spot when they change to adapt
+              complex. You have to learn them and spot when they change to then adapt
               your answer. This poses the first challenge of the game.
               <br />
               <br />
@@ -141,7 +145,7 @@ class TrainingIntroB extends React.Component {
               <span className={styles.center}>TRAINING III</span>
               <br />
               <br />
-              Another challenge makes your mission even more difficult:
+              The second challenge makes your mission even more difficult:
               <br />
               <br />
               Your spaceship has not only one but <strong>three</strong>{" "}
@@ -152,7 +156,7 @@ class TrainingIntroB extends React.Component {
               You have to find out <strong>
                 which single one is relevant
               </strong>{" "}
-              and is associated with the population size. <br />
+              and associated with the population size. <br />
               Only one instrument at a time is associated with the population
               size.
               <br />
@@ -202,8 +206,8 @@ class TrainingIntroB extends React.Component {
           <div className={styles.main}>
             <p>
               <span className={styles.center}>TRAINING III</span>
-              Again, the true population size will be shown after each you
-              indicated your answer. <br /> <br /> This will make it possible
+              Again, the true population size will be shown after you
+              indicate your answer. <br /> <br /> This will make it possible
               for you to find out which instrument is important <br />
               and how it is associated with the population size.
               <br />
@@ -213,7 +217,7 @@ class TrainingIntroB extends React.Component {
               and how it is assocated with the population size.
               <br />
               <br />
-              Indicate your estimated by pressing the corresponding left and
+              Indicate your estimate by pressing the corresponding left or
               right arrow key.
               <br />
               Click the [<strong>SPACEBAR</strong>] once you have seen the
