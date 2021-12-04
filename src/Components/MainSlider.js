@@ -18,6 +18,7 @@ class Slider extends React.Component {
     var distheight_tmp = Math.max.apply(null, yValuesAdapt) * 5;
 
     this.state = {
+      spaceButton: false,
       timesKeyDown: 0,
       mu: this.props.mu,
       sgm: this.props.sgm,
@@ -143,15 +144,28 @@ class Slider extends React.Component {
   componentDidMount() {
     this._isMounted = true;
       document.addEventListener("keydown", this.handleKeyDown);
-      this.timerkeyHandle = 0;
-
+      this.setTimer();
   }
 
   componentWillUnmount() {
     this._isMounted = false;
     document.removeEventListener("keydown", this.handleKeyDown);
-
+    this.clearTimer();
   }
+
+  setTimer = () => {
+    this.timerHandle = setTimeout(() => {
+      this.setState({ spaceButton: true });
+      this.timerHandle = 0;
+    },2000);
+  };
+
+  clearTimer = () => {
+    if (this.timerHandle) {
+        clearTimeout(this.timerHandle);
+        this.timerHandle = 0;
+    }
+  };
 
   handleKeyDown = (event) => {
     if (this._isMounted = true) {
@@ -166,8 +180,10 @@ class Slider extends React.Component {
           if (this.props.training === 1 && this._isMounted) {
             this.resetSlider(50, 50);
           }
+          if (this._isMounted && this.state.spaceButton){
           let choiceTime0 = Math.round(performance.now());
           this.props.onSpacebarHit({ mu, sgm }, distHeight, choiceTime0);
+        }
           break;
         case 40:
           this.setState((prevState) => ({

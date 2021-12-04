@@ -90,7 +90,6 @@ class ElementsFullDisplay extends React.Component {
     this._isMounted = true;
     this.timerkeyHandle = setTimeout(() => {
       document.addEventListener("keydown", this.handleKeyDownElem);
-
       this.timerkeyHandle = 0;
     }, 1000);
   }

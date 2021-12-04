@@ -168,21 +168,24 @@ class OutcomeSliderBar extends React.Component {
 
   componentDidMount() {
     this._isMounted = true;
-    if (this._isMounted) {
+    // if (this._isMounted) {
+    //   document.addEventListener("keydown", this.handleFeedbackEnd);
+    // }
+    this.spaceHandle = setTimeout(() => {
       document.addEventListener("keydown", this.handleFeedbackEnd);
-    }
+      this.spaceHandle = 0;
+    }, 1);
 
     this.timerHandle = setTimeout(() => {
       this.props.getBarHeight(this.state.height_bar);
       this.timerHandle = 0;
-    }, 90);
+    }, 500);
   }
   //
   componentWillUnmount() {
     this._isMounted = false;
-
+    clearTimeout(this.spaceHandle);
     if (this.timerHandle) {
-      // Yes, clear it
       clearTimeout(this.timerHandle);
       this.timerHandle = 0;
     }

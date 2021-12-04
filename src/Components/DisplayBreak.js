@@ -11,7 +11,7 @@ class DisplayBreak extends React.Component {
     this.timerkeyHandle = setTimeout(() => {
     document.addEventListener("keyup", this.handleBreakKey);
     this.timerkeyHandle = 0;
-  }, 100);
+  }, 2000);
 
     this.timerHandle = setTimeout(() => {
       this.props.onBreakEnd(1);
