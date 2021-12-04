@@ -142,74 +142,59 @@ class Slider extends React.Component {
   ////////////////////////////////////////////////////////////////////////////////
   componentDidMount() {
     this._isMounted = true;
-    this.timerHandle = setTimeout(() => {
       document.addEventListener("keydown", this.handleKeyDown);
-      document.addEventListener("keyup", this.handleKeyUp)
-      this.timerHandle = 0;
-    }, 500);
-  }
-  componentDidUpdate(){
+      this.timerkeyHandle = 0;
 
   }
 
   componentWillUnmount() {
     this._isMounted = false;
     document.removeEventListener("keydown", this.handleKeyDown);
-    document.removeEventListener("keyup", this.handleKeyUp);
-    if (this.timerHandle) {
-      // Yes, clear it
-      clearTimeout(this.timerHandle);
-      this.timerHandle = 0;
-    }
+
   }
 
-  handleKeyUp = () => {
-    this.setState({ timesKeyDown: 0 });
-  };
-
   handleKeyDown = (event) => {
-    this.setState((prevState) => ({
-      timesKeyDown: prevState.timesKeyDown + 1,
-    }));
-    var mu = this.state.mu;
-    var sgm = this.state.sgm;
-    var distHeight = this.state.distHeight;
-
-    switch (event.keyCode) {
-      case 32:
-        let choiceTime0 = Math.round(performance.now());
-        this.props.onSpacebarHit({ mu, sgm }, distHeight, choiceTime0);
-        if (this.props.training===1 && this._isMounted) {
-          this.resetSlider(50, 50);
-        }
-        break;
-      case 40:
-        this.setState((prevState) => ({
-          sgm: prevState.sgm + this.stepsSgm(prevState.timesKeyDown),
-        }));
-        this.setValue(this.state.mu, this.state.sgm);
-        break;
-      case 38:
-        this.setState((prevState) => ({
-          sgm: prevState.sgm - this.stepsSgm(prevState.timesKeyDown),
-        }));
-
-        this.setValue(this.state.mu, this.state.sgm);
-
-        break;
-      case 39:
-        this.setState((prevState) => ({
-          mu: prevState.mu + this.stepsMu(prevState.timesKeyDown),
-        }));
-        this.setValue(this.state.mu, this.state.sgm);
-        break;
-      case 37:
-        this.setState((prevState) => ({
-          mu: prevState.mu - this.stepsMu(prevState.timesKeyDown),
-        }));
-        this.setValue(this.state.mu, this.state.sgm);
-        break;
-      default:
+    if (this._isMounted = true) {
+      this.setState((prevState) => ({
+        timesKeyDown: prevState.timesKeyDown + 1,
+      }));
+      var mu = this.state.mu;
+      var sgm = this.state.sgm;
+      var distHeight = this.state.distHeight;
+      switch (event.keyCode) {
+        case 32:
+          if (this.props.training === 1 && this._isMounted) {
+            this.resetSlider(50, 50);
+          }
+          let choiceTime0 = Math.round(performance.now());
+          this.props.onSpacebarHit({ mu, sgm }, distHeight, choiceTime0);
+          break;
+        case 40:
+          this.setState((prevState) => ({
+            sgm: prevState.sgm + this.stepsSgm(prevState.timesKeyDown),
+          }));
+          this.setValue(this.state.mu, this.state.sgm);
+          break;
+        case 38:
+          this.setState((prevState) => ({
+            sgm: prevState.sgm - this.stepsSgm(prevState.timesKeyDown),
+          }));
+          this.setValue(this.state.mu, this.state.sgm);
+          break;
+        case 39:
+          this.setState((prevState) => ({
+            mu: prevState.mu + this.stepsMu(prevState.timesKeyDown),
+          }));
+          this.setValue(this.state.mu, this.state.sgm);
+          break;
+        case 37:
+          this.setState((prevState) => ({
+            mu: prevState.mu - this.stepsMu(prevState.timesKeyDown),
+          }));
+          this.setValue(this.state.mu, this.state.sgm);
+          break;
+        default:
+      }
     }
   };
 
@@ -226,16 +211,16 @@ class Slider extends React.Component {
       return 50;
     } else if (pressed >= 50 && pressed < 60) {
       return 60;
-    }  else if (pressed >= 60 && pressed < 70) {
-        return 70;
-    }  else if (pressed >= 70 && pressed < 80) {
-        return 80;
-    }  else if (pressed >= 80 && pressed < 90) {
-          return 90;
-    }  else if (pressed >= 90 && pressed < 100) {
-            return 100;
+    } else if (pressed >= 60 && pressed < 70) {
+      return 70;
+    } else if (pressed >= 70 && pressed < 80) {
+      return 80;
+    } else if (pressed >= 80 && pressed < 90) {
+      return 90;
+    } else if (pressed >= 90 && pressed < 100) {
+      return 100;
     } else if (pressed >= 100) {
-         return 110;
+      return 110;
     }
   };
 
@@ -254,6 +239,7 @@ class Slider extends React.Component {
   };
 
   resetSlider = (mu, sgm) => {
+    if (this._isMounted){
     const xValues = range(0, 100.5, 0.5);
     const yValues = xValues.map((x) =>
       normalPdf(x, this.props.mu, this.props.sgm)
@@ -269,6 +255,7 @@ class Slider extends React.Component {
       mu: mu,
       distHeight: distheight_tmp,
     });
+  }
   };
 
   setValue = (mu, sgm) => {
@@ -278,7 +265,6 @@ class Slider extends React.Component {
     if (mu < 0) {
       mu = 0;
     }
-
     if (sgm < 1) {
       sgm = 1;
     }

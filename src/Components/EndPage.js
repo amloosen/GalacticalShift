@@ -35,7 +35,6 @@ class EndPage extends React.Component {
       this.setState({ instructScreenText: curText + 1 });
     } else if (whichButton === 10 && curText === 2) {
       this.handleSubmit();
-
     }
   }
 
@@ -82,7 +81,6 @@ class EndPage extends React.Component {
       feedback: this.state.feedback,
       bonus: this.state.bonus,
     };
-    debugger;
     try {
       fetch(
         `${API_URL}/end_info/create/` +
@@ -104,7 +102,6 @@ class EndPage extends React.Component {
     }
 
     alert("Thanks for your feedback!");
-
 
     this.clearFb();
     this.redirectToEnd();
@@ -172,28 +169,30 @@ class EndPage extends React.Component {
               have completed.
               <br /> <br />
               If you have any, please fill in the box below and click submit.
-
-                <form onSubmit={this.handleSubmit}>
-                  <label>
-                    <textarea
-                      rows="5"
-                      cols="50"
-                      placeholder={this.state.placeholder}
-                      value={this.state.feedback}
-                      onChange={this.handleChange}
-                    />
-                  </label>
-                  <br />
-                  <input type="submit" value="Submit" />
-                </form>
+              <form onSubmit={this.handleSubmit}>
+                <label>
+                  <textarea
+                    rows="5"
+                    cols="50"
+                    placeholder={this.state.placeholder}
+                    value={this.state.feedback}
+                    onChange={this.handleChange}
+                  />
+                </label>
+                <br />
+                <input type="submit" value="Submit" />
+              </form>
               <span className={styles.centerTwo}>
                 If you are ready to return to Prolific, press [
                 <strong>SUBMIT</strong>] <br />
                 <br />
                 and follow the pop-up to complete the session.
                 <br />
-                Or fill in the completion code: <strong>67D0ACA0</strong><br />
-              </span><br /><br />
+                Or fill in the completion code: <strong>67D0ACA0</strong>
+                <br />
+              </span>
+              <br />
+              <br />
               &nbsp;
               <span className={styles.centerTwo}>
                 [← <strong>BACK</strong>]

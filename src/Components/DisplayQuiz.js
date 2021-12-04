@@ -80,7 +80,7 @@ class DisplayQuiz extends React.Component {
         this.setState({
           showQuiz: 0,
           nextRound: 1,
-          repeatNum: repeat
+          repeatNum: repeat,
         });
       }
     }
@@ -215,8 +215,7 @@ class DisplayQuiz extends React.Component {
       }
     );
     ////////////////////////
-    debugger;
-    if (r===1) {
+    if (r === 1) {
       var reStart = this.state.reStart;
       reStart = reStart + 1;
       this.props.history.push({
@@ -239,19 +238,5 @@ class DisplayQuiz extends React.Component {
       });
     }
   }
-
-  // redirectToRepeatStage() {
-  //   var reStart = this.state.reStart;
-  //   reStart = reStart + 1;
-  //   this.props.history.push({
-  //     pathname: `/TrainingIntroC`,
-  //     state: {
-  //       userID: this.state.userID,
-  //       date: this.state.date,
-  //       startTime: this.state.startTime,
-  //       reStart: reStart,
-  //     },
-  //   });
-  // }
 }
 export default withRouter(DisplayQuiz);

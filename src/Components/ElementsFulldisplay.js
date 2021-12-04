@@ -63,6 +63,7 @@ class ElementsFullDisplay extends React.Component {
       times_element3: times_element3,
       first_hover: 0,
       hover: 0,
+      disabled: false,
     };
 
     this.mouseOver = this.mouseOver.bind(this);
@@ -85,44 +86,37 @@ class ElementsFullDisplay extends React.Component {
         this.state.times_element3
       );
       this.timerHandle = 0;
-    }, 30000);
-  }
-
-  componentDidUpdate() {
+    }, 60000);
     this._isMounted = true;
-      this.timerkeyHandle = setTimeout(() => {
-        if (this.state.first_hover == 1) {
-        document.addEventListener("keydown", this.handleKeyDownElem);
-      }
-        this.timerkeyHandle = 0;
-      }, 1000);
+    this.timerkeyHandle = setTimeout(() => {
+      document.addEventListener("keydown", this.handleKeyDownElem);
 
-  }
-  componentWillUnmount() {
-     this._isMounted = false;
-    if (this.timerkeyHandle) {
-      // Yes, clear it
-      clearTimeout(this.timerkeyHandle);
       this.timerkeyHandle = 0;
-    }
-    if (this.timerHandle) {
-      // Yes, clear it
-      clearTimeout(this.timerHandle);
-      this.timerHandle = 0;
-    }
-    window.removeEventListener("keydown", this.handleKeyDownElem);
+    }, 1000);
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+    document.removeEventListener("keydown", this.handleKeyDownElem);
+    clearTimeout(this.timerkeyHandle);
   }
 
   handleKeyDownElem = (e) => {
-    window.removeEventListener("keydown", this.handleKeyDownElem);
-    this.mouseOut(this.state.hover);
-    if (e.keyCode === 32) {
+    if (this.state.disabled) {
+      return;
+    } else {
+      if (this.state.first_hover === 1) {
+        this.mouseOut(this.state.hover);
+        if (e.keyCode === 32) {
+          document.removeEventListener("keydown", this.handleKeyDownElem);
 
-      this.props.onViewEnd(
-        this.state.times_element1,
-        this.state.times_element2,
-        this.state.times_element3
-      );
+          this.props.onViewEnd(
+            this.state.times_element1,
+            this.state.times_element2,
+            this.state.times_element3
+          );
+        }
+      }
     }
   };
 

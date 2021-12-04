@@ -102,7 +102,7 @@ class OutcomeSliderBar extends React.Component {
             width: "100%",
           },
           labels: {
-              offsetY: 8,
+            offsetY: 8,
             rotate: 0,
             style: {
               fontSize: "2.5vh",
@@ -167,10 +167,10 @@ class OutcomeSliderBar extends React.Component {
   }
 
   componentDidMount() {
-    this.timerkeyHandle = setTimeout(() => {
-    document.addEventListener("keydown", this.handleKeyDown);
-    this.timerkeyHandle = 0;
-  }, 30);
+    this._isMounted = true;
+    if (this._isMounted) {
+      document.addEventListener("keydown", this.handleFeedbackEnd);
+    }
 
     this.timerHandle = setTimeout(() => {
       this.props.getBarHeight(this.state.height_bar);
@@ -179,22 +179,18 @@ class OutcomeSliderBar extends React.Component {
   }
   //
   componentWillUnmount() {
-    if (this.timerkeyHandle) {
-      clearTimeout(this.timerkeyHandle);
-      this.timerkeyHandle = 0;
-    }
+    this._isMounted = false;
+
     if (this.timerHandle) {
       // Yes, clear it
       clearTimeout(this.timerHandle);
       this.timerHandle = 0;
     }
-    document.removeEventListener("keydown", this.handleKeyDown);
+    document.removeEventListener("keydown", this.handleFeedbackEnd);
   }
 
-  handleKeyDown = (e) => {
-    if (e.keyCode === 32) {
-      this.props.getBarHeight(this.state.height_bar);
-    }
+  handleFeedbackEnd = (e) => {
+    this.props.getBarHeight(this.state.height_bar);
   };
 
   render() {
