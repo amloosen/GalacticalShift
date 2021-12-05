@@ -143,13 +143,15 @@ class Slider extends React.Component {
   ////////////////////////////////////////////////////////////////////////////////
   componentDidMount() {
     this._isMounted = true;
-      document.addEventListener("keydown", this.handleKeyDown);
-      this.setTimer();
+    document.addEventListener("keydown", this.handleKeyDown);
+    document.addEventListener("keyup", this.handleKeyUp);
+    this.setTimer();
   }
 
   componentWillUnmount() {
     this._isMounted = false;
     document.removeEventListener("keydown", this.handleKeyDown);
+    document.removeEventListener("keyup", this.handleKeyUp);
     this.clearTimer();
   }
 
@@ -157,18 +159,18 @@ class Slider extends React.Component {
     this.timerHandle = setTimeout(() => {
       this.setState({ spaceButton: true });
       this.timerHandle = 0;
-    },2000);
+    }, 2000);
   };
 
   clearTimer = () => {
     if (this.timerHandle) {
-        clearTimeout(this.timerHandle);
-        this.timerHandle = 0;
+      clearTimeout(this.timerHandle);
+      this.timerHandle = 0;
     }
   };
 
   handleKeyDown = (event) => {
-    if (this._isMounted = true) {
+    if ((this._isMounted = true)) {
       this.setState((prevState) => ({
         timesKeyDown: prevState.timesKeyDown + 1,
       }));
@@ -180,10 +182,10 @@ class Slider extends React.Component {
           if (this.props.training === 1 && this._isMounted) {
             this.resetSlider(50, 50);
           }
-          if (this._isMounted && this.state.spaceButton){
-          let choiceTime0 = Math.round(performance.now());
-          this.props.onSpacebarHit({ mu, sgm }, distHeight, choiceTime0);
-        }
+          if (this._isMounted && this.state.spaceButton) {
+            let choiceTime0 = Math.round(performance.now());
+            this.props.onSpacebarHit({ mu, sgm }, distHeight, choiceTime0);
+          }
           break;
         case 40:
           this.setState((prevState) => ({
@@ -214,31 +216,30 @@ class Slider extends React.Component {
     }
   };
 
-  stepsSgm = (pressed) => {
+  handleKeyUp = () => {
+    this.setState({ timesKeyDown: 0 });
+  };
 
+  stepsSgm = (pressed) => {
     if (pressed < 10) {
-      return 10;
-    }
-    else if (pressed >= 10 && pressed < 30) {
+      return 5;
+    } else if (pressed >= 10 && pressed < 30) {
       return 20;
-    // } else if (pressed >= 20 && pressed < 30) {
-    //   return 30;
-  } else if (pressed >= 30 && pressed < 50) {
+    } else if (pressed >= 20 && pressed < 30) {
+      return 30;
+    } else if (pressed >= 30 && pressed < 50) {
       return 40;
-    // } else if (pressed >= 40 && pressed < 50) {
-    //   return 50;
-  } else if (pressed >= 50 && pressed < 70) {
+    } else if (pressed >= 40 && pressed < 50) {
+      return 50;
+    } else if (pressed >= 50 && pressed < 70) {
       return 60;
-    // } else if (pressed >= 60 && pressed < 70) {
-    //   return 70;
-  } else if (pressed >= 70 && pressed < 90) {
+    } else if (pressed >= 60 && pressed < 70) {
+      return 70;
+    } else if (pressed >= 70 && pressed < 90) {
       return 80;
-    }
-  //   else if (pressed >= 80 && pressed < 90) {
-  //   //   return 90;
-  //   //
-  // }
-    else if (pressed >= 90 && pressed < 100) {
+    } else if (pressed >= 80 && pressed < 90) {
+      return 90;
+    } else if (pressed >= 90 && pressed < 100) {
       return 100;
     } else {
       return 110;
@@ -260,23 +261,23 @@ class Slider extends React.Component {
   };
 
   resetSlider = (mu, sgm) => {
-    if (this._isMounted){
-    const xValues = range(0, 100.5, 0.5);
-    const yValues = xValues.map((x) =>
-      normalPdf(x, this.props.mu, this.props.sgm)
-    );
-    const yValuesAdapt_tmp = yValues.map(function (element) {
-      return element * 1000;
-    });
-    var distheight_tmp = Math.max.apply(null, yValuesAdapt_tmp) * 5;
+    if (this._isMounted) {
+      const xValues = range(0, 100.5, 0.5);
+      const yValues = xValues.map((x) =>
+        normalPdf(x, this.props.mu, this.props.sgm)
+      );
+      const yValuesAdapt_tmp = yValues.map(function (element) {
+        return element * 1000;
+      });
+      var distheight_tmp = Math.max.apply(null, yValuesAdapt_tmp) * 5;
 
-    this.setState({
-      series: [{ data: yValuesAdapt_tmp }],
-      sgm: sgm,
-      mu: mu,
-      distHeight: distheight_tmp,
-    });
-  }
+      this.setState({
+        series: [{ data: yValuesAdapt_tmp }],
+        sgm: sgm,
+        mu: mu,
+        distHeight: distheight_tmp,
+      });
+    }
   };
 
   setValue = (mu, sgm) => {
