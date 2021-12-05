@@ -149,10 +149,6 @@ class MainTask extends React.Component {
       userID: this.props.location.state.userID,
       date: this.props.location.state.date,
       startTime: this.props.location.state.startTime, //debugger
-      //
-      // userID: 12,
-      // date: 12,
-      // startTime: 12, //debugger
 
       sectionStartTime: mainStartTime,
       taskSession: "MainTask",
@@ -324,7 +320,7 @@ class MainTask extends React.Component {
       });
       ///
       var bonisum = height_check.reduce((result, number) => result + number);
-      var bonus = getBonus(bonisum, this.state.trialNum);
+      var bonus = getBonus(bonisum,this.state.trialNum);
 
       let backup = {
         times_element1_backup: this.state.times_element1,
@@ -483,6 +479,7 @@ class MainTask extends React.Component {
   };
 
   nextTrial = (height) => {
+
     if (
       this.state.trialSgmMu[this.state.trialNum - 1][1] === this.state.startSgm
     ) {
