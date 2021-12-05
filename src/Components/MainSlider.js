@@ -145,12 +145,14 @@ class Slider extends React.Component {
     this._isMounted = true;
       document.addEventListener("keydown", this.handleKeyDown);
       document.addEventListener("keyup", this.handleKeyUp);
+       this.setTimer();
   }
 
   componentWillUnmount() {
     this._isMounted = false;
     document.removeEventListener("keydown", this.handleKeyDown);
     document.removeEventListener("keyup", this.handleKeyUp);
+    this.clearTimer();
   }
 
   setTimer = () => {
