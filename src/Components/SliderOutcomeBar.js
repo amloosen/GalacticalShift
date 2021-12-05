@@ -169,10 +169,10 @@ class OutcomeSliderBar extends React.Component {
   componentDidMount() {
     this._isMounted = true;
     // if (this._isMounted) {
-    //   document.addEventListener("keydown", this.handleFeedbackEnd);
+    //   document.addEventListener("keyup", this.handleFeedbackEnd);
     // }
     this.spaceHandle = setTimeout(() => {
-      document.addEventListener("keydown", this.handleFeedbackEnd);
+      document.addEventListener("keyup", this.handleFeedbackEnd);
       this.spaceHandle = 0;
     }, 1);
 
@@ -189,7 +189,7 @@ class OutcomeSliderBar extends React.Component {
       clearTimeout(this.timerHandle);
       this.timerHandle = 0;
     }
-    document.removeEventListener("keydown", this.handleFeedbackEnd);
+    document.removeEventListener("keyup", this.handleFeedbackEnd);
   }
 
   handleFeedbackEnd = (e) => {

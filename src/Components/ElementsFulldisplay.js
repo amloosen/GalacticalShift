@@ -89,25 +89,25 @@ class ElementsFullDisplay extends React.Component {
     }, 60000);
     this._isMounted = true;
     this.timerkeyHandle = setTimeout(() => {
-      document.addEventListener("keydown", this.handleKeyDownElem);
+      document.addEventListener("keyup", this.handlekeyupElem);
       this.timerkeyHandle = 0;
     }, 1000);
   }
 
   componentWillUnmount() {
     this._isMounted = false;
-    document.removeEventListener("keydown", this.handleKeyDownElem);
+    document.removeEventListener("keyup", this.handlekeyupElem);
     clearTimeout(this.timerkeyHandle);
   }
 
-  handleKeyDownElem = (e) => {
+  handlekeyupElem = (e) => {
     if (this.state.disabled) {
       return;
     } else {
       if (this.state.first_hover === 1) {
         this.mouseOut(this.state.hover);
         if (e.keyCode === 32) {
-          document.removeEventListener("keydown", this.handleKeyDownElem);
+          document.removeEventListener("keyup", this.handlekeyupElem);
 
           this.props.onViewEnd(
             this.state.times_element1,
