@@ -98,6 +98,7 @@ class ElementsFullDisplay extends React.Component {
     this._isMounted = false;
     document.removeEventListener("keyup", this.handlekeyupElem);
     clearTimeout(this.timerkeyHandle);
+    clearTimeout(this.timerHandle);
   }
 
   handlekeyupElem = (e) => {
