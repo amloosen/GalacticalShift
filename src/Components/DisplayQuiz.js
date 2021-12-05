@@ -49,7 +49,6 @@ class DisplayQuiz extends React.Component {
   }
 
   componentWillUnmount() {
-    clearTimeout(this.timerRound);
     document.removeEventListener("keyup", this.handleStartKey);
   }
 

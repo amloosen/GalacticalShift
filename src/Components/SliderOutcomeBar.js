@@ -186,7 +186,7 @@ class OutcomeSliderBar extends React.Component {
     this._isMounted = false;
     clearTimeout(this.spaceHandle);
     if (this.timerHandle) {
-      clearTimeout(this.timerHandle);
+    clearTimeout(this.timerHandle);
       this.timerHandle = 0;
     }
     document.removeEventListener("keyup", this.handleFeedbackEnd);
