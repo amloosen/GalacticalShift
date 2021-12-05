@@ -159,7 +159,7 @@ class Slider extends React.Component {
     this.timerHandle = setTimeout(() => {
       this.setState({ spaceButton: true });
       this.timerHandle = 0;
-    }, 2000);
+    }, 1000);
   };
 
   clearTimer = () => {

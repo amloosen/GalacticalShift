@@ -25,11 +25,7 @@ class DisplayBreak extends React.Component {
       clearTimeout(this.timerkeyHandle);
       this.timerkeyHandle = 0;
     }
-    if (this.timerHandle) {
-      // Yes, clear it
       clearTimeout(this.timerHandle);
-      this.timerHandle = 0;
-    }
     document.removeEventListener("keyup", this.handleBreakKey);
   }
 
