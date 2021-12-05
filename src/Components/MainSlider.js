@@ -259,7 +259,7 @@ class Slider extends React.Component {
     } else if (pressed >= 10) {
       return 8;
     } else if (pressed >= 10) {
-      return 12;
+      return 16;
     }
   };
 
