@@ -34,11 +34,11 @@ function getRandomInt(min, max) {
 }
 
 function getBonus(bonisum, currTrialNum) {
-  var bonus = (bonisum / (89 * currTrialNum)) * 1; // adapt the *1 later for patient study
+  var bonus = (bonisum / (89 * currTrialNum+1)) * 5; // adapt the *1 later for patient study
   if (bonus < 0) {
     bonus = 0;
   } else if (bonus > 1) {
-    bonus = 1;
+    bonus = 5;
   } else {
     bonus = roundTo(bonus, 2); //2 dec pl
   }

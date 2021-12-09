@@ -16,9 +16,6 @@ class TrainingIntroB extends React.Component {
       date: this.props.location.state.date,
       startTime: this.props.location.state.startTime,
 
-        // userID: 12,
-        // date: 12,
-        // startTime: 12,
       sectionStartTime: introTrainingStartTime,
       taskSessionTry: 1,
       taskSession: "TrainingIntroB",
@@ -192,7 +189,7 @@ class TrainingIntroB extends React.Component {
               <br />
               <strong>(3)</strong> detect when suddenly a new instrument is
               relevant <br />
-              or when the association to the population size changes.
+              or when the association with the population size changes.
               <br />
               <br />
               <span className={styles.center}>
@@ -207,8 +204,8 @@ class TrainingIntroB extends React.Component {
             <p>
               <span className={styles.center}>TRAINING III</span>
               Again, the true population size will be shown after you
-              indicate your answer. <br /> <br /> This will make it possible
-              for you to find out which instrument is important <br />
+              indicated your answer. <br /> <br /> This will make it possible
+              for you to find out, which instrument is important <br />
               and how it is associated with the population size.
               <br />
               <br />

@@ -132,10 +132,10 @@ class SliderIntro extends React.Component {
           <div className={styles.main}>
             <p>
               <br />
-              <span className={styles.center}>Welcome to our study!</span>
+              <span className={styles.center}>Welcome to our Galactical Game!</span>
               <br />
-              Step by step, we will now introduce our online game and all its
-              components.
+              We will introduce this online game and all its
+              components step by step.
               <br />
               Please make sure to pay full attention. <br />
               <br />

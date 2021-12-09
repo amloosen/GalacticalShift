@@ -2,6 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import { API_URL } from "../config.js";
 import styles from "./style/taskStyle.module.css";
+import buttonStyles from "./style/taskStyle.module.css";
 /////////////////////////////////////////////////////////////////////
 class EndPage extends React.Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class EndPage extends React.Component {
       feedback: [],
       placeholder:
         "Were the task instructions clear? Did you encounter any problems?",
-      bonus: this.props.location.state.bonus,
+      bonus: this.props.location.state.bonus,  
       study_part: 6,
     };
   }
@@ -62,15 +63,8 @@ class EndPage extends React.Component {
     }
   };
 
-  redirectToEnd = () => {
-    alert("You will now be redirected to the validation page.");
-    document.removeEventListener("keyup", this._handleInstructKey);
-    window.location =
-      "https://app.prolific.co/submissions/complete?cc=67D0ACA0"; //this will the prolific validation code
-  };
-
   handleChange = (event) => {
-    this.setState({ feedback: event.target.value });
+    this.setState({ instructScreenText: 3});
   };
 
   handleSubmit = (event) => {
@@ -137,7 +131,7 @@ class EndPage extends React.Component {
             <span className={styles.likeP}>
               <span className={styles.center}>THANK YOU</span>
               <br />
-              Well done, you have earned £{this.state.bonus} as a bonus!
+              Well done, you have earned ${this.state.bonus} as a bonus!
               <br /> <br />
               Thanks for your help!
               <br />
@@ -147,10 +141,7 @@ class EndPage extends React.Component {
               <br />
               In this study, we were interested in how you detect complex
               associations and how <br />
-              you react when they change. Previous work have linked differences
-              <br />
-              in behaviour to psychiatric disorders, which we are aiming to
-              understand better.
+              you react when they change.
               <br />
               <br />
               <span className={styles.centerTwo}>
@@ -165,37 +156,31 @@ class EndPage extends React.Component {
             <span className={styles.likeP}>
               <span className={styles.center}>THANK YOU</span>
               <br />
-              We would love to hear any comments you have about the tasks you
-              have completed.
+              This was the last stage of our study. Thank you very much for your
+              time and effort! We will process your data and soon be in touch
+              about the payment.
               <br /> <br />
-              If you have any, please fill in the box below and click submit.
-              <form onSubmit={this.handleSubmit}>
-                <label>
-                  <textarea
-                    rows="5"
-                    cols="50"
-                    placeholder={this.state.placeholder}
-                    value={this.state.feedback}
-                    onChange={this.handleChange}
-                  />
-                </label>
-                <br />
-                <input type="submit" value="Submit" />
-              </form>
-              <span className={styles.centerTwo}>
-                If you are ready to return to Prolific, press [
-                <strong>SUBMIT</strong>] <br />
-                <br />
-                and follow the pop-up to complete the session.
-                <br />
-                Or fill in the completion code: <strong>67D0ACA0</strong>
-                <br />
-              </span>
-              <br />
-              <br />
-              &nbsp;
+              Please click the button below to end the game.
+              <br /> <br />
+              <br /> <br />
+              <button onClick={this.handleChange}>
+              <span class="align-middle" >END GAME</span>
+              </button>
+              <br /> <br />
               <span className={styles.centerTwo}>
                 [← <strong>BACK</strong>]
+              </span>
+            </span>
+          </div>
+        );
+      } else if (this.state.instructScreenText === 3) {
+        text = (
+          <div className={styles.main}>
+            <span className={styles.likeP}>
+              <span className={styles.center}>THANK YOU</span>
+              <br />
+              <span className={styles.centerTwo}>
+                <strong>You can now close this window.</strong>
               </span>
             </span>
           </div>

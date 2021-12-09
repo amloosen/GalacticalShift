@@ -109,7 +109,7 @@ const Quiz = ({ onQuizEnd = () => {} }) => {
           </div>
           <div className="answer-section">
             {questions[currentQuestion].answerOptions.map((answerOption) => (
-              <button
+              <button className="button"
                 onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}
               >
                 {answerOption.answerText}

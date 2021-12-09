@@ -117,7 +117,7 @@ class TrainingIntroC extends React.Component {
             <p>
               <span className={styles.center}>TRAINING IV</span>
               <br />
-              Welcome to the last training stage!
+              Congrats, you have reached the last training stage!
               <br />
               <br />
               You have now learned about the main challenges of our game.
@@ -127,17 +127,17 @@ class TrainingIntroC extends React.Component {
               <br />- <strong>Only one</strong> instrument is associated with the population size
               at a given time.
               <br />
-              - At some point the important instrument switches and a new
+              - At some point, the <strong> important instrument changes</strong>  and a new
               instrument is important.
               <br />- You have to learn <strong>
                 how
               </strong>{" "}
               the important instrument is associated with the population size.
               <br />
-              - You have to recognize when this association changes. The same intrument might still be important but in a different way.
+              - You have to recognize <strong>when this association changes</strong> . The same intrument might still be important but in a different way.
               <br />
               <br />
-              All these challenges together are like a puzzle that you can solve by
+              All these challenges make up a puzzle that you can solve by
               looking at the values on the instruments
               and the feedback you get after each planet where we tell you the
               true population size.
@@ -193,7 +193,7 @@ class TrainingIntroC extends React.Component {
               <br />
               <br />
               To slowly introduce you to this level of difficulty, we will help
-              you a little during this final training stage.
+              you during this final training stage.
               We will show you which of the three instruments is <strong>important</strong> by
               highlighting it with a green frame like this:
               <br />
@@ -224,7 +224,7 @@ class TrainingIntroC extends React.Component {
               <strong>An additional hint:</strong>
               <br />
               <br />
-              As you might have noticed in the trainig session, planets (trials)
+              As you might have noticed in the previous trainig sessions, planets (trials)
               that you encounter after each other,
               are more similar to each other than planets that are further
               apart.
@@ -303,7 +303,7 @@ class TrainingIntroC extends React.Component {
               be deleted after the training. <br />
               <br />
               In the main task, this reward will determine your bonus payment,
-              so try to indicate your estimated number and <br />
+              so try to indicate your estimated number and
               certainty as precisely as possible. Press 'NEXT' to learn how to
               optimize it.
               <br />
@@ -374,8 +374,8 @@ class TrainingIntroC extends React.Component {
               <br />
               And finally, look what happens if you indicated a wrong value with
               low certainty <br />
-              and slider still covers the correct value of 50: The bar rises a
-              little bit
+              and the slider still covers the correct value of 50: The bar rises a
+              little bit.
               <br />
               <br />
               <span className={styles.center}>
@@ -444,7 +444,7 @@ class TrainingIntroC extends React.Component {
               <br />
               <strong>(2)</strong> how it is associated with the population
               size.
-              <br /> <strong>(3)</strong> Spot and react to changes in (1) or
+              <br /> <strong>(3)</strong> Spot and react to changes in (1) and
               (2). <br />
               <br />
               Again, the true population size shown after each planet will make

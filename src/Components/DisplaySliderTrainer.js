@@ -78,7 +78,7 @@ class DisplaySliderTrainer extends React.Component {
     } else if (this.props.practNum === 7) {
       var text = (
         <div className={styles.questions}>
-          What is the population of London? <br />
+          What is the population of New York City? <br />
           (the scale refers to 0 - 100 Million) <br />
           <br />
         </div>
