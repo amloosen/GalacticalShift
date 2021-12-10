@@ -21,7 +21,7 @@ class EndPage extends React.Component {
       feedback: [],
       placeholder:
         "Were the task instructions clear? Did you encounter any problems?",
-      bonus: this.props.location.state.bonus,  
+      bonus: this.props.location.state.bonus,
       study_part: 6,
     };
   }
@@ -94,11 +94,6 @@ class EndPage extends React.Component {
     } catch (e) {
       console.log("Cant post?");
     }
-
-    alert("Thanks for your feedback!");
-
-    this.clearFb();
-    this.redirectToEnd();
   };
 
   clearFb = () => {
@@ -111,6 +106,7 @@ class EndPage extends React.Component {
   }
 
   componentDidMount() {
+    this.handleSubmit();
     window.scrollTo(0, 0);
   }
 
