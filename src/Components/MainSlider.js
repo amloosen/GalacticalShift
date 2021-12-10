@@ -145,7 +145,7 @@ class Slider extends React.Component {
     this._isMounted = true;
       document.addEventListener("keydown", this.handleKeyDown);
       document.addEventListener("keyup", this.handleKeyUp);
-       this.setTimer();
+      this.setTimer();
   }
 
   componentWillUnmount() {
@@ -309,7 +309,6 @@ class Slider extends React.Component {
     } else {
       var distheight_tmp = Math.max.apply(null, yValuesAdapt_tmp) * 5;
     }
-
     this.setState({
       series: [{ data: yValuesAdapt_tmp }],
       sgm: sgm,
