@@ -179,14 +179,22 @@ class TrainingTaskA extends React.Component {
       this.redirectToNextStage();
     } else {
       var traintrialNum_tmp = this.state.traintrialNum + 1;
-       var all_corr_values = this.state.all_corr_values;
+      var all_corr_values = this.state.all_corr_values;
       var corr_pos = this.state.corr_pos;
       if (corr_pos[traintrialNum_tmp - 1] === 4) {
         var ansTwo = 100 - all_corr_values[traintrialNum_tmp - 1];
         var ansOne = all_corr_values[traintrialNum_tmp - 1];
+
+        if (ansOne === ansTwo) {
+          ansTwo = ansTwo - 10;
+        }
       } else {
         var ansOne = 100 - all_corr_values[traintrialNum_tmp - 1];
         var ansTwo = all_corr_values[traintrialNum_tmp - 1];
+
+        if (ansOne === ansTwo) {
+          ansOne = ansOne - 10;
+        }
       }
 
       this.setState({
