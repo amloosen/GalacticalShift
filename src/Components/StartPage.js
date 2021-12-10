@@ -117,7 +117,7 @@ class StartPage extends React.Component {
               type: "html",
               name: "info",
               html:
-                "<p>In this study, you will be asked to play a game that involves making choices to earn rewards. You will receive an additional bonus payment if you perform well in this game. Please make sure to complete the game in <strong>one go</strong>. Short breaks will be given in between. The game will take between 50 and 90 minutes.</p>",
+                "<p>In this part of the study, you will be asked to play a game that involves making choices to earn rewards. You will receive an additional bonus payment if you perform well in this game. Please make sure to complete the game in <strong>one go</strong>. Short breaks will be given in between. The game will take approximately 50 to 90 minutes.</p>",
             },
 
             {
