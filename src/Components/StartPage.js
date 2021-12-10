@@ -27,9 +27,9 @@ class StartPage extends React.Component {
     let url = this.props.location.search;
     let params = queryString.parse(url);
     const prolific_id =
-      params["PROLIFIC_PID"] === undefined
+      params["PART_ID"] === undefined
         ? "undefined"
-        : params["PROLIFIC_PID"];
+        : params["PART_ID"];
     console.log(prolific_id);
 
 
@@ -130,7 +130,7 @@ class StartPage extends React.Component {
               type: "html",
               name: "info",
               html:
-                "<p>Please note that this game must be played on a <strong>DESKTOP/LAPTOP</strong> (not a tablet/mobile phone). Otherwise, it won't work! Additionally, please use <strong>Chrome</strong> or <strong>Safari as abrowser</strong>.</p>",
+                "<p>Please note that this game must be played on a <strong>DESKTOP/LAPTOP</strong> (not a tablet/mobile phone). Otherwise, it won't work! Additionally, please use <strong>Chrome</strong> or <strong>Safari as a browser</strong>.</p>",
             },
 
             {
@@ -143,7 +143,7 @@ class StartPage extends React.Component {
               type: "html",
               name: "info",
               html:
-                "<p>If you do have impaired vision, please make sure to wear your glasses or contact lenses while playing the game to ensure normal eyesight.</p>",
+                "<p>If you have impaired vision, please wear your glasses or contact lenses while playing the game to ensure normal eyesight.</p>",
             },
 
 
