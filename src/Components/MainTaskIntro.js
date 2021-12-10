@@ -219,7 +219,7 @@ class MainTaskIntro extends React.Component {
               determines the population size at a given moment. <br />
               <br />
               To probe your understanding of the task, we will
-              randomly ask you to indicate which colour/instrument is the
+              randomly ask you to indicate which color/instrument is the
               important one at a given stage of the task. You can indicate this
               by pressing the number key indicated on the corresponding
               instrument (see example below). Please answer the question as
@@ -256,7 +256,7 @@ class MainTaskIntro extends React.Component {
             <p>
               <span className={styles.center}>MAIN GAME</span>
               <br />
-              It is important, that you complete the game in one go. <br />
+              It is important that you complete the game in one go.
               However, there will be short breaks in between, that you can
               choose to take or you can continue <br />
               by pressing the space bar.

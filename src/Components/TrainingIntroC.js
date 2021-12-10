@@ -30,7 +30,7 @@ class TrainingIntroC extends React.Component {
       taskSession: "TrainingIntroC",
       instructScreenText: 1,
       instructScreen: true,
-      reStart: this.props.location.state.reStart
+      reStart: this.props.location.state.reStart,
     };
 
     this.handleInstructLocal = this.handleInstructLocal.bind(this);
@@ -97,7 +97,7 @@ class TrainingIntroC extends React.Component {
         userID: this.state.userID,
         date: this.state.date,
         startTime: this.state.startTime,
-        reStart: this.state.reStart
+        reStart: this.state.reStart,
       },
     });
   };
@@ -124,26 +124,25 @@ class TrainingIntroC extends React.Component {
               <br />
               <br />
               Lets recap:
-              <br />- <strong>Only one</strong> instrument is associated with the population size
-              at a given time.
-              <br />
-              - At some point, the <strong> important instrument changes</strong>  and a new
+              <br />- <strong>Only one</strong> instrument is associated with
+              the population size at a given time.
+              <br />- At some point, the{" "}
+              <strong> important instrument changes</strong> and a new
               instrument is important.
-              <br />- You have to learn <strong>
-                how
-              </strong>{" "}
-              the important instrument is associated with the population size.
-              <br />
-              - You have to recognize <strong>when this association changes</strong> . The same intrument might still be important but in a different way.
+              <br />- You have to learn <strong>how</strong> the important
+              instrument is associated with the population size.
+              <br />- You have to recognize{" "}
+              <strong>when this association changes</strong>. The same intrument
+              might still be important but in a different way.
               <br />
               <br />
               All these challenges make up a puzzle that you can solve by
-              looking at the values on the instruments
-              and the feedback you get after each planet where we tell you the
-              true population size.
+              looking at the values on the instruments and the feedback you get
+              after each planet.
               <br />
               <br />
-              All parts of the game you have been introduced to will now be put together.
+              All parts of the game you have been introduced to will now be put
+              together.
               <br />
               <br />
               <span className={styles.center}>
@@ -193,8 +192,8 @@ class TrainingIntroC extends React.Component {
               <br />
               <br />
               To slowly introduce you to this level of difficulty, we will help
-              you during this final training stage.
-              We will show you which of the three instruments is <strong>important</strong> by
+              you during this final training stage. We will show you which of
+              the three instruments is <strong>important</strong> by
               highlighting it with a green frame like this:
               <br />
               <br />
@@ -224,18 +223,15 @@ class TrainingIntroC extends React.Component {
               <strong>An additional hint:</strong>
               <br />
               <br />
-              As you might have noticed in the previous trainig sessions, planets (trials)
-              that you encounter after each other,
-              are more similar to each other than planets that are further
-              apart.
+              As you might have noticed in the previous trainig sessions,
+              planets (trials) that you encounter after each other, are more
+              similar to each other than planets that are further apart.
               <br /> <br />
               This means, their population size depends on the same instrument
-              in the same way.
-              After a while, when you enter new galaxies, this changes and the
-              association between the instrument
-              and the population size changes or a completely new instrument{" "}
-              <br />
-              is important.
+              in the same way. After a while, when you enter new galaxies, this
+              changes and the association between the instrument and the
+              population size changes or a completely new instrument is
+              important.
               <br /> <br />
               Keep this in mind when indicating your answers.
               <br /> <br />
@@ -250,9 +246,8 @@ class TrainingIntroC extends React.Component {
           <div className={styles.main}>
             <p>
               <span className={styles.center}>TRAINING IV</span>
-              From now on, you will be asked to use the slider.
-
-              Remember, with the slider you can indicate{" "}
+              From now on, you will be asked to use the slider. Remember, with
+              the slider you can indicate{" "}
               <strong>the number you estimate</strong>, by changing the peak of
               the slider
               <br /> <br />
@@ -285,27 +280,24 @@ class TrainingIntroC extends React.Component {
             <p>
               <span className={styles.center}>TRAINING IV</span>
               <br />
-              So keep in mind: not only your the number you estimate is
-              important, but also your certainty in this number
-              that you indicate. <br />
+              So keep in mind: Not only your the number you estimate is
+              important, but also your certainty in this number that you
+              indicate. <br />
               <br />
-              After each trial you will be rewarded for the accuracy of your
-              answer and your certainty in it.
-
-              This reward will be indicated by a bar that looks like this:{" "}
-              <br />
+              After each trial, you will be rewarded for the accuracy of your
+              answer and your certainty in it. This reward will be indicated by
+              a bar that looks like this: <br />
               <br />
               <span className={styles.center}>
                 <img src={img_bar} alt="bar" />
               </span>
-              During this training stage the collected reward is for
-              demonstration purposes only and will
-              be deleted after the training. <br />
+              During this training stage, the collected reward is for
+              demonstration purposes only and will be deleted after the
+              training. <br />
               <br />
               In the main task, this reward will determine your bonus payment,
-              so try to indicate your estimated number and
-              certainty as precisely as possible. Press 'NEXT' to learn how to
-              optimize it.
+              so try to indicate your estimated number and certainty as
+              precisely as possible. Press 'NEXT' to learn how to optimize it.
               <br />
               <span className={styles.center}>
                 [<strong>← BACK</strong>] [<strong>NEXT →</strong>]
@@ -321,11 +313,10 @@ class TrainingIntroC extends React.Component {
                 TRAINING IV
               </span>
               The bar will rise at the position where the true population size{" "}
-              would have been indicated up to the height
-              of the slider.
-              To clarify, look what happens if the true population size is 50
-              million and you indicated this with high certainty:
-              The bar reaches its maximum height.
+              would have been indicated up to the height of the slider. To
+              clarify, look what happens if the true population size is 50
+              million and you indicated this with high certainty: The bar
+              reaches its maximum height.
               <br />
               <br />
               <span className={styles.center}>
@@ -336,9 +327,10 @@ class TrainingIntroC extends React.Component {
                 />
               </span>
               In contrast, look what happens if the true population size is 50
-              million and you indicated this with low certainty:
-              The bar reaches a way lower height.
-              <br /><br />
+              million and you indicated this with low certainty: The bar reaches
+              a way lower height.
+              <br />
+              <br />
               <span className={styles.center}>
                 <img
                   className={styles.introImgTwo}
@@ -374,8 +366,8 @@ class TrainingIntroC extends React.Component {
               <br />
               And finally, look what happens if you indicated a wrong value with
               low certainty <br />
-              and the slider still covers the correct value of 50: The bar rises a
-              little bit.
+              and the slider still covers the correct value of 50: The bar rises
+              a little bit.
               <br />
               <br />
               <span className={styles.center}>
@@ -401,8 +393,8 @@ class TrainingIntroC extends React.Component {
               <br />
               To summarize, in order to maximize your reward you should:
               <br /> <br />
-              - Make the slider narrow when you are certain about your answer to
-              reach the maximum height of the bar
+              Make the slider narrow when you are certain about your answer to
+              reach the maximum height of the bar.
               <br />
               <br />
               <span className={styles.center}>
@@ -412,8 +404,8 @@ class TrainingIntroC extends React.Component {
                   alt="bar"
                 />
               </span>
-              - Make the slider wider when you are uncertain to cover a number
-              of values
+              Make the slider wider when you are uncertain to cover a number of
+              values.
               <br />
               <br />
               <span className={styles.center}>
@@ -437,7 +429,7 @@ class TrainingIntroC extends React.Component {
               <br />
               <br />
               So your task is it to use the slider optimally to maximise your
-              reward and master the three challenges.
+              reward and master the three challenges:
               <br />
               <br />
               <strong>(1)</strong> Find out which instrument is important and{" "}
