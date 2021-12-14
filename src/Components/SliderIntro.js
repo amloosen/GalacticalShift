@@ -390,7 +390,7 @@ class SliderIntro extends React.Component {
                   alt="example1"
                 />
               </span>
-              and here you see how it looks like when it is 75
+              and here you see how it looks like when it is 65
               <br />
               <br />
               <span className={styles.center}>
@@ -478,7 +478,7 @@ class SliderIntro extends React.Component {
               0-100 million)”
               <br />
               <br />
-              If you think it is approximately 65 million and you are relatively
+              If you think it is approximately 75 million and you are relatively
               certain,your answer could be:
               <br />
               <br />
