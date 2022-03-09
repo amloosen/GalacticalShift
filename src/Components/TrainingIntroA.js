@@ -243,7 +243,7 @@ class TrainingIntroA extends React.Component {
               <br />
               <br />
               First, uncover the instrument by{" "}
-              <strong>hoovering over the black square with your mouse.</strong>
+              <strong>hovering over the black square with your mouse.</strong>
               <br />
               Click 'play' to see how.
               <br /> <br />

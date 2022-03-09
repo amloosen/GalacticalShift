@@ -132,7 +132,7 @@ class TrainingIntroC extends React.Component {
               <br />- You have to learn <strong>how</strong> the important
               instrument is associated with the population size.
               <br />- You have to recognize{" "}
-              <strong>when this association changes</strong>. The same intrument
+              <strong>when this association changes</strong>. The same instrument
               might still be important but in a different way.
               <br />
               <br />
@@ -223,7 +223,7 @@ class TrainingIntroC extends React.Component {
               <strong>An additional hint:</strong>
               <br />
               <br />
-              As you might have noticed in the previous trainig sessions,
+              As you might have noticed in the previous training sessions,
               planets (trials) that you encounter after each other, are more
               similar to each other than planets that are further apart.
               <br /> <br />
@@ -280,7 +280,7 @@ class TrainingIntroC extends React.Component {
             <p>
               <span className={styles.center}>TRAINING IV</span>
               <br />
-              So keep in mind: Not only your the number you estimate is
+              So keep in mind: Not only the number you estimate is
               important, but also your certainty in this number that you
               indicate. <br />
               <br />
@@ -434,7 +434,7 @@ class TrainingIntroC extends React.Component {
               <br />
               <strong>(1)</strong> Find out which instrument is important and{" "}
               <br />
-              <strong>(2)</strong> how it is associated with the population
+              <strong>(2)</strong> How it is associated with the population
               size.
               <br /> <strong>(3)</strong> Spot and react to changes in (1) and
               (2). <br />
