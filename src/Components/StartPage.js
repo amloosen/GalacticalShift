@@ -27,7 +27,7 @@ class StartPage extends React.Component {
     let url = this.props.location.search;
     let params = queryString.parse(url);
 
-    const prolific_id = (params['PART_ID']=== undefined ? 'undefined' : params['PART_ID'])
+    const prolific_id = (params['PART_ID']=== null ? 'undefined' : params['PART_ID'])
 
     // Set state
     this.state = {
